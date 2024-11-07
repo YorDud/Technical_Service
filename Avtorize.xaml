@@ -17,17 +17,14 @@ Padding="10">
             </Border.Effect>
             <StackPanel Margin="10,10,10,10">
                 <TextBlock FontSize="30" FontWeight="Bold" Margin="0,0,0,20" FontFamily="Yu Gothic UI" TextAlignment="Center"><Run Text="Автор"/><Run Language="ru-ru" Text="и"/><Run Text="зирут"/><Run Language="ru-ru" Text="й"/><Run Text="есь "/><Run Language="ru-ru" Text="тут"/></TextBlock>
-                <Grid>
-                    <Button Content="Регистрация" HorizontalAlignment="Left" Margin="0,30,0,30" VerticalAlignment="Top"/>
-                    <Button Content="Войти" HorizontalAlignment="Right" Margin="0,30,0,30" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFlatButton}"/>
-                </Grid>
+                <Grid/>
 
                 <TextBox x:Name="log_txt" materialDesign:HintAssist.Hint="Введите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
                 <PasswordBox x:Name="pass_txt" materialDesign:HintAssist.Hint="Введите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"></PasswordBox>
                 <PasswordBox x:Name="pass_txt_repeat" materialDesign:HintAssist.Hint="Повторите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"></PasswordBox>
                 <TextBox materialDesign:HintAssist.Hint="Введите ваше ФИО" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 
-                <Button Content="Войти" Margin="0,15,0,30" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFlatButton}" Click="Button_Click"/>
+                <Button Content="Войти" Margin="0,15,0,30" VerticalAlignment="Top" Click="Button_Click"/>
             </StackPanel>
 
 

@@ -7,15 +7,56 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="MainWindow" Height="1000" Width="1500" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="MainWindow" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
     </Window.Resources>
-    
 
 
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Левое меню -->
+        <StackPanel Background="#f0f0f0" Grid.Column="0">
+            <Button Content="🏠 Мониторинг ТО" FontSize="16" Margin="10" Padding="10" Height="45" 
+                    HorizontalAlignment="Stretch" Click="ShowMonitoringTO" />
+
+            <Expander Header="📂 Категории" FontSize="16" Margin="10" Padding="10">
+                <StackPanel>
+                    <Button Content="Виды ТО" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="ShowTipesTO"/>
+                    <Button Content="Оборудование" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="ShowDevices"/>
+                </StackPanel>
+            </Expander>
+
+            <Expander Header="⚙️ Настройки" FontSize="16" Margin="10" Padding="10">
+                <StackPanel>
+                    <Button Content="🔒 Конфиденциальность" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="ShowPrivacy"/>
+                </StackPanel>
+            </Expander>
+
+            <Button Content="❓ Помощь" FontSize="16" Margin="10" Padding="10" Height="45" 
+                    HorizontalAlignment="Stretch" Click="ShowHelp" />
+        </StackPanel>
+
+        <!-- Основное содержание -->
+        <ContentControl x:Name="MainContent" Grid.Column="1">
+            <Button Content="Мониторинг ТО"></Button>
+            </ContentControl>
+        <ContentControl x:Name="TO" Grid.Column="1" Visibility="Hidden">
+            <Button Content="Виды ТО"></Button>
+        </ContentControl>
+        <ContentControl x:Name="Devices" Grid.Column="1" Visibility="Hidden">
+            <Button Content="Оборудование"></Button>
+        </ContentControl>
+        <ContentControl x:Name="MainHelp" Grid.Column="1" Visibility="Hidden">
+            <Button Content="Помощь"></Button>
+        </ContentControl>
+    </Grid>
 
 
-    <Grid Background="Gray">
+    <!--<Grid Background="Gray">
         <Border Background="White" 
  CornerRadius="15" 
  Padding="10" 
@@ -29,11 +70,11 @@
                         <DataGrid x:Name="dataGridView1" Margin="0,40,0,60" AutoGenerateColumns="False" ItemsSource="{Binding}" CellEditEnding="dataGridView1_CellEditEnding">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Номер" Binding="{Binding ID}"/>
-                                <!-- Используем DatePicker вместо DatePicker -->
+                                --><!-- Используем DatePicker вместо DatePicker --><!--
                                 <DataGridTemplateColumn Header="Дата создания" Width="SizeToHeader">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <!-- Предполагается, что у вас есть DatePicker в проекте -->
+                                            --><!-- Предполагается, что у вас есть DatePicker в проекте --><!--
                                             <DatePicker SelectedDate="{Binding Date_Create, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -41,7 +82,7 @@
                                 <DataGridTextColumn Header="ФИО Создателя" Binding="{Binding FIO_Lab}"/>
                                 <DataGridTextColumn Header="CO3 2-" Binding="{Binding Pro_Photorez_1_CO32}"/>
                                 <DataGridTextColumn Header="HCO3-" Binding="{Binding Pro_Photorez_1_CO3}"/>
-                                <!-- Продолжайте добавлять остальные столбцы аналогичным образом -->
+                                --><!-- Продолжайте добавлять остальные столбцы аналогичным образом --><!--
                                 <DataGridTextColumn Header="pH" Binding="{Binding Pro_Photorez_1_pH}"/>
                                 <DataGridTextColumn Header="A/B" Binding="{Binding Pro_Photorez_1_A_B}"/>
                                 <DataGridTextColumn Header="Сухой остаток" Binding="{Binding Pro_Photorez_1_ostat}"/>
@@ -83,7 +124,7 @@
 
 
 
-                        <!--<DataGrid x:Name="dataGridView1" Margin="0,40,0,60" AutoGenerateColumns="False" ItemsSource="{Binding}" CellEditEnding="dataGridView1_CellEditEnding">
+                        --><!--<DataGrid x:Name="dataGridView1" Margin="0,40,0,60" AutoGenerateColumns="False" ItemsSource="{Binding}" CellEditEnding="dataGridView1_CellEditEnding">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Номер" Binding="{Binding ID}"/>
                                 --><!--<DataGridTextColumn Header="Дата создания" Binding="{Binding Date_Create}"/>--><!--
@@ -115,7 +156,7 @@
 
                                 <materialDesign:DataGridComboBoxColumn/>
                             </DataGrid.Columns>
-                        </DataGrid>-->
+                        </DataGrid>--><!--
                         <Button Content="Обновить" HorizontalAlignment="Left" Margin="1293,810,0,10" BorderBrush="#FF43C139" Foreground="#DDF9F9F9" Click="Button_Click">
                             <Button.Background>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -234,10 +275,10 @@
         </Border>
 
 
-        <!--<TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" Background="AliceBlue" Padding="32" Margin="16"></TextBlock>-->
+        --><!--<TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" Background="AliceBlue" Padding="32" Margin="16"></TextBlock>--><!--
 
 
 
 
-    </Grid>
+    </Grid>-->
 </Window>
