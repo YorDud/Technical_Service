@@ -198,6 +198,11 @@
       <DependentUpon>CustomMessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomMessageBoxService.cs" />
+    <Compile Include="Lab_RezDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lab_RezDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="WC.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
@@ -245,6 +250,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Lab_RezDataSet.xsc">
+      <DependentUpon>Lab_RezDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Lab_RezDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Lab_RezDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Lab_RezDataSet.xss">
+      <DependentUpon>Lab_RezDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

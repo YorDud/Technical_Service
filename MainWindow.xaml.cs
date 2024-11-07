@@ -82,7 +82,16 @@ namespace WpfApp4
 			Devices.Visibility = Visibility.Hidden;
 		}
 
-		
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+
+			WpfApp4.Lab_RezDataSet lab_RezDataSet = ((WpfApp4.Lab_RezDataSet)(this.FindResource("lab_RezDataSet")));
+			// Загрузить данные в таблицу test_table. Можно изменить этот код как требуется.
+			WpfApp4.Lab_RezDataSetTableAdapters.test_tableTableAdapter lab_RezDataSettest_tableTableAdapter = new WpfApp4.Lab_RezDataSetTableAdapters.test_tableTableAdapter();
+			lab_RezDataSettest_tableTableAdapter.Fill(lab_RezDataSet.test_table);
+			System.Windows.Data.CollectionViewSource test_tableViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("test_tableViewSource")));
+			test_tableViewSource.View.MoveCurrentToFirst();
+		}
 	}
 }
 

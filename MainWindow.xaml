@@ -7,8 +7,10 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="MainWindow" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="MainWindow" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="Window_Loaded">
     <Window.Resources>
+        <local:Lab_RezDataSet x:Key="lab_RezDataSet"/>
+        <CollectionViewSource x:Key="test_tableViewSource" Source="{Binding test_table, Source={StaticResource lab_RezDataSet}}"/>
     </Window.Resources>
 
 
@@ -42,8 +44,25 @@
 
         <!-- Основное содержание -->
         <ContentControl x:Name="MainContent" Grid.Column="1">
-            <Button Content="Мониторинг ТО"></Button>
-            </ContentControl>
+            <Grid DataContext="{StaticResource test_tableViewSource}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Button x:Name="MT" Content="Мониторинг ТО" Margin="40" Grid.Row="2" HorizontalAlignment="Right"/>
+                <DataGrid x:Name="test_tableDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10" Grid.Row="1" Height="600">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="ffffColumn" Binding="{Binding ffff}" Header="ffff" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="rrrrColumn" Binding="{Binding rrrr}" Header="rrrr" Width="SizeToHeader"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </ContentControl>
+
         <ContentControl x:Name="TO" Grid.Column="1" Visibility="Hidden">
             <Button Content="Виды ТО"></Button>
         </ContentControl>
@@ -54,231 +73,4 @@
             <Button Content="Помощь"></Button>
         </ContentControl>
     </Grid>
-
-
-    <!--<Grid Background="Gray">
-        <Border Background="White" 
- CornerRadius="15" 
- Padding="10" 
- HorizontalAlignment="Center" 
- VerticalAlignment="Top"
- Effect="{DynamicResource DropShadow}" Height="950" Width="1450" Margin="20,20,20,20">
-
-            <TabControl Height="900" Width="1400" Margin="15,15,15,15">
-                <TabItem Header="Первое">
-                    <Grid Background="#FFE5E5E5">
-                        <DataGrid x:Name="dataGridView1" Margin="0,40,0,60" AutoGenerateColumns="False" ItemsSource="{Binding}" CellEditEnding="dataGridView1_CellEditEnding">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Номер" Binding="{Binding ID}"/>
-                                --><!-- Используем DatePicker вместо DatePicker --><!--
-                                <DataGridTemplateColumn Header="Дата создания" Width="SizeToHeader">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            --><!-- Предполагается, что у вас есть DatePicker в проекте --><!--
-                                            <DatePicker SelectedDate="{Binding Date_Create, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="ФИО Создателя" Binding="{Binding FIO_Lab}"/>
-                                <DataGridTextColumn Header="CO3 2-" Binding="{Binding Pro_Photorez_1_CO32}"/>
-                                <DataGridTextColumn Header="HCO3-" Binding="{Binding Pro_Photorez_1_CO3}"/>
-                                --><!-- Продолжайте добавлять остальные столбцы аналогичным образом --><!--
-                                <DataGridTextColumn Header="pH" Binding="{Binding Pro_Photorez_1_pH}"/>
-                                <DataGridTextColumn Header="A/B" Binding="{Binding Pro_Photorez_1_A_B}"/>
-                                <DataGridTextColumn Header="Сухой остаток" Binding="{Binding Pro_Photorez_1_ostat}"/>
-                                <DataGridTextColumn Header="Корректировка Материал" Binding="{Binding Pro_Photorez_1_Correction_Mat}"/>
-                                <DataGridTextColumn Header="Корректировка Количество" Binding="{Binding Pro_Photorez_1_Correction_Score}"/>
-                                <DataGridTemplateColumn Header="Дата создания корректировки" Width="SizeToHeader">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Date_tech, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="ФИО Лаборанта (редакт)" Binding="{Binding FIO_Lab_Update}"/>
-                                <DataGridTemplateColumn Header="Дата (редакт)" Width="SizeToHeader">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Date_Lab_Update, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="ФИО Корректировщика" Binding="{Binding FIO_Corr}"/>
-                                <DataGridTemplateColumn Header="Время выполнения корректировки" Width="SizeToHeader">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Date_Corr, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="Выполнение" Binding="{Binding Сompleted}"/>
-                                <DataGridTextColumn Header="Принятие в работу" Binding="{Binding Start_corr}"/>
-                                <DataGridTextColumn Header="Время принятия корректировки в выполнение" Binding="{Binding Date_start_corr}"/>
-                                <DataGridTextColumn Header="ФИО Корректировщикa" Binding="{Binding FIO_start_corr}"/>
-                                <DataGridTextColumn Header="Комментарий" Binding="{Binding Сomment}"/>
-
-                                <materialDesign:DataGridComboBoxColumn/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-
-
-
-
-                        --><!--<DataGrid x:Name="dataGridView1" Margin="0,40,0,60" AutoGenerateColumns="False" ItemsSource="{Binding}" CellEditEnding="dataGridView1_CellEditEnding">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Номер" Binding="{Binding ID}"/>
-                                --><!--<DataGridTextColumn Header="Дата создания" Binding="{Binding Date_Create}"/>--><!--
-                                <DataGridTemplateColumn x:Name="date_CreateColumn" Header="Date Create" Width="SizeToHeader">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <DatePicker SelectedDate="{Binding Date_Create, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                <DataGridTextColumn Header="ФИО Создателя" Binding="{Binding FIO_Lab}"/>
-                                <DataGridTextColumn Header="CO3 2-" Binding="{Binding Pro_Photorez_1_CO32}"/>
-                                <DataGridTextColumn Header="HCO3-" Binding="{Binding Pro_Photorez_1_CO3}"/>
-                                --><!-- Продолжайте добавлять остальные столбцы аналогичным образом --><!--
-                                <DataGridTextColumn Header="pH" Binding="{Binding Pro_Photorez_1_pH}"/>
-                                <DataGridTextColumn Header="A/B" Binding="{Binding Pro_Photorez_1_A_B}"/>
-                                <DataGridTextColumn Header="Сухой остаток" Binding="{Binding Pro_Photorez_1_ostat}"/>
-                                <DataGridTextColumn Header="Корректировка Материал" Binding="{Binding Pro_Photorez_1_Correction_Mat}"/>
-                                <DataGridTextColumn Header="Корректировка Количество" Binding="{Binding Pro_Photorez_1_Correction_Score}"/>
-                                <DataGridTextColumn Header="Дата создания корректировки" Binding="{Binding Date_tech}"/>
-                                <DataGridTextColumn Header="ФИО Лаборанта (редакт)" Binding="{Binding FIO_Lab_Update}"/>
-                                <DataGridTextColumn Header="Дата (редакт)" Binding="{Binding Date_Lab_Update}"/>
-                                <DataGridTextColumn Header="ФИО Корректировщика" Binding="{Binding FIO_Corr}"/>
-                                <DataGridTextColumn Header="Время выполнения корректировки" Binding="{Binding Date_Corr}"/>
-                                <DataGridTextColumn Header="Выполнение" Binding="{Binding Сompleted}"/>
-                                <DataGridTextColumn Header="Принятие в работу" Binding="{Binding Start_corr}"/>
-                                <DataGridTextColumn Header="Время принятия корректировки в выполнение" Binding="{Binding Date_start_corr}"/>
-                                <DataGridTextColumn Header="ФИО Корректировщикa" Binding="{Binding FIO_start_corr}"/>
-                                <DataGridTextColumn Header="Комментарий" Binding="{Binding Сomment}"/>
-
-                                <materialDesign:DataGridComboBoxColumn/>
-                            </DataGrid.Columns>
-                        </DataGrid>--><!--
-                        <Button Content="Обновить" HorizontalAlignment="Left" Margin="1293,810,0,10" BorderBrush="#FF43C139" Foreground="#DDF9F9F9" Click="Button_Click">
-                            <Button.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF673AB7"/>
-                                    <GradientStop Color="#FF52F908" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Button.Background>
-                        </Button>
-                        <Button x:Name="Add_btn" Content="Добавить новую строку" HorizontalAlignment="Left" Margin="499,810,0,0" VerticalAlignment="Top" BorderBrush="#FF43C139" Foreground="#DDF9F9F9" Click="Add_btn_Click">
-                            <Button.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF673AB7"/>
-                                    <GradientStop Color="#FF0890F9" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Button.Background>
-                        </Button>
-                        <Button Content="закрыть" HorizontalAlignment="Left" Margin="1098,804,0,16" BorderBrush="#FF43C139" Foreground="#DDF9F9F9" Click="btnclose">
-                            <Button.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF673AB7"/>
-                                    <GradientStop Color="#FF52F908" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Button.Background>
-                        </Button>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Второе">
-                    <Grid Background="#FFE5E5E5">
-                        <DataGrid x:Name="dataGrid2" Margin="0,40,0,60" AutoGenerateColumns="False" ItemsSource="{Binding}" CellEditEnding="dataGrid2_CellEditEnding">
-    <DataGrid.Columns>
-        <DataGridTextColumn Header="Номер" Binding="{Binding ID}"/>
-
-                                <DataGridTextColumn Header="Дата создания" Binding="{Binding Date_Create}"/>
-                                <DataGridTextColumn Header="ФИО Создателя" Binding="{Binding FIO_Lab}"/>
-        <DataGridTextColumn Header="CO3 2-" Binding="{Binding Pro_Photorez_1_CO32}"/>
-        <DataGridTextColumn Header="HCO3-" Binding="{Binding Pro_Photorez_1_CO3}"/>
-       
-                        
-        <DataGridTextColumn Header="pH" Binding="{Binding Pro_Photorez_1_pH}"/>
-        <DataGridTextColumn Header="A/B" Binding="{Binding Pro_Photorez_1_A_B}"/>
-        <DataGridTextColumn Header="Сухой остаток" Binding="{Binding Pro_Photorez_1_ostat}"/>
-        <DataGridTextColumn Header="Корректировка Материал" Binding="{Binding Pro_Photorez_1_Correction_Mat}"/>
-        <DataGridTextColumn Header="Корректировка Количество" Binding="{Binding Pro_Photorez_1_Correction_Score}"/>
-        <DataGridTextColumn Header="Дата создания корректировки" Binding="{Binding Date_tech}"/>
-        <DataGridTextColumn Header="ФИО Лаборанта (редакт)" Binding="{Binding FIO_Lab_Update}"/>
-        <DataGridTextColumn Header="Дата (редакт)" Binding="{Binding Date_Lab_Update}"/>
-        <DataGridTextColumn Header="ФИО Корректировщика" Binding="{Binding FIO_Corr}"/>
-        <DataGridTextColumn Header="Время выполнения корректировки" Binding="{Binding Date_Corr}"/>
-        <DataGridTextColumn Header="Выполнение" Binding="{Binding Сompleted}"/>
-        <DataGridTextColumn Header="Принятие в работу" Binding="{Binding Start_corr}"/>
-        <DataGridTextColumn Header="Время принятия корректировки в выполнение" Binding="{Binding Date_start_corr}"/>
-        <DataGridTextColumn Header="ФИО Корректировщикa" Binding="{Binding FIO_start_corr}"/>
-        <DataGridTextColumn Header="Комментарий" Binding="{Binding Сomment}"/>
-
-        <materialDesign:DataGridComboBoxColumn/>
-    </DataGrid.Columns>
-</DataGrid>
-                        <Button x:Name="save_btn" Content="Обновить" HorizontalAlignment="Left" Margin="1293,810,0,0" VerticalAlignment="Top" BorderBrush="#FF43C139" Foreground="#DDF9F9F9" Click="save_btn_Click">
-                            <Button.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF673AB7"/>
-                                    <GradientStop Color="#FF52F908" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Button.Background>
-                        </Button>
-                        
-
-                    </Grid>
-
-                </TabItem>
-                <TabItem Header="Третье">
-                    <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dataGrid3" Margin="0,40,0,60" AutoGenerateColumns="False" ItemsSource="{Binding}" CellEditEnding="dataGrid3_CellEditEnding">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Номер" Binding="{Binding ID}"/>
-
-                            <DataGridTextColumn Header="Дата создания" Binding="{Binding Date_Create}"/>
-                            <DataGridTextColumn Header="ФИО Создателя" Binding="{Binding FIO_Lab}"/>
-                            <DataGridTextColumn Header="CO3 2-" Binding="{Binding Pro_Photorez_1_CO32}"/>
-                            <DataGridTextColumn Header="HCO3-" Binding="{Binding Pro_Photorez_1_CO3}"/>
-
-
-                            <DataGridTextColumn Header="pH" Binding="{Binding Pro_Photorez_1_pH}"/>
-                            <DataGridTextColumn Header="A/B" Binding="{Binding Pro_Photorez_1_A_B}"/>
-                            <DataGridTextColumn Header="Сухой остаток" Binding="{Binding Pro_Photorez_1_ostat}"/>
-                            <DataGridTextColumn Header="Корректировка Материал" Binding="{Binding Pro_Photorez_1_Correction_Mat}"/>
-                            <DataGridTextColumn Header="Корректировка Количество" Binding="{Binding Pro_Photorez_1_Correction_Score}"/>
-                            <DataGridTextColumn Header="Дата создания корректировки" Binding="{Binding Date_tech}"/>
-                            <DataGridTextColumn Header="ФИО Лаборанта (редакт)" Binding="{Binding FIO_Lab_Update}"/>
-                            <DataGridTextColumn Header="Дата (редакт)" Binding="{Binding Date_Lab_Update}"/>
-                            <DataGridTextColumn Header="ФИО Корректировщика" Binding="{Binding FIO_Corr}"/>
-                            <DataGridTextColumn Header="Время выполнения корректировки" Binding="{Binding Date_Corr}"/>
-                            <DataGridTextColumn Header="Выполнение" Binding="{Binding Сompleted}"/>
-                            <DataGridTextColumn Header="Принятие в работу" Binding="{Binding Start_corr}"/>
-                            <DataGridTextColumn Header="Время принятия корректировки в выполнение" Binding="{Binding Date_start_corr}"/>
-                            <DataGridTextColumn Header="ФИО Корректировщикa" Binding="{Binding FIO_start_corr}"/>
-                            <DataGridTextColumn Header="Комментарий" Binding="{Binding Сomment}"/>
-
-                            <materialDesign:DataGridComboBoxColumn/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <Button x:Name="save_btn3" Content="Обновить" HorizontalAlignment="Left" Margin="1293,810,0,0" VerticalAlignment="Top" BorderBrush="#FF43C139" Foreground="#DDF9F9F9" Click="save_btn3_Click">
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FF673AB7"/>
-                                <GradientStop Color="#FF52F908" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
-                    </Button>
-                    </Grid>
-                </TabItem>
-            </TabControl>
-
-
-
-        </Border>
-
-
-        --><!--<TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" Background="AliceBlue" Padding="32" Margin="16"></TextBlock>--><!--
-
-
-
-
-    </Grid>-->
 </Window>
