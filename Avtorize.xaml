@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp4"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Авторизация" Height="450" Width="600" WindowStartupLocation="CenterScreen">
+        Title="Авторизация" Height="299" Width="519" WindowStartupLocation="CenterScreen">
     <Grid Background="Gray">
         <Border Background="White" Margin="15,15,15,15"
 CornerRadius="15" 
@@ -16,15 +16,15 @@ Padding="10">
                 <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"></DropShadowEffect>
             </Border.Effect>
             <StackPanel Margin="10,10,10,10">
-                <TextBlock FontSize="30" FontWeight="Bold" Margin="0,0,0,20" FontFamily="Yu Gothic UI" TextAlignment="Center"><Run Text="Автор"/><Run Language="ru-ru" Text="и"/><Run Text="зирут"/><Run Language="ru-ru" Text="й"/><Run Text="есь "/><Run Language="ru-ru" Text="тут"/></TextBlock>
+                <TextBlock FontSize="30" FontWeight="Bold" Margin="0,0,0,20" FontFamily="Yu Gothic UI" TextAlignment="Center"><Run Text="Авторизация"/></TextBlock>
                 <Grid/>
 
+                <!--<TextBox x:Name="log_txt" materialDesign:HintAssist.Hint="Введите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.FloatingHintHorizontalAlignment="Left" materialDesign:HintAssist.HintHorizontalAlignment="Center" HorizontalContentAlignment="Center"></TextBox>-->
                 <TextBox x:Name="log_txt" materialDesign:HintAssist.Hint="Введите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
                 <PasswordBox x:Name="pass_txt" materialDesign:HintAssist.Hint="Введите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"></PasswordBox>
-                <PasswordBox x:Name="pass_txt_repeat" materialDesign:HintAssist.Hint="Повторите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"></PasswordBox>
-                <TextBox materialDesign:HintAssist.Hint="Введите ваше ФИО" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+                <!--<PasswordBox x:Name="pass_txt" materialDesign:HintAssist.Hint="Введите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:HintAssist.FloatingHintHorizontalAlignment="Left" materialDesign:HintAssist.HintHorizontalAlignment="Center" HorizontalContentAlignment="Center"></PasswordBox>-->
 
-                <Button Content="Войти" Margin="0,15,0,30" VerticalAlignment="Top" Click="Button_Click"/>
+                <Button Content="Войти" Margin="0,25,0,30" VerticalAlignment="Top" Click="Button_Click"/>
             </StackPanel>
 
 

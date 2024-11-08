@@ -106,14 +106,29 @@ namespace WpfApp4
 								insertCommand.ExecuteNonQuery();
 							}
 
-							System.Windows.MessageBox.Show($"Добро пожаловать, {WC.fio}!", "Приветствие", (MessageBoxButton)MessageBoxButtons.OK);
+							//System.Windows.MessageBox.Show($"Добро пожаловать, {WC.fio}!", "Приветствие", (MessageBoxButton)MessageBoxButtons.OK);
+							bool result = CustomMessageBoxService.Show($"Добро пожаловать, {WC.fio}!", "Приветствие");
+							//if (result)
+							//{
+							//	// Пользователь нажал OK
+								
+							//}
+
+							//bool? confirm = CustomMessageBoxService.Show("Вы уверены, что хотите выйти?", "Подтверждение", true);
+							//if (confirm == true)
+							//{
+							//	//System.Windows.Application.Current.Shutdown();
+							//}
+						
+
 							this.Hide();
 							nextForm.ShowDialog();
 							this.Show();
 						}
 						else
 						{
-							System.Windows.MessageBox.Show("Вы ввели неверный логин или пароль", "Ошибка входа", (MessageBoxButton)MessageBoxButtons.OK, (MessageBoxImage)MessageBoxIcon.Error);
+							bool result = CustomMessageBoxService.Show($"Вы ввели неверный логин или пароль", "Ошибка входа");
+							//System.Windows.MessageBox.Show("Вы ввели неверный логин или пароль", "Ошибка входа", (MessageBoxButton)MessageBoxButtons.OK, (MessageBoxImage)MessageBoxIcon.Error);
 						}
 					}
 				}
