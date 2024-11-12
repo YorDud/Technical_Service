@@ -1,0 +1,33 @@
+﻿<Window x:Class="WpfApp4.MiniWindows.Ed_Izmer_Create_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Классификатор единиц измерения (создан...)" Height="250" Width="500">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="Записать и закрыть" Background="Yellow" Padding="10,5" Margin="0,0,10,0" Foreground="Black"/>
+            <Button Content="Записать" Padding="10,5" Margin="0,0,10,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Код:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <CheckBox Width="20" Height="20" Margin="105,0,10,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Наименование:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox Width="300" Margin="43,0,0,0" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Полное наименование:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox Width="300" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

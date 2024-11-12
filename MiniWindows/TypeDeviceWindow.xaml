@@ -1,0 +1,56 @@
+﻿<Window x:Class="WpfApp4.MiniWindows.TypeDeviceWindow"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Типы оборудования (создание)" Height="300" Width="600"
+        materialDesign:ColorZoneAssist.Mode="PrimaryLight">
+
+   
+
+
+    <Grid Margin="10">
+
+        <!-- Tab Control -->
+        <TabControl Margin="0,0,0,60">
+            <TabItem Header="Основное">
+                <StackPanel Orientation="Vertical" Height="200" Margin="10">
+                    <!-- Кнопки записи -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                        <Button Content="Записать и закрыть" Width="194" Height="35" Margin="0,0,5,0" 
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                    Background="Yellow" Foreground="Black" />
+                        <Button Content="Записать" Width="101" Height="35" 
+                    Style="{StaticResource MaterialDesignRaisedButton}" />
+                    </StackPanel>
+
+                    <!-- Поля кода и наименования -->
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <TextBlock Text="Код:" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Width="100" Height="30" Padding="3" Margin="0,0,50,0" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            <TextBlock Text="Наименование:" VerticalAlignment="Center" Margin="0,0,10,0" />
+                            <TextBox Width="200" Height="30" Padding="3" Margin="0,0,50,0" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                        </StackPanel>
+
+
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+
+
+            <TabItem Header="Техническое обслуживание" />
+        </TabControl>
+
+
+        <!-- Кнопки записи -->
+        
+        
+
+        <!-- Кнопка "Еще" -->
+
+    </Grid>
+</Window>

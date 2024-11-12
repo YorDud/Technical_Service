@@ -1,0 +1,83 @@
+﻿<Window x:Class="WpfApp4.MiniWindows.DeviceCreateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Оборудование (создание)" Height="482" Width="800">
+
+    <Grid Margin="10">
+        <TabControl>
+            <TabItem Header="Основное">
+                <StackPanel Margin="10" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+
+                    <!-- Кнопки действия -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                        <Button Content="Записать и закрыть" Width="168" Margin="0,0,5,0"
+                                Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                                Background="Yellow" Foreground="Black"/>
+                        <Button Content="Записать" Width="100" Margin="0,0,5,0"
+                                Style="{StaticResource MaterialDesignRaisedButton}" />
+                        <Button Content="Создать наряд" Width="134"
+                                Style="{StaticResource MaterialDesignRaisedButton}" />
+                    </StackPanel>
+
+                    <!-- Поля ввода -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Код и Инвентарный номер -->
+                        <TextBlock Text="Код:" VerticalAlignment="Center" Margin="0,5"/>
+                        <TextBox Grid.Column="1" Margin="5"   Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+                        <TextBlock Text="Инвентарный номер:" Grid.Column="2" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                        <TextBox Grid.Column="3" Margin="5"   Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+                        <!-- Наименование -->
+                        <TextBlock Text="Наименование:" Grid.Row="1" VerticalAlignment="Center" Margin="0,5"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="5"   Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+                        <TextBlock Text="Наименование в бухучете:" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                        <TextBox Grid.Row="1" Grid.Column="3" Margin="5"   Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+                        <!-- Другие поля -->
+                        <TextBlock Text="Тип оборудования:" Grid.Row="2" VerticalAlignment="Center" Margin="0,5"/>
+                        <ComboBox Grid.Row="2" Grid.Column="1" Margin="5"   Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+
+                        <TextBlock Text="Марка:" Grid.Row="3" VerticalAlignment="Center" Margin="0,5"/>
+                        <ComboBox Grid.Row="3" Grid.Column="1" Margin="5"   Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+
+                        <TextBlock Text="Серийный номер:" Grid.Row="4" VerticalAlignment="Center" Margin="0,5"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Margin="5"   Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+                        <TextBlock Text="Линия:" Grid.Row="5" VerticalAlignment="Center" Margin="0,5"/>
+                        <ComboBox Grid.Row="5" Grid.Column="1" Margin="5"   Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+
+                        <!-- Работает -->
+                        <TextBlock Text="Работает:" Grid.Row="7" VerticalAlignment="Center" Margin="0,5"/>
+                        <CheckBox Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" Margin="5"/>
+                    </Grid>
+
+                    <!-- Печать штрихкода -->
+                    <Button Content="Печать присвоенного штрихкода" Margin="0,5" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
+
