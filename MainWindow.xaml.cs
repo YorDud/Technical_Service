@@ -66,7 +66,8 @@ namespace WpfApp4
 		NarTO,
 		TechObsl,
 		ZapTO,
-		Ed_Izmer
+		Ed_Izmer,
+		Kontragents
 	};
 
 			// Устанавливаем видимость для каждого элемента
@@ -221,11 +222,18 @@ namespace WpfApp4
 		{
 			SetVisibility(Ed_Izmer);
 		}
-		private void ShowPrivacy(object sender, RoutedEventArgs e)
+		
+
+		private void Kontragents_Create_Click(object sender, RoutedEventArgs e)
 		{
-			SetVisibility(Ed_Izmer);
+			MiniWindows.Kontragents_Create_Window kontragents_Create_Window = new MiniWindows.Kontragents_Create_Window();
+			kontragents_Create_Window.ShowDialog();
 		}
 
+		private void Kontragents_Click(object sender, RoutedEventArgs e)
+		{
+			SetVisibility(Kontragents);
+		}
 	}
 
 	public class NonEmptyStringConverter : IValueConverter

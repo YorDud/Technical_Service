@@ -212,6 +212,9 @@
     <Compile Include="MiniWindows\Ed_Izmer_Create_Window.xaml.cs">
       <DependentUpon>Ed_Izmer_Create_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MiniWindows\Kontragents_Create_Window.xaml.cs">
+      <DependentUpon>Kontragents_Create_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiniWindows\NarTOCreateWindow.xaml.cs">
       <DependentUpon>NarTOCreateWindow.xaml</DependentUpon>
     </Compile>
@@ -254,6 +257,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MiniWindows\Ed_Izmer_Create_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MiniWindows\Kontragents_Create_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
