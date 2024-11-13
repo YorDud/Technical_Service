@@ -26,6 +26,9 @@ using Button = System.Windows.Controls.Button;
 using System.Windows.Controls.Primitives;
 using DataGridCell = System.Windows.Controls.DataGridCell;
 using System.ComponentModel;
+using System.Web.UI.WebControls;
+using WpfApp4.MiniWindows;
+using Style = System.Windows.Style;
 
 
 
@@ -67,7 +70,9 @@ namespace WpfApp4
 		TechObsl,
 		ZapTO,
 		Ed_Izmer,
-		Kontragents
+		Kontragents,
+		Nomekluatura,
+		Users_Nalad
 	};
 
 			// Устанавливаем видимость для каждого элемента
@@ -126,16 +131,22 @@ namespace WpfApp4
 			SetVisibility(MainHelp);
 		}
 
-		private void Window_Loaded(object sender, RoutedEventArgs e)
+		private void Load_Data_DataGrid()
 		{
-
 			WpfApp4.Lab_RezDataSet lab_RezDataSet = ((WpfApp4.Lab_RezDataSet)(this.FindResource("lab_RezDataSet")));
 			// Загрузить данные в таблицу test_table. Можно изменить этот код как требуется.
 			WpfApp4.Lab_RezDataSetTableAdapters.test_tableTableAdapter lab_RezDataSettest_tableTableAdapter = new WpfApp4.Lab_RezDataSetTableAdapters.test_tableTableAdapter();
 			lab_RezDataSettest_tableTableAdapter.Fill(lab_RezDataSet.test_table);
 			System.Windows.Data.CollectionViewSource test_tableViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("test_tableViewSource")));
 			test_tableViewSource.View.MoveCurrentToFirst();
+		}
 
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			Load_Data_DataGrid();
+
+			
 
 			////test_tableDataGrid_Loaded(sender, e);
 		}
@@ -234,7 +245,57 @@ namespace WpfApp4
 		{
 			SetVisibility(Kontragents);
 		}
+
+		private void Nomekluatura_Click(object sender, RoutedEventArgs e)
+		{
+			SetVisibility(Nomekluatura);
+		}
+
+		private void Nomekluatura_Create_Click(object sender, RoutedEventArgs e)
+		{
+			MiniWindows.Nomekluatura_Create_Window nomekluatura_Create_Window = new MiniWindows.Nomekluatura_Create_Window();
+			nomekluatura_Create_Window.ShowDialog();
+		}
+
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void Users_Nalad_Click(object sender, RoutedEventArgs e)
+		{
+			
+			SetVisibility(Users_Nalad);
+		}
+
+		private void Users_Nalad_Create_Click(object sender, RoutedEventArgs e)
+		{
+			MiniWindows.Users_Nalad_Create_Window users_Nalad_Create = new MiniWindows.Users_Nalad_Create_Window();
+			users_Nalad_Create.ShowDialog();
+		}
+
+		private void Device_2_Click(object sender, RoutedEventArgs e)
+		{
+			SetVisibility(Devices);
+		}
+
+		private void dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			if (test_tableDataGrid.SelectedItem is DataRowView selectedRow)
+			{
+				// Открываем окно редактирования
+				EditWindow_Monitor_TO editWindow = new EditWindow_Monitor_TO((DataRowView)test_tableDataGrid.SelectedItem);
+				editWindow.ShowDialog();
+			}
+		}
+
+		private void MT_Click(object sender, RoutedEventArgs e)
+		{
+			Load_Data_DataGrid();
+		}
 	}
+
+
 
 	public class NonEmptyStringConverter : IValueConverter
 	{

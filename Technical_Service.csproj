@@ -209,6 +209,9 @@
     <Compile Include="MiniWindows\DeviceGroupsCreateWindow.xaml.cs">
       <DependentUpon>DeviceGroupsCreateWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MiniWindows\EditWindow_Monitor_TO.xaml.cs">
+      <DependentUpon>EditWindow_Monitor_TO.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiniWindows\Ed_Izmer_Create_Window.xaml.cs">
       <DependentUpon>Ed_Izmer_Create_Window.xaml</DependentUpon>
     </Compile>
@@ -218,11 +221,17 @@
     <Compile Include="MiniWindows\NarTOCreateWindow.xaml.cs">
       <DependentUpon>NarTOCreateWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MiniWindows\Nomekluatura_Create_Window.xaml.cs">
+      <DependentUpon>Nomekluatura_Create_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiniWindows\TechObslCreateWindow.xaml.cs">
       <DependentUpon>TechObslCreateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MiniWindows\TypeDeviceWindow.xaml.cs">
       <DependentUpon>TypeDeviceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MiniWindows\Users_Nalad_Create_Window.xaml.cs">
+      <DependentUpon>Users_Nalad_Create_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="WC.cs" />
     <Compile Include="Window1.xaml.cs">
@@ -256,6 +265,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MiniWindows\EditWindow_Monitor_TO.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MiniWindows\Ed_Izmer_Create_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -268,11 +281,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MiniWindows\Nomekluatura_Create_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MiniWindows\TechObslCreateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MiniWindows\TypeDeviceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MiniWindows\Users_Nalad_Create_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

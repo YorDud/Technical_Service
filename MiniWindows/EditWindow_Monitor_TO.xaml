@@ -1,0 +1,34 @@
+﻿<Window x:Class="WpfApp4.MiniWindows.EditWindow_Monitor_TO"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Редактирование" Height="227" Width="400">
+    <Grid>
+        <StackPanel>
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Id -->
+                <Label Content="ID:" VerticalAlignment="Center" Margin="5"/>
+                <TextBox x:Name="idTextBox" Margin="5" IsReadOnly="True" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
+
+                <!-- First Field -->
+                <Label Content="ffff:" VerticalAlignment="Center" Margin="5" Grid.Row="1"/>
+                <TextBox x:Name="ffffTextBox" Margin="5" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1" Grid.Row="1"/>
+
+                <!-- Second Field -->
+                <Label Content="rrrr:" VerticalAlignment="Center" Margin="5" Grid.Row="2"/>
+                <TextBox x:Name="rrrrTextBox" Margin="5" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1" Grid.Row="2"/>
+            </Grid>
+
+            <Button Content="Сохранить" Margin="10" Click="SaveButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,64 @@
+﻿<Window x:Class="WpfApp4.MiniWindows.Nomekluatura_Create_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Номенклатура (создание)" Height="468" Width="933">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Button Content="Записать и закрыть" Margin="0,0,5,0" Background="Yellow" Foreground="Black"/>
+            <Button Content="Записать" Margin="0,0,5,0"/>
+            <Button Content="Печать присвоенного штрихкода" Margin="0,0,5,0"/>
+            <Button Content="Изменить штрихкод" Margin="0,0,5,0"/>
+            <Button Content="Печать штрихкода старый" Margin="0,0,5,0"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="0,10,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Код:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5,548,5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+            <Label Content="Наименование:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5,246,5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+            <Label Content="Артикул:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,246,5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+            <Label Content="Полное наименование:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="0,5,246,5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+            <Label Content="Базовая единица измерения:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <ComboBox Grid.Row="4" Grid.Column="1" Margin="0,0,246,0"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+
+            <Label Content="Услуга:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <CheckBox Grid.Row="5" Grid.Column="1" Margin="0,5,246,5" />
+
+            <Label Content="Критическое значение:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox Grid.Row="6" Grid.Column="1" Margin="0,5,540,5" Text="0" RenderTransformOrigin="0.5,0.5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+            <Label Content="Группа:" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <ComboBox Grid.Row="7" Grid.Column="1" Margin="0,0,246,0"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+            
+            <Button Content="Найти номенклатуру на складе" HorizontalAlignment="Left" Margin="0,10,0,0" Grid.Row="8"/>
+        </Grid>
+
+    </Grid>
+</Window>
