@@ -47,7 +47,7 @@ namespace WpfApp4
 			InitializeComponent();
 			StartDatePicker.SelectedDate = DateTime.Now;
 			EndDatePicker.SelectedDate = DateTime.Now.AddDays(7);       // Текущая дата + 7 дней
-																		//DataContext = this;
+																		
 			ApplyConditionalStyles();
 
 
@@ -75,7 +75,11 @@ namespace WpfApp4
 		Users_Nalad,
 		Sklad,
 		Shtrichcodes,
-		Dop_Rekvizits
+		Dop_Rekvizits,
+		Jurnal_Docs,
+		Otch_Kopletuishie,
+		Otch_Sklad,
+		Monitor_Sklad
 	};
 
 			// Устанавливаем видимость для каждого элемента
@@ -304,7 +308,8 @@ namespace WpfApp4
 
 		private void Sklad_Create_Click(object sender, RoutedEventArgs e)
 		{
-
+			MiniWindows.Sklad_Create_Window sklad_Create_Window = new Sklad_Create_Window();
+			sklad_Create_Window.ShowDialog();
 		}
 
 		private void Shtrichcodes_Click(object sender, RoutedEventArgs e)
@@ -320,6 +325,26 @@ namespace WpfApp4
 		private void Dop_Rekvizits_Click(object sender, RoutedEventArgs e)
 		{
 			SetVisibility(Dop_Rekvizits);
+		}
+
+		private void Show_Jurnal_Docs(object sender, RoutedEventArgs e)
+		{
+			SetVisibility(Jurnal_Docs);
+		}
+
+		private void Otch_Kopletuishie_Click(object sender, RoutedEventArgs e)
+		{
+			SetVisibility(Otch_Kopletuishie);
+		}
+
+		private void Otch_Sklad_Click(object sender, RoutedEventArgs e)
+		{
+			SetVisibility(Otch_Sklad);
+		}
+
+		private void Monitor_Sklad_Click(object sender, RoutedEventArgs e)
+		{
+			SetVisibility(Monitor_Sklad);
 		}
 	}
 

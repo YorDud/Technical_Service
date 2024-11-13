@@ -224,6 +224,9 @@
     <Compile Include="MiniWindows\Nomekluatura_Create_Window.xaml.cs">
       <DependentUpon>Nomekluatura_Create_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MiniWindows\Sklad_Create_Window.xaml.cs">
+      <DependentUpon>Sklad_Create_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiniWindows\TechObslCreateWindow.xaml.cs">
       <DependentUpon>TechObslCreateWindow.xaml</DependentUpon>
     </Compile>
@@ -282,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MiniWindows\Nomekluatura_Create_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MiniWindows\Sklad_Create_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
