@@ -72,7 +72,10 @@ namespace WpfApp4
 		Ed_Izmer,
 		Kontragents,
 		Nomekluatura,
-		Users_Nalad
+		Users_Nalad,
+		Sklad,
+		Shtrichcodes,
+		Dop_Rekvizits
 	};
 
 			// Устанавливаем видимость для каждого элемента
@@ -292,6 +295,31 @@ namespace WpfApp4
 		private void MT_Click(object sender, RoutedEventArgs e)
 		{
 			Load_Data_DataGrid();
+		}
+
+		private void Sklad_Click(object sender, RoutedEventArgs e)
+		{
+			SetVisibility(Sklad);
+		}
+
+		private void Sklad_Create_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void Shtrichcodes_Click(object sender, RoutedEventArgs e)
+		{
+			SetVisibility(Shtrichcodes);
+		}
+
+		private void Dop_Rekvizits_Create_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void Dop_Rekvizits_Click(object sender, RoutedEventArgs e)
+		{
+			SetVisibility(Dop_Rekvizits);
 		}
 	}
 
