@@ -53,7 +53,7 @@ namespace WpfApp4
 
 		}
 
-
+		
 
 
 
@@ -79,7 +79,9 @@ namespace WpfApp4
 		Jurnal_Docs,
 		Otch_Kopletuishie,
 		Otch_Sklad,
-		Monitor_Sklad
+		Monitor_Sklad,
+		Kalendar_To,
+		Raboti_Devices
 	};
 
 			// Устанавливаем видимость для каждого элемента
@@ -345,6 +347,16 @@ namespace WpfApp4
 		private void Monitor_Sklad_Click(object sender, RoutedEventArgs e)
 		{
 			SetVisibility(Monitor_Sklad);
+		}
+
+		private void Kalendar_To_Click(object sender, RoutedEventArgs e)
+		{
+			SetVisibility(Kalendar_To);
+		}
+
+		private void Raboti_Devices_Click(object sender, RoutedEventArgs e)
+		{
+			SetVisibility(Raboti_Devices);
 		}
 	}
 

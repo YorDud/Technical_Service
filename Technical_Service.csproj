@@ -240,6 +240,7 @@
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="YourDataType.cs" />
     <Page Include="Avtorize.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
