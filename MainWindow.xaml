@@ -89,10 +89,10 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Мониторинг нарядов на ТО" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                 <TextBlock Text="Дата начала:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Margin="10,0,10,0"/>
-                <DatePicker Name="StartDatePicker" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="90,0,0,0" Width="100" />
+                <DatePicker Name="StartDatePicker" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="90,0,0,0" Width="100"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
 
                 <TextBlock Text="Дата конца:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Margin="230,0,10,0"/>
-                <DatePicker Name="EndDatePicker" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="310,0,0,0" Width="100" />
+                <DatePicker Name="EndDatePicker" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="310,0,0,0" Width="100"   Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
 
 
 
@@ -323,9 +323,9 @@
 
                 <StackPanel  Grid.Row="3" Orientation="Horizontal" Margin="10,0,0,5">
                     <TextBlock Text="Дата начала:" VerticalAlignment="Center" Width="80" Margin="0,0,5,0"/>
-                    <DatePicker Width="120" Margin="0,0,15,0" Height="27"/>
+                    <DatePicker Width="120" Margin="0,0,15,0"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
                     <TextBlock Text="Дата конца:" VerticalAlignment="Center" Width="80" Margin="0,0,5,0"/>
-                    <DatePicker Width="120" Margin="0,0,15,0" Height="27"/>
+                    <DatePicker Width="120" Margin="0,0,15,0"   Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
                     <Button Content="..." Width="99" Margin="0,0,15,0"/>
                     <Button Content="Следующий месяц" Width="172" Margin="0,0,5,0"/>
                 </StackPanel>
@@ -333,13 +333,13 @@
                 <!-- Вторая строка полей -->
                 <StackPanel  Grid.Row="4" Orientation="Horizontal" Margin="10,0,0,5">
                     <TextBlock Text="ТО:" VerticalAlignment="Center" Width="20" Margin="0,0,5,0"/>
-                    <TextBox Width="200" Margin="0,0,10,0"/>
+                    <TextBox Width="200" Margin="0,0,10,0"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                 </StackPanel>
 
                 <!-- Третья строка полей -->
                 <StackPanel  Grid.Row="5" Orientation="Horizontal" Margin="10,0,0,5">
                     <TextBlock Text="Оборудование:" VerticalAlignment="Center" Width="100" Margin="0,0,5,0"/>
-                    <TextBox Width="200" Margin="0,0,10,0"/>
+                    <TextBox Width="200" Margin="0,0,10,0"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                 </StackPanel>
 
                 <!-- Кнопка заполнения наряда -->
