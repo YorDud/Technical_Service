@@ -79,7 +79,7 @@
         </StackPanel>
 
         <!-- Основное содержание                                                                                         Главное -->
-        <ContentControl x:Name="MainContent" Grid.Column="1" Visibility="Hidden">
+        <ContentControl x:Name="MainContent" Grid.Column="1" Visibility="Visible">
             <Grid DataContext="{StaticResource test_tableViewSource}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
