@@ -51,6 +51,9 @@ namespace WpfApp4
 			ApplyConditionalStyles();
 
 
+			LoadData_Users();
+
+
 		}
 
 		
@@ -93,6 +96,28 @@ namespace WpfApp4
 
 		// Пример вызова метода
 		//SetVisibility(ZapTO);
+
+
+
+
+		public void LoadData_Users()
+		{
+			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+			{
+				string query = "SELECT [ID], [FIO], [Login], [Password], [Role], [Smena], [Phone] FROM [Users]";
+				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+
+				DataTable dataTable = new DataTable();
+
+				connection.Open();
+				adapter.Fill(dataTable);
+				connection.Close();
+
+				dataGridUsers.ItemsSource = dataTable.DefaultView;
+			}
+		}
+
+
 
 
 
@@ -273,13 +298,13 @@ namespace WpfApp4
 
 		private void Users_Nalad_Click(object sender, RoutedEventArgs e)
 		{
-			
+			LoadData_Users();
 			SetVisibility(Users_Nalad);
 		}
 
 		private void Users_Nalad_Create_Click(object sender, RoutedEventArgs e)
 		{
-			MiniWindows.Users_Nalad_Create_Window users_Nalad_Create = new MiniWindows.Users_Nalad_Create_Window();
+			MiniWindows.Users_Nalad_Create_Window users_Nalad_Create = new MiniWindows.Users_Nalad_Create_Window(this);
 			users_Nalad_Create.ShowDialog();
 		}
 
