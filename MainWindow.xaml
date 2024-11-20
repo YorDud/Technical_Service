@@ -6,8 +6,7 @@
         xmlns:local="clr-namespace:WpfApp4"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="MainWindow" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="Window_Loaded">
+        Title="MainWindow" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="Window_Loaded" Closed="Window_Closed">
     <Window.Resources>
         <local:Lab_RezDataSet x:Key="lab_RezDataSet"/>
         <CollectionViewSource x:Key="test_tableViewSource" Source="{Binding test_table, Source={StaticResource lab_RezDataSet}}"/>
@@ -29,48 +28,25 @@
                 <StackPanel>
                     <Button Content="Типы оборудования" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="ShowTipesTO"/>
                     <Button Content="Оборудование" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="ShowDevices"/>
-                    <Button Content="Наряд на ТО" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="NarTObtn"/>
-                    <Button Content="Тех обслуживание" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="TechObslbtn"/>
-                    <Button Content="Заполнение ТО" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="ZapolTObtn"/>
+                    <Button Content="Наряды" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="NarTObtn"/>
+                    <Button Content="Виды ТО" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="TechObslbtn"/>
+                    <Button Content="Сотрудники" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Users_Nalad_Click"/>
+                    <Button Content="Документация" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Show_Jurnal_Docs"/>
                 </StackPanel>
             </Expander>
-
-            <Expander Header="📂 Управление" FontSize="14" Margin="10" Padding="10">
-                <StackPanel>
-                    <Button Content="Единицы измерения" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Show_ED_Izmer"/>
-                    <Button Content="Контрагенты" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Kontragents_Click"/>
-                    <Button Content="Номенклуатура" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Nomekluatura_Click"/>
-                    <Button Content="Оборудование" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Device_2_Click" />
-                    <Button Content="Пользователи" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Users_Nalad_Click"/>
-                    <Button Content="Склад" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Sklad_Click"/>
-                    <Button Content="Тех обслуживание" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="TechObslbtn"/>
-                    <Button Content="Типы оборудования" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="ShowTipesTO"/>
-                    <Button Content="Штрихкоды" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Shtrichcodes_Click"/>
-                    <Button Content="Доп ревизиты" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Dop_Rekvizits_Click"/>
-
-                </StackPanel>
-            </Expander>
-
 
             <Expander Header="📂 Склад" FontSize="14" Margin="10" Padding="10">
                 <StackPanel>
-                    <Button Content="Журнал документов" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Show_Jurnal_Docs"/>
-                    <Button Content="Отчет по компл. в ТО" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Otch_Kopletuishie_Click"/>
-                    <Button Content="Отчет по складу" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Otch_Sklad_Click"/>
-                    <Button Content="Мониторинг склада" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Monitor_Sklad_Click" />
+
+                    <Button Content="Склад" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Sklad_Click"/>
+
 
                 </StackPanel>
             </Expander>
 
 
-            <Expander Header="📂 Наряды" FontSize="14" Margin="10" Padding="10">
-                <StackPanel>
-                    <Button Content="Календарь ТО" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Kalendar_To_Click"/>
-                    <Button Content="Перечень работ ТО" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Raboti_Devices_Click"/>
-                    <Button Content="Заполнение ТО" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="ZapolTObtn"/>
 
-                </StackPanel>
-            </Expander>
+
 
 
 
@@ -79,7 +55,7 @@
         </StackPanel>
 
         <!-- Основное содержание                                                                                         Главное -->
-        <ContentControl x:Name="MainContent" Grid.Column="1" Visibility="Visible">
+        <ContentControl x:Name="MainContent" Grid.Column="1" Visibility="Hidden">
             <Grid DataContext="{StaticResource test_tableViewSource}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -167,20 +143,23 @@
 
 
                 <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="DeviceCreateClick"/>
-                <Button Grid.Row="1" Content="Создать группу" Margin="120,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" Click="DeviceGroupsCreateClick"/>
 
                 <!-- Data Grid -->
-                <DataGrid Grid.Row="2" AutoGenerateColumns="False" Margin="10" HeadersVisibility="Column" Height="500"
-                  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+                <DataGrid x:Name="dataGridDevices" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridDevices_MouseDoubleClick">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Наименование" Width="230" Binding="{Binding Name}" />
-                        <DataGridTextColumn Header="Код" Width="230" Binding="{Binding Code}" />
-                        <DataGridTextColumn Header="Тип оборудования" Width="230" Binding="{Binding Type}" />
-                        <DataGridTextColumn Header="Серийный номер" Width="230" Binding="{Binding SerialNumber}" />
-                        <DataGridTextColumn Header="Модель" Width="230" Binding="{Binding Model}" />
-                        <DataGridCheckBoxColumn Header="Работает" Width="230" Binding="{Binding IsWorking}" />
+                        <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Наименование оборудования" Width="auto" Binding="{Binding Name_Device}" />
+                        <DataGridTextColumn Header="Тип оборудования" Width="auto" Binding="{Binding Device_Type}" />
+                        <DataGridTextColumn Header="Модель" Width="auto" Binding="{Binding Model}" />
+                        <DataGridTextColumn Header="Серийный номер" Width="auto" Binding="{Binding Ser_Number}" />
+                        <DataGridTextColumn Header="Год выпуска" Width="auto" Binding="{Binding Year_Create_Device}" />
+                        <DataGridTextColumn Header="Инв номер" Width="auto" Binding="{Binding Inventory_Number}" />
+                        <DataGridTextColumn Header="Помещение" Width="auto" Binding="{Binding Location}" />
+                        <DataGridTextColumn Header="Наименование бух. учет" Width="auto" Binding="{Binding Name_Buh_Uch}" />
+
                     </DataGrid.Columns>
-                    <!-- You would bind this DataGrid to a collection of objects in your code-behind or view-model -->
+
+
                 </DataGrid>
             </Grid>
         </ContentControl>
@@ -198,7 +177,7 @@
 
 
 
-                <TextBlock Grid.Row="0" Text="Наряд на ТО" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBlock Grid.Row="0" Text="Наряды ТО" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                 <TextBox Grid.Row="1" Width="150" Height="30" HorizontalAlignment="Right" VerticalContentAlignment="Center" Margin="0,0,85,0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 
 
@@ -213,54 +192,27 @@
                 <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="NarTOCreateClick"/>
 
                 <!-- Data Grid -->
-                <DataGrid Grid.Row="2" AutoGenerateColumns="False" Margin="10" HeadersVisibility="Column" Height="500"
-      CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+                <DataGrid x:Name="dataGridNaryad" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridNaryad_MouseDoubleClick">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Наименование" Width="230" Binding="{Binding Name}" />
-                        <DataGridTextColumn Header="Код" Width="230" Binding="{Binding Code}" />
-                        <DataGridTextColumn Header="Тип оборудования" Width="230" Binding="{Binding Type}" />
-                        <DataGridTextColumn Header="Серийный номер" Width="230" Binding="{Binding SerialNumber}" />
-                        <DataGridTextColumn Header="Модель" Width="230" Binding="{Binding Model}" />
-                        <DataGridCheckBoxColumn Header="Работает" Width="230" Binding="{Binding IsWorking}" />
+                        <DataGridTextColumn Header="Номер наряда" Width="auto" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Устройство" Width="auto" Binding="{Binding Device_Name}" />
+                        <DataGridTextColumn Header="ТО" Width="auto" Binding="{Binding Types_TO_Name}" />
+                        <DataGridTextColumn Header="Список работ" Width="auto" Binding="{Binding Types_TO_Work_List}" />
+                        <DataGridTextColumn Header="Сотрудник" Width="auto" Binding="{Binding Users_FIO}" />
+                        <DataGridTextColumn Header="Дата начала" Width="auto" Binding="{Binding Date_Start}" />
+                        <DataGridTextColumn Header="Дата завершения" Width="auto" Binding="{Binding Date_End}" />
+                        <DataGridTextColumn Header="Статус" Width="auto" Binding="{Binding Status}" />
+                        <DataGridTextColumn Header="Запчасти" Width="auto" Binding="{Binding Sklad_Deteil_ID}" />
+                        <DataGridTextColumn Header="Количество запчастей" Width="auto" Binding="{Binding Sklad_Kolich}" />
+                        <DataGridTextColumn Header="Документация" Width="auto" Binding="{Binding Documentation_Name_ID}" />
+                        <DataGridTextColumn Header="Комментарий" Width="auto" Binding="{Binding Comment}" />
                     </DataGrid.Columns>
-                    <!-- You would bind this DataGrid to a collection of objects in your code-behind or view-model -->
                 </DataGrid>
 
 
+
                 <!-- Верхняя строка полей -->
-                <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="10,0,0,5">
-                    <CheckBox Content="ТехОбсл" VerticalAlignment="Center" Margin="0,0,100,0"/>
-                    <TextBlock Text="Дата начала" VerticalAlignment="Center" Width="45" Margin="0,0,10,0"/>
-                    <DatePicker Width="120" Margin="0,0,100,0"/>
-                    <TextBlock Text="Дата конца" VerticalAlignment="Center" Width="45" Margin="0,0,10,0"/>
-                    <DatePicker Width="120" Margin="0,0,10,0"/>
-                </StackPanel>
 
-                <!-- Средняя строка полей -->
-                <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="10,0,0,5">
-                    <TextBlock Text="Номер" VerticalAlignment="Center" Width="45" Margin="0,0,10,0"/>
-                    <TextBox Width="100" Margin="0,0,100,0"/>
-                    <TextBlock Text="Проведен" VerticalAlignment="Center" Width="60" Margin="0,0,10,0"/>
-                    <ComboBox Width="150" Margin="0,0,100,0">
-                    </ComboBox>
-                    <TextBlock Text="Оборудование" VerticalAlignment="Center" Width="90" Margin="0,0,10,0"/>
-                    <ComboBox Width="150" Margin="0,0,10,0">
-                        <!-- Добавьте элементы сюда -->
-                    </ComboBox>
-                </StackPanel>
-
-                <!-- Нижняя строка полей -->
-                <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="10,0,5,0">
-                    <TextBlock Text="Плановое ТО" VerticalAlignment="Center" Width="80" Margin="0,0,10,0"/>
-                    <ComboBox Width="150" Margin="0,0,100,0">
-                    </ComboBox>
-                    <TextBlock Text="Состояние наряда" VerticalAlignment="Center" Width="100" Margin="0,0,10,0"/>
-                    <ComboBox Width="150" Margin="0,0,100,0">
-                    </ComboBox>
-                    <TextBlock Text="Срочно" VerticalAlignment="Center" Width="50" Margin="0,0,10,0"/>
-                    <ComboBox Width="150" Margin="0,0,100,0">
-                    </ComboBox>
-                </StackPanel>
 
 
             </Grid>
@@ -276,7 +228,7 @@
 
 
 
-                <TextBlock Grid.Row="0" Text="Техническое обслуживание" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBlock Grid.Row="0" Text="Виды ТО" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                 <TextBox Grid.Row="1" Width="150" Height="30" HorizontalAlignment="Right" VerticalContentAlignment="Center" Margin="0,0,85,0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 
 
@@ -288,23 +240,24 @@
 
 
 
-                <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="TechObslCreateClick"/>
+                <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="Types_TO_Create_Click"/>
 
                 <!-- Data Grid -->
-                <DataGrid Grid.Row="2" AutoGenerateColumns="False" Margin="10" HeadersVisibility="Column" Height="500"
-      CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+                <DataGrid x:Name="dataGridTypesTO" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridTypesTO_MouseDoubleClick">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Наименование" Width="270" Binding="{Binding Name}" />
-                        <DataGridTextColumn Header="Код" Width="230" Binding="{Binding Code}" />
-                        <DataGridTextColumn Header="Тип оборудования" Width="300" Binding="{Binding Type}" />
-                        <DataGridTextColumn Header="Расписание" Width="300" Binding="{Binding SerialNumber}" />
+                        <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Тип оборудования" Width="auto" Binding="{Binding Device_Type}" />
+                        <DataGridTextColumn Header="ТО" Width="auto" Binding="{Binding Name_TO}" />
+                        <DataGridTextColumn Header="Перечень работ" Width="auto" Binding="{Binding Work_List}" />
+                        <DataGridTextColumn Header="Расписание" Width="auto" Binding="{Binding Raspisanie}" />
 
                     </DataGrid.Columns>
-                    <!-- You would bind this DataGrid to a collection of objects in your code-behind or view-model -->
+
+
                 </DataGrid>
             </Grid>
         </ContentControl>
-        <ContentControl x:Name="ZapTO" Grid.Column="1" Visibility="Hidden">
+        <!--<ContentControl x:Name="ZapTO" Grid.Column="1" Visibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -330,25 +283,31 @@
                     <Button Content="Следующий месяц" Width="172" Margin="0,0,5,0"/>
                 </StackPanel>
 
-                <!-- Вторая строка полей -->
+                -->
+        <!-- Вторая строка полей -->
+        <!--
                 <StackPanel  Grid.Row="4" Orientation="Horizontal" Margin="10,0,0,5">
                     <TextBlock Text="ТО:" VerticalAlignment="Center" Width="20" Margin="0,0,5,0"/>
                     <TextBox Width="200" Margin="0,0,10,0"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                 </StackPanel>
 
-                <!-- Третья строка полей -->
+                -->
+        <!-- Третья строка полей -->
+        <!--
                 <StackPanel  Grid.Row="5" Orientation="Horizontal" Margin="10,0,0,5">
                     <TextBlock Text="Оборудование:" VerticalAlignment="Center" Width="100" Margin="0,0,5,0"/>
                     <TextBox Width="200" Margin="0,0,10,0"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                 </StackPanel>
 
-                <!-- Кнопка заполнения наряда -->
+                -->
+        <!-- Кнопка заполнения наряда -->
+        <!--
                 <Button Grid.Row="6" Content="Заполнить Нарад на ТО" Width="200" Margin="10,30,0,10" HorizontalAlignment="Left"/>
 
 
 
             </Grid>
-        </ContentControl>
+        </ContentControl>-->
 
 
 
@@ -446,7 +405,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="Пользователи/Наладчики" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBlock Grid.Row="0" Text="Сотрудники" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
 
 
                 <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="Users_Nalad_Create_Click"/>
@@ -455,6 +414,9 @@
 
                 <!-- Serch Button -->
                 <Button Grid.Row="1" HorizontalAlignment="Right" Height="30" Margin="0,0,5,0" Content="Искать"></Button>
+
+
+
 
                 <DataGrid x:Name="dataGridUsers" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridUsers_MouseDoubleClick">
                     <DataGrid.Columns>
@@ -465,10 +427,12 @@
                         <DataGridTextColumn Header="Должность" Width="auto" Binding="{Binding Role}" />
                         <DataGridTextColumn Header="Смена" Width="auto" Binding="{Binding Smena}" />
                         <DataGridTextColumn Header="Телефон" Width="auto" Binding="{Binding Phone}" />
-                        
+
                     </DataGrid.Columns>
 
+
                 </DataGrid>
+
             </Grid>
         </ContentControl>
 
@@ -492,7 +456,21 @@
                 <!-- Serch Button -->
                 <Button Grid.Row="1" HorizontalAlignment="Right" Height="30" Margin="0,0,5,0" Content="Искать"></Button>
 
-                <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10" Grid.Row="2" Height="900">
+                <DataGrid x:Name="dataGridSklad" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridSklad_MouseDoubleClick">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Тип детали" Width="auto" Binding="{Binding Deteil_Types}" />
+                        <DataGridTextColumn Header="Модель" Width="auto" Binding="{Binding Model}" />
+                        <DataGridTextColumn Header="Производитель" Width="auto" Binding="{Binding Proizvod}" />
+                        <DataGridTextColumn Header="Поставщик" Width="auto" Binding="{Binding Postav}" />
+                        <DataGridTextColumn Header="Оборудование" Width="auto" Binding="{Binding Devices_ID}" />
+                        <DataGridTextColumn Header="Изображение" Width="auto" Binding="{Binding Image}" />
+                        <DataGridTextColumn Header="Место хранения" Width="auto" Binding="{Binding Location}" />
+                        <DataGridTextColumn Header="Количество" Width="auto" Binding="{Binding Kolich}" />
+
+
+                    </DataGrid.Columns>
+
 
                 </DataGrid>
             </Grid>
@@ -595,7 +573,7 @@
 
         <!-- Основное содержание                                                                                         Склад -->
         <ContentControl x:Name="Jurnal_Docs" Grid.Column="1" Visibility="Hidden">
-            <Grid DataContext="{StaticResource test_tableViewSource}">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
                     <RowDefinition Height="Auto" />
@@ -607,44 +585,32 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="Журнал документов склада" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBlock Grid.Row="0" Text="Документация" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
 
 
-                <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100"/>
+                <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="Docs_Create_Click"/>
                 <TextBox Grid.Row="1" Width="150" Height="30" HorizontalAlignment="Right" VerticalContentAlignment="Center" Margin="0,0,85,0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 
 
                 <!-- Serch Button -->
                 <Button Grid.Row="1" HorizontalAlignment="Right" Height="30" Margin="0,0,5,0" Content="Искать"></Button>
 
-                <DataGrid AutoGenerateColumns="False" Height="700" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10" Grid.Row="2">
+                <DataGrid x:Name="dataGridDocs" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridDocs_MouseDoubleClick">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Название документа" Width="auto" Binding="{Binding Name_Doc}" />
+                        <DataGridTextColumn Header="Документ" Width="auto" Binding="{Binding Doc}" />
+                        <DataGridTextColumn Header="Описание" Width="auto" Binding="{Binding Opisaniye}" />
+
+
+                    </DataGrid.Columns>
+
 
                 </DataGrid>
 
 
 
-                <TextBlock Text="Событие" Margin="10" Grid.Row="3"/>
 
-
-                <!-- First Row Elements -->
-                <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="4" >
-                    <Label Content="Дата начала:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <DatePicker Width="120" Margin="0,0,10,0" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
-                    <Label Content="Дата конца:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <DatePicker Width="120" Margin="0,0,10,0" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
-                    <Label Content="Проведен:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <ComboBox Width="262" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
-                </StackPanel>
-
-                <!-- Second Row Elements -->
-                <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="5">
-                    <Label Content="Номер:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <TextBox Width="250" Margin="0,0,10,0" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                    <Label Content="Тип документа:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <ComboBox Width="250" Margin="0,0,10,0" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
-                    <Label Content="Склад/На склад" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <ComboBox Width="250" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
-                </StackPanel>
 
 
             </Grid>
@@ -755,7 +721,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="630"/>
                             <ColumnDefinition Width="Auto"/>
-                            
+
                         </Grid.ColumnDefinitions>
 
                         <!-- First Row -->
@@ -859,7 +825,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                
+
 
                 <TextBlock Grid.Row="0" Text="Календарь ТО" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
 
@@ -894,7 +860,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- First Row -->
-                    
+
 
                     <!-- Second Row -->
                     <Label Content="Тип оборудования:" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="0,5,5,5"/>

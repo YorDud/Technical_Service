@@ -21,7 +21,6 @@ using System.Globalization;
 using System.Windows.Markup;
 using MaterialDesignThemes.Wpf;
 using MahApps.Metro.Controls.Dialogs;
-using MaterialDesignThemes.MahApps;
 using Button = System.Windows.Controls.Button;
 using System.Windows.Controls.Primitives;
 using DataGridCell = System.Windows.Controls.DataGridCell;
@@ -40,23 +39,33 @@ namespace WpfApp4
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		
+
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			StartDatePicker.SelectedDate = DateTime.Now;
 			EndDatePicker.SelectedDate = DateTime.Now.AddDays(7);       // Текущая дата + 7 дней
-																		
+
 			ApplyConditionalStyles();
 
 
 			LoadData_Users();
 
+			LoadData_Devices();
+
+			LoadData_Docs();
+			LoadData_Sklad();
+			LoadData_TypesTO();
+			LoadData_Naryad();
+
+
+
+
 
 		}
 
-		
+
 
 
 
@@ -71,7 +80,7 @@ namespace WpfApp4
 		Devices,
 		NarTO,
 		TechObsl,
-		ZapTO,
+		//ZapTO,
 		Ed_Izmer,
 		Kontragents,
 		Nomekluatura,
@@ -117,6 +126,107 @@ namespace WpfApp4
 			}
 		}
 
+		public void LoadData_Docs()
+		{
+			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+			{
+				string query = "SELECT [ID]\r\n      ,[Name_Doc]\r\n      ,[Doc]\r\n      ,[Opisaniye] FROM [Documentation]";
+				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+
+				DataTable dataTable = new DataTable();
+
+				connection.Open();
+				adapter.Fill(dataTable);
+				connection.Close();
+
+				dataGridDocs.ItemsSource = dataTable.DefaultView;
+			}
+		}
+
+		public void LoadData_Devices()
+		{
+			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+			{
+				string query = "SELECT [ID], [Name_Device]\r\n      ,[Device_Type]\r\n      ,[Model]\r\n      ,[Ser_Number]\r\n      ,[Year_Create_Device]\r\n      ,[Inventory_Number]\r\n      ,[Location]\r\n      ,[Name_Buh_Uch]\r\n  FROM [Devices]";
+				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+
+				DataTable dataTable = new DataTable();
+
+				connection.Open();
+				adapter.Fill(dataTable);
+				connection.Close();
+
+				dataGridDevices.ItemsSource = dataTable.DefaultView;
+			}
+		}
+
+		public void LoadData_Sklad()
+		{
+			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+			{
+				string query = "SELECT [ID]\r\n      ,[Deteil_Types]\r\n      ,[Model]\r\n      ,[Proizvod]\r\n      ,[Postav]\r\n      ,[Devices_ID]\r\n      ,[Image]\r\n      ,[Location]\r\n      ,[Kolich]\r\n  FROM [Sklad]";
+				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+
+				DataTable dataTable = new DataTable();
+
+				connection.Open();
+				adapter.Fill(dataTable);
+				connection.Close();
+
+				dataGridSklad.ItemsSource = dataTable.DefaultView;
+			}
+		}
+
+		public void LoadData_TypesTO()
+		{
+			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+			{
+				string query = "SELECT [ID]\r\n      ,[Device_Type]\r\n      ,[Name_TO]\r\n      ,[Work_List]\r\n      ,[Raspisanie]\r\n  FROM [Types_TO]";
+				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+
+				DataTable dataTable = new DataTable();
+
+				connection.Open();
+				adapter.Fill(dataTable);
+				connection.Close();
+
+				dataGridTypesTO.ItemsSource = dataTable.DefaultView;
+			}
+		}
+
+		public void LoadData_Naryad()
+		{
+			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+			{
+				// SQL-запрос с JOIN для получения данных из таблиц Naryad и Types_TO
+				string query = @"
+            SELECT 
+                [ID]
+      ,[Device_Name]
+      ,[Types_TO_Name]
+      ,[Types_TO_Work_List]
+      ,[Users_FIO]
+      ,[Date_Start]
+      ,[Date_End]
+      ,[Status]
+      ,[Sklad_Deteil_ID]
+      ,[Sklad_Kolich]
+      ,[Documentation_Name_ID]
+      ,[Comment]
+  FROM [Technical_Service].[dbo].[Naryad]";
+
+				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+				DataTable dataTable = new DataTable();
+
+				connection.Open();
+				adapter.Fill(dataTable);
+				connection.Close();
+
+				dataGridNaryad.ItemsSource = dataTable.DefaultView;
+			}
+		}
+
+
 
 
 
@@ -140,19 +250,22 @@ namespace WpfApp4
 
 		private void ShowDevices(object sender, RoutedEventArgs e)
 		{
+			LoadData_Devices();
 			SetVisibility(Devices);
 		}
 		private void NarTObtn(object sender, RoutedEventArgs e)
 		{
+			LoadData_Naryad();
 			SetVisibility(NarTO);
 		}
 		private void TechObslbtn(object sender, RoutedEventArgs e)
 		{
+			LoadData_TypesTO();
 			SetVisibility(TechObsl);
 		}
 		private void ZapolTObtn(object sender, RoutedEventArgs e)
 		{
-			SetVisibility(ZapTO);
+			//SetVisibility(ZapTO);
 		}
 
 
@@ -180,7 +293,7 @@ namespace WpfApp4
 		{
 			Load_Data_DataGrid();
 
-			
+
 
 			////test_tableDataGrid_Loaded(sender, e);
 		}
@@ -235,7 +348,7 @@ namespace WpfApp4
 
 		private void DeviceCreateClick(object sender, RoutedEventArgs e)
 		{
-			MiniWindows.DeviceCreateWindow deviceCreateWindow = new MiniWindows.DeviceCreateWindow();
+			MiniWindows.DeviceCreateWindow deviceCreateWindow = new MiniWindows.DeviceCreateWindow(this);
 			deviceCreateWindow.ShowDialog();
 		}
 
@@ -247,14 +360,14 @@ namespace WpfApp4
 
 		private void NarTOCreateClick(object sender, RoutedEventArgs e)
 		{
-			MiniWindows.NarTOCreateWindow narTOCreateWindow = new MiniWindows.NarTOCreateWindow();
+			MiniWindows.Naryad_Create_Window narTOCreateWindow = new MiniWindows.Naryad_Create_Window(this);
 			narTOCreateWindow.ShowDialog();
 		}
 
-		private void TechObslCreateClick(object sender, RoutedEventArgs e)
+		private void Types_TO_Create_Click(object sender, RoutedEventArgs e)
 		{
-			MiniWindows.TechObslCreateWindow techObslCreateWindow = new MiniWindows.TechObslCreateWindow();
-			techObslCreateWindow.ShowDialog();
+			MiniWindows.Types_TO_Create_Window types_TO_Create_Window = new Types_TO_Create_Window(this);
+			types_TO_Create_Window.ShowDialog();
 		}
 
 		private void Ed_Izmer_Create_Click(object sender, RoutedEventArgs e)
@@ -267,7 +380,7 @@ namespace WpfApp4
 		{
 			SetVisibility(Ed_Izmer);
 		}
-		
+
 
 		private void Kontragents_Create_Click(object sender, RoutedEventArgs e)
 		{
@@ -330,12 +443,13 @@ namespace WpfApp4
 
 		private void Sklad_Click(object sender, RoutedEventArgs e)
 		{
+			LoadData_Sklad();
 			SetVisibility(Sklad);
 		}
 
 		private void Sklad_Create_Click(object sender, RoutedEventArgs e)
 		{
-			MiniWindows.Sklad_Create_Window sklad_Create_Window = new Sklad_Create_Window();
+			MiniWindows.Sklad_Create_Window sklad_Create_Window = new Sklad_Create_Window(this);
 			sklad_Create_Window.ShowDialog();
 		}
 
@@ -356,6 +470,7 @@ namespace WpfApp4
 
 		private void Show_Jurnal_Docs(object sender, RoutedEventArgs e)
 		{
+			LoadData_Docs();
 			SetVisibility(Jurnal_Docs);
 		}
 
@@ -382,6 +497,115 @@ namespace WpfApp4
 		private void Raboti_Devices_Click(object sender, RoutedEventArgs e)
 		{
 			SetVisibility(Raboti_Devices);
+		}
+
+
+
+		private void Docs_Create_Window_Click(object sender, RoutedEventArgs e)
+		{
+			//MiniWindows.Docs_Create_Window docs_Create_Window = new MiniWindows.Docs_Create_Window();
+			//docs_Create_Window.ShowDialog();
+		}
+
+		private void TechObsl_Create_Click(object sender, RoutedEventArgs e)
+		{
+			//MiniWindows.TechObslCreateWindow techObslCreateWindow = new TechObslCreateWindow();
+			//techObslCreateWindow.ShowDialog();
+		}
+
+		private void Docs_Click(object sender, RoutedEventArgs e)
+		{
+			SetVisibility(Jurnal_Docs);
+		}
+
+		private void Sklad_Create_Window_Click(object sender, RoutedEventArgs e)
+		{
+			MiniWindows.Sklad_Create_Window sklad_Create_Window = new Sklad_Create_Window(this);
+			sklad_Create_Window.ShowDialog();
+		}
+
+		private void Window_Closed(object sender, EventArgs e)
+		{
+			System.Windows.Application.Current.Shutdown();
+		}
+
+		private void dataGridUsers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			// Проверяем, выбрана ли строка
+			if (dataGridUsers.SelectedItem is DataRowView selectedRow)
+			{
+				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+				Users_Nalad_Edit_Window users_Nalad_Edit_Window = new Users_Nalad_Edit_Window(this, selectedRow);
+
+				// Показываем диалоговое окно
+				users_Nalad_Edit_Window.ShowDialog();
+			}
+		}
+
+		private void dataGridDevices_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			if (dataGridDevices.SelectedItem is DataRowView selectedRow)
+			{
+				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+				DeviceEditWindow users_Nalad_Edit_Window = new DeviceEditWindow(this, selectedRow);
+
+				// Показываем диалоговое окно
+				users_Nalad_Edit_Window.ShowDialog();
+			}
+		}
+
+		private void Docs_Create_Click(object sender, RoutedEventArgs e)
+		{
+			MiniWindows.Docs_Create_Window docs_Create_Window = new Docs_Create_Window(this);
+			docs_Create_Window.ShowDialog();
+		}
+
+		private void dataGridDocs_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			if (dataGridDocs.SelectedItem is DataRowView selectedRow)
+			{
+				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+				Docs_Edit_Window users_Nalad_Edit_Window = new Docs_Edit_Window(this, selectedRow);
+
+				// Показываем диалоговое окно
+				users_Nalad_Edit_Window.ShowDialog();
+			}
+		}
+
+		private void dataGridSklad_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			if (dataGridSklad.SelectedItem is DataRowView selectedRow)
+			{
+				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+				Sklad_Edit_Window sklad_Edit_Window = new Sklad_Edit_Window(this, selectedRow);
+
+				// Показываем диалоговое окно
+				sklad_Edit_Window.ShowDialog();
+			}
+		}
+
+		private void dataGridTypesTO_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			if (dataGridTypesTO.SelectedItem is DataRowView selectedRow)
+			{
+				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+				Types_TO_Edit_Window sklad_Edit_Window = new Types_TO_Edit_Window(this, selectedRow);
+
+				// Показываем диалоговое окно
+				sklad_Edit_Window.ShowDialog();
+			}
+		}
+
+		private void dataGridNaryad_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			if (dataGridNaryad.SelectedItem is DataRowView selectedRow)
+			{
+				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+				Naryad_Edit_Window naryad_Edit_Window = new Naryad_Edit_Window(this, selectedRow);
+
+				// Показываем диалоговое окно
+				naryad_Edit_Window.ShowDialog();
+			}
 		}
 	}
 

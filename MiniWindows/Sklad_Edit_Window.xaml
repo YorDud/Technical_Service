@@ -1,7 +1,7 @@
-﻿<Window x:Class="WpfApp4.MiniWindows.Sklad_Create_Window"
+﻿<Window x:Class="WpfApp4.MiniWindows.Sklad_Edit_Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                        Title="Склад" Height="588" Width="700" ResizeMode="NoResize">
+                        Title="Склад" Height="626" Width="700" ResizeMode="NoResize">
 
     <Grid Background="White">
         <Border Background="White" Margin="15,15,15,15"
@@ -19,7 +19,7 @@ Padding="10">
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0">
-                    <TextBlock Grid.Row="0" Text="Добавить деталь" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                    <TextBlock Grid.Row="0" Text="Изменить деталь" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                 </StackPanel>
 
 
@@ -35,6 +35,7 @@ Padding="10">
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="30"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -66,7 +67,8 @@ Padding="10">
 
 
 
-                    <Button Grid.Row="9" Content="Добавить" Margin="5" Grid.ColumnSpan="2" Click="Sklad_Dobav_Click" />
+                    <Button Grid.Row="9" Content="Сохранить" Margin="5" Grid.ColumnSpan="2" Click="Sklad_Update_Click" />
+                    <Button Grid.Row="10" Content="Удалить деталь" Margin="5" Grid.ColumnSpan="2" Click="Sklad_Delete_Click" Background="#FFDC2C2C" />
 
                 </Grid>
             </Grid>
