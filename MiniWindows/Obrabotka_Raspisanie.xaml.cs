@@ -20,53 +20,47 @@ namespace WpfApp4.MiniWindows
 	/// </summary>
 	public partial class Obrabotka_Raspisanie : Window
 	{
-		private string _scheduleData;
-		public Obrabotka_Raspisanie(string scheduleData)
+		
+		public Obrabotka_Raspisanie()
 		{
 			InitializeComponent();
 
-			_scheduleData = scheduleData;
-			ScheduleTextBox.Text = _scheduleData;
-
-			// Обработка сохранения данных в БД
-			SaveScheduleToDatabase();
+			
 		}
-		private void SaveScheduleToDatabase()
+		private void ProcessScheduleButton_Click(object sender, RoutedEventArgs e)
 		{
-			// Замените на вашу строку подключения
+			
+			string selectQuery = "SELECT Raspisanie FROM Types_TO";
+			string insertQuery = "INSERT INTO Naryad (Date_TO) VALUES (@Date_TO)";
 
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
+				SqlCommand selectCommand = new SqlCommand(selectQuery, connection);
 				connection.Open();
 
+				string schedule = selectCommand.ExecuteScalar()?.ToString();
+				if (schedule == null)
+				{
+					ResultTextBox.Text = "Нет расписания для обработки.";
+					return;
+				}
+
+				// Пример обработки расписания
 				DateTime currentDate = DateTime.Now;
 				DateTime endDate = currentDate.AddYears(1);
 
-				foreach (DateTime date in GenerateDates(currentDate, endDate))
+				while (currentDate <= endDate)
 				{
-					string query = "INSERT INTO [Raspisanie] (DateValue, Description) VALUES (@DateValue, @Description)";
-					using (SqlCommand command = new SqlCommand(query, connection))
-					{
-						command.Parameters.AddWithValue("@DateValue", date);
-						command.Parameters.AddWithValue("@Description", _scheduleData);
-						command.ExecuteNonQuery();
-					}
+					// Ваша логика генерации дат (например, каждая неделя)
+					currentDate = currentDate.AddDays(7);
+
+					SqlCommand insertCommand = new SqlCommand(insertQuery, connection);
+					insertCommand.Parameters.AddWithValue("@Date_TO", currentDate);
+					insertCommand.ExecuteNonQuery();
 				}
 			}
 
-			MessageBox.Show("Расписание успешно сохранено в базе данных!");
-		}
-
-		private IEnumerable<DateTime> GenerateDates(DateTime startDate, DateTime endDate)
-		{
-			// Логика генерации дат на основе переданного расписания.
-			// Например:
-			for (DateTime date = startDate; date < endDate; date = date.AddDays(1))
-			{
-				// Здесь добавьте логику, чтобы проверить каждый день недели и месяц,
-				// а затем добавьте соответствующие даты в результат.
-				yield return date; // пример возврата всех дат
-			}
+			ResultTextBox.Text = "Расписание обработано и записано.";
 		}
 	}
 }

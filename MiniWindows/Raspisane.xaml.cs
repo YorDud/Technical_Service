@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace WpfApp4.MiniWindows
 		{
 			InitializeComponent();
 		}
-		
+
 
 		private void SaveScheduleToDatabase(string schedule)
 		{
@@ -41,48 +42,70 @@ namespace WpfApp4.MiniWindows
 
 		private void CreateScheduleButton_Click(object sender, RoutedEventArgs e)
 		{
-			StringBuilder scheduleBuilder = new StringBuilder();
-			scheduleBuilder.AppendLine("Выбранные дни недели:");
+			// Сбор данных из UI
+			var selectedDays = new[] {
+		MondayCheckBox.IsChecked == true ? "Понедельник" : null,
+		TuesdayCheckBox.IsChecked == true ? "Вторник" : null,
+		WednesdayCheckBox.IsChecked == true ? "Среда" : null,
+		ThursdayCheckBox.IsChecked == true ? "Четверг" : null,
+		FridayCheckBox.IsChecked == true ? "Пятница" : null,
+		SaturdayCheckBox.IsChecked == true ? "Суббота" : null,
+		SundayCheckBox.IsChecked == true ? "Воскресенье" : null
+	}.Where(day => day != null).ToList();
 
-			if (MondayCheckBox.IsChecked == true) scheduleBuilder.Append("Понедельник, ");
-			if (TuesdayCheckBox.IsChecked == true) scheduleBuilder.Append("Вторник, ");
-			if (WednesdayCheckBox.IsChecked == true) scheduleBuilder.Append("Среда, ");
-			if (ThursdayCheckBox.IsChecked == true) scheduleBuilder.Append("Четверг, ");
-			if (FridayCheckBox.IsChecked == true) scheduleBuilder.Append("Пятница, ");
-			if (SaturdayCheckBox.IsChecked == true) scheduleBuilder.Append("Суббота, ");
-			if (SundayCheckBox.IsChecked == true) scheduleBuilder.Append("Воскресенье, ");
+			var selectedMonths = new[] {
+		JanuaryCheckBox.IsChecked == true ? "Январь" : null,
+		FebruaryCheckBox.IsChecked == true ? "Февраль" : null,
+		MarchCheckBox.IsChecked == true ? "Март" : null,
+		AprilCheckBox.IsChecked == true ? "Апрель" : null,
+		MayCheckBox.IsChecked == true ? "Май" : null,
+		JuneCheckBox.IsChecked == true ? "Июнь" : null,
+		JulyCheckBox.IsChecked == true ? "Июль" : null,
+		AugustCheckBox.IsChecked == true ? "Август" : null,
+		SeptemberCheckBox.IsChecked == true ? "Сентябрь" : null,
+		OctoberCheckBox.IsChecked == true ? "Октябрь" : null,
+		NovemberCheckBox.IsChecked == true ? "Ноябрь" : null,
+		DecemberCheckBox.IsChecked == true ? "Декабрь" : null
+	}.Where(month => month != null).ToList();
 
-			scheduleBuilder.AppendLine();
-			scheduleBuilder.AppendLine("Выбранные месяцы:");
+			var frequency = WeeklyRadioButton.IsChecked == true ? "Каждую неделю" :
+							SpecificWeekRadioButton.IsChecked == true ? "Определенная неделя" : null;
 
-			if (JanuaryCheckBox.IsChecked == true) scheduleBuilder.Append("Январь, ");
-			if (FebruaryCheckBox.IsChecked == true) scheduleBuilder.Append("Февраль, ");
-			if (MarchCheckBox.IsChecked == true) scheduleBuilder.Append("Март, ");
-			if (AprilCheckBox.IsChecked == true) scheduleBuilder.Append("Апрель, ");
-			if (MayCheckBox.IsChecked == true) scheduleBuilder.Append("Май, ");
-			if (JuneCheckBox.IsChecked == true) scheduleBuilder.Append("Июнь, ");
-			if (JulyCheckBox.IsChecked == true) scheduleBuilder.Append("Июль, ");
-			if (AugustCheckBox.IsChecked == true) scheduleBuilder.Append("Август, ");
-			if (SeptemberCheckBox.IsChecked == true) scheduleBuilder.Append("Сентябрь, ");
-			if (OctoberCheckBox.IsChecked == true) scheduleBuilder.Append("Октябрь, ");
-			if (NovemberCheckBox.IsChecked == true) scheduleBuilder.Append("Ноябрь, ");
-			if (DecemberCheckBox.IsChecked == true) scheduleBuilder.Append("Декабрь, ");
+			var specificDays = SpecificDaysTextBox.Text;
 
-			scheduleBuilder.AppendLine();
-			scheduleBuilder.AppendLine("Частота выполнения:");
-			if (WeeklyRadioButton.IsChecked == true) scheduleBuilder.AppendLine("Каждую неделю");
-			if (SpecificWeekRadioButton.IsChecked == true)
+			var everySixMonths = EverySixMonthsCheckBox.IsChecked == true ? "Да" : "Нет";
+			var everyQuarter = EveryQuarterCheckBox.IsChecked == true ? "Да" : "Нет";
+
+			// Формирование строки расписания
+			string schedule = $"Дни недели: {string.Join(", ", selectedDays)}; " +
+							  $"Месяцы: {string.Join(", ", selectedMonths)}; " +
+							  $"Частота: {frequency}; " +
+							  $"Определенные дни: {specificDays}; " +
+							  $"Каждые полгода: {everySixMonths}; " +
+							  $"Каждый квартал: {everyQuarter}";
+
+			// SQL-запрос для записи расписания
+			string query = "INSERT INTO [Technical_Service].[dbo].[Types_TO] (Raspisanie) VALUES (@Schedule)";
+
+			try
 			{
-				scheduleBuilder.AppendLine($"Определенная неделя: {SpecificWeekDatePicker.SelectedDate}");
+				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				{
+					connection.Open();
+					using (var command = new SqlCommand(query, connection))
+					{
+						command.Parameters.AddWithValue("@Schedule", schedule);
+						command.ExecuteNonQuery();
+					}
+				}
+
+				OutputTextBox.Text = "Расписание успешно сохранено!";
 			}
-
-			scheduleBuilder.AppendLine($"Определенные дни месяца: {SpecificDaysTextBox.Text}");
-			scheduleBuilder.AppendLine($"Каждые полгода: {EverySixMonthsCheckBox.IsChecked}");
-			scheduleBuilder.AppendLine($"Каждый квартал: {EveryQuarterCheckBox.IsChecked}");
-
-			OutputTextBox.Text = scheduleBuilder.ToString(); 
-			Obrabotka_Raspisanie scheduleProcessor = new Obrabotka_Raspisanie(scheduleBuilder.ToString());
-			scheduleProcessor.Show();
+			catch (Exception ex)
+			{
+				OutputTextBox.Text = $"Ошибка: {ex.Message}";
+			}
 		}
+
 	}
 }

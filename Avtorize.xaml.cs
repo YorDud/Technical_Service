@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp4.MiniWindows;
 
 namespace WpfApp4
 {
@@ -30,10 +31,15 @@ namespace WpfApp4
 		{
 			if (log_txt.Text == "1" && pass_txt.Password == "1")
 			{
+				//this.Hide();
+				//MainWindow mainWindow = new MainWindow();
+				//mainWindow.ShowDialog();
+
+
 				this.Hide();
-				MainWindow mainWindow = new MainWindow();
+			 	MiniWindows.Obrabotka_Raspisanie mainWindow = new MiniWindows.Obrabotka_Raspisanie();
 				mainWindow.ShowDialog();
-				
+
 			}
 
 

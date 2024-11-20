@@ -243,6 +243,12 @@
     <Compile Include="MiniWindows\Nomekluatura_Create_Window.xaml.cs">
       <DependentUpon>Nomekluatura_Create_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MiniWindows\Obrabotka_Raspisanie.xaml.cs">
+      <DependentUpon>Obrabotka_Raspisanie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MiniWindows\Raspisane.xaml.cs">
+      <DependentUpon>Raspisane.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiniWindows\Sklad_Edit_Window.xaml.cs">
       <DependentUpon>Sklad_Edit_Window.xaml</DependentUpon>
     </Compile>
@@ -329,6 +335,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MiniWindows\Nomekluatura_Create_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MiniWindows\Obrabotka_Raspisanie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MiniWindows\Raspisane.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
