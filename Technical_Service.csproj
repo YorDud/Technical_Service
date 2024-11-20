@@ -246,6 +246,9 @@
     <Compile Include="MiniWindows\Obrabotka_Raspisanie.xaml.cs">
       <DependentUpon>Obrabotka_Raspisanie.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MiniWindows\Obr_Rasp.xaml.cs">
+      <DependentUpon>Obr_Rasp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiniWindows\Raspisane.xaml.cs">
       <DependentUpon>Raspisane.xaml</DependentUpon>
     </Compile>
@@ -339,6 +342,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MiniWindows\Obrabotka_Raspisanie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MiniWindows\Obr_Rasp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

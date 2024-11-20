@@ -37,8 +37,12 @@ namespace WpfApp4
 
 
 				this.Hide();
-			 	MiniWindows.Obrabotka_Raspisanie mainWindow = new MiniWindows.Obrabotka_Raspisanie();
-				mainWindow.ShowDialog();
+			 	Obr_Rasp mainWindow = new Obr_Rasp();
+				mainWindow.Show();
+
+				this.Hide();
+				Raspisane mainWindow1 = new Raspisane();
+				mainWindow1.Show();
 
 			}
 

@@ -1,53 +1,60 @@
 ﻿<Window x:Class="WpfApp4.MiniWindows.Raspisane"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Создание расписания" Height="450" Width="400">
-    <Grid>
-        <StackPanel Margin="10">
-            <TextBlock Text="Выберите дни недели:" FontWeight="Bold"/>
-            <WrapPanel>
-                <CheckBox Content="Понедельник" Name="MondayCheckBox"/>
-                <CheckBox Content="Вторник" Name="TuesdayCheckBox"/>
-                <CheckBox Content="Среда" Name="WednesdayCheckBox"/>
-                <CheckBox Content="Четверг" Name="ThursdayCheckBox"/>
-                <CheckBox Content="Пятница" Name="FridayCheckBox"/>
-                <CheckBox Content="Суббота" Name="SaturdayCheckBox"/>
-                <CheckBox Content="Воскресенье" Name="SundayCheckBox"/>
-            </WrapPanel>
+        Title="Создание расписания" Height="600" Width="400">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="10">
+            <StackPanel>
+                <!-- Дни недели -->
+                <TextBlock Text="Дни недели" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+                <WrapPanel>
+                    <CheckBox Content="Пн" Name="MondayCheckBox" Checked="DayOfWeekChecked" Unchecked="DayOfWeekUnchecked"/>
+                    <CheckBox Content="Вт" Name="TuesdayCheckBox" Checked="DayOfWeekChecked" Unchecked="DayOfWeekUnchecked"/>
+                    <CheckBox Content="Ср" Name="WednesdayCheckBox" Checked="DayOfWeekChecked" Unchecked="DayOfWeekUnchecked"/>
+                    <CheckBox Content="Чт" Name="ThursdayCheckBox" Checked="DayOfWeekChecked" Unchecked="DayOfWeekUnchecked"/>
+                    <CheckBox Content="Пт" Name="FridayCheckBox" Checked="DayOfWeekChecked" Unchecked="DayOfWeekUnchecked"/>
+                    <CheckBox Content="Сб" Name="SaturdayCheckBox" Checked="DayOfWeekChecked" Unchecked="DayOfWeekUnchecked"/>
+                    <CheckBox Content="Вс" Name="SundayCheckBox" Checked="DayOfWeekChecked" Unchecked="DayOfWeekUnchecked"/>
+                </WrapPanel>
 
-            <TextBlock Text="Выберите месяцы:" FontWeight="Bold"/>
-            <WrapPanel>
-                <CheckBox Content="Январь" Name="JanuaryCheckBox"/>
-                <CheckBox Content="Февраль" Name="FebruaryCheckBox"/>
-                <CheckBox Content="Март" Name="MarchCheckBox"/>
-                <CheckBox Content="Апрель" Name="AprilCheckBox"/>
-                <CheckBox Content="Май" Name="MayCheckBox"/>
-                <CheckBox Content="Июнь" Name="JuneCheckBox"/>
-                <CheckBox Content="Июль" Name="JulyCheckBox"/>
-                <CheckBox Content="Август" Name="AugustCheckBox"/>
-                <CheckBox Content="Сентябрь" Name="SeptemberCheckBox"/>
-                <CheckBox Content="Октябрь" Name="OctoberCheckBox"/>
-                <CheckBox Content="Ноябрь" Name="NovemberCheckBox"/>
-                <CheckBox Content="Декабрь" Name="DecemberCheckBox"/>
-            </WrapPanel>
+                <TextBlock Text="Повторять каждые:" Margin="0,10,0,5"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Name="RepeatWeeksTextBox" Width="50" Margin="0,0,5,0"/>
+                    <TextBlock Text="(нед.)" VerticalAlignment="Center"/>
+                </StackPanel>
 
-            <TextBlock Text="Частота выполнения:" FontWeight="Bold"/>
-            <RadioButton Content="Каждую неделю" Name="WeeklyRadioButton" GroupName="Frequency" Checked="Frequency_Checked"/>
-            <RadioButton Content="Определенная неделя" Name="SpecificWeekRadioButton" GroupName="Frequency" Checked="Frequency_Checked"/>
-            <TextBlock Text="Выберите дату определенной недели:" Name="SpecificWeekDateLabel" Visibility="Collapsed"/>
-            <DatePicker Name="SpecificWeekDatePicker" IsEnabled="False" Visibility="Collapsed"/>
+                <!-- Месяцы -->
+                <TextBlock Text="Месяцы" FontWeight="Bold" FontSize="16" Margin="20,10,0,5"/>
+                <WrapPanel>
+                    <CheckBox Content="Январь" Name="JanuaryCheckBox"/>
+                    <CheckBox Content="Февраль" Name="FebruaryCheckBox"/>
+                    <CheckBox Content="Март" Name="MarchCheckBox"/>
+                    <CheckBox Content="Апрель" Name="AprilCheckBox"/>
+                    <CheckBox Content="Май" Name="MayCheckBox"/>
+                    <CheckBox Content="Июнь" Name="JuneCheckBox"/>
+                    <CheckBox Content="Июль" Name="JulyCheckBox"/>
+                    <CheckBox Content="Август" Name="AugustCheckBox"/>
+                    <CheckBox Content="Сентябрь" Name="SeptemberCheckBox"/>
+                    <CheckBox Content="Октябрь" Name="OctoberCheckBox"/>
+                    <CheckBox Content="Ноябрь" Name="NovemberCheckBox"/>
+                    <CheckBox Content="Декабрь" Name="DecemberCheckBox"/>
+                </WrapPanel>
 
-            <TextBlock Text="Определенные дни месяца (Например: 1, 15):" FontWeight="Bold"/>
-            <TextBox Name="SpecificDaysTextBox" Width="200"/>
+                <!-- Дни месяца -->
+                <TextBlock Text="Выполнять в:" Margin="0,10,0,5"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="день месяца:" Margin="0,0,5,0"/>
+                    <TextBox Name="SpecificDaysTextBox" Width="50"/>
+                </StackPanel>
 
-            <TextBlock Text="Каждые полгода:" FontWeight="Bold"/>
-            <CheckBox Content="Да" Name="EverySixMonthsCheckBox"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                    <!--<TextBlock Text="день недели в месяце:" Margin="0,0,5,0"/>
+                    <TextBox Name="WeekDaysInMonthTextBox" Width="50"/>-->
+                </StackPanel>
 
-            <TextBlock Text="Каждый квартал:" FontWeight="Bold"/>
-            <CheckBox Content="Да" Name="EveryQuarterCheckBox"/>
-
-            <Button Content="Создать расписание" Click="CreateScheduleButton_Click" Margin="0,10,0,0"/>
-            <TextBox Name="OutputTextBox" Height="200" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True"/>
-        </StackPanel>
-    </Grid>
+                <!-- Кнопка создания расписания -->
+                <Button Content="Создать расписание" Click="CreateScheduleButton_Click" Height="40" Background="Purple" Foreground="White"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Window>

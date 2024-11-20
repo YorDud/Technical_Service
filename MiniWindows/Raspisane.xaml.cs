@@ -2,22 +2,11 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WpfApp4.MiniWindows
 {
-	/// <summary>
-	/// Логика взаимодействия для Raspisane.xaml
-	/// </summary>
 	public partial class Raspisane : Window
 	{
 		public Raspisane()
@@ -25,87 +14,76 @@ namespace WpfApp4.MiniWindows
 			InitializeComponent();
 		}
 
-
-		private void SaveScheduleToDatabase(string schedule)
+		private void DayOfWeekChecked(object sender, RoutedEventArgs e)
 		{
-			// Реализуйте метод для сохранения расписания в базу данных
-			// Например, используя ADO.NET или Entity Framework
+			// Когда выбран день недели, нужно отключить дни месяца
+			SpecificDaysTextBox.IsEnabled = false;
 		}
 
-		private void Frequency_Checked(object sender, RoutedEventArgs e)
+		private void DayOfWeekUnchecked(object sender, RoutedEventArgs e)
 		{
-			bool isSpecificWeek = SpecificWeekRadioButton.IsChecked == true;
-			SpecificWeekDatePicker.IsEnabled = isSpecificWeek;
-			SpecificWeekDateLabel.Visibility = isSpecificWeek ? Visibility.Visible : Visibility.Collapsed;
-			SpecificWeekDatePicker.Visibility = isSpecificWeek ? Visibility.Visible : Visibility.Collapsed;
+			// Когда день недели снят, включаем дни месяца
+			if (!AreAnyDayOfWeekChecked())
+			{
+				SpecificDaysTextBox.IsEnabled = true;
+			}
+		}
+
+		private bool AreAnyDayOfWeekChecked()
+		{
+			return MondayCheckBox.IsChecked == true ||
+				   TuesdayCheckBox.IsChecked == true ||
+				   WednesdayCheckBox.IsChecked == true ||
+				   ThursdayCheckBox.IsChecked == true ||
+				   FridayCheckBox.IsChecked == true ||
+				   SaturdayCheckBox.IsChecked == true ||
+				   SundayCheckBox.IsChecked == true;
 		}
 
 		private void CreateScheduleButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Сбор данных из UI
 			var selectedDays = new[] {
-		MondayCheckBox.IsChecked == true ? "Понедельник" : null,
-		TuesdayCheckBox.IsChecked == true ? "Вторник" : null,
-		WednesdayCheckBox.IsChecked == true ? "Среда" : null,
-		ThursdayCheckBox.IsChecked == true ? "Четверг" : null,
-		FridayCheckBox.IsChecked == true ? "Пятница" : null,
-		SaturdayCheckBox.IsChecked == true ? "Суббота" : null,
-		SundayCheckBox.IsChecked == true ? "Воскресенье" : null
-	}.Where(day => day != null).ToList();
+				MondayCheckBox.IsChecked == true ? "Пн" : null,
+				TuesdayCheckBox.IsChecked == true ? "Вт" : null,
+				WednesdayCheckBox.IsChecked == true ? "Ср" : null,
+				ThursdayCheckBox.IsChecked == true ? "Чт" : null,
+				FridayCheckBox.IsChecked == true ? "Пт" : null,
+				SaturdayCheckBox.IsChecked == true ? "Сб" : null,
+				SundayCheckBox.IsChecked == true ? "Вс" : null
+			}.Where(day => day != null).ToList();
 
 			var selectedMonths = new[] {
-		JanuaryCheckBox.IsChecked == true ? "Январь" : null,
-		FebruaryCheckBox.IsChecked == true ? "Февраль" : null,
-		MarchCheckBox.IsChecked == true ? "Март" : null,
-		AprilCheckBox.IsChecked == true ? "Апрель" : null,
-		MayCheckBox.IsChecked == true ? "Май" : null,
-		JuneCheckBox.IsChecked == true ? "Июнь" : null,
-		JulyCheckBox.IsChecked == true ? "Июль" : null,
-		AugustCheckBox.IsChecked == true ? "Август" : null,
-		SeptemberCheckBox.IsChecked == true ? "Сентябрь" : null,
-		OctoberCheckBox.IsChecked == true ? "Октябрь" : null,
-		NovemberCheckBox.IsChecked == true ? "Ноябрь" : null,
-		DecemberCheckBox.IsChecked == true ? "Декабрь" : null
-	}.Where(month => month != null).ToList();
+				JanuaryCheckBox.IsChecked == true ? "Январь" : null,
+				FebruaryCheckBox.IsChecked == true ? "Февраль" : null,
+				MarchCheckBox.IsChecked == true ? "Март" : null,
+                // остальные месяцы
+            }.Where(month => month != null).ToList();
 
-			var frequency = WeeklyRadioButton.IsChecked == true ? "Каждую неделю" :
-							SpecificWeekRadioButton.IsChecked == true ? "Определенная неделя" : null;
-
-			var specificDays = SpecificDaysTextBox.Text;
-
-			var everySixMonths = EverySixMonthsCheckBox.IsChecked == true ? "Да" : "Нет";
-			var everyQuarter = EveryQuarterCheckBox.IsChecked == true ? "Да" : "Нет";
+			int.TryParse(RepeatWeeksTextBox.Text, out int repeatWeeks);
+			int.TryParse(SpecificDaysTextBox.Text, out int specificDay);
+			//int.TryParse(WeekDaysInMonthTextBox.Text, out int weekDayInMonth);
 
 			// Формирование строки расписания
 			string schedule = $"Дни недели: {string.Join(", ", selectedDays)}; " +
 							  $"Месяцы: {string.Join(", ", selectedMonths)}; " +
-							  $"Частота: {frequency}; " +
-							  $"Определенные дни: {specificDays}; " +
-							  $"Каждые полгода: {everySixMonths}; " +
-							  $"Каждый квартал: {everyQuarter}";
+							  $"Повторять каждые: {repeatWeeks} недель; " +
+							  $"День месяца: {specificDay}; ";
+							  //$"День недели в месяце: {weekDayInMonth}";
 
-			// SQL-запрос для записи расписания
-			string query = "INSERT INTO [Technical_Service].[dbo].[Types_TO] (Raspisanie) VALUES (@Schedule)";
-
-			try
+			// Запись расписания в БД
+			string query = "INSERT INTO Types_TO (Raspisanie) VALUES (@Schedule)";
+			using (var connection = new SqlConnection(WC.ConnectionString))
 			{
-				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				connection.Open();
+				using (var command = new SqlCommand(query, connection))
 				{
-					connection.Open();
-					using (var command = new SqlCommand(query, connection))
-					{
-						command.Parameters.AddWithValue("@Schedule", schedule);
-						command.ExecuteNonQuery();
-					}
+					command.Parameters.AddWithValue("@Schedule", schedule);
+					command.ExecuteNonQuery();
 				}
+			}
 
-				OutputTextBox.Text = "Расписание успешно сохранено!";
-			}
-			catch (Exception ex)
-			{
-				OutputTextBox.Text = $"Ошибка: {ex.Message}";
-			}
+			MessageBox.Show("Расписание успешно сохранено!");
 		}
-
 	}
 }
