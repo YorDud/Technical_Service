@@ -1,0 +1,53 @@
+﻿<Window x:Class="WpfApp4.MiniWindows.Raspisane"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Создание расписания" Height="450" Width="400">
+    <Grid>
+        <StackPanel Margin="10">
+            <TextBlock Text="Выберите дни недели:" FontWeight="Bold"/>
+            <WrapPanel>
+                <CheckBox Content="Понедельник" Name="MondayCheckBox"/>
+                <CheckBox Content="Вторник" Name="TuesdayCheckBox"/>
+                <CheckBox Content="Среда" Name="WednesdayCheckBox"/>
+                <CheckBox Content="Четверг" Name="ThursdayCheckBox"/>
+                <CheckBox Content="Пятница" Name="FridayCheckBox"/>
+                <CheckBox Content="Суббота" Name="SaturdayCheckBox"/>
+                <CheckBox Content="Воскресенье" Name="SundayCheckBox"/>
+            </WrapPanel>
+
+            <TextBlock Text="Выберите месяцы:" FontWeight="Bold"/>
+            <WrapPanel>
+                <CheckBox Content="Январь" Name="JanuaryCheckBox"/>
+                <CheckBox Content="Февраль" Name="FebruaryCheckBox"/>
+                <CheckBox Content="Март" Name="MarchCheckBox"/>
+                <CheckBox Content="Апрель" Name="AprilCheckBox"/>
+                <CheckBox Content="Май" Name="MayCheckBox"/>
+                <CheckBox Content="Июнь" Name="JuneCheckBox"/>
+                <CheckBox Content="Июль" Name="JulyCheckBox"/>
+                <CheckBox Content="Август" Name="AugustCheckBox"/>
+                <CheckBox Content="Сентябрь" Name="SeptemberCheckBox"/>
+                <CheckBox Content="Октябрь" Name="OctoberCheckBox"/>
+                <CheckBox Content="Ноябрь" Name="NovemberCheckBox"/>
+                <CheckBox Content="Декабрь" Name="DecemberCheckBox"/>
+            </WrapPanel>
+
+            <TextBlock Text="Частота выполнения:" FontWeight="Bold"/>
+            <RadioButton Content="Каждую неделю" Name="WeeklyRadioButton" GroupName="Frequency" Checked="Frequency_Checked"/>
+            <RadioButton Content="Определенная неделя" Name="SpecificWeekRadioButton" GroupName="Frequency" Checked="Frequency_Checked"/>
+            <TextBlock Text="Выберите дату определенной недели:" Name="SpecificWeekDateLabel" Visibility="Collapsed"/>
+            <DatePicker Name="SpecificWeekDatePicker" IsEnabled="False" Visibility="Collapsed"/>
+
+            <TextBlock Text="Определенные дни месяца (Например: 1, 15):" FontWeight="Bold"/>
+            <TextBox Name="SpecificDaysTextBox" Width="200"/>
+
+            <TextBlock Text="Каждые полгода:" FontWeight="Bold"/>
+            <CheckBox Content="Да" Name="EverySixMonthsCheckBox"/>
+
+            <TextBlock Text="Каждый квартал:" FontWeight="Bold"/>
+            <CheckBox Content="Да" Name="EveryQuarterCheckBox"/>
+
+            <Button Content="Создать расписание" Click="CreateScheduleButton_Click" Margin="0,10,0,0"/>
+            <TextBox Name="OutputTextBox" Height="200" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
