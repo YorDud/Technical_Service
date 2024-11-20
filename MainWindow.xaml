@@ -163,7 +163,7 @@
                 </DataGrid>
             </Grid>
         </ContentControl>
-        <ContentControl x:Name="NarTO" Grid.Column="1" Visibility="Hidden">
+        <ContentControl x:Name="NarTO" Grid.Column="1" Visibility="Visible">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -205,6 +205,7 @@
                         <DataGridTextColumn Header="Запчасти" Width="auto" Binding="{Binding Sklad_Deteil_ID}" />
                         <DataGridTextColumn Header="Количество запчастей" Width="auto" Binding="{Binding Sklad_Kolich}" />
                         <DataGridTextColumn Header="Документация" Width="auto" Binding="{Binding Documentation_Name_ID}" />
+                        <DataGridTextColumn Header="Дата ТО" Width="auto" Binding="{Binding Date_TO}" />
                         <DataGridTextColumn Header="Комментарий" Width="auto" Binding="{Binding Comment}" />
                     </DataGrid.Columns>
                 </DataGrid>

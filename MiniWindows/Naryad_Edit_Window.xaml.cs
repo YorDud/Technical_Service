@@ -43,6 +43,7 @@ namespace WpfApp4.MiniWindows
 			SkladDeteilID.Text = _dataRow["Sklad_Deteil_ID"].ToString();
 			SkladKolich.Text = _dataRow["Sklad_Kolich"].ToString();
 			DocumentationNameID.Text = _dataRow["Documentation_Name_ID"].ToString();
+			DateTO.Text = _dataRow["Date_TO"].ToString();
 		}
 
 		private void Naryad_Update_Click(object sender, RoutedEventArgs e)
@@ -60,6 +61,7 @@ namespace WpfApp4.MiniWindows
 			var skladDeteilID = SkladDeteilID.Text; // Получение ID запчасти
 			var skladKolich = SkladKolich.Text; // Получение количества запчастей
 			var documentationNameID = DocumentationNameID.Text; // Получение ID документации
+			var dateTO = DateTO.SelectedDate; // Получение ID документации
 
 			string query = "UPDATE [Technical_Service].[dbo].[Naryad] SET " +
 						   "[Device_Name] = @DeviceName, " +
@@ -72,7 +74,8 @@ namespace WpfApp4.MiniWindows
 						   "[Comment] = @Comment, " +
 						   "[Sklad_Deteil_ID] = @SkladDeteilID, " +
 						   "[Sklad_Kolich] = @SkladKolich, " +
-						   "[Documentation_Name_ID] = @DocumentationNameID " +
+						   "[Documentation_Name_ID] = @DocumentationNameID, " +
+						   "[Date_TO] = @DateTO " +
 						   "WHERE [ID] = @ID";
 
 			try
@@ -93,6 +96,7 @@ namespace WpfApp4.MiniWindows
 						command.Parameters.AddWithValue("@SkladDeteilID", skladDeteilID);
 						command.Parameters.AddWithValue("@SkladKolich", (object)skladKolich ?? DBNull.Value);
 						command.Parameters.AddWithValue("@DocumentationNameID", documentationNameID);
+						command.Parameters.AddWithValue("@DateTO", (object)dateTO ?? DBNull.Value);
 
 						connection.Open();
 						command.ExecuteNonQuery();

@@ -30,15 +30,49 @@ namespace WpfApp4.MiniWindows
 
 		private void AddTypeTO_Click(object sender, RoutedEventArgs e)
 		{
+			// Сбор данных из UI
 			var deviceType = DeviceType.Text;
 			var nameTO = NameTO.Text;
 			var workList = WorkList.Text;
-			var raspisanie = Raspisanie.Text;
+
+			// Формирование расписания
+			var selectedDays = new[] {
+		MondayCheckBox.IsChecked == true ? "Пн" : null,
+		TuesdayCheckBox.IsChecked == true ? "Вт" : null,
+		WednesdayCheckBox.IsChecked == true ? "Ср" : null,
+		ThursdayCheckBox.IsChecked == true ? "Чт" : null,
+		FridayCheckBox.IsChecked == true ? "Пт" : null,
+		SaturdayCheckBox.IsChecked == true ? "Сб" : null,
+		SundayCheckBox.IsChecked == true ? "Вс" : null
+	}.Where(day => day != null).ToList();
+
+			var selectedMonths = new[] {
+		JanuaryCheckBox.IsChecked == true ? "Январь" : null,
+		FebruaryCheckBox.IsChecked == true ? "Февраль" : null,
+		MarchCheckBox.IsChecked == true ? "Март" : null,
+		AprilCheckBox.IsChecked == true ? "Апрель" : null,
+		MayCheckBox.IsChecked == true ? "Май" : null,
+		JuneCheckBox.IsChecked == true ? "Июнь" : null,
+		JulyCheckBox.IsChecked == true ? "Июль" : null,
+		AugustCheckBox.IsChecked == true ? "Август" : null,
+		SeptemberCheckBox.IsChecked == true ? "Сентябрь" : null,
+		OctoberCheckBox.IsChecked == true ? "Октябрь" : null,
+		NovemberCheckBox.IsChecked == true ? "Ноябрь" : null,
+		DecemberCheckBox.IsChecked == true ? "Декабрь" : null
+	}.Where(month => month != null).ToList();
+
+			int.TryParse(RepeatWeeksTextBox.Text, out int repeatWeeks);
+			int.TryParse(SpecificDaysTextBox.Text, out int specificDay);
+
+			string schedule = $"Дни недели: {string.Join(", ", selectedDays)}; " +
+							  $"Месяцы: {string.Join(", ", selectedMonths)}; " +
+							  $"Повторять каждые: {repeatWeeks} недель; " +
+							  $"День месяца: {specificDay}; ";
 
 			// SQL-запрос для добавления записи в таблицу Types_TO
 			string query = "INSERT INTO [Technical_Service].[dbo].[Types_TO] " +
 						   "([Device_Type], [Name_TO], [Work_List], [Raspisanie]) " +
-						   "VALUES (@DeviceType, @NameTO, @WorkList, @Raspisanie)";
+						   "VALUES (@DeviceType, @NameTO, @WorkList, @Schedule)";
 
 			try
 			{
@@ -50,7 +84,7 @@ namespace WpfApp4.MiniWindows
 						command.Parameters.AddWithValue("@DeviceType", deviceType);
 						command.Parameters.AddWithValue("@NameTO", nameTO);
 						command.Parameters.AddWithValue("@WorkList", workList);
-						command.Parameters.AddWithValue("@Raspisanie", raspisanie);
+						command.Parameters.AddWithValue("@Schedule", schedule);
 
 						connection.Open();
 						command.ExecuteNonQuery();
@@ -66,6 +100,36 @@ namespace WpfApp4.MiniWindows
 				MessageBox.Show("Ошибка: " + ex.Message);
 			}
 		}
+
+
+		private void DayOfWeekChecked(object sender, RoutedEventArgs e)
+		{
+			// Когда выбран день недели, нужно отключить дни месяца
+			SpecificDaysTextBox.IsEnabled = false;
+		}
+
+		private void DayOfWeekUnchecked(object sender, RoutedEventArgs e)
+		{
+			// Когда день недели снят, включаем дни месяца
+			if (!AreAnyDayOfWeekChecked())
+			{
+				SpecificDaysTextBox.IsEnabled = true;
+			}
+		}
+
+		private bool AreAnyDayOfWeekChecked()
+		{
+			return MondayCheckBox.IsChecked == true ||
+				   TuesdayCheckBox.IsChecked == true ||
+				   WednesdayCheckBox.IsChecked == true ||
+				   ThursdayCheckBox.IsChecked == true ||
+				   FridayCheckBox.IsChecked == true ||
+				   SaturdayCheckBox.IsChecked == true ||
+				   SundayCheckBox.IsChecked == true;
+		}
+
+		
+
 	}
 
 }

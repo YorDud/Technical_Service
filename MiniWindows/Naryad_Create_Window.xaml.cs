@@ -32,6 +32,7 @@ namespace WpfApp4.MiniWindows
 
 		private void AddNaryad_Click(object sender, RoutedEventArgs e)
 		{
+			// Получение данных из полей формы
 			var deviceName = DeviceName.Text;
 			var typesTOName = TypesTOName.Text;
 			var typesTOWorkList = TypesTOWorkList.Text;
@@ -40,47 +41,194 @@ namespace WpfApp4.MiniWindows
 			var dateEnd = DateEnd.SelectedDate;
 			var status = Status.Text;
 			var comment = Comment.Text;
-			var skladDeteilID = SkladDeteilID.Text; // Получение ID запчасти
-			var skladKolich = SkladKolich.Text; // Получение количества запчастей
-			var documentationNameID = DocumentationNameID.Text; // Получение ID документации
+			var skladDeteilID = SkladDeteilID.Text;
+			var skladKolich = SkladKolich.Text;
+			var documentationNameID = DocumentationNameID.Text;
 
-			string query = "INSERT INTO [Technical_Service].[dbo].[Naryad] " +
-						   "([Device_Name], [Types_TO_Name], [Types_TO_Work_List], [Users_FIO], [Date_Start], [Date_End], " +
-						   "[Status], [Comment], [Sklad_Deteil_ID], [Sklad_Kolich], [Documentation_Name_ID]) " +
-						   "VALUES (@DeviceName, @TypesTOName, @TypesTOWorkList, @UsersFIO, @DateStart, @DateEnd, " +
-						   "@Status, @Comment, @SkladDeteilID, @SkladKolich, @DocumentationNameID)";
+			// Проверяем, выбрано ли значение ID
+			
 
-			try
+			
+
+			string selectQuery = "SELECT Raspisanie FROM Types_TO WHERE Name_TO = @Id";
+			string insertNaryadQuery = "INSERT INTO [Technical_Service].[dbo].[Naryad] " +
+									   "([Device_Name], [Types_TO_Name], [Types_TO_Work_List], [Users_FIO], [Date_Start], [Date_End], " +
+									   "[Status], [Comment], [Sklad_Deteil_ID], [Sklad_Kolich], [Documentation_Name_ID], [Date_TO]) " +
+									   "VALUES (@DeviceName, @TypesTOName, @TypesTOWorkList, @UsersFIO, @DateStart, @DateEnd, " +
+									   "@Status, @Comment, @SkladDeteilID, @SkladKolich, @DocumentationNameID, @Date_TO)";
+
+			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
-				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				connection.Open();
+
+				// Получаем расписание из базы данных
+				string schedule;
+				using (SqlCommand selectCommand = new SqlCommand(selectQuery, connection))
 				{
-					using (SqlCommand command = new SqlCommand(query, connection))
+					selectCommand.Parameters.AddWithValue("@Id", typesTOName);
+					schedule = selectCommand.ExecuteScalar()?.ToString();
+				}
+
+				if (string.IsNullOrEmpty(schedule))
+				{
+					MessageBox.Show($"Нет расписания для обработки по {typesTOName}.");
+					return;
+				}
+
+				// Парсинг расписания
+				var parsedSchedule = ParseSchedule(schedule);
+
+				// Обработка расписания (1 год вперед)
+				DateTime currentDate = DateTime.Now;
+				DateTime endDate = currentDate.AddYears(1);
+
+				while (currentDate <= endDate)
+				{
+					if (IsDateMatchingSchedule(currentDate, parsedSchedule))
 					{
-						command.Parameters.AddWithValue("@DeviceName", deviceName);
-						command.Parameters.AddWithValue("@TypesTOName", typesTOName);
-						command.Parameters.AddWithValue("@TypesTOWorkList", typesTOWorkList);
-						command.Parameters.AddWithValue("@UsersFIO", usersFIO);
-						command.Parameters.AddWithValue("@DateStart", (object)dateStart ?? DBNull.Value);
-						command.Parameters.AddWithValue("@DateEnd", (object)dateEnd ?? DBNull.Value);
-						command.Parameters.AddWithValue("@Status", status);
-						command.Parameters.AddWithValue("@Comment", comment);
-						command.Parameters.AddWithValue("@SkladDeteilID", skladDeteilID); // Параметр для ID запчасти
-						command.Parameters.AddWithValue("@SkladKolich", (object)skladKolich ?? DBNull.Value); // Параметр для количества запчастей
-						command.Parameters.AddWithValue("@DocumentationNameID", documentationNameID); // Параметр для ID документации
+						// Вставляем наряд с датой из расписания
+						using (SqlCommand insertCommand = new SqlCommand(insertNaryadQuery, connection))
+						{
+							insertCommand.Parameters.AddWithValue("@DeviceName", deviceName);
+							insertCommand.Parameters.AddWithValue("@TypesTOName", typesTOName);
+							insertCommand.Parameters.AddWithValue("@TypesTOWorkList", typesTOWorkList);
+							insertCommand.Parameters.AddWithValue("@UsersFIO", usersFIO);
+							insertCommand.Parameters.AddWithValue("@DateStart", (object)dateStart ?? DBNull.Value);
+							insertCommand.Parameters.AddWithValue("@DateEnd", (object)dateEnd ?? DBNull.Value);
+							insertCommand.Parameters.AddWithValue("@Status", status);
+							insertCommand.Parameters.AddWithValue("@Comment", comment);
+							insertCommand.Parameters.AddWithValue("@SkladDeteilID", skladDeteilID);
+							insertCommand.Parameters.AddWithValue("@SkladKolich", (object)skladKolich ?? DBNull.Value);
+							insertCommand.Parameters.AddWithValue("@DocumentationNameID", documentationNameID);
+							insertCommand.Parameters.AddWithValue("@Date_TO", currentDate);
 
-						connection.Open();
-						command.ExecuteNonQuery();
-
-						mainWindow.LoadData_Naryad();
-						this.Close();
+							insertCommand.ExecuteNonQuery();
+						}
 					}
+
+					// Переход к следующему дню
+					currentDate = currentDate.AddDays(1);
 				}
 			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Ошибка: " + ex.Message);
-			}
+
+			
+			mainWindow.LoadData_Naryad();
+			this.Close();
 		}
+
+		
+
+
+
+
+		private (List<DayOfWeek> DaysOfWeek, List<int> Months, int RepeatWeeks, List<int> SpecificDays, int WeekDayInMonth) ParseSchedule(string schedule)
+		{
+			var daysOfWeek = new List<DayOfWeek>();
+			var months = new List<int>();
+			var specificDays = new List<int>();
+			int repeatWeeks = 0, weekDayInMonth = 0;
+
+			// Разделяем расписание на части
+			var parts = schedule.Split(';');
+			foreach (var part in parts)
+			{
+				var cleanedPart = part.Trim();
+
+				if (cleanedPart.StartsWith("Дни недели:"))
+				{
+					var days = cleanedPart.Replace("Дни недели:", "").Split(',').Select(d => d.Trim());
+					foreach (var day in days)
+					{
+						switch (day)
+						{
+							case "Пн": daysOfWeek.Add(DayOfWeek.Monday); break;
+							case "Вт": daysOfWeek.Add(DayOfWeek.Tuesday); break;
+							case "Ср": daysOfWeek.Add(DayOfWeek.Wednesday); break;
+							case "Чт": daysOfWeek.Add(DayOfWeek.Thursday); break;
+							case "Пт": daysOfWeek.Add(DayOfWeek.Friday); break;
+							case "Сб": daysOfWeek.Add(DayOfWeek.Saturday); break;
+							case "Вс": daysOfWeek.Add(DayOfWeek.Sunday); break;
+						}
+					}
+				}
+				else if (cleanedPart.StartsWith("Месяцы:"))
+				{
+					var monthsStr = cleanedPart.Replace("Месяцы:", "").Split(',').Select(m => m.Trim());
+					foreach (var month in monthsStr)
+					{
+						switch (month)
+						{
+							case "Январь": months.Add(1); break;
+							case "Февраль": months.Add(2); break;
+							case "Март": months.Add(3); break;
+							case "Апрель": months.Add(4); break;
+							case "Май": months.Add(5); break;
+							case "Июнь": months.Add(6); break;
+							case "Июль": months.Add(7); break;
+							case "Август": months.Add(8); break;
+							case "Сентябрь": months.Add(9); break;
+							case "Октябрь": months.Add(10); break;
+							case "Ноябрь": months.Add(11); break;
+							case "Декабрь": months.Add(12); break;
+						}
+					}
+				}
+				else if (cleanedPart.StartsWith("Повторять каждые:"))
+				{
+					int.TryParse(cleanedPart.Replace("Повторять каждые:", "").Replace("недель", "").Trim(), out repeatWeeks);
+				}
+				else if (cleanedPart.StartsWith("День месяца:"))
+				{
+					var days = cleanedPart.Replace("День месяца:", "").Split(',').Select(d => d.Trim());
+					foreach (var day in days)
+					{
+						if (int.TryParse(day, out int specificDay) && specificDay != 0)
+							specificDays.Add(specificDay);
+					}
+				}
+				else if (cleanedPart.StartsWith("День недели в месяце:"))
+				{
+					int.TryParse(cleanedPart.Replace("День недели в месяце:", "").Trim(), out weekDayInMonth);
+				}
+			}
+
+			return (daysOfWeek, months, repeatWeeks, specificDays, weekDayInMonth);
+		}
+
+
+		private bool IsDateMatchingSchedule(DateTime date, (List<DayOfWeek> DaysOfWeek, List<int> Months, int RepeatWeeks, List<int> SpecificDays, int WeekDayInMonth) schedule)
+		{
+			// Проверяем дни недели
+			if (schedule.DaysOfWeek.Count > 0 && !schedule.DaysOfWeek.Contains(date.DayOfWeek))
+				return false;
+
+			// Проверяем месяцы
+			if (schedule.Months.Count > 0 && !schedule.Months.Contains(date.Month))
+				return false;
+
+			// Проверяем частоту повторения (например, каждую неделю)
+			if (schedule.RepeatWeeks > 0)
+			{
+				int weekDifference = (int)((date - DateTime.Now.Date).TotalDays / 7);
+				if (weekDifference % schedule.RepeatWeeks != 0)
+					return false;
+			}
+
+			// Проверяем конкретные дни месяца
+			if (schedule.SpecificDays.Count > 0 && !schedule.SpecificDays.Contains(date.Day))
+				return false;
+
+			// Проверяем "день недели в месяце", если он задан
+			if (schedule.WeekDayInMonth > 0)
+			{
+				int weekOfMonth = (date.Day - 1) / 7 + 1;
+				if (weekOfMonth != schedule.WeekDayInMonth)
+					return false;
+			}
+
+			return true;
+		}
+
 
 
 

@@ -88,6 +88,8 @@
                     <Label Content="Комментарий:" Grid.Row="10" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
        FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                     <TextBox x:Name="Comment" Grid.Row="10" Grid.Column="1" Margin="5" Height="30" Padding="3"  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    
+                    
 
 
                     <Button Content="Добавить" Grid.Row="12" Grid.ColumnSpan="2" Margin="5" Click="AddNaryad_Click"/>

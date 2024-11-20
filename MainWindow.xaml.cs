@@ -212,6 +212,7 @@ namespace WpfApp4
       ,[Sklad_Deteil_ID]
       ,[Sklad_Kolich]
       ,[Documentation_Name_ID]
+      ,[Date_TO]
       ,[Comment]
   FROM [Technical_Service].[dbo].[Naryad]";
 
