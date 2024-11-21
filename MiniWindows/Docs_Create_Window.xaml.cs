@@ -41,13 +41,7 @@ namespace WpfApp4.MiniWindows
 
 			this.mainWindow = mainWindow; // сохраняем ссылку на главное окно
 
-			//_dataRow = dataRow;
-			//FIO.Text = _dataRow["ID"].ToString();
-			//Log.Text = _dataRow["FIO"].ToString();
-			//Pass.Text = _dataRow["Pass"].ToString();
-			//Role.Text = _dataRow["Role"].ToString();
-			//Smena.Text = _dataRow["Smena"].ToString();
-			//Phone.Text = _dataRow["Phone"].ToString();
+			
 		}
 
 		private void Docs_Dobav_Click(object sender, RoutedEventArgs e)
@@ -140,6 +134,39 @@ namespace WpfApp4.MiniWindows
 			}
 		}
 
+		private void ChooseFileButton_Click(object sender, RoutedEventArgs e)
+		{
+			// Используем OpenFileDialog для выбора файла
+			Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog
+			{
+				Filter = "Все файлы (*.*)|*.*", // Устанавливаем фильтр для выбора файла
+				Title = "Выберите файл"
+			};
+
+			if (openFileDialog.ShowDialog() == true)
+			{
+				filePath = openFileDialog.FileName; // Сохраняем путь к файлу
+				FileNameTextBox.Text = Path.GetFileName(filePath); // Отображаем имя файла в TextBox
+			}
+		}
+
+		private void ChooseFileHyperlink_Click(object sender, RoutedEventArgs e)
+		{
+			// Используем OpenFileDialog для выбора файла
+			Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog
+			{
+				Filter = "Все файлы (*.*)|*.*", // Устанавливаем фильтр для выбора файла
+				Title = "Выберите файл"
+			};
+
+			if (openFileDialog.ShowDialog() == true)
+			{
+				filePath = openFileDialog.FileName; // Сохраняем путь к файлу
+				FileNameTextBox.Text = Path.GetFileName(filePath); // Отображаем имя файла в TextBox
+			}
+		}
+
+
 
 
 
@@ -201,6 +228,6 @@ namespace WpfApp4.MiniWindows
 
 	}
 
-	
+
 }
 

@@ -43,6 +43,7 @@ namespace WpfApp4.MiniWindows
 
 			_dataRow = dataRow;
 			Opisaniye.Text = _dataRow["Opisaniye"].ToString();
+			FileNameTextBox.Text = _dataRow["Name_Doc"].ToString();
 			
 		}
 
@@ -190,7 +191,7 @@ namespace WpfApp4.MiniWindows
 				if (files.Length > 0)
 				{
 					filePath = files[0]; // Сохраняем путь к первому перетаскиваемому файлу
-										 // Проверка на то, что файл существует
+
 					if (File.Exists(filePath))
 					{
 						FileNameTextBox.Text = Path.GetFileName(filePath); // Отображаем имя файла в TextBox
@@ -207,7 +208,98 @@ namespace WpfApp4.MiniWindows
 			}
 		}
 
-		
+
+		//private void ChooseFileButton_Click(object sender, RoutedEventArgs e)
+		//{
+		//	// Используем OpenFileDialog для выбора файла
+		//	Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog
+		//	{
+		//		Filter = "Все файлы (*.*)|*.*", // Устанавливаем фильтр для выбора файла
+		//		Title = "Выберите файл"
+		//	};
+
+		//	if (openFileDialog.ShowDialog() == true)
+		//	{
+		//		filePath = openFileDialog.FileName; // Сохраняем путь к файлу
+		//		FileNameTextBox.Text = Path.GetFileName(filePath); // Отображаем имя файла в TextBox
+		//	}
+		//}
+
+		private void SaveFileButton_Click(object sender, RoutedEventArgs e)
+		{
+			// Получаем имя документа из текстового поля (можно изменить источник данных)
+			string fileName = FileNameTextBox.Text;
+
+			if (string.IsNullOrEmpty(fileName))
+			{
+				MessageBox.Show("Пожалуйста, выберите файл для сохранения.");
+				return;
+			}
+
+			// Запрос к базе данных для получения файла
+			string query = "SELECT [Doc] FROM [Technical_Service].[dbo].[Documentation] WHERE [Name_Doc] = @Name_Doc";
+
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				{
+					using (SqlCommand command = new SqlCommand(query, connection))
+					{
+						command.Parameters.AddWithValue("@Name_Doc", fileName);
+
+						connection.Open();
+
+						// Выполняем запрос
+						byte[] fileData = command.ExecuteScalar() as byte[];
+
+						if (fileData == null)
+						{
+							MessageBox.Show("Файл не найден в базе данных.");
+							return;
+						}
+
+						// Используем SaveFileDialog для выбора пути сохранения
+						Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog
+						{
+							FileName = fileName, // Предлагаемое имя файла
+							Filter = "Все файлы (*.*)|*.*", // Фильтр файлов
+							Title = "Сохранить файл"
+						};
+
+						if (saveFileDialog.ShowDialog() == true)
+						{
+							// Сохраняем файл на диск
+							File.WriteAllBytes(saveFileDialog.FileName, fileData);
+							//MessageBox.Show("Файл успешно сохранён.");
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ошибка: " + ex.Message);
+			}
+		}
+
+		private void ChooseFileHyperlink_Click(object sender, RoutedEventArgs e)
+		{
+			// Используем OpenFileDialog для выбора файла
+			Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog
+			{
+				Filter = "Все файлы (*.*)|*.*", // Устанавливаем фильтр для выбора файла
+				Title = "Выберите файл"
+			};
+
+			if (openFileDialog.ShowDialog() == true)
+			{
+				filePath = openFileDialog.FileName; // Сохраняем путь к файлу
+				FileNameTextBox.Text = Path.GetFileName(filePath); // Отображаем имя файла в TextBox
+			}
+		}
+
+
+
+
 
 
 
@@ -272,6 +364,6 @@ namespace WpfApp4.MiniWindows
 
 	}
 
-	
+
 }
 
