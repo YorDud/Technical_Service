@@ -55,7 +55,7 @@
         </StackPanel>
 
         <!-- Основное содержание                                                                                         Главное -->
-        <ContentControl x:Name="MainContent" Grid.Column="1" Visibility="Visible">
+        <ContentControl x:Name="MainContent" Grid.Column="1" Visibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -94,7 +94,7 @@
             </Grid>
         </ContentControl>
 
-        <ContentControl x:Name="TO" Grid.Column="1" Visibility= "Hidden">
+        <ContentControl x:Name="TO" Grid.Column="1" Visibility= "Visible">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -120,16 +120,20 @@
                 <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="TypeDeviceCreatebtn_Click"/>
 
 
-                <DataGrid AutoGenerateColumns="False" Grid.Row="2" HeadersVisibility="Column" Height="500" Margin="10">
+                <DataGrid x:Name="dataGridDevice_Types" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Наименование" Width="400"/>
-                        <DataGridTextColumn Header="Код" Width="400"/>
+                        <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Тип оборудования" Width="auto" Binding="{Binding Device_Type}" />
                     </DataGrid.Columns>
-
-
                 </DataGrid>
             </Grid>
         </ContentControl>
+        
+        
+        
+        
+        
+        
         <ContentControl x:Name="Devices" Grid.Column="1" Visibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
@@ -457,6 +461,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Склад" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
 
@@ -469,7 +474,7 @@
                 <Button x:Name="ClearBtnSklad" Grid.Row="1" HorizontalAlignment="Right" Width="auto" Height="30" FontSize="12" Margin="0,0,10,0" Content="✖" Click="ClearBtnSklad_Click"></Button>
 
 
-                <DataGrid x:Name="dataGridSklad" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridSklad_MouseDoubleClick">
+                <DataGrid x:Name="dataGridSklad" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="600" MouseDoubleClick="dataGridSklad_MouseDoubleClick" MouseMove="dataGridSklad_MouseMove">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
                         <DataGridTextColumn Header="Тип детали" Width="auto" Binding="{Binding Deteil_Types}" />
@@ -477,6 +482,7 @@
                         <DataGridTextColumn Header="Производитель" Width="auto" Binding="{Binding Proizvod}" />
                         <DataGridTextColumn Header="Поставщик" Width="auto" Binding="{Binding Postav}" />
                         <DataGridTextColumn Header="Оборудование" Width="auto" Binding="{Binding Devices_ID}" />
+                        <DataGridTextColumn Header="Название изображения" Width="auto" Binding="{Binding Name_Image}" />
                         <DataGridTextColumn Header="Изображение" Width="auto" Binding="{Binding Image}" />
                         <DataGridTextColumn Header="Место хранения" Width="auto" Binding="{Binding Location}" />
                         <DataGridTextColumn Header="Количество" Width="auto" Binding="{Binding Kolich}" />
@@ -486,6 +492,7 @@
 
 
                 </DataGrid>
+                <Image x:Name="SelectedImage" Grid.Row="3" Height="300" />
             </Grid>
         </ContentControl>
 

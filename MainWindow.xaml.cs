@@ -28,6 +28,7 @@ using System.ComponentModel;
 using System.Web.UI.WebControls;
 using WpfApp4.MiniWindows;
 using Style = System.Windows.Style;
+using System.IO;
 
 
 
@@ -59,6 +60,7 @@ namespace WpfApp4
 			LoadData_TypesTO();
 			LoadData_Naryad();
 			LoadData_Monitor_Naryad();
+			LoadData_Device_Types();
 
 
 
@@ -160,6 +162,29 @@ namespace WpfApp4
 				dataGridDevices.ItemsSource = dataTable.DefaultView;
 			}
 		}
+
+		public void LoadData_Device_Types()
+		{
+			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+			{
+				string query = "SELECT [ID]\r\n      ,[Device_Type]\r\n  FROM [Devices_Types]";
+				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+
+				DataTable dataTable = new DataTable();
+
+				connection.Open();
+				adapter.Fill(dataTable);
+				connection.Close();
+
+				dataGridDevice_Types.ItemsSource = dataTable.DefaultView;
+			}
+		}
+
+
+
+
+
+
 
 
 
@@ -402,7 +427,7 @@ namespace WpfApp4
 		{
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
-				string query = "SELECT [ID]\r\n      ,[Deteil_Types]\r\n      ,[Model]\r\n      ,[Proizvod]\r\n      ,[Postav]\r\n      ,[Devices_ID]\r\n      ,[Image]\r\n      ,[Location]\r\n      ,[Kolich]\r\n  FROM [Sklad]";
+				string query = "SELECT [ID]\r\n      ,[Deteil_Types]\r\n      ,[Model]\r\n      ,[Proizvod]\r\n      ,[Postav]\r\n      ,[Devices_ID]\r\n ,[Name_Image]     ,[Image]\r\n      ,[Location]\r\n      ,[Kolich]\r\n  FROM [Sklad]";
 				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
 
 				DataTable dataTable = new DataTable();
@@ -589,6 +614,7 @@ namespace WpfApp4
 
 		private void ShowTipesTO(object sender, RoutedEventArgs e)
 		{
+			LoadData_Device_Types();
 			SetVisibility(TO);
 		}
 
@@ -661,7 +687,7 @@ namespace WpfApp4
 
 		private void TypeDeviceCreatebtn_Click(object sender, RoutedEventArgs e)
 		{
-			MiniWindows.TypeDeviceWindow typeDeviceWindow = new MiniWindows.TypeDeviceWindow();
+			MiniWindows.TypeDeviceWindow typeDeviceWindow = new MiniWindows.TypeDeviceWindow(this);
 			typeDeviceWindow.ShowDialog();
 		}
 
@@ -933,7 +959,59 @@ namespace WpfApp4
 			}
 		}
 
-		
+		private void dataGridSklad_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+		{
+			// Определяем, на какую строку наведен курсор
+			var dataGridRow = FindVisualParent<DataGridRow>(e.OriginalSource as DependencyObject);
+
+			if (dataGridRow != null && dataGridRow.Item is DataRowView selectedRow)
+			{
+				// Извлекаем изображение из строки
+				var imageBytes = selectedRow["Image"] as byte[];
+
+				if (imageBytes != null)
+				{
+					try
+					{
+						// Преобразуем байтовый массив в BitmapImage
+						BitmapImage bitmap = new BitmapImage();
+						using (var stream = new MemoryStream(imageBytes))
+						{
+							bitmap.BeginInit();
+							bitmap.StreamSource = stream;
+							bitmap.CacheOption = BitmapCacheOption.OnLoad;
+							bitmap.EndInit();
+						}
+
+						// Устанавливаем изображение в источник Image
+						SelectedImage.Source = bitmap;
+					}
+					catch (Exception ex)
+					{
+						//MessageBox.Show("Ошибка при отображении изображения: " + ex.Message);
+					}
+				}
+				else
+				{
+					// Если изображения нет
+					SelectedImage.Source = null;
+				}
+			}
+		}
+
+		// Вспомогательный метод для поиска родителя типа DataGridRow
+		private static T FindVisualParent<T>(DependencyObject child) where T : DependencyObject
+		{
+			while (child != null)
+			{
+				if (child is T parent)
+					return parent;
+
+				child = VisualTreeHelper.GetParent(child);
+			}
+			return null;
+
+		}
 	}
 
 

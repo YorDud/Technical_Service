@@ -12,6 +12,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using Path = System.IO.Path;
+using System.Data;
+
 
 namespace WpfApp4.MiniWindows
 {
@@ -25,66 +29,78 @@ namespace WpfApp4.MiniWindows
 		//private DataRowView _dataRow;
 		private MainWindow mainWindow;
 
+		private string imageFilePath;
+		private string filePath;
 		public Sklad_Create_Window(MainWindow mainWindow/*DataRowView dataRow)*/)
 		{
 			InitializeComponent();
 
 			this.mainWindow = mainWindow; // сохраняем ссылку на главное окно
 
-			//_dataRow = dataRow;
-			//FIO.Text = _dataRow["ID"].ToString();
-			//Log.Text = _dataRow["FIO"].ToString();
-			//Pass.Text = _dataRow["Pass"].ToString();
-			//Role.Text = _dataRow["Role"].ToString();
-			//Smena.Text = _dataRow["Smena"].ToString();
-			//Phone.Text = _dataRow["Phone"].ToString();
 		}
 
 		private void Sklad_Dobav_Click(object sender, RoutedEventArgs e)
 		{
-			var detailTypes = Deteil_Types.Text;
-			var model = Model.Text;
-			var proizvod = Proizvod.Text;
-			var postav = Postav.Text;
-			var devicesId = 0; // Задаем значение по умолчанию
-			if (!string.IsNullOrWhiteSpace(Devices_ID.Text))
-			{
-				devicesId = Convert.ToInt32(Devices_ID.Text); // Преобразуем только если поле не пустое
-			}
-			var image = Image.Text; // Не требуется проверка, если не обязательно
-			var location = Location.Text; // Также не требуется проверка
-			var kolich = Kolich.Text;
+			// Считываем данные из UI
+			string detailTypes = Deteil_Types.Text;
+			string model = Model.Text;
+			string proizvod = Proizvod.Text;
+			string postav = Postav.Text;
+			int devicesId = string.IsNullOrWhiteSpace(Devices_ID.Text) ? 0 : Convert.ToInt32(Devices_ID.Text);
+			string location = Location.Text;
+			string kolich = Kolich.Text;
+			byte[] imageBytes = null; // Массив байтов для изображения
+			string imageName = null;  // Имя файла изображения
 
-			// SQL-запрос на добавление
+			// Если файл выбран, преобразуем его в массив байтов и извлекаем имя
+			if (!string.IsNullOrEmpty(imageFilePath) && File.Exists(imageFilePath))
+			{
+				imageBytes = File.ReadAllBytes(imageFilePath);
+				imageName = Path.GetFileName(imageFilePath); // Извлекаем имя файла
+			}
+
+			// SQL-запрос
 			string query = "INSERT INTO [Technical_Service].[dbo].[Sklad] " +
-						   "([Deteil_Types], [Model], [Proizvod], [Postav], [Devices_ID], [Image], [Location], [Kolich]) " +
-						   "VALUES (@Deteil_Types, @Model, @Proizvod, @Postav, @Devices_ID, @Image, @Location, @Kolich)";
+						   "([Deteil_Types], [Model], [Proizvod], [Postav], [Devices_ID], [Name_Image], [Image], [Location], [Kolich]) " +
+						   "VALUES (@Deteil_Types, @Model, @Proizvod, @Postav, @Devices_ID, @Name_Image, @Image, @Location, @Kolich)";
 
 			try
 			{
+				// Подключение к базе данных
 				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 				{
 					using (SqlCommand command = new SqlCommand(query, connection))
 					{
-						// Добавление значений для параметров
-						command.Parameters.AddWithValue("@Deteil_Types", (object)detailTypes ?? DBNull.Value);
-						command.Parameters.AddWithValue("@Model", (object)model ?? DBNull.Value);
-						command.Parameters.AddWithValue("@Proizvod", (object)proizvod ?? DBNull.Value);
-						command.Parameters.AddWithValue("@Postav", (object)postav ?? DBNull.Value);
+						// Параметры запроса
+						command.Parameters.AddWithValue("@Deteil_Types", string.IsNullOrEmpty(detailTypes) ? (object)DBNull.Value : detailTypes);
+						command.Parameters.AddWithValue("@Model", string.IsNullOrEmpty(model) ? (object)DBNull.Value : model);
+						command.Parameters.AddWithValue("@Proizvod", string.IsNullOrEmpty(proizvod) ? (object)DBNull.Value : proizvod);
+						command.Parameters.AddWithValue("@Postav", string.IsNullOrEmpty(postav) ? (object)DBNull.Value : postav);
 						command.Parameters.AddWithValue("@Devices_ID", devicesId == 0 ? (object)DBNull.Value : devicesId);
-						command.Parameters.AddWithValue("@Image", (object)image ?? DBNull.Value);
-						command.Parameters.AddWithValue("@Location", (object)location ?? DBNull.Value);
-						command.Parameters.AddWithValue("@Kolich", (object)DBNull.Value);
+						command.Parameters.AddWithValue("@Name_Image", string.IsNullOrEmpty(imageName) ? (object)DBNull.Value : imageName);
 
-						// Открытие соединения и выполнение команды
+						// Проверяем, является ли imageBytes массивом байтов
+						if (imageBytes != null && imageBytes is byte[])
+						{
+							command.Parameters.Add("@Image", SqlDbType.VarBinary).Value = imageBytes;
+						}
+						else
+						{
+							command.Parameters.Add("@Image", SqlDbType.VarBinary).Value = DBNull.Value;
+						}
+
+						command.Parameters.AddWithValue("@Location", string.IsNullOrEmpty(location) ? (object)DBNull.Value : location);
+						command.Parameters.AddWithValue("@Kolich", string.IsNullOrEmpty(kolich) ? (object)DBNull.Value : kolich);
+
+						// Открываем соединение и выполняем запрос
 						connection.Open();
 						int rowsAffected = command.ExecuteNonQuery();
 
+						// Проверка результата
 						if (rowsAffected > 0)
 						{
-							//MessageBox.Show("Запись успешно добавлена в склад!");
-							mainWindow.LoadData_Sklad(); // Обновляем данные на интерфейсе
-							this.Close();
+							mainWindow.LoadData_Sklad(); // Обновляем данные
+							this.Close(); // Закрываем текущее окно
 						}
 						else
 						{
@@ -95,9 +111,88 @@ namespace WpfApp4.MiniWindows
 			}
 			catch (Exception ex)
 			{
+				// Выводим сообщение об ошибке
 				MessageBox.Show("Ошибка: " + ex.Message);
 			}
 		}
+
+
+
+
+
+		private void ChooseFileHyperlink_Click(object sender, RoutedEventArgs e)
+		{
+			Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog
+			{
+				Filter = "Изображения (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|Все файлы (*.*)|*.*",
+				Title = "Выберите изображение"
+			};
+
+			if (openFileDialog.ShowDialog() == true)
+			{
+				imageFilePath = openFileDialog.FileName; // Сохраняем путь к изображению
+				FileNameTextBox.Text = Path.GetFileName(imageFilePath); // Отображаем имя файла
+
+				// Отображаем изображение
+				SelectedImage.Source = new BitmapImage(new Uri(imageFilePath));
+				SelectedImage.Visibility = Visibility.Visible;
+				FileDropText.Visibility = Visibility.Collapsed;
+			}
+		}
+
+		
+
+		private void FileDropBorder_DragOver(object sender, DragEventArgs e)
+		{
+			// Проверка на наличие файлов
+			if (e.Data.GetDataPresent(DataFormats.FileDrop))
+			{
+				e.Effects = DragDropEffects.Copy; // Разрешаем копирование
+			}
+			else
+			{
+				e.Effects = DragDropEffects.None; // Отклоняем другие операции
+			}
+		}
+
+		private void FileDropBorder_Drop(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.FileDrop))
+			{
+				string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+				if (files.Length > 0)
+				{
+					imageFilePath = files[0]; // Сохраняем путь к файлу
+
+					if (File.Exists(imageFilePath))
+					{
+						FileNameTextBox.Text = Path.GetFileName(imageFilePath);
+
+						// Проверяем, является ли файл изображением
+						try
+						{
+							SelectedImage.Source = new BitmapImage(new Uri(imageFilePath));
+							SelectedImage.Visibility = Visibility.Visible;
+							FileDropText.Visibility = Visibility.Collapsed;
+						}
+						catch
+						{
+							MessageBox.Show("Выбранный файл не является изображением.");
+						}
+					}
+					else
+					{
+						MessageBox.Show("Файл не найден.");
+					}
+				}
+			}
+			else
+			{
+				MessageBox.Show("Перетаскиваемый объект не является файлом.");
+			}
+		}
+
 
 	}
 }
