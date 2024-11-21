@@ -47,7 +47,7 @@ namespace WpfApp4
 			StartDatePicker.SelectedDate = DateTime.Now;
 			EndDatePicker.SelectedDate = DateTime.Now.AddDays(7);       // Текущая дата + 7 дней
 
-			ApplyConditionalStyles();
+			
 
 
 			LoadData_Users();
@@ -58,6 +58,7 @@ namespace WpfApp4
 			LoadData_Sklad();
 			LoadData_TypesTO();
 			LoadData_Naryad();
+			LoadData_Monitor_Naryad();
 
 
 
@@ -160,6 +161,243 @@ namespace WpfApp4
 			}
 		}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		private void SearchBoxDevices_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			var dataView = dataGridDevices.ItemsSource as DataView;
+
+			if (dataView != null)
+			{
+				string filterText = SearchBoxDevices.Text;
+
+				if (string.IsNullOrEmpty(filterText))
+				{
+					dataView.RowFilter = string.Empty; // Показываем все строки
+				}
+				else
+				{
+					// Создаем фильтр, приводя числовые данные к строковому типу
+					string filter = string.Join(" OR ", dataView.Table.Columns.Cast<DataColumn>()
+						.Select(col => col.DataType == typeof(string)
+							? $"[{col.ColumnName}] LIKE '%{filterText}%'"
+							: $"CONVERT([{col.ColumnName}], 'System.String') LIKE '%{filterText}%'"));
+
+					dataView.RowFilter = filter;
+				}
+			}
+		}
+
+		private void ClearBtnDevices_Click(object sender, RoutedEventArgs e)
+		{
+			SearchBoxDevices.Clear();
+		}
+
+		private void SearchBoxNarTO_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			var dataView = dataGridNaryad.ItemsSource as DataView;
+
+			if (dataView != null)
+			{
+				string filterText = SearchBoxNarTO.Text;
+
+				if (string.IsNullOrEmpty(filterText))
+				{
+					dataView.RowFilter = string.Empty; // Показываем все строки
+				}
+				else
+				{
+					// Создаем фильтр, приводя числовые данные к строковому типу
+					string filter = string.Join(" OR ", dataView.Table.Columns.Cast<DataColumn>()
+						.Select(col => col.DataType == typeof(string)
+							? $"[{col.ColumnName}] LIKE '%{filterText}%'"
+							: $"CONVERT([{col.ColumnName}], 'System.String') LIKE '%{filterText}%'"));
+
+					dataView.RowFilter = filter;
+				}
+			}
+		}
+
+		private void ClearBtnNarTO_Click(object sender, RoutedEventArgs e)
+		{
+			SearchBoxNarTO.Clear();
+		}
+
+
+
+
+		private void SearchBoxTypesTO_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			var dataView = dataGridTypesTO.ItemsSource as DataView;
+
+			if (dataView != null)
+			{
+				string filterText = SearchBoxTypesTO.Text;
+
+				if (string.IsNullOrEmpty(filterText))
+				{
+					dataView.RowFilter = string.Empty; // Показываем все строки
+				}
+				else
+				{
+					// Создаем фильтр, приводя числовые данные к строковому типу
+					string filter = string.Join(" OR ", dataView.Table.Columns.Cast<DataColumn>()
+						.Select(col => col.DataType == typeof(string)
+							? $"[{col.ColumnName}] LIKE '%{filterText}%'"
+							: $"CONVERT([{col.ColumnName}], 'System.String') LIKE '%{filterText}%'"));
+
+					dataView.RowFilter = filter;
+				}
+			}
+		}
+		private void ClearBtnTypesTO_Click(object sender, RoutedEventArgs e)
+		{
+			SearchBoxTypesTO.Clear();
+		}
+
+
+		private void SearchBoxUsers_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			var dataView = dataGridUsers.ItemsSource as DataView;
+
+			if (dataView != null)
+			{
+				string filterText = SearchBoxUsers.Text;
+
+				if (string.IsNullOrEmpty(filterText))
+				{
+					dataView.RowFilter = string.Empty; // Показываем все строки
+				}
+				else
+				{
+					// Создаем фильтр, приводя числовые данные к строковому типу
+					string filter = string.Join(" OR ", dataView.Table.Columns.Cast<DataColumn>()
+						.Select(col => col.DataType == typeof(string)
+							? $"[{col.ColumnName}] LIKE '%{filterText}%'"
+							: $"CONVERT([{col.ColumnName}], 'System.String') LIKE '%{filterText}%'"));
+
+					dataView.RowFilter = filter;
+				}
+			}
+		}
+
+		private void ClearBtnUsers_Click(object sender, RoutedEventArgs e)
+		{
+			SearchBoxUsers.Clear();
+		}
+
+
+		private void SearchBoxSklad_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			var dataView = dataGridSklad.ItemsSource as DataView;
+
+			if (dataView != null)
+			{
+				string filterText = SearchBoxSklad.Text;
+
+				if (string.IsNullOrEmpty(filterText))
+				{
+					dataView.RowFilter = string.Empty; // Показываем все строки
+				}
+				else
+				{
+					// Создаем фильтр, приводя числовые данные к строковому типу
+					string filter = string.Join(" OR ", dataView.Table.Columns.Cast<DataColumn>()
+						.Select(col => col.DataType == typeof(string)
+							? $"[{col.ColumnName}] LIKE '%{filterText}%'"
+							: $"CONVERT([{col.ColumnName}], 'System.String') LIKE '%{filterText}%'"));
+
+					dataView.RowFilter = filter;
+				}
+			}
+
+		}
+
+		private void ClearBtnSklad_Click(object sender, RoutedEventArgs e)
+		{
+			SearchBoxSklad.Clear();
+		}
+
+		private void SearchBoxDocs_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			var dataView = dataGridDocs.ItemsSource as DataView;
+
+			if (dataView != null)
+			{
+				string filterText = SearchBoxDocs.Text;
+
+				if (string.IsNullOrEmpty(filterText))
+				{
+					dataView.RowFilter = string.Empty; // Показываем все строки
+				}
+				else
+				{
+					// Создаем фильтр, приводя числовые данные к строковому типу
+					string filter = string.Join(" OR ", dataView.Table.Columns.Cast<DataColumn>()
+						.Select(col => col.DataType == typeof(string)
+							? $"[{col.ColumnName}] LIKE '%{filterText}%'"
+							: $"CONVERT([{col.ColumnName}], 'System.String') LIKE '%{filterText}%'"));
+
+					dataView.RowFilter = filter;
+				}
+			}
+		}
+
+		private void ClearBtnDocs_Click(object sender, RoutedEventArgs e)
+		{
+			SearchBoxDocs.Clear();
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		public void LoadData_Sklad()
 		{
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
@@ -230,6 +468,111 @@ namespace WpfApp4
 
 
 
+		public void LoadData_Monitor_Naryad()
+		{
+			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+			{
+				// Получаем значения выбранных дат
+				DateTime? startDate = StartDatePicker.SelectedDate;
+				DateTime? endDate = EndDatePicker.SelectedDate;
+
+				// SQL-запрос с использованием диапазона дат и условий по Status
+				string query = @"
+            SELECT 
+                [ID],
+                [Device_Name],
+                [Types_TO_Name],
+                [Types_TO_Work_List],
+                [Users_FIO],
+                [Date_Start],
+                [Date_End],
+                [Status],
+                [Sklad_Deteil_ID],
+                [Sklad_Kolich],
+                [Documentation_Name_ID],
+                [Date_TO],
+                [Comment]
+            FROM [Technical_Service].[dbo].[Naryad]
+            WHERE 
+                ([Date_TO] BETWEEN @StartDate AND @EndDate)
+                AND ([Status] IS NULL OR [Status] != 'Закрыт')";
+
+				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+
+				// Передаем параметры диапазона дат
+				adapter.SelectCommand.Parameters.AddWithValue("@StartDate", (object)startDate ?? DBNull.Value);
+				adapter.SelectCommand.Parameters.AddWithValue("@EndDate", (object)endDate ?? DBNull.Value);
+
+				DataTable dataTable = new DataTable();
+				connection.Open();
+				adapter.Fill(dataTable);
+				connection.Close();
+
+				// Настраиваем источник данных
+				dataGridMonitorNaryad.ItemsSource = dataTable.DefaultView;
+
+				// Применяем цветовые стили строк
+				foreach (DataRowView row in dataGridMonitorNaryad.ItemsSource)
+				{
+					string status = row["Status"].ToString();
+
+					if (string.IsNullOrEmpty(status) || status == "В работе")
+					{
+						// Светло-красный цвет для строк со статусом NULL или "В работе"
+						DataGridRow dataGridRow = dataGridMonitorNaryad.ItemContainerGenerator.ContainerFromItem(row) as DataGridRow;
+						if (dataGridRow != null)
+						{
+							dataGridRow.Background = new SolidColorBrush(Colors.LightCoral);
+						}
+					}
+					else if (status == "Выполнено")
+					{
+						// Светло-зеленый цвет для строк со статусом "Выполнено"
+						DataGridRow dataGridRow = dataGridMonitorNaryad.ItemContainerGenerator.ContainerFromItem(row) as DataGridRow;
+						if (dataGridRow != null)
+						{
+							dataGridRow.Background = new SolidColorBrush(Colors.LightGreen);
+						}
+					}
+				}
+			}
+		}
+		private void StartDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+		{
+			LoadData_Monitor_Naryad();
+		}
+
+		private void EndDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+		{
+			LoadData_Monitor_Naryad();
+		}
+		private void dataGridMonitorNaryad_LoadingRow(object sender, DataGridRowEventArgs e)
+		{
+			// Получаем текущую строку
+			var row = e.Row.Item as DataRowView;
+			if (row != null)
+			{
+				string status = row["Status"]?.ToString();
+
+				// Если статус пустой или "В работе", устанавливаем светло-красный цвет
+				if (string.IsNullOrEmpty(status) || status == "В работе")
+				{
+					e.Row.Background = new SolidColorBrush(Colors.LightCoral);
+				}
+				// Если статус "Выполнено", устанавливаем светло-зеленый цвет
+				else if (status == "Выполнен")
+				{
+					e.Row.Background = new SolidColorBrush(Colors.LightGreen);
+				}
+			}
+		}
+
+
+
+
+
+
+
 
 
 
@@ -237,7 +580,7 @@ namespace WpfApp4
 
 		private void ShowMonitoringTO(object sender, RoutedEventArgs e)
 		{
-
+			LoadData_Monitor_Naryad();
 			SetVisibility(MainContent);
 
 		}
@@ -314,30 +657,7 @@ namespace WpfApp4
 		//}
 
 
-		private void ApplyConditionalStyles()                                                                           //  ПЕРЕКРАШИВАНИЕ ЯЧЕЕК В ЗАВИСИМОСТИ ОТ УСЛОВИЙ В БД
-		{
-			Style style = new Style(typeof(DataGridCell));
-
-			DataTrigger nonEmptyTrigger = new DataTrigger
-			{
-				Binding = new System.Windows.Data.Binding("ffff")
-				{
-					Converter = new NonEmptyStringConverter()
-				},
-				Value = true
-			};
-
-			nonEmptyTrigger.Setters.Add(new Setter
-			{
-				Property = DataGridCell.BackgroundProperty,
-				Value = new SolidColorBrush(Colors.Green)
-			});
-
-			style.Triggers.Add(nonEmptyTrigger);
-
-			// Применяем стиль ко второму столбцу
-			test_tableDataGrid.Columns[1].CellStyle = style;
-		}
+		
 
 		private void TypeDeviceCreatebtn_Click(object sender, RoutedEventArgs e)
 		{
@@ -427,15 +747,7 @@ namespace WpfApp4
 			SetVisibility(Devices);
 		}
 
-		private void dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			if (test_tableDataGrid.SelectedItem is DataRowView selectedRow)
-			{
-				// Открываем окно редактирования
-				EditWindow_Monitor_TO editWindow = new EditWindow_Monitor_TO((DataRowView)test_tableDataGrid.SelectedItem);
-				editWindow.ShowDialog();
-			}
-		}
+		
 
 		private void MT_Click(object sender, RoutedEventArgs e)
 		{
@@ -608,6 +920,20 @@ namespace WpfApp4
 				naryad_Edit_Window.ShowDialog();
 			}
 		}
+
+		private void dataGridMonitorNaryad_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			if (dataGridMonitorNaryad.SelectedItem is DataRowView selectedRow)
+			{
+				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+				MonitorNaryad_Edit_Window naryad_Edit_Window = new MonitorNaryad_Edit_Window(this, selectedRow);
+
+				// Показываем диалоговое окно
+				naryad_Edit_Window.ShowDialog();
+			}
+		}
+
+		
 	}
 
 

@@ -234,6 +234,9 @@
     <Compile Include="MiniWindows\Kontragents_Create_Window.xaml.cs">
       <DependentUpon>Kontragents_Create_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MiniWindows\MonitorNaryad_Edit_Window.xaml.cs">
+      <DependentUpon>MonitorNaryad_Edit_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiniWindows\Naryad_Edit_Window.xaml.cs">
       <DependentUpon>Naryad_Edit_Window.xaml</DependentUpon>
     </Compile>
@@ -328,6 +331,10 @@
     <Page Include="MiniWindows\Kontragents_Create_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MiniWindows\MonitorNaryad_Edit_Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MiniWindows\Naryad_Edit_Window.xaml">
       <Generator>MSBuild:Compile</Generator>
