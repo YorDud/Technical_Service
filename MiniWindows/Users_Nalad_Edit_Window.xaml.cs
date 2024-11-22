@@ -148,64 +148,69 @@ namespace WpfApp4.MiniWindows
 			}
 		}
 
-
-
-		//private void User_Dobav_Click(object sender, RoutedEventArgs e)
-		//{
-		//	var FIOv = FIO.Text;
-		//	var Logv = Log.Text; // предполагаем, что id — это int
-		//	var Passv = Pass.Text; // предполагаем, что id — это int
-		//	var Rolev = Role.Text; // предполагаем, что id — это int
-		//	var Smenav = Smena.Text; // предполагаем, что id — это int
-		//	var Phonev = Phone.Text;  // предполагаем, что id — это int
-
-		//	// Обновляем данные в базе данных
-		//	// Укажите строку подключения к вашей базе данных
-
-		//	using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
-		//	{
-		//		connection.Open();
-		//		string query = "UPDATE [Technical_Service].[dbo].[Users] " +
-		//		   "SET [FIO] = @FIO, [Login] = @Login, [Password] = @Password, " +
-		//		   "[Role] = @Role, [Smena] = @Smena, [Phone] = @Phone " +
-		//		   "WHERE [ID] = @ID";
-
-		//		using (SqlCommand command = new SqlCommand(query, connection))
-		//		{
-		//			command.Parameters.AddWithValue("@FIO", FIOv);
-		//			command.Parameters.AddWithValue("@Log", Logv);
-		//			command.Parameters.AddWithValue("@Pass", Passv);
-		//			command.Parameters.AddWithValue("@Role", Rolev);
-		//			command.Parameters.AddWithValue("@Smena", Smenav);
-		//			command.Parameters.AddWithValue("@Phone", Phonev);
-
-		//			try
-		//			{
-		//				int rowsAffected = command.ExecuteNonQuery();
-		//				if (rowsAffected > 0)
-		//				{
-		//					MessageBox.Show("Изменения успешно сохранены!");
-		//				}
-		//				else
-		//				{
-		//					MessageBox.Show("Не удалось сохранить изменения.");
-		//				}
-		//			}
-		//			catch (Exception ex)
-		//			{
-		//				MessageBox.Show("Произошла ошибка: " + ex.Message);
-		//			}
-		//		}
-		//	}
+		private void ExitButton_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+        }
 
 
 
+        //private void User_Dobav_Click(object sender, RoutedEventArgs e)
+        //{
+        //	var FIOv = FIO.Text;
+        //	var Logv = Log.Text; // предполагаем, что id — это int
+        //	var Passv = Pass.Text; // предполагаем, что id — это int
+        //	var Rolev = Role.Text; // предполагаем, что id — это int
+        //	var Smenav = Smena.Text; // предполагаем, что id — это int
+        //	var Phonev = Phone.Text;  // предполагаем, что id — это int
+
+        //	// Обновляем данные в базе данных
+        //	// Укажите строку подключения к вашей базе данных
+
+        //	using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+        //	{
+        //		connection.Open();
+        //		string query = "UPDATE [Technical_Service].[dbo].[Users] " +
+        //		   "SET [FIO] = @FIO, [Login] = @Login, [Password] = @Password, " +
+        //		   "[Role] = @Role, [Smena] = @Smena, [Phone] = @Phone " +
+        //		   "WHERE [ID] = @ID";
+
+        //		using (SqlCommand command = new SqlCommand(query, connection))
+        //		{
+        //			command.Parameters.AddWithValue("@FIO", FIOv);
+        //			command.Parameters.AddWithValue("@Log", Logv);
+        //			command.Parameters.AddWithValue("@Pass", Passv);
+        //			command.Parameters.AddWithValue("@Role", Rolev);
+        //			command.Parameters.AddWithValue("@Smena", Smenav);
+        //			command.Parameters.AddWithValue("@Phone", Phonev);
+
+        //			try
+        //			{
+        //				int rowsAffected = command.ExecuteNonQuery();
+        //				if (rowsAffected > 0)
+        //				{
+        //					MessageBox.Show("Изменения успешно сохранены!");
+        //				}
+        //				else
+        //				{
+        //					MessageBox.Show("Не удалось сохранить изменения.");
+        //				}
+        //			}
+        //			catch (Exception ex)
+        //			{
+        //				MessageBox.Show("Произошла ошибка: " + ex.Message);
+        //			}
+        //		}
+        //	}
 
 
-		//	this.Close();
-		//}
 
-	}
+
+
+        //	this.Close();
+        //}
+
+    }
 
 	
 }

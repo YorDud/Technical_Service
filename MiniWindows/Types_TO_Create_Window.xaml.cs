@@ -145,8 +145,10 @@ namespace WpfApp4.MiniWindows
 				   SundayCheckBox.IsChecked == true;
 		}
 
-		
-
-	}
+		private void ExitButton_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+        }
+    }
 
 }

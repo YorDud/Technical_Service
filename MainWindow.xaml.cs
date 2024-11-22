@@ -710,8 +710,8 @@ namespace WpfApp4
 
 		private void DeviceGroupsCreateClick(object sender, RoutedEventArgs e)
 		{
-			MiniWindows.DeviceGroupsCreateWindow deviceGroupsCreateWindow = new MiniWindows.DeviceGroupsCreateWindow();
-			deviceGroupsCreateWindow.ShowDialog();
+			//MiniWindows.DeviceGroupsCreateWindow deviceGroupsCreateWindow = new MiniWindows.DeviceGroupsCreateWindow();
+			//deviceGroupsCreateWindow.ShowDialog();
 		}
 
 		private void NarTOCreateClick(object sender, RoutedEventArgs e)
@@ -728,8 +728,8 @@ namespace WpfApp4
 
 		private void Ed_Izmer_Create_Click(object sender, RoutedEventArgs e)
 		{
-			MiniWindows.Ed_Izmer_Create_Window ed_Izmer_Create_Window = new MiniWindows.Ed_Izmer_Create_Window();
-			ed_Izmer_Create_Window.ShowDialog();
+			//MiniWindows.Ed_Izmer_Create_Window ed_Izmer_Create_Window = new MiniWindows.Ed_Izmer_Create_Window();
+			//ed_Izmer_Create_Window.ShowDialog();
 		}
 
 		private void Show_ED_Izmer(object sender, RoutedEventArgs e)
@@ -740,8 +740,8 @@ namespace WpfApp4
 
 		private void Kontragents_Create_Click(object sender, RoutedEventArgs e)
 		{
-			MiniWindows.Kontragents_Create_Window kontragents_Create_Window = new MiniWindows.Kontragents_Create_Window();
-			kontragents_Create_Window.ShowDialog();
+			//MiniWindows.Kontragents_Create_Window kontragents_Create_Window = new MiniWindows.Kontragents_Create_Window();
+			//kontragents_Create_Window.ShowDialog();
 		}
 
 		private void Kontragents_Click(object sender, RoutedEventArgs e)
@@ -756,8 +756,8 @@ namespace WpfApp4
 
 		private void Nomekluatura_Create_Click(object sender, RoutedEventArgs e)
 		{
-			MiniWindows.Nomekluatura_Create_Window nomekluatura_Create_Window = new MiniWindows.Nomekluatura_Create_Window();
-			nomekluatura_Create_Window.ShowDialog();
+			//MiniWindows.Nomekluatura_Create_Window nomekluatura_Create_Window = new MiniWindows.Nomekluatura_Create_Window();
+			//nomekluatura_Create_Window.ShowDialog();
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)

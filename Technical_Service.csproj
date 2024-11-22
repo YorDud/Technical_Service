@@ -219,20 +219,8 @@
     <Compile Include="MiniWindows\DeviceCreateWindow.xaml.cs">
       <DependentUpon>DeviceCreateWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MiniWindows\DeviceGroupsCreateWindow.xaml.cs">
-      <DependentUpon>DeviceGroupsCreateWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MiniWindows\Docs_Edit_Window.xaml.cs">
       <DependentUpon>Docs_Edit_Window.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MiniWindows\EditWindow_Monitor_TO.xaml.cs">
-      <DependentUpon>EditWindow_Monitor_TO.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MiniWindows\Ed_Izmer_Create_Window.xaml.cs">
-      <DependentUpon>Ed_Izmer_Create_Window.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MiniWindows\Kontragents_Create_Window.xaml.cs">
-      <DependentUpon>Kontragents_Create_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="MiniWindows\MonitorNaryad_Edit_Window.xaml.cs">
       <DependentUpon>MonitorNaryad_Edit_Window.xaml</DependentUpon>
@@ -242,9 +230,6 @@
     </Compile>
     <Compile Include="MiniWindows\Naryad_Create_Window.xaml.cs">
       <DependentUpon>Naryad_Create_Window.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MiniWindows\Nomekluatura_Create_Window.xaml.cs">
-      <DependentUpon>Nomekluatura_Create_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="MiniWindows\Obrabotka_Raspisanie.xaml.cs">
       <DependentUpon>Obrabotka_Raspisanie.xaml</DependentUpon>
@@ -312,25 +297,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MiniWindows\DeviceGroupsCreateWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MiniWindows\Docs_Edit_Window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MiniWindows\EditWindow_Monitor_TO.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MiniWindows\Ed_Izmer_Create_Window.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MiniWindows\Kontragents_Create_Window.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MiniWindows\MonitorNaryad_Edit_Window.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -341,10 +310,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MiniWindows\Naryad_Create_Window.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MiniWindows\Nomekluatura_Create_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

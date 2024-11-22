@@ -245,6 +245,9 @@ namespace WpfApp4.MiniWindows
 			}
 		}
 
-		
-	}
+		private void ExitButton_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+        }
+    }
 }

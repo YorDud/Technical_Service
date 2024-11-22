@@ -240,35 +240,40 @@ namespace WpfApp4.MiniWindows
 			}
 		}
 
-		//private void DeleteTypeTO_Click(object sender, RoutedEventArgs e)
-		//{
-		//	var id = _dataRow["ID"];
+		private void ExitButton_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+        }
 
-		//	// SQL-запрос для удаления записи
-		//	string query = "DELETE FROM [Technical_Service].[dbo].[Types_TO] WHERE [ID] = @ID";
+        //private void DeleteTypeTO_Click(object sender, RoutedEventArgs e)
+        //{
+        //	var id = _dataRow["ID"];
 
-		//	try
-		//	{
-		//		using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
-		//		{
-		//			using (SqlCommand command = new SqlCommand(query, connection))
-		//			{
-		//				command.Parameters.AddWithValue("@ID", id);
+        //	// SQL-запрос для удаления записи
+        //	string query = "DELETE FROM [Technical_Service].[dbo].[Types_TO] WHERE [ID] = @ID";
 
-		//				connection.Open();
-		//				command.ExecuteNonQuery();
+        //	try
+        //	{
+        //		using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+        //		{
+        //			using (SqlCommand command = new SqlCommand(query, connection))
+        //			{
+        //				command.Parameters.AddWithValue("@ID", id);
 
-		//				mainWindow.LoadData_TypesTO();
-		//				this.Close();
-		//			}
-		//		}
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		MessageBox.Show("Ошибка: " + ex.Message);
-		//	}
-		//}
-	}
+        //				connection.Open();
+        //				command.ExecuteNonQuery();
+
+        //				mainWindow.LoadData_TypesTO();
+        //				this.Close();
+        //			}
+        //		}
+        //	}
+        //	catch (Exception ex)
+        //	{
+        //		MessageBox.Show("Ошибка: " + ex.Message);
+        //	}
+        //}
+    }
 
 
 }

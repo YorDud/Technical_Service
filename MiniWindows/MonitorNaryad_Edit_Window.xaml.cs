@@ -81,6 +81,9 @@ namespace WpfApp4.MiniWindows
 			Status.Items.Add("Закрыт");
 		}
 
-		
-	}
+		private void ExitButton_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+        }
+    }
 }
