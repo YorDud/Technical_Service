@@ -562,6 +562,15 @@ namespace WpfApp4
 				}
 			}
 		}
+
+
+
+		
+
+
+
+
+
 		private void StartDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
 		{
 			LoadData_Monitor_Naryad();

@@ -72,7 +72,7 @@
 
 
 
-                <DataGrid x:Name="dataGridMonitorNaryad" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridMonitorNaryad_MouseDoubleClick" LoadingRow="dataGridMonitorNaryad_LoadingRow">
+                <DataGrid x:Name="dataGridMonitorNaryad" IsReadOnly="True" Focusable="False" SelectionMode="Single" SelectionUnit="FullRow" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridMonitorNaryad_MouseDoubleClick" LoadingRow="dataGridMonitorNaryad_LoadingRow">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Дата ТО" Width="auto" Binding="{Binding Date_TO}" />
                         <DataGridTextColumn Header="Номер наряда" Width="auto" Binding="{Binding ID}" />
@@ -94,7 +94,7 @@
             </Grid>
         </ContentControl>
 
-        <ContentControl x:Name="TO" Grid.Column="1" Visibility= "Visible">
+        <ContentControl x:Name="TO" Grid.Column="1" Visibility= "Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -233,7 +233,7 @@
 
             </Grid>
         </ContentControl>
-        <ContentControl x:Name="TechObsl" Grid.Column="1" Visibility="Hidden">
+        <ContentControl x:Name="TechObsl" Grid.Column="1" Visibility="Visible">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />

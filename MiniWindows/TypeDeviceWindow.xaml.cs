@@ -66,6 +66,11 @@ namespace WpfApp4.MiniWindows
 				MessageBox.Show("Ошибка: " + ex.Message);
 			}
 		}
+
+		private void ExitButton_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+		}
 	}
     
 }
