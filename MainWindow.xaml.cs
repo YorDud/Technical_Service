@@ -48,8 +48,8 @@ namespace WpfApp4
 			StartDatePicker.SelectedDate = DateTime.Now;
 			EndDatePicker.SelectedDate = DateTime.Now.AddDays(7);       // Текущая дата + 7 дней
 
-			
 
+			LoadData_Monitor_Naryad();
 
 			LoadData_Users();
 
@@ -59,7 +59,7 @@ namespace WpfApp4
 			LoadData_Sklad();
 			LoadData_TypesTO();
 			LoadData_Naryad();
-			LoadData_Monitor_Naryad();
+			
 			LoadData_Device_Types();
 
 
@@ -388,6 +388,37 @@ namespace WpfApp4
 			SearchBoxDocs.Clear();
 		}
 
+		private void SearchBoxDevices_Types_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			var dataView = dataGridDevice_Types.ItemsSource as DataView;
+
+			if (dataView != null)
+			{
+				string filterText = SearchBoxDevices_Types.Text;
+
+				if (string.IsNullOrEmpty(filterText))
+				{
+					dataView.RowFilter = string.Empty; // Показываем все строки
+				}
+				else
+				{
+					// Создаем фильтр, приводя числовые данные к строковому типу
+					string filter = string.Join(" OR ", dataView.Table.Columns.Cast<DataColumn>()
+						.Select(col => col.DataType == typeof(string)
+							? $"[{col.ColumnName}] LIKE '%{filterText}%'"
+							: $"CONVERT([{col.ColumnName}], 'System.String') LIKE '%{filterText}%'"));
+
+					dataView.RowFilter = filter;
+				}
+			}
+		}
+
+		private void ClearBtnDevices_Types_Click(object sender, RoutedEventArgs e)
+		{
+			SearchBoxDevices_Types.Clear();
+		}
+
+
 
 
 
@@ -532,20 +563,23 @@ namespace WpfApp4
 						{
 							dataGridRow.Background = new SolidColorBrush(Colors.LightCoral);
 						}
+						else if (string.Equals(status, "В работе", StringComparison.OrdinalIgnoreCase))
+						{
+							dataGridRow.Background = new SolidColorBrush(Color.FromRgb(255, 255, 102));
+							
+						}
 						else if (string.Equals(status, "Выполнено", StringComparison.OrdinalIgnoreCase))
 						{
 							dataGridRow.Background = new SolidColorBrush(Colors.LightGreen);
 						}
-						else if (string.Equals(status, "В работе", StringComparison.OrdinalIgnoreCase))
-						{
-							dataGridRow.Background = new SolidColorBrush(Colors.LightYellow);
-						}
+						
 					}
+					dataGridMonitorNaryad.UpdateLayout();
 				}
 			}
 		}
 
-	}
+	
 
 
 
@@ -556,469 +590,477 @@ namespace WpfApp4
 
 
 	private void StartDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-		{
-			LoadData_Monitor_Naryad();
-		}
-
-		private void EndDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-		{
-			LoadData_Monitor_Naryad();
-		}
-		private void dataGridMonitorNaryad_LoadingRow(object sender, DataGridRowEventArgs e)
-		{
-			// Получаем текущую строку
-			var row = e.Row.Item as DataRowView;
-			if (row != null)
-			{
-				string status = row["Status"]?.ToString();
-
-				// Если статус пустой или "В работе", устанавливаем светло-красный цвет
-				if (string.IsNullOrEmpty(status) || status == "В работе")
-				{
-					e.Row.Background = new SolidColorBrush(Colors.LightCoral);
-				}
-				// Если статус "Выполнено", устанавливаем светло-зеленый цвет
-				else if (status == "Выполнен")
-				{
-					e.Row.Background = new SolidColorBrush(Colors.LightGreen);
-				}
-			}
-		}
-
-
-
-
-
-
-
-
-
-
-
-
-		private void ShowMonitoringTO(object sender, RoutedEventArgs e)
-		{
-			LoadData_Monitor_Naryad();
-			SetVisibility(MainContent);
-
-		}
-
-
-
-		private void ShowTipesTO(object sender, RoutedEventArgs e)
-		{
-			LoadData_Device_Types();
-			SetVisibility(Devices_Types);
-		}
-
-		private void ShowDevices(object sender, RoutedEventArgs e)
-		{
-			LoadData_Devices();
-			SetVisibility(Devices);
-		}
-		private void NarTObtn(object sender, RoutedEventArgs e)
-		{
-			LoadData_Naryad();
-			SetVisibility(NarTO);
-		}
-		private void TechObslbtn(object sender, RoutedEventArgs e)
-		{
-			LoadData_TypesTO();
-			SetVisibility(TechObsl);
-		}
-		private void ZapolTObtn(object sender, RoutedEventArgs e)
-		{
-			//SetVisibility(ZapTO);
-		}
-
-
-
-
-
-
-		private void ShowHelp(object sender, RoutedEventArgs e)
-		{
-			SetVisibility(MainHelp);
-		}
-
-		private void Load_Data_DataGrid()
-		{
-			WpfApp4.Lab_RezDataSet lab_RezDataSet = ((WpfApp4.Lab_RezDataSet)(this.FindResource("lab_RezDataSet")));
-			// Загрузить данные в таблицу test_table. Можно изменить этот код как требуется.
-			WpfApp4.Lab_RezDataSetTableAdapters.test_tableTableAdapter lab_RezDataSettest_tableTableAdapter = new WpfApp4.Lab_RezDataSetTableAdapters.test_tableTableAdapter();
-			lab_RezDataSettest_tableTableAdapter.Fill(lab_RezDataSet.test_table);
-			System.Windows.Data.CollectionViewSource test_tableViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("test_tableViewSource")));
-			test_tableViewSource.View.MoveCurrentToFirst();
-		}
-
-
-		private void Window_Loaded(object sender, RoutedEventArgs e)
-		{
-			Load_Data_DataGrid();
-
-
-
-			////test_tableDataGrid_Loaded(sender, e);
-		}
-
-		//private void LoadData()                                                                                                 //   LoadData   !!!!!!!!!!!!!!!!!!!!!!!!!!!
-		//{
-		//	string connectionString = WC.ConnectionString;
-		//	string query = "SELECT [id], [ffff], [rrrr] FROM [test_table]";
-
-		//	using (SqlConnection connection = new SqlConnection(connectionString))
-		//	{
-		//		SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
-		//		DataTable dataTable = new DataTable();
-		//		adapter.Fill(dataTable);
-		//		test_tableDataGrid.ItemsSource = dataTable.DefaultView;
-		//	}
-		//}
-
-
-		
-
-		private void TypeDeviceCreatebtn_Click(object sender, RoutedEventArgs e)
-		{
-			MiniWindows.TypeDeviceWindow typeDeviceWindow = new MiniWindows.TypeDeviceWindow(this);
-			typeDeviceWindow.ShowDialog();
-		}
-
-
-
-		private void DeviceCreateClick(object sender, RoutedEventArgs e)
-		{
-			MiniWindows.DeviceCreateWindow deviceCreateWindow = new MiniWindows.DeviceCreateWindow(this);
-			deviceCreateWindow.ShowDialog();
-		}
-
-		private void DeviceGroupsCreateClick(object sender, RoutedEventArgs e)
-		{
-			//MiniWindows.DeviceGroupsCreateWindow deviceGroupsCreateWindow = new MiniWindows.DeviceGroupsCreateWindow();
-			//deviceGroupsCreateWindow.ShowDialog();
-		}
-
-		private void NarTOCreateClick(object sender, RoutedEventArgs e)
-		{
-			MiniWindows.Naryad_Create_Window narTOCreateWindow = new MiniWindows.Naryad_Create_Window(this);
-			narTOCreateWindow.ShowDialog();
-		}
-
-		private void Types_TO_Create_Click(object sender, RoutedEventArgs e)
-		{
-			MiniWindows.Types_TO_Create_Window types_TO_Create_Window = new Types_TO_Create_Window(this);
-			types_TO_Create_Window.ShowDialog();
-		}
-
-		private void Ed_Izmer_Create_Click(object sender, RoutedEventArgs e)
-		{
-			//MiniWindows.Ed_Izmer_Create_Window ed_Izmer_Create_Window = new MiniWindows.Ed_Izmer_Create_Window();
-			//ed_Izmer_Create_Window.ShowDialog();
-		}
-
-		private void Show_ED_Izmer(object sender, RoutedEventArgs e)
-		{
-			SetVisibility(Ed_Izmer);
-		}
-
-
-		private void Kontragents_Create_Click(object sender, RoutedEventArgs e)
-		{
-			//MiniWindows.Kontragents_Create_Window kontragents_Create_Window = new MiniWindows.Kontragents_Create_Window();
-			//kontragents_Create_Window.ShowDialog();
-		}
-
-		private void Kontragents_Click(object sender, RoutedEventArgs e)
-		{
-			SetVisibility(Kontragents);
-		}
-
-		private void Nomekluatura_Click(object sender, RoutedEventArgs e)
-		{
-			SetVisibility(Nomekluatura);
-		}
-
-		private void Nomekluatura_Create_Click(object sender, RoutedEventArgs e)
-		{
-			//MiniWindows.Nomekluatura_Create_Window nomekluatura_Create_Window = new MiniWindows.Nomekluatura_Create_Window();
-			//nomekluatura_Create_Window.ShowDialog();
-		}
-
-		private void Button_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-
-		private void Users_Nalad_Click(object sender, RoutedEventArgs e)
-		{
-			LoadData_Users();
-			SetVisibility(Users_Nalad);
-		}
-
-		private void Users_Nalad_Create_Click(object sender, RoutedEventArgs e)
-		{
-			MiniWindows.Users_Nalad_Create_Window users_Nalad_Create = new MiniWindows.Users_Nalad_Create_Window(this);
-			users_Nalad_Create.ShowDialog();
-		}
-
-		private void Device_2_Click(object sender, RoutedEventArgs e)
-		{
-			SetVisibility(Devices);
-		}
-
-		
-
-		private void MT_Click(object sender, RoutedEventArgs e)
-		{
-			Load_Data_DataGrid();
-		}
-
-		private void Sklad_Click(object sender, RoutedEventArgs e)
-		{
-			LoadData_Sklad();
-			SetVisibility(Sklad);
-		}
-
-		private void Sklad_Create_Click(object sender, RoutedEventArgs e)
-		{
-			MiniWindows.Sklad_Create_Window sklad_Create_Window = new Sklad_Create_Window(this);
-			sklad_Create_Window.ShowDialog();
-		}
-
-		private void Shtrichcodes_Click(object sender, RoutedEventArgs e)
-		{
-			SetVisibility(Shtrichcodes);
-		}
-
-		private void Dop_Rekvizits_Create_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-
-		private void Dop_Rekvizits_Click(object sender, RoutedEventArgs e)
-		{
-			SetVisibility(Dop_Rekvizits);
-		}
-
-		private void Show_Jurnal_Docs(object sender, RoutedEventArgs e)
-		{
-			LoadData_Docs();
-			SetVisibility(Jurnal_Docs);
-		}
-
-		private void Otch_Kopletuishie_Click(object sender, RoutedEventArgs e)
-		{
-			SetVisibility(Otch_Kopletuishie);
-		}
-
-		private void Otch_Sklad_Click(object sender, RoutedEventArgs e)
-		{
-			SetVisibility(Otch_Sklad);
-		}
-
-		private void Monitor_Sklad_Click(object sender, RoutedEventArgs e)
-		{
-			SetVisibility(Monitor_Sklad);
-		}
-
-		private void Kalendar_To_Click(object sender, RoutedEventArgs e)
-		{
-			SetVisibility(Kalendar_To);
-		}
-
-		private void Raboti_Devices_Click(object sender, RoutedEventArgs e)
-		{
-			SetVisibility(Raboti_Devices);
-		}
-
-
-
-		private void Docs_Create_Window_Click(object sender, RoutedEventArgs e)
-		{
-			//MiniWindows.Docs_Create_Window docs_Create_Window = new MiniWindows.Docs_Create_Window();
-			//docs_Create_Window.ShowDialog();
-		}
-
-		private void TechObsl_Create_Click(object sender, RoutedEventArgs e)
-		{
-			//MiniWindows.TechObslCreateWindow techObslCreateWindow = new TechObslCreateWindow();
-			//techObslCreateWindow.ShowDialog();
-		}
-
-		private void Docs_Click(object sender, RoutedEventArgs e)
-		{
-			SetVisibility(Jurnal_Docs);
-		}
-
-		private void Sklad_Create_Window_Click(object sender, RoutedEventArgs e)
-		{
-			MiniWindows.Sklad_Create_Window sklad_Create_Window = new Sklad_Create_Window(this);
-			sklad_Create_Window.ShowDialog();
-		}
-
-		private void Window_Closed(object sender, EventArgs e)
-		{
-			System.Windows.Application.Current.Shutdown();
-		}
-
-		private void dataGridUsers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			// Проверяем, выбрана ли строка
-			if (dataGridUsers.SelectedItem is DataRowView selectedRow)
-			{
-				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
-				Users_Nalad_Edit_Window users_Nalad_Edit_Window = new Users_Nalad_Edit_Window(this, selectedRow);
-
-				// Показываем диалоговое окно
-				users_Nalad_Edit_Window.ShowDialog();
-			}
-		}
-
-		private void dataGridDevices_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			if (dataGridDevices.SelectedItem is DataRowView selectedRow)
-			{
-				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
-				DeviceEditWindow users_Nalad_Edit_Window = new DeviceEditWindow(this, selectedRow);
-
-				// Показываем диалоговое окно
-				users_Nalad_Edit_Window.ShowDialog();
-			}
-		}
-
-		private void Docs_Create_Click(object sender, RoutedEventArgs e)
-		{
-			MiniWindows.Docs_Create_Window docs_Create_Window = new Docs_Create_Window(this);
-			docs_Create_Window.ShowDialog();
-		}
-
-		private void dataGridDocs_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			if (dataGridDocs.SelectedItem is DataRowView selectedRow)
-			{
-				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
-				Docs_Edit_Window users_Nalad_Edit_Window = new Docs_Edit_Window(this, selectedRow);
-
-				// Показываем диалоговое окно
-				users_Nalad_Edit_Window.ShowDialog();
-			}
-		}
-
-		private void dataGridSklad_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			if (dataGridSklad.SelectedItem is DataRowView selectedRow)
-			{
-				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
-				Sklad_Edit_Window sklad_Edit_Window = new Sklad_Edit_Window(this, selectedRow);
-
-				// Показываем диалоговое окно
-				sklad_Edit_Window.ShowDialog();
-			}
-		}
-
-		private void dataGridTypesTO_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			if (dataGridTypesTO.SelectedItem is DataRowView selectedRow)
-			{
-				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
-				Types_TO_Edit_Window sklad_Edit_Window = new Types_TO_Edit_Window(this, selectedRow);
-
-				// Показываем диалоговое окно
-				sklad_Edit_Window.ShowDialog();
-			}
-		}
-
-		private void dataGridNaryad_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			if (dataGridNaryad.SelectedItem is DataRowView selectedRow)
-			{
-				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
-				Naryad_Edit_Window naryad_Edit_Window = new Naryad_Edit_Window(this, selectedRow);
-
-				// Показываем диалоговое окно
-				naryad_Edit_Window.ShowDialog();
-			}
-		}
-
-		private void dataGridMonitorNaryad_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			if (dataGridMonitorNaryad.SelectedItem is DataRowView selectedRow)
-			{
-				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
-				MonitorNaryad_Edit_Window naryad_Edit_Window = new MonitorNaryad_Edit_Window(this, selectedRow);
-
-				// Показываем диалоговое окно
-				naryad_Edit_Window.ShowDialog();
-			}
-		}
-		private void dataGridDevices_Types_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			if (dataGridDevice_Types.SelectedItem is DataRowView selectedRow)
-			{
-				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
-				TypeDeviceEditWindow naryad_Edit_Window = new TypeDeviceEditWindow(this, selectedRow);
-
-				// Показываем диалоговое окно
-				naryad_Edit_Window.ShowDialog();
-			}
-		}
-
-		private void dataGridSklad_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-		{
-			// Определяем, на какую строку наведен курсор
-			var dataGridRow = FindVisualParent<DataGridRow>(e.OriginalSource as DependencyObject);
-
-			if (dataGridRow != null && dataGridRow.Item is DataRowView selectedRow)
-			{
-				// Извлекаем изображение из строки
-				var imageBytes = selectedRow["Image"] as byte[];
-
-				if (imageBytes != null)
-				{
-					try
-					{
-						// Преобразуем байтовый массив в BitmapImage
-						BitmapImage bitmap = new BitmapImage();
-						using (var stream = new MemoryStream(imageBytes))
-						{
-							bitmap.BeginInit();
-							bitmap.StreamSource = stream;
-							bitmap.CacheOption = BitmapCacheOption.OnLoad;
-							bitmap.EndInit();
-						}
-
-						// Устанавливаем изображение в источник Image
-						SelectedImage.Source = bitmap;
-					}
-					catch (Exception ex)
-					{
-						//MessageBox.Show("Ошибка при отображении изображения: " + ex.Message);
-					}
-				}
-				else
-				{
-					// Если изображения нет
-					SelectedImage.Source = null;
-				}
-			}
-		}
-
-		// Вспомогательный метод для поиска родителя типа DataGridRow
-		private static T FindVisualParent<T>(DependencyObject child) where T : DependencyObject
-		{
-			while (child != null)
-			{
-				if (child is T parent)
-					return parent;
-
-				child = VisualTreeHelper.GetParent(child);
-			}
-			return null;
-
-		}
-
-		
+	{
+		LoadData_Monitor_Naryad();
 	}
+
+	private void EndDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+	{
+		LoadData_Monitor_Naryad();
+	}
+	private void dataGridMonitorNaryad_LoadingRow(object sender, DataGridRowEventArgs e)
+	{
+		// Получаем текущую строку
+		var row = e.Row.Item as DataRowView;
+		if (row != null)
+		{
+			string status = row["Status"]?.ToString();
+
+			// Если статус пустой или "В работе", устанавливаем светло-красный цвет
+			if (string.IsNullOrEmpty(status) || status == "В работе")
+			{
+				e.Row.Background = new SolidColorBrush(Colors.LightCoral);
+			}
+			// Если статус "Выполнено", устанавливаем светло-зеленый цвет
+			else if (status == "Выполнен")
+			{
+				e.Row.Background = new SolidColorBrush(Colors.LightGreen);
+			}
+				else if (status == "В работе")
+				{
+					e.Row.Background = new SolidColorBrush(Color.FromRgb(255, 255, 102));
+					
+				}
+
+			}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	private void ShowMonitoringTO(object sender, RoutedEventArgs e)
+	{
+		LoadData_Monitor_Naryad();
+		SetVisibility(MainContent);
+
+	}
+
+
+
+	private void ShowTipesTO(object sender, RoutedEventArgs e)
+	{
+		LoadData_Device_Types();
+		SetVisibility(Devices_Types);
+	}
+
+	private void ShowDevices(object sender, RoutedEventArgs e)
+	{
+		LoadData_Devices();
+		SetVisibility(Devices);
+	}
+	private void NarTObtn(object sender, RoutedEventArgs e)
+	{
+		LoadData_Naryad();
+		SetVisibility(NarTO);
+	}
+	private void TechObslbtn(object sender, RoutedEventArgs e)
+	{
+		LoadData_TypesTO();
+		SetVisibility(TechObsl);
+	}
+	private void ZapolTObtn(object sender, RoutedEventArgs e)
+	{
+		//SetVisibility(ZapTO);
+	}
+
+
+
+
+
+
+	private void ShowHelp(object sender, RoutedEventArgs e)
+	{
+		SetVisibility(MainHelp);
+	}
+
+	private void Load_Data_DataGrid()
+	{
+		WpfApp4.Lab_RezDataSet lab_RezDataSet = ((WpfApp4.Lab_RezDataSet)(this.FindResource("lab_RezDataSet")));
+		// Загрузить данные в таблицу test_table. Можно изменить этот код как требуется.
+		WpfApp4.Lab_RezDataSetTableAdapters.test_tableTableAdapter lab_RezDataSettest_tableTableAdapter = new WpfApp4.Lab_RezDataSetTableAdapters.test_tableTableAdapter();
+		lab_RezDataSettest_tableTableAdapter.Fill(lab_RezDataSet.test_table);
+		System.Windows.Data.CollectionViewSource test_tableViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("test_tableViewSource")));
+		test_tableViewSource.View.MoveCurrentToFirst();
+	}
+
+
+	private void Window_Loaded(object sender, RoutedEventArgs e)
+	{
+		Load_Data_DataGrid();
+			LoadData_Monitor_Naryad();
+
+
+
+
+		////test_tableDataGrid_Loaded(sender, e);
+	}
+
+	//private void LoadData()                                                                                                 //   LoadData   !!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//{
+	//	string connectionString = WC.ConnectionString;
+	//	string query = "SELECT [id], [ffff], [rrrr] FROM [test_table]";
+
+	//	using (SqlConnection connection = new SqlConnection(connectionString))
+	//	{
+	//		SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+	//		DataTable dataTable = new DataTable();
+	//		adapter.Fill(dataTable);
+	//		test_tableDataGrid.ItemsSource = dataTable.DefaultView;
+	//	}
+	//}
+
+
+
+
+	private void TypeDeviceCreatebtn_Click(object sender, RoutedEventArgs e)
+	{
+		MiniWindows.TypeDeviceWindow typeDeviceWindow = new MiniWindows.TypeDeviceWindow(this);
+		typeDeviceWindow.ShowDialog();
+	}
+
+
+
+	private void DeviceCreateClick(object sender, RoutedEventArgs e)
+	{
+		MiniWindows.DeviceCreateWindow deviceCreateWindow = new MiniWindows.DeviceCreateWindow(this);
+		deviceCreateWindow.ShowDialog();
+	}
+
+	private void DeviceGroupsCreateClick(object sender, RoutedEventArgs e)
+	{
+		//MiniWindows.DeviceGroupsCreateWindow deviceGroupsCreateWindow = new MiniWindows.DeviceGroupsCreateWindow();
+		//deviceGroupsCreateWindow.ShowDialog();
+	}
+
+	private void NarTOCreateClick(object sender, RoutedEventArgs e)
+	{
+		MiniWindows.Naryad_Create_Window narTOCreateWindow = new MiniWindows.Naryad_Create_Window(this);
+		narTOCreateWindow.ShowDialog();
+	}
+
+	private void Types_TO_Create_Click(object sender, RoutedEventArgs e)
+	{
+		MiniWindows.Types_TO_Create_Window types_TO_Create_Window = new Types_TO_Create_Window(this);
+		types_TO_Create_Window.ShowDialog();
+	}
+
+	private void Ed_Izmer_Create_Click(object sender, RoutedEventArgs e)
+	{
+		//MiniWindows.Ed_Izmer_Create_Window ed_Izmer_Create_Window = new MiniWindows.Ed_Izmer_Create_Window();
+		//ed_Izmer_Create_Window.ShowDialog();
+	}
+
+	private void Show_ED_Izmer(object sender, RoutedEventArgs e)
+	{
+		SetVisibility(Ed_Izmer);
+	}
+
+
+	private void Kontragents_Create_Click(object sender, RoutedEventArgs e)
+	{
+		//MiniWindows.Kontragents_Create_Window kontragents_Create_Window = new MiniWindows.Kontragents_Create_Window();
+		//kontragents_Create_Window.ShowDialog();
+	}
+
+	private void Kontragents_Click(object sender, RoutedEventArgs e)
+	{
+		SetVisibility(Kontragents);
+	}
+
+	private void Nomekluatura_Click(object sender, RoutedEventArgs e)
+	{
+		SetVisibility(Nomekluatura);
+	}
+
+	private void Nomekluatura_Create_Click(object sender, RoutedEventArgs e)
+	{
+		//MiniWindows.Nomekluatura_Create_Window nomekluatura_Create_Window = new MiniWindows.Nomekluatura_Create_Window();
+		//nomekluatura_Create_Window.ShowDialog();
+	}
+
+	private void Button_Click(object sender, RoutedEventArgs e)
+	{
+
+	}
+
+	private void Users_Nalad_Click(object sender, RoutedEventArgs e)
+	{
+		LoadData_Users();
+		SetVisibility(Users_Nalad);
+	}
+
+	private void Users_Nalad_Create_Click(object sender, RoutedEventArgs e)
+	{
+		MiniWindows.Users_Nalad_Create_Window users_Nalad_Create = new MiniWindows.Users_Nalad_Create_Window(this);
+		users_Nalad_Create.ShowDialog();
+	}
+
+	private void Device_2_Click(object sender, RoutedEventArgs e)
+	{
+		SetVisibility(Devices);
+	}
+
+
+
+	private void MT_Click(object sender, RoutedEventArgs e)
+	{
+		Load_Data_DataGrid();
+	}
+
+	private void Sklad_Click(object sender, RoutedEventArgs e)
+	{
+		LoadData_Sklad();
+		SetVisibility(Sklad);
+	}
+
+	private void Sklad_Create_Click(object sender, RoutedEventArgs e)
+	{
+		MiniWindows.Sklad_Create_Window sklad_Create_Window = new Sklad_Create_Window(this);
+		sklad_Create_Window.ShowDialog();
+	}
+
+	private void Shtrichcodes_Click(object sender, RoutedEventArgs e)
+	{
+		SetVisibility(Shtrichcodes);
+	}
+
+	private void Dop_Rekvizits_Create_Click(object sender, RoutedEventArgs e)
+	{
+
+	}
+
+	private void Dop_Rekvizits_Click(object sender, RoutedEventArgs e)
+	{
+		SetVisibility(Dop_Rekvizits);
+	}
+
+	private void Show_Jurnal_Docs(object sender, RoutedEventArgs e)
+	{
+		LoadData_Docs();
+		SetVisibility(Jurnal_Docs);
+	}
+
+	private void Otch_Kopletuishie_Click(object sender, RoutedEventArgs e)
+	{
+		SetVisibility(Otch_Kopletuishie);
+	}
+
+	private void Otch_Sklad_Click(object sender, RoutedEventArgs e)
+	{
+		SetVisibility(Otch_Sklad);
+	}
+
+	private void Monitor_Sklad_Click(object sender, RoutedEventArgs e)
+	{
+		SetVisibility(Monitor_Sklad);
+	}
+
+	private void Kalendar_To_Click(object sender, RoutedEventArgs e)
+	{
+		SetVisibility(Kalendar_To);
+	}
+
+	private void Raboti_Devices_Click(object sender, RoutedEventArgs e)
+	{
+		SetVisibility(Raboti_Devices);
+	}
+
+
+
+	private void Docs_Create_Window_Click(object sender, RoutedEventArgs e)
+	{
+		//MiniWindows.Docs_Create_Window docs_Create_Window = new MiniWindows.Docs_Create_Window();
+		//docs_Create_Window.ShowDialog();
+	}
+
+	private void TechObsl_Create_Click(object sender, RoutedEventArgs e)
+	{
+		//MiniWindows.TechObslCreateWindow techObslCreateWindow = new TechObslCreateWindow();
+		//techObslCreateWindow.ShowDialog();
+	}
+
+	private void Docs_Click(object sender, RoutedEventArgs e)
+	{
+		SetVisibility(Jurnal_Docs);
+	}
+
+	private void Sklad_Create_Window_Click(object sender, RoutedEventArgs e)
+	{
+		MiniWindows.Sklad_Create_Window sklad_Create_Window = new Sklad_Create_Window(this);
+		sklad_Create_Window.ShowDialog();
+	}
+
+	private void Window_Closed(object sender, EventArgs e)
+	{
+		System.Windows.Application.Current.Shutdown();
+	}
+
+	private void dataGridUsers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+	{
+		// Проверяем, выбрана ли строка
+		if (dataGridUsers.SelectedItem is DataRowView selectedRow)
+		{
+			// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+			Users_Nalad_Edit_Window users_Nalad_Edit_Window = new Users_Nalad_Edit_Window(this, selectedRow);
+
+			// Показываем диалоговое окно
+			users_Nalad_Edit_Window.ShowDialog();
+		}
+	}
+
+	private void dataGridDevices_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+	{
+		if (dataGridDevices.SelectedItem is DataRowView selectedRow)
+		{
+			// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+			DeviceEditWindow users_Nalad_Edit_Window = new DeviceEditWindow(this, selectedRow);
+
+			// Показываем диалоговое окно
+			users_Nalad_Edit_Window.ShowDialog();
+		}
+	}
+
+	private void Docs_Create_Click(object sender, RoutedEventArgs e)
+	{
+		MiniWindows.Docs_Create_Window docs_Create_Window = new Docs_Create_Window(this);
+		docs_Create_Window.ShowDialog();
+	}
+
+	private void dataGridDocs_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+	{
+		if (dataGridDocs.SelectedItem is DataRowView selectedRow)
+		{
+			// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+			Docs_Edit_Window users_Nalad_Edit_Window = new Docs_Edit_Window(this, selectedRow);
+
+			// Показываем диалоговое окно
+			users_Nalad_Edit_Window.ShowDialog();
+		}
+	}
+
+	private void dataGridSklad_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+	{
+		if (dataGridSklad.SelectedItem is DataRowView selectedRow)
+		{
+			// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+			Sklad_Edit_Window sklad_Edit_Window = new Sklad_Edit_Window(this, selectedRow);
+
+			// Показываем диалоговое окно
+			sklad_Edit_Window.ShowDialog();
+		}
+	}
+
+	private void dataGridTypesTO_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+	{
+		if (dataGridTypesTO.SelectedItem is DataRowView selectedRow)
+		{
+			// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+			Types_TO_Edit_Window sklad_Edit_Window = new Types_TO_Edit_Window(this, selectedRow);
+
+			// Показываем диалоговое окно
+			sklad_Edit_Window.ShowDialog();
+		}
+	}
+
+	private void dataGridNaryad_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+	{
+		if (dataGridNaryad.SelectedItem is DataRowView selectedRow)
+		{
+			// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+			Naryad_Edit_Window naryad_Edit_Window = new Naryad_Edit_Window(this, selectedRow);
+
+			// Показываем диалоговое окно
+			naryad_Edit_Window.ShowDialog();
+		}
+	}
+
+	private void dataGridMonitorNaryad_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+	{
+		if (dataGridMonitorNaryad.SelectedItem is DataRowView selectedRow)
+		{
+			// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+			MonitorNaryad_Edit_Window naryad_Edit_Window = new MonitorNaryad_Edit_Window(this, selectedRow);
+
+			// Показываем диалоговое окно
+			naryad_Edit_Window.ShowDialog();
+		}
+	}
+	private void dataGridDevices_Types_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+	{
+		if (dataGridDevice_Types.SelectedItem is DataRowView selectedRow)
+		{
+			// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+			TypeDeviceEditWindow naryad_Edit_Window = new TypeDeviceEditWindow(this, selectedRow);
+
+			// Показываем диалоговое окно
+			naryad_Edit_Window.ShowDialog();
+		}
+	}
+
+	private void dataGridSklad_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+	{
+		// Определяем, на какую строку наведен курсор
+		var dataGridRow = FindVisualParent<DataGridRow>(e.OriginalSource as DependencyObject);
+
+		if (dataGridRow != null && dataGridRow.Item is DataRowView selectedRow)
+		{
+			// Извлекаем изображение из строки
+			var imageBytes = selectedRow["Image"] as byte[];
+
+			if (imageBytes != null)
+			{
+				try
+				{
+					// Преобразуем байтовый массив в BitmapImage
+					BitmapImage bitmap = new BitmapImage();
+					using (var stream = new MemoryStream(imageBytes))
+					{
+						bitmap.BeginInit();
+						bitmap.StreamSource = stream;
+						bitmap.CacheOption = BitmapCacheOption.OnLoad;
+						bitmap.EndInit();
+					}
+
+					// Устанавливаем изображение в источник Image
+					SelectedImage.Source = bitmap;
+				}
+				catch (Exception ex)
+				{
+					//MessageBox.Show("Ошибка при отображении изображения: " + ex.Message);
+				}
+			}
+			else
+			{
+				// Если изображения нет
+				SelectedImage.Source = null;
+			}
+		}
+	}
+
+	// Вспомогательный метод для поиска родителя типа DataGridRow
+	private static T FindVisualParent<T>(DependencyObject child) where T : DependencyObject
+	{
+		while (child != null)
+		{
+			if (child is T parent)
+				return parent;
+
+			child = VisualTreeHelper.GetParent(child);
+		}
+		return null;
+
+	}
+
+
+
 
 
 
@@ -1035,6 +1077,8 @@ namespace WpfApp4
 		}
 	}
 
+		
+	}
 }
 
 //		public MainWindow()
