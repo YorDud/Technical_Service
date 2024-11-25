@@ -68,7 +68,7 @@ Padding="10">
 
                     <!--<Button Grid.Row="1" Grid.ColumnSpan="2" Content="Выбрать файл" Margin="5" Click="ChooseFileButton_Click" Background="#FFE0E0E0" Foreground="#DD000000" />-->
 
-                    <TextBox x:Name="FileNameTextBox" Grid.Row="2" VerticalAlignment="Center" Margin="5,0,62,0"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="FileNameTextBox" Grid.Row="2" VerticalAlignment="Center" Margin="5,0,80,0"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.ColumnSpan="2"/>
                     <Button Grid.Row="2" Content="📥" Margin="463,5,5,5" Click="SaveFileButton_Click" Grid.Column="1" />
 
                     <Label Content="Описание:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>

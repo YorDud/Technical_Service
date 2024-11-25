@@ -61,14 +61,14 @@ Padding="10">
                     <TextBox x:Name="Name_Device" Grid.Row="0" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
 
                     <Label Content="Тип оборудования:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                    <TextBox x:Name="Device_Type" Grid.Row="1" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
+                <ComboBox x:Name="Device_Type"  SelectionChanged="Device_Type_SelectionChanged" Grid.Row="1" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1"/>
                     <Label Content="Модель:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                     <TextBox x:Name="Model" Grid.Row="2" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
                     <Label Content="Серийный номер:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                    <ComboBox x:Name="Ser_Number" Grid.Row="3" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1"/>
+                <TextBox x:Name="Ser_Number" Grid.Row="3" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
 
                     <Label Content="Год выпуска:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                    <ComboBox x:Name="Year_Create_Device" Grid.Row="4" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1"/>
+                <TextBox x:Name="Year_Create_Device" Grid.Row="4" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
 
                     <Label Content="Инв номер:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                     <TextBox x:Name="Inventory_Number" Grid.Row="5" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>

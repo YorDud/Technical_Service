@@ -37,6 +37,8 @@ namespace WpfApp4.MiniWindows
 			//Role.Text = _dataRow["Role"].ToString();
 			//Smena.Text = _dataRow["Smena"].ToString();
 			//Phone.Text = _dataRow["Phone"].ToString();
+
+			LoadDevice_Type();
 		}
 
 		private void Device_Dobav_Click(object sender, RoutedEventArgs e)
@@ -93,9 +95,60 @@ namespace WpfApp4.MiniWindows
 			}
 		}
 
+
+		private void LoadDevice_Type()
+		{
+			string query = "SELECT Device_Type FROM [Technical_Service].[dbo].[Devices_Types]";
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				{
+					connection.Open();
+					using (SqlCommand command = new SqlCommand(query, connection))
+					{
+						using (SqlDataReader reader = command.ExecuteReader())
+						{
+							List<string> typesTO = new List<string>();
+							while (reader.Read())
+							{
+								typesTO.Add(reader["Device_Type"].ToString());
+							}
+							Device_Type.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
+						}
+					}
+				}
+
+				// Подписка на событие выбора элемента
+				//Device_Type.SelectionChanged += Device_Type_SelectionChanged;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+
 		private void ExitButton_Click(object sender, RoutedEventArgs e)
 		{
 			this.Close();
+		}
+
+		private void Device_Type_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			//if (Device_Type.SelectedItem != null)
+			//{
+			//	string selectedNameTO = TypesTOName.SelectedItem.ToString();
+			//	LoadWorkList(selectedNameTO);
+			//}
 		}
 	}
 }

@@ -28,6 +28,10 @@ namespace WpfApp4.MiniWindows
 			this.mainWindow = mainWindow;
 
 			LoadData_ComboBox();
+
+			DateStart.SelectedDate = DateTime.Now;
+			DateEnd.SelectedDate = DateTime.Now.AddYears(1);
+
 		}
 
 		private void AddNaryad_Click(object sender, RoutedEventArgs e)
@@ -36,26 +40,31 @@ namespace WpfApp4.MiniWindows
 			var deviceName = DeviceName.Text;
 			var typesTOName = TypesTOName.Text;
 			var typesTOWorkList = TypesTOWorkList.Text;
-			var usersFIO = UsersFIO.Text;
-			var dateStart = DateStart.SelectedDate;
-			var dateEnd = DateEnd.SelectedDate;
-			var status = Status.Text;
+			//var usersFIO = UsersFIO.Text;
+			//var dateStart = DateStart.SelectedDate;
+			//var dateEnd = DateEnd.SelectedDate;
+			//var status = Status.Text;
 			var comment = Comment.Text;
 			var skladDeteilID = SkladDeteilID.Text;
 			var skladKolich = SkladKolich.Text;
 			var documentationNameID = DocumentationNameID.Text;
 
 			// Проверяем, выбрано ли значение ID
-			
 
-			
+			//string selectQuery = "SELECT Raspisanie FROM Types_TO WHERE Name_TO = @Id";
+			//string insertNaryadQuery = "INSERT INTO [Technical_Service].[dbo].[Naryad] " +
+			//						   "([Device_Name], [Types_TO_Name], [Types_TO_Work_List], [Users_FIO], " +
+			//						   "[Status], [Comment], [Sklad_Deteil_ID], [Sklad_Kolich], [Documentation_Name_ID], [Date_TO]) " +
+			//						   "VALUES (@DeviceName, @TypesTOName, @TypesTOWorkList, @UsersFIO, " +
+			//						   "@Status, @Comment, @SkladDeteilID, @SkladKolich, @DocumentationNameID, @Date_TO)";
+
 
 			string selectQuery = "SELECT Raspisanie FROM Types_TO WHERE Name_TO = @Id";
 			string insertNaryadQuery = "INSERT INTO [Technical_Service].[dbo].[Naryad] " +
-									   "([Device_Name], [Types_TO_Name], [Types_TO_Work_List], [Users_FIO], [Date_Start], [Date_End], " +
-									   "[Status], [Comment], [Sklad_Deteil_ID], [Sklad_Kolich], [Documentation_Name_ID], [Date_TO]) " +
-									   "VALUES (@DeviceName, @TypesTOName, @TypesTOWorkList, @UsersFIO, @DateStart, @DateEnd, " +
-									   "@Status, @Comment, @SkladDeteilID, @SkladKolich, @DocumentationNameID, @Date_TO)";
+									   "([Device_Name], [Types_TO_Name], [Types_TO_Work_List], " +
+									   "[Comment], [Sklad_Deteil_ID], [Sklad_Kolich], [Documentation_Name_ID], [Date_TO]) " +
+									   "VALUES (@DeviceName, @TypesTOName, @TypesTOWorkList, " +
+									   "@Comment, @SkladDeteilID, @SkladKolich, @DocumentationNameID, @Date_TO)";
 
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
@@ -78,9 +87,16 @@ namespace WpfApp4.MiniWindows
 				// Парсинг расписания
 				var parsedSchedule = ParseSchedule(schedule);
 
+
+				DateTime? start = DateStart.SelectedDate;
+				DateTime? end = DateEnd.SelectedDate;
+
 				// Обработка расписания (1 год вперед)
-				DateTime currentDate = DateTime.Now;
-				DateTime endDate = currentDate.AddYears(1);
+				DateTime currentDate = start.Value;
+				DateTime endDate = end.Value;
+
+
+
 
 				while (currentDate <= endDate)
 				{
@@ -92,10 +108,10 @@ namespace WpfApp4.MiniWindows
 							insertCommand.Parameters.AddWithValue("@DeviceName", deviceName);
 							insertCommand.Parameters.AddWithValue("@TypesTOName", typesTOName);
 							insertCommand.Parameters.AddWithValue("@TypesTOWorkList", typesTOWorkList);
-							insertCommand.Parameters.AddWithValue("@UsersFIO", usersFIO);
-							insertCommand.Parameters.AddWithValue("@DateStart", (object)dateStart ?? DBNull.Value);
-							insertCommand.Parameters.AddWithValue("@DateEnd", (object)dateEnd ?? DBNull.Value);
-							insertCommand.Parameters.AddWithValue("@Status", status);
+							//insertCommand.Parameters.AddWithValue("@UsersFIO", usersFIO);
+							//insertCommand.Parameters.AddWithValue("@DateStart", (object)dateStart ?? DBNull.Value);
+							//insertCommand.Parameters.AddWithValue("@DateEnd", (object)dateEnd ?? DBNull.Value);
+							//insertCommand.Parameters.AddWithValue("@Status", status);
 							insertCommand.Parameters.AddWithValue("@Comment", comment);
 							insertCommand.Parameters.AddWithValue("@SkladDeteilID", skladDeteilID);
 							insertCommand.Parameters.AddWithValue("@SkladKolich", (object)skladKolich ?? DBNull.Value);
@@ -292,8 +308,8 @@ namespace WpfApp4.MiniWindows
 		{
 			LoadDeviceNames();   // Загрузка устройств
 			LoadTypesTOName();   // Загрузка ТО
-			LoadUsersFIO();      // Загрузка ФИО сотрудников
-			LoadStatus();        // Загрузка статусов
+			//LoadUsersFIO();      // Загрузка ФИО сотрудников
+			//LoadStatus();        // Загрузка статусов
 			LoadSkladDeteilID(); // Загрузка деталей
 			LoadDocumentationNameID(); // Загрузка документации
 		}
@@ -385,41 +401,41 @@ namespace WpfApp4.MiniWindows
 		}
 
 		// Загрузка ФИО сотрудников в ComboBox
-		private void LoadUsersFIO()
-		{
-			string query = "SELECT FIO FROM [Technical_Service].[dbo].[Users]";
-			try
-			{
-				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
-				{
-					connection.Open();
-					using (SqlCommand command = new SqlCommand(query, connection))
-					{
-						using (SqlDataReader reader = command.ExecuteReader())
-						{
-							List<string> usersFIO = new List<string>();
-							while (reader.Read())
-							{
-								usersFIO.Add(reader["FIO"].ToString());
-							}
-							UsersFIO.ItemsSource = usersFIO; // Устанавливаем источник данных для ComboBox
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
-			}
-		}
+		//private void LoadUsersFIO()
+		//{
+		//	string query = "SELECT FIO FROM [Technical_Service].[dbo].[Users]";
+		//	try
+		//	{
+		//		using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+		//		{
+		//			connection.Open();
+		//			using (SqlCommand command = new SqlCommand(query, connection))
+		//			{
+		//				using (SqlDataReader reader = command.ExecuteReader())
+		//				{
+		//					List<string> usersFIO = new List<string>();
+		//					while (reader.Read())
+		//					{
+		//						usersFIO.Add(reader["FIO"].ToString());
+		//					}
+		//					UsersFIO.ItemsSource = usersFIO; // Устанавливаем источник данных для ComboBox
+		//				}
+		//			}
+		//		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+		//	}
+		//}
 
 		// Загрузка статусов в ComboBox
-		private void LoadStatus()
-		{
-			Status.Items.Add("В работе");
-			Status.Items.Add("Выполнен");
-			Status.Items.Add("Закрыт");
-		}
+		//private void LoadStatus()
+		//{
+		//	Status.Items.Add("В работе");
+		//	Status.Items.Add("Выполнен");
+		//	Status.Items.Add("Закрыт");
+		//}
 
 		// Загрузка деталей в ComboBox SkladDeteilID
 		private void LoadSkladDeteilID()

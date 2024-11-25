@@ -31,6 +31,8 @@ namespace WpfApp4.MiniWindows
 			this.mainWindow = mainWindow;
 			_dataRow = dataRow;
 
+			LoadDevice_Type();
+			
 			// Заполнение полей данными из выбранной записи
 			DeviceType.Text = _dataRow["Device_Type"].ToString();
 			NameTO.Text = _dataRow["Name_TO"].ToString();
@@ -39,8 +41,38 @@ namespace WpfApp4.MiniWindows
 
 			Raspisanie.Text = _dataRow["Raspisanie"].ToString();
 		}
+		
 
+		private void LoadDevice_Type()
+		{
+			string query = "SELECT Device_Type FROM [Technical_Service].[dbo].[Devices_Types]";
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				{
+					connection.Open();
+					using (SqlCommand command = new SqlCommand(query, connection))
+					{
+						using (SqlDataReader reader = command.ExecuteReader())
+						{
+							List<string> typesTO = new List<string>();
+							while (reader.Read())
+							{
+								typesTO.Add(reader["Device_Type"].ToString());
+							}
+							DeviceType.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
+						}
+					}
+				}
 
+				// Подписка на событие выбора элемента
+				//Device_Type.SelectionChanged += Device_Type_SelectionChanged;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+			}
+		}
 
 
 		private void LoadWorkList()

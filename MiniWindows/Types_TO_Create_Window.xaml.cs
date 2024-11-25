@@ -27,6 +27,8 @@ namespace WpfApp4.MiniWindows
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
+
+			LoadDevice_Type();
 		}
 
 		private void AddWork_Click(object sender, RoutedEventArgs e)
@@ -42,7 +44,43 @@ namespace WpfApp4.MiniWindows
 			workNumber++;
 
 			WorkList.Clear();
+
+			
+
 		}
+
+
+		private void LoadDevice_Type()
+		{
+			string query = "SELECT Device_Type FROM [Technical_Service].[dbo].[Devices_Types]";
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				{
+					connection.Open();
+					using (SqlCommand command = new SqlCommand(query, connection))
+					{
+						using (SqlDataReader reader = command.ExecuteReader())
+						{
+							List<string> typesTO = new List<string>();
+							while (reader.Read())
+							{
+								typesTO.Add(reader["Device_Type"].ToString());
+							}
+							DeviceType.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
+						}
+					}
+				}
+
+				// Подписка на событие выбора элемента
+				//Device_Type.SelectionChanged += Device_Type_SelectionChanged;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+			}
+		}
+
 
 		private void AddTypeTO_Click(object sender, RoutedEventArgs e)
 		{

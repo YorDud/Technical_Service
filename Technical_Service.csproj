@@ -246,6 +246,9 @@
     <Compile Include="MiniWindows\Sklad_Create_Window.xaml.cs">
       <DependentUpon>Sklad_Create_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MiniWindows\TypeDeviceEditWindow.xaml.cs">
+      <DependentUpon>TypeDeviceEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiniWindows\Types_TO_Edit_Window.xaml.cs">
       <DependentUpon>Types_TO_Edit_Window.xaml</DependentUpon>
     </Compile>
@@ -332,6 +335,10 @@
     <Page Include="MiniWindows\Sklad_Create_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MiniWindows\TypeDeviceEditWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MiniWindows\Types_TO_Edit_Window.xaml">
       <Generator>MSBuild:Compile</Generator>

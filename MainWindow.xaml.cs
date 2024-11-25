@@ -79,7 +79,7 @@ namespace WpfApp4
 	{
 		MainHelp,
 		MainContent,
-		TO,
+		Devices_Types,
 		Devices,
 		NarTO,
 		TechObsl,
@@ -497,34 +497,18 @@ namespace WpfApp4
 		{
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
-				// Получаем значения выбранных дат
 				DateTime? startDate = StartDatePicker.SelectedDate;
 				DateTime? endDate = EndDatePicker.SelectedDate;
 
-				// SQL-запрос с использованием диапазона дат и условий по Status
 				string query = @"
-            SELECT 
-                [ID],
-                [Device_Name],
-                [Types_TO_Name],
-                [Types_TO_Work_List],
-                [Users_FIO],
-                [Date_Start],
-                [Date_End],
-                [Status],
-                [Sklad_Deteil_ID],
-                [Sklad_Kolich],
-                [Documentation_Name_ID],
-                [Date_TO],
-                [Comment]
+            SELECT [ID], [Device_Name], [Types_TO_Name], [Types_TO_Work_List], [Users_FIO],
+                   [Date_Start], [Date_End], [Status], [Sklad_Deteil_ID], [Sklad_Kolich],
+                   [Documentation_Name_ID], [Date_TO], [Comment]
             FROM [Technical_Service].[dbo].[Naryad]
-            WHERE 
-                ([Date_TO] BETWEEN @StartDate AND @EndDate)
-                AND ([Status] IS NULL OR [Status] != 'Закрыт')";
+            WHERE ([Date_TO] BETWEEN @StartDate AND @EndDate)
+              AND ([Status] IS NULL OR [Status] != 'Закрыт')";
 
 				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
-
-				// Передаем параметры диапазона дат
 				adapter.SelectCommand.Parameters.AddWithValue("@StartDate", (object)startDate ?? DBNull.Value);
 				adapter.SelectCommand.Parameters.AddWithValue("@EndDate", (object)endDate ?? DBNull.Value);
 
@@ -533,45 +517,45 @@ namespace WpfApp4
 				adapter.Fill(dataTable);
 				connection.Close();
 
-				// Настраиваем источник данных
 				dataGridMonitorNaryad.ItemsSource = dataTable.DefaultView;
 
 				// Применяем цветовые стили строк
+				dataGridMonitorNaryad.UpdateLayout();
 				foreach (DataRowView row in dataGridMonitorNaryad.ItemsSource)
 				{
-					string status = row["Status"].ToString();
+					string status = row["Status"] == DBNull.Value ? null : row["Status"].ToString().Trim();
+					DataGridRow dataGridRow = dataGridMonitorNaryad.ItemContainerGenerator.ContainerFromItem(row) as DataGridRow;
 
-					if (string.IsNullOrEmpty(status) || status == "В работе")
+					if (dataGridRow != null)
 					{
-						// Светло-красный цвет для строк со статусом NULL или "В работе"
-						DataGridRow dataGridRow = dataGridMonitorNaryad.ItemContainerGenerator.ContainerFromItem(row) as DataGridRow;
-						if (dataGridRow != null)
+						if (string.IsNullOrEmpty(status))
 						{
 							dataGridRow.Background = new SolidColorBrush(Colors.LightCoral);
 						}
-					}
-					else if (status == "Выполнено")
-					{
-						// Светло-зеленый цвет для строк со статусом "Выполнено"
-						DataGridRow dataGridRow = dataGridMonitorNaryad.ItemContainerGenerator.ContainerFromItem(row) as DataGridRow;
-						if (dataGridRow != null)
+						else if (string.Equals(status, "Выполнено", StringComparison.OrdinalIgnoreCase))
 						{
 							dataGridRow.Background = new SolidColorBrush(Colors.LightGreen);
+						}
+						else if (string.Equals(status, "В работе", StringComparison.OrdinalIgnoreCase))
+						{
+							dataGridRow.Background = new SolidColorBrush(Colors.LightYellow);
 						}
 					}
 				}
 			}
 		}
 
-
-
-		
-
+	}
 
 
 
 
-		private void StartDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+
+
+
+
+
+	private void StartDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
 		{
 			LoadData_Monitor_Naryad();
 		}
@@ -624,7 +608,7 @@ namespace WpfApp4
 		private void ShowTipesTO(object sender, RoutedEventArgs e)
 		{
 			LoadData_Device_Types();
-			SetVisibility(TO);
+			SetVisibility(Devices_Types);
 		}
 
 		private void ShowDevices(object sender, RoutedEventArgs e)
@@ -967,6 +951,17 @@ namespace WpfApp4
 				naryad_Edit_Window.ShowDialog();
 			}
 		}
+		private void dataGridDevices_Types_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			if (dataGridDevice_Types.SelectedItem is DataRowView selectedRow)
+			{
+				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+				TypeDeviceEditWindow naryad_Edit_Window = new TypeDeviceEditWindow(this, selectedRow);
+
+				// Показываем диалоговое окно
+				naryad_Edit_Window.ShowDialog();
+			}
+		}
 
 		private void dataGridSklad_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
 		{
@@ -1021,6 +1016,8 @@ namespace WpfApp4
 			return null;
 
 		}
+
+		
 	}
 
 

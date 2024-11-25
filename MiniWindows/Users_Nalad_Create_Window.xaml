@@ -60,8 +60,12 @@ Padding="10">
                     <TextBox x:Name="Log" Grid.Row="1" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
                     <Label Content="Пароль:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                     <TextBox x:Name="Pass" Grid.Row="2" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
-                    <Label Content="Должность:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                    <ComboBox x:Name="Role" Grid.Row="3" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1"/>
+                <Label Content="Должность:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <ComboBox x:Name="Role" Grid.Row="3" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1">
+                    <ComboBoxItem>admin</ComboBoxItem>
+                    <ComboBoxItem>nalad</ComboBoxItem>
+                </ComboBox>
+
 
                     <Label Content="Смена:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                     <ComboBox x:Name="Smena" Grid.Row="4" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1"/>
