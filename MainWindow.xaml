@@ -48,6 +48,8 @@
                 <StackPanel>
 
                     <Button Content="Типы оборудования" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="ShowTipesTO"/>
+                    <Button Content="Типы деталей" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Show_Deteil_Types"/>
+                    <Button Content="Помещения" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Show_Location"/>
 
 
                 </StackPanel>
@@ -65,7 +67,7 @@
         </StackPanel>
 
         <!-- Основное содержание                                                                                         Главное -->
-        <ContentControl x:Name="MainContent" Grid.Column="1" Visibility="Visible">
+        <ContentControl x:Name="MainContent" Grid.Column="1" Visibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -104,40 +106,7 @@
             </Grid>
         </ContentControl>
 
-        <ContentControl x:Name="Devices_Types" Grid.Column="1" Visibility= "Hidden">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-
-
-                <TextBlock Grid.Row="0" Text="Типы оборудования" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                <TextBox Grid.Row="1" x:Name="SearchBoxDevices_Types" Width="150" Height="30" HorizontalAlignment="Right" VerticalContentAlignment="Center" Margin="0,0,65,0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="SearchBoxDevices_Types_TextChanged"></TextBox>
-
-
-                <!-- Serch Button -->
-                <Button x:Name="ClearBtnDevices_Types" Grid.Row="1" HorizontalAlignment="Right" Width="auto" Height="30" FontSize="12" Margin="0,0,10,0" Content="✖" Click="ClearBtnDevices_Types_Click"></Button>
-
-
-
-
-
-
-                <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="TypeDeviceCreatebtn_Click"/>
-
-
-                <DataGrid x:Name="dataGridDevice_Types" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridDevices_Types_MouseDoubleClick">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
-                        <DataGridTextColumn Header="Тип оборудования" Width="auto" Binding="{Binding Device_Type}" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-        </ContentControl>
+        
         
         
         
@@ -971,6 +940,128 @@
 
             </Grid>
         </ContentControl>
+        
+        
+        
+        
+<!--                                                                                                        ПРОЧЕЕ                                                  -->
+        <ContentControl x:Name="Deteil_Types" Grid.Column="1" Visibility= "Hidden">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+
+
+                <TextBlock Grid.Row="0" Text="Типы деталей" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBox Grid.Row="1" x:Name="SearchBoxDeteil_Types" Width="150" Height="30" HorizontalAlignment="Right" VerticalContentAlignment="Center" Margin="0,0,65,0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="SearchBoxDeteil_Types_TextChanged"></TextBox>
+
+
+                <!-- Serch Button -->
+                <Button x:Name="ClearBtnDeteil_Types" Grid.Row="1" HorizontalAlignment="Right" Width="auto" Height="30" FontSize="12" Margin="0,0,10,0" Content="✖" Click="ClearBtnDeteil_Types_Click"></Button>
+
+
+
+
+
+
+                <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="Deteil_TypesCreatebtn_Click"/>
+
+
+                <DataGrid x:Name="dataGridDeteil_Types" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridDeteil_Types_MouseDoubleClick">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Тип детали" Width="auto" Binding="{Binding Deteil_Types}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </ContentControl>
+
+
+
+
+
+        <ContentControl x:Name="Devices_Types" Grid.Column="1" Visibility= "Hidden">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+
+
+                <TextBlock Grid.Row="0" Text="Типы оборудования" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBox Grid.Row="1" x:Name="SearchBoxDevices_Types" Width="150" Height="30" HorizontalAlignment="Right" VerticalContentAlignment="Center" Margin="0,0,65,0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="SearchBoxDevices_Types_TextChanged"></TextBox>
+
+
+                <!-- Serch Button -->
+                <Button x:Name="ClearBtnDevices_Types" Grid.Row="1" HorizontalAlignment="Right" Width="auto" Height="30" FontSize="12" Margin="0,0,10,0" Content="✖" Click="ClearBtnDevices_Types_Click"></Button>
+
+
+
+
+
+
+                <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="TypeDeviceCreatebtn_Click"/>
+
+
+                <DataGrid x:Name="dataGridDevice_Types" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridDevices_Types_MouseDoubleClick">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Тип оборудования" Width="auto" Binding="{Binding Device_Type}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </ContentControl>
+
+
+        <ContentControl x:Name="Location" Grid.Column="1" Visibility= "Visible">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+
+
+                <TextBlock Grid.Row="0" Text="Помещения" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBox Grid.Row="1" x:Name="SearchBoxLocation" Width="150" Height="30" HorizontalAlignment="Right" VerticalContentAlignment="Center" Margin="0,0,65,0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="SearchBoxLocation_TextChanged"></TextBox>
+
+
+                <!-- Serch Button -->
+                <Button x:Name="ClearBtnLocation" Grid.Row="1" HorizontalAlignment="Right" Width="auto" Height="30" FontSize="12" Margin="0,0,10,0" Content="✖" Click="ClearBtnLocation_Click"></Button>
+
+
+
+
+
+
+                <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="Location_Createbtn_Click"/>
+
+
+                <DataGrid x:Name="dataGridLocation" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridLocation_MouseDoubleClick">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Помещение" Width="auto" Binding="{Binding Location}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </ContentControl>
+
+
+
+
+
+
+
+
 
 
 

@@ -39,6 +39,7 @@ namespace WpfApp4.MiniWindows
 			//Phone.Text = _dataRow["Phone"].ToString();
 
 			LoadDevice_Type();
+			LoadLocation();
 		}
 
 		private void Device_Dobav_Click(object sender, RoutedEventArgs e)
@@ -114,6 +115,36 @@ namespace WpfApp4.MiniWindows
 								typesTO.Add(reader["Device_Type"].ToString());
 							}
 							Device_Type.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
+						}
+					}
+				}
+
+				// Подписка на событие выбора элемента
+				//Device_Type.SelectionChanged += Device_Type_SelectionChanged;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+			}
+		}
+		private void LoadLocation()
+		{
+			string query = "SELECT Location FROM [Technical_Service].[dbo].[Location]";
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				{
+					connection.Open();
+					using (SqlCommand command = new SqlCommand(query, connection))
+					{
+						using (SqlDataReader reader = command.ExecuteReader())
+						{
+							List<string> typesTO = new List<string>();
+							while (reader.Read())
+							{
+								typesTO.Add(reader["Location"].ToString());
+							}
+							Location.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
 						}
 					}
 				}

@@ -52,9 +52,9 @@ AllowsTransparency="True" WindowStartupLocation="CenterScreen">
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Тип устройства:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5" 
+                    <Label Content="Тип оборудования:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5" 
                            FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                    <ComboBox x:Name="DeviceType" Grid.Row="0" Grid.Column="1" Margin="5" Height="30" Padding="3" 
+                <ComboBox x:Name="DeviceType" IsEditable="True" Grid.Row="0" Grid.Column="1" Margin="5" Height="30" Padding="3" 
                              Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
 
                     <Label Content="Название ТО:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5" 

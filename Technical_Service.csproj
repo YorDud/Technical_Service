@@ -220,6 +220,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lab_RezDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MiniWindows\Location_Edit_Window.xaml.cs">
+      <DependentUpon>Location_Edit_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MiniWindows\Location_Create_Window.xaml.cs">
+      <DependentUpon>Location_Create_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiniWindows\DeviceEditWindow.xaml.cs">
       <DependentUpon>DeviceEditWindow.xaml</DependentUpon>
     </Compile>
@@ -253,8 +259,14 @@
     <Compile Include="MiniWindows\Sklad_Create_Window.xaml.cs">
       <DependentUpon>Sklad_Create_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MiniWindows\Deteil_Types_Edit_Window.xaml.cs">
+      <DependentUpon>Deteil_Types_Edit_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiniWindows\TypeDeviceEditWindow.xaml.cs">
       <DependentUpon>TypeDeviceEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MiniWindows\Deteil_Types_Create_Window.xaml.cs">
+      <DependentUpon>Deteil_Types_Create_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="MiniWindows\Types_TO_Edit_Window.xaml.cs">
       <DependentUpon>Types_TO_Edit_Window.xaml</DependentUpon>
@@ -299,6 +311,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MiniWindows\Location_Edit_Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MiniWindows\Location_Create_Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MiniWindows\DeviceEditWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -343,7 +363,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MiniWindows\Deteil_Types_Edit_Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MiniWindows\TypeDeviceEditWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MiniWindows\Deteil_Types_Create_Window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

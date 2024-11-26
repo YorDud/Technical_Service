@@ -59,8 +59,14 @@ namespace WpfApp4
 			LoadData_Sklad();
 			LoadData_TypesTO();
 			LoadData_Naryad();
-			
+
+
+
+
+			//   ПРОЧЕЕ
 			LoadData_Device_Types();
+			LoadData_Deteil_Types();
+			LoadData_Location();
 
 
 
@@ -96,7 +102,9 @@ namespace WpfApp4
 		Otch_Sklad,
 		Monitor_Sklad,
 		Kalendar_To,
-		Raboti_Devices
+		Raboti_Devices,
+		Deteil_Types,
+		Location
 	};
 
 			// Устанавливаем видимость для каждого элемента
@@ -177,6 +185,23 @@ namespace WpfApp4
 				connection.Close();
 
 				dataGridDevice_Types.ItemsSource = dataTable.DefaultView;
+			}
+		}
+
+		public void LoadData_Location()
+		{
+			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+			{
+				string query = "SELECT [ID]\r\n      ,[Location]\r\n  FROM [Location]";
+				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+
+				DataTable dataTable = new DataTable();
+
+				connection.Open();
+				adapter.Fill(dataTable);
+				connection.Close();
+
+				dataGridLocation.ItemsSource = dataTable.DefaultView;
 			}
 		}
 
@@ -420,6 +445,71 @@ namespace WpfApp4
 
 
 
+		private void SearchBoxDeteil_Types_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			var dataView = dataGridDeteil_Types.ItemsSource as DataView;
+
+			if (dataView != null)
+			{
+				string filterText = SearchBoxDeteil_Types.Text;
+
+				if (string.IsNullOrEmpty(filterText))
+				{
+					dataView.RowFilter = string.Empty; // Показываем все строки
+				}
+				else
+				{
+					// Создаем фильтр, приводя числовые данные к строковому типу
+					string filter = string.Join(" OR ", dataView.Table.Columns.Cast<DataColumn>()
+						.Select(col => col.DataType == typeof(string)
+							? $"[{col.ColumnName}] LIKE '%{filterText}%'"
+							: $"CONVERT([{col.ColumnName}], 'System.String') LIKE '%{filterText}%'"));
+
+					dataView.RowFilter = filter;
+				}
+			}
+
+		}
+
+		private void ClearBtnDeteil_Types_Click(object sender, RoutedEventArgs e)
+		{
+			SearchBoxDeteil_Types.Clear();
+		}
+
+
+		private void SearchBoxLocation_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			var dataView = dataGridLocation.ItemsSource as DataView;
+
+			if (dataView != null)
+			{
+				string filterText = SearchBoxLocation.Text;
+
+				if (string.IsNullOrEmpty(filterText))
+				{
+					dataView.RowFilter = string.Empty; // Показываем все строки
+				}
+				else
+				{
+					// Создаем фильтр, приводя числовые данные к строковому типу
+					string filter = string.Join(" OR ", dataView.Table.Columns.Cast<DataColumn>()
+						.Select(col => col.DataType == typeof(string)
+							? $"[{col.ColumnName}] LIKE '%{filterText}%'"
+							: $"CONVERT([{col.ColumnName}], 'System.String') LIKE '%{filterText}%'"));
+
+					dataView.RowFilter = filter;
+				}
+			}
+
+		}
+
+		private void ClearBtnLocation_Click(object sender, RoutedEventArgs e)
+		{
+			SearchBoxLocation.Clear();
+		}
+
+
+
 
 
 
@@ -579,17 +669,35 @@ namespace WpfApp4
 			}
 		}
 
-	
 
 
 
 
 
 
+		public void LoadData_Deteil_Types()
+		{
+			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+			{
+				string query = "SELECT [ID]\r\n      ,[Deteil_Types]\r\n  FROM [Deteil_Types]";
+				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+
+				DataTable dataTable = new DataTable();
+
+				connection.Open();
+				adapter.Fill(dataTable);
+				connection.Close();
+
+				dataGridDeteil_Types.ItemsSource = dataTable.DefaultView;
+			}
+		}
 
 
 
-	private void StartDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+
+
+
+		private void StartDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
 	{
 		LoadData_Monitor_Naryad();
 	}
@@ -728,7 +836,33 @@ namespace WpfApp4
 
 
 
-	private void DeviceCreateClick(object sender, RoutedEventArgs e)
+		private void Deteil_TypesCreatebtn_Click(object sender, RoutedEventArgs e)
+		{
+			MiniWindows.Deteil_Types_Create_Window typeDeviceWindow = new MiniWindows.Deteil_Types_Create_Window(this);
+			typeDeviceWindow.ShowDialog();
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		private void DeviceCreateClick(object sender, RoutedEventArgs e)
 	{
 		MiniWindows.DeviceCreateWindow deviceCreateWindow = new MiniWindows.DeviceCreateWindow(this);
 		deviceCreateWindow.ShowDialog();
@@ -1077,7 +1211,47 @@ namespace WpfApp4
 		}
 	}
 
-		
+		private void Show_Deteil_Types(object sender, RoutedEventArgs e)
+		{
+			LoadData_Deteil_Types();
+			SetVisibility(Deteil_Types);
+		}
+
+		private void dataGridDeteil_Types_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			if (dataGridDeteil_Types.SelectedItem is DataRowView selectedRow)
+			{
+				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+				Deteil_Types_Edit_Window naryad_Edit_Window = new Deteil_Types_Edit_Window(this, selectedRow);
+
+				// Показываем диалоговое окно
+				naryad_Edit_Window.ShowDialog();
+			}
+		}
+
+		private void Show_Location(object sender, RoutedEventArgs e)
+		{
+			LoadData_Location();
+			SetVisibility(Location);
+		}
+
+		private void Location_Createbtn_Click(object sender, RoutedEventArgs e)
+		{
+			MiniWindows.Location_Create_Window sklad_Create_Window = new Location_Create_Window(this);
+			sklad_Create_Window.ShowDialog();
+		}
+
+		private void dataGridLocation_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			if (dataGridLocation.SelectedItem is DataRowView selectedRow)
+			{
+				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+				Location_Edit_Window naryad_Edit_Window = new Location_Edit_Window(this, selectedRow);
+
+				// Показываем диалоговое окно
+				naryad_Edit_Window.ShowDialog();
+			}
+		}
 	}
 }
 

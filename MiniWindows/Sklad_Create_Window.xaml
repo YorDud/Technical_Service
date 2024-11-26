@@ -54,7 +54,7 @@ Padding="10">
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Тип детали:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                    <TextBox x:Name="Deteil_Types" Grid.Row="0" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
+                <ComboBox x:Name="Deteil_Types" IsEditable="True" Grid.Row="0" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1"/>
 
                     <Label Content="Модель:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                     <TextBox x:Name="Model" Grid.Row="1" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
@@ -88,7 +88,7 @@ Padding="10">
                     <TextBox x:Name="FileNameTextBox" Grid.Row="6" VerticalAlignment="Top" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.ColumnSpan="2"/>
 
                     <Label Content="Место хранения:" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                    <TextBox x:Name="Location" Grid.Row="7" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
+                <ComboBox x:Name="Location" IsEditable="True" Grid.Row="7" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1"/>
 
                     <Label Content="Количество:" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                     <TextBox x:Name="Kolich" Grid.Row="8" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
