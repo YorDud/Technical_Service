@@ -1397,10 +1397,10 @@ namespace WpfApp4
 
 		public class RoomInfo
 		{
+			public string ID { get; set; } // Добавлен ID для передачи
 			public string DateCrash { get; set; }
 			public string Device { get; set; }
 			public string Status { get; set; }
-			public string Location { get; set; } // Добавленное поле для локации
 		}
 
 		// Инициализация ссылок на комнаты
@@ -1410,13 +1410,9 @@ namespace WpfApp4
 			_roomRectangles["107"] = Room107;
 			_roomRectangles["108"] = Room108;
 
-			foreach (var room in _roomRectangles.Values)
-			{
-				room.MouseLeftButtonDown += Room_MouseLeftButtonDown;
-			}
+			
 		}
 
-		// Начало мониторинга (таймер, обновляющий данные каждые 5 секунд)
 		private void StartMonitoring()
 		{
 			_timer = new Timer(5000); // Таймер на 5 секунд
@@ -1425,59 +1421,70 @@ namespace WpfApp4
 			_timer.Start();
 		}
 
-		// Обновление статусов комнат из базы данных
 		private void UpdateStatusesFromDatabase()
 		{
-			var roomStatuses = new Dictionary<string, string>();
-
 			using (SqlConnection connection = new SqlConnection(_connectionString))
 			{
 				connection.Open();
-				var query = "SELECT [ID], [Status], [Location] FROM [Technical_Service].[dbo].[Crash]";
-				using (var command = new SqlCommand(query, connection))
+				string query = "SELECT ID, Location, Status, Date_Crash, Device FROM [Technical_Service].[dbo].[Crash]";
+				using (SqlCommand command = new SqlCommand(query, connection))
 				{
-					using (var reader = command.ExecuteReader())
+					using (SqlDataReader reader = command.ExecuteReader())
 					{
 						while (reader.Read())
 						{
-							string id = reader["ID"].ToString();
-							string status = reader["Status"].ToString();
 							string location = reader["Location"].ToString();
+							string status = reader["Status"].ToString();
 
-							if (!_roomInfo.ContainsKey(id))
-								_roomInfo[id] = new RoomInfo();
+							// Фильтрация только по комнатам 106, 107, 108
+							if (_roomRectangles.ContainsKey(location))
+							{
+								string id = reader["ID"].ToString();
+								string dateCrash = reader["Date_Crash"].ToString();
+								string device = reader["Device"].ToString();
 
-							_roomInfo[id].Status = status;
-							_roomInfo[id].Location = location; // Обновление локации
-							roomStatuses[id] = status;
+								_roomInfo[location] = new RoomInfo
+								{
+									ID = id,
+									DateCrash = dateCrash,
+									Device = device,
+									Status = status
+								};
+							}
 						}
 					}
 				}
 			}
 
-			UpdateRoomStatuses(roomStatuses);
+			UpdateRoomStatuses();
 		}
 
-		// Обновление статусов комнат на экране (изменение цвета прямоугольников)
-		private void UpdateRoomStatuses(Dictionary<string, string> roomStatuses)
+		private void UpdateRoomStatuses()
 		{
 			foreach (var room in _roomRectangles)
 			{
 				string roomNumber = room.Key;
+				Rectangle rectangle = room.Value;
 
-				if (roomStatuses.TryGetValue(roomNumber, out string status))
+				if (_roomInfo.ContainsKey(roomNumber))
 				{
-					SolidColorBrush fillColor = new SolidColorBrush(Colors.Green);
-					if (status == "Поломка") fillColor = new SolidColorBrush(Colors.Red);
-					else if (status == "В работе") fillColor = new SolidColorBrush(Colors.Yellow);
-					else if (status == "Ожидание") fillColor = new SolidColorBrush(Colors.Blue); // Добавленное состояние
+					string status = _roomInfo[roomNumber].Status;
+					SolidColorBrush fillColor = new SolidColorBrush(Colors.Green); // Зеленый по умолчанию
 
-					_roomRectangles[roomNumber].Fill = fillColor;
+					if (status == "Поломка")
+						fillColor = new SolidColorBrush(Colors.Red);
+					else if (status == "В работе")
+						fillColor = new SolidColorBrush(Colors.Yellow);
+
+					rectangle.Fill = fillColor;
+				}
+				else
+				{
+					rectangle.Fill = new SolidColorBrush(Colors.Gray); // Нет данных
 				}
 			}
 		}
 
-		// Обработка клика на прямоугольник
 		private void Room_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			if (sender is Rectangle roomRectangle && roomRectangle.Tag is string roomNumber)
@@ -1486,58 +1493,37 @@ namespace WpfApp4
 			}
 		}
 
-		// Загрузка данных комнаты в DataGrid
-		private void LoadRoomData(string roomId)
+		private void LoadRoomData(string roomNumber)
 		{
-			var roomData = new List<dynamic>(); // Используем dynamic для отображения всех столбцов.
-			using (var connection = new SqlConnection(_connectionString))
+			if (_roomInfo.ContainsKey(roomNumber))
 			{
-				connection.Open();
-				string query = "SELECT [ID], [Date_Crash], [FIO_Tech], [Location], [Device], [Comment], [FIO_Nalad], [Date_Complete], [Status] FROM [Technical_Service].[dbo].[Crash] WHERE ID = @ID";
-				using (var command = new SqlCommand(query, connection))
-				{
-					command.Parameters.AddWithValue("@ID", roomId);
-					using (var reader = command.ExecuteReader())
-					{
-						while (reader.Read())
-						{
-							roomData.Add(new
-							{
-								ID = reader["ID"],
-								DateCrash = reader["Date_Crash"],
-								FIO_Tech = reader["FIO_Tech"],
-								Location = reader["Location"],
-								Device = reader["Device"],
-								Comment = reader["Comment"],
-								FIO_Nalad = reader["FIO_Nalad"],
-								DateComplete = reader["Date_Complete"],
-								Status = reader["Status"]
-							});
-						}
-					}
-				}
-			}
+				RoomInfo roomData = _roomInfo[roomNumber];
 
-			dataGridCrash.ItemsSource = roomData;
+				// Отображение данных в DataGrid
+				dataGridCrash.ItemsSource = new List<RoomInfo> { roomData };
 
-			if (roomData.Count > 0)
-			{
-				var firstRow = roomData.FirstOrDefault();
-				ShowRoomWindow(firstRow.ID.ToString(), firstRow.DateCrash.ToString(), firstRow.Device.ToString(), firstRow.Status.ToString());
+				// Открытие окна информации о комнате
+				ShowRoomWindow(roomData);
 			}
 		}
 
-		// Открытие окна с данными комнаты
-		private void ShowRoomWindow(string id, string dateCrash, string device, string status)
+		private void ShowRoomWindow(RoomInfo roomData)
 		{
-			var crashWorkWindow = new Crash_Work_Window(id, dateCrash, device, status)
+			var crashWorkWindow = new Crash_Work_Window(
+				roomData.ID,
+				roomData.DateCrash,
+				roomData.Device,
+				roomData.Status)
 			{
 				Owner = this
 			};
+
 			crashWorkWindow.ShowDialog();
+
+			// После закрытия окна обновляем данные
+			UpdateStatusesFromDatabase();
 		}
 
-		// Управление этажами
 		private void Floor1_Click(object sender, RoutedEventArgs e)
 		{
 			_currentFloor = 1;
@@ -1550,10 +1536,10 @@ namespace WpfApp4
 			LoadFloorImage(_currentFloor);
 		}
 
-		// Загрузка изображения этажа
 		private void LoadFloorImage(int floor)
 		{
-			FloorImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri($"/Floor{floor}.PNG", UriKind.Relative));
+			FloorImage.Source = new System.Windows.Media.Imaging.BitmapImage(
+				new Uri($"/Floor{floor}.PNG", UriKind.Relative));
 		}
 
 

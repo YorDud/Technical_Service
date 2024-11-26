@@ -22,12 +22,12 @@ namespace WpfApp4.MiniWindows
 	public partial class Crash_Work_Window : Window
 	{
 		private string _recordId;
-		private string _roomNumber;
 		private string _connectionString = WC.ConnectionString;
 
 		public Crash_Work_Window(string recordId, string dateCrash, string device, string status)
 		{
 			InitializeComponent();
+
 			_recordId = recordId;
 			DateCrashLabel.Content = dateCrash;
 			DeviceLabel.Content = device;
@@ -41,23 +41,27 @@ namespace WpfApp4.MiniWindows
 
 		private void StartWorkButton_Click(object sender, RoutedEventArgs e)
 		{
+			UpdateStatus("В работе");
+		}
+
+		private void UpdateStatus(string newStatus)
+		{
 			try
 			{
 				using (SqlConnection connection = new SqlConnection(_connectionString))
 				{
 					connection.Open();
-
 					string query = "UPDATE [Technical_Service].[dbo].[Crash] SET Status = @Status WHERE ID = @ID";
 					using (SqlCommand command = new SqlCommand(query, connection))
 					{
-						command.Parameters.AddWithValue("@Status", "В работе");
+						command.Parameters.AddWithValue("@Status", newStatus);
 						command.Parameters.AddWithValue("@ID", _recordId);
 
 						int rowsAffected = command.ExecuteNonQuery();
 						if (rowsAffected > 0)
 						{
-							MessageBox.Show("Статус обновлен на 'В работе'", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
-							StatusLabel.Content = "В работе";
+							MessageBox.Show($"Статус обновлен на '{newStatus}'", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+							StatusLabel.Content = newStatus;
 						}
 						else
 						{
@@ -72,5 +76,4 @@ namespace WpfApp4.MiniWindows
 			}
 		}
 	}
-
 }
