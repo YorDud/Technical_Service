@@ -1099,44 +1099,82 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1200"/>
-                    <ColumnDefinition Width="*"/>
+
                 </Grid.ColumnDefinitions>
 
                 <!-- Кнопки переключения этажей -->
-                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="10">
-                    <Button x:Name="Floor1Button" Content="Этаж 1" Width="100" Click="Floor1_Click"/>
-                    <Button x:Name="Floor2Button" Content="Этаж 2" Width="100" Margin="10,0,0,0" Click="Floor2_Click"/>
-                </StackPanel>
+                <Button x:Name="Floor1Button" Content="Этаж 1" Grid.Row="1" HorizontalAlignment="Left" Width="100" Margin="5" Click="Floor1_Click"/>
+                <Button x:Name="Floor2Button" Content="Этаж 2" Grid.Row="1" HorizontalAlignment="Left" Width="100" Margin="150,5,5,5" Click="Floor2_Click"/>
 
-                <!-- Контейнер для изображения и Canvas -->
-                <Grid Grid.Row="1" Grid.Column="0">
+                <!-- Контейнер для изображения и Rectangle -->
+                <Grid Grid.Row="2" Grid.Column="0">
                     <!-- Изображение плана этажа -->
-                    <Image x:Name="FloorImage" Stretch="Uniform" Source="/Floor1.PNG"/>
+                    <Image x:Name="FloorImage" Stretch="Uniform" Width="1000" Height="800" Source="/Floor1.PNG"/>
 
-                    <!-- Canvas для отображения фигур -->
+                    <!-- Прямоугольники для комнат -->
                     <Canvas x:Name="RoomOverlayCanvas" Background="Transparent">
-                        <!-- Определение комнат -->
-                        <Rectangle x:Name="Room106" Width="100" Height="100" Fill="Green" Stroke="Black" StrokeThickness="1" Canvas.Left="500" Canvas.Top="50"/>
-                        <Rectangle x:Name="Room107" Width="150" Height="100" Fill="Green" Stroke="Black" StrokeThickness="1" Canvas.Left="200" Canvas.Top="200"/>
-                        <Rectangle x:Name="Room108" Width="120" Height="80" Fill="Green" Stroke="Black" StrokeThickness="1" Canvas.Left="300" Canvas.Top="300"/>
+                        <Rectangle x:Name="Room106" Tag="106" Width="152" Height="91" Fill="Green" Stroke="Black" 
+               StrokeThickness="1" Canvas.Left="821" Canvas.Top="229"
+               MouseLeftButtonDown="Room_MouseLeftButtonDown" RenderTransformOrigin="0.5,0.5" 
+               HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand">
+                            <Rectangle.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="59.056"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                        <TextBlock Text="106" FontSize="20" Foreground="Black" FontWeight="Bold" 
+               Canvas.Left="885" Canvas.Top="263" />
+
+                        <Rectangle x:Name="Room107" Tag="107" Width="80" Height="80" Fill="Green" Stroke="Black" 
+               StrokeThickness="1" Canvas.Left="708" Canvas.Top="286"
+               MouseLeftButtonDown="Room_MouseLeftButtonDown" RenderTransformOrigin="0.5,0.5" 
+               HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand">
+                            <Rectangle.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-32.104"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                        <TextBlock Text="107" FontSize="20" Foreground="Black" FontWeight="Bold" 
+               Canvas.Left="722" Canvas.Top="313" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+                        <Rectangle x:Name="Room108" Tag="108" Width="144" Height="80" Fill="Green" Stroke="Black" 
+               StrokeThickness="1" Canvas.Left="787" Canvas.Top="399"
+               MouseLeftButtonDown="Room_MouseLeftButtonDown" RenderTransformOrigin="0.5,0.5" 
+               HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand">
+                            <Rectangle.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-32.104"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                        <TextBlock Text="108" FontSize="20" Foreground="Black" FontWeight="Bold" 
+               Canvas.Left="843" Canvas.Top="428" />
                     </Canvas>
+
                 </Grid>
 
-                <!-- DataGrid для отображения информации -->
-                <DataGrid x:Name="dataGridCrash" Grid.Row="1" Grid.Column="1" IsReadOnly="True" AutoGenerateColumns="False" Margin="10">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="*"/>
-                        <DataGridTextColumn Header="Оборудование" Binding="{Binding Device}" Width="*"/>
-                        <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <DataGrid x:Name="dataGridCrash" IsReadOnly="True" AutoGenerateColumns="True" Margin="10" Grid.Row="3" Height="120" />
+
+
             </Grid>
         </ContentControl>
+
 
 
 

@@ -211,6 +211,9 @@
     <Compile Include="Avtorize.xaml.cs">
       <DependentUpon>Avtorize.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Crash\Crash_Work_Window.xaml.cs">
+      <DependentUpon>Crash_Work_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomMessageBox.xaml.cs">
       <DependentUpon>CustomMessageBox.xaml</DependentUpon>
     </Compile>
@@ -300,6 +303,10 @@
     <Page Include="Avtorize.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Crash\Crash_Work_Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="CustomMessageBox.xaml">
       <SubType>Designer</SubType>

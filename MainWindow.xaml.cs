@@ -31,8 +31,6 @@ using Style = System.Windows.Style;
 using System.IO;
 using System.Timers;
 using Timer = System.Timers.Timer;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using Path = System.Windows.Shapes.Path;
 
 
@@ -1392,120 +1390,66 @@ namespace WpfApp4
 
 
 		private Timer _timer;
-		private readonly Dictionary<string, Rectangle> _roomShapes = new();
-		private readonly Dictionary<string, RoomInfo> _roomInfo = new();
-		private Popup _popup;
-		private int _currentFloor = 1;
+		private string _connectionString = WC.ConnectionString;
+		private int _currentFloor = 1; // Текущий этаж
+		private Dictionary<string, RoomInfo> _roomInfo = new Dictionary<string, RoomInfo>();
+		private Dictionary<string, Rectangle> _roomRectangles = new Dictionary<string, Rectangle>();
 
+		public class RoomInfo
+		{
+			public string DateCrash { get; set; }
+			public string Device { get; set; }
+			public string Status { get; set; }
+			public string Location { get; set; } // Добавленное поле для локации
+		}
 
 		// Инициализация ссылок на комнаты
 		private void InitializeRooms()
 		{
-			// Сопоставляем комнаты с объектами Rectangle
-			_roomShapes["106"] = Room106;
-			_roomShapes["107"] = Room107;
-			_roomShapes["108"] = Room108;
+			_roomRectangles["106"] = Room106;
+			_roomRectangles["107"] = Room107;
+			_roomRectangles["108"] = Room108;
 
-			// Назначаем события
-			foreach (var room in _roomShapes)
+			foreach (var room in _roomRectangles.Values)
 			{
-				room.Value.MouseEnter += (sender, e) => ShowRoomInfo(sender, room.Key);
-				room.Value.MouseLeave += (sender, e) => HideRoomInfo();
+				room.MouseLeftButtonDown += Room_MouseLeftButtonDown;
 			}
 		}
 
-		private void ShowRoomInfo(object sender, string roomNumber)
-		{
-			if (_roomInfo.ContainsKey(roomNumber))
-			{
-				var room = _roomInfo[roomNumber];
-
-				if (_popup == null)
-				{
-					_popup = new Popup
-					{
-						PlacementTarget = sender as UIElement,
-						Placement = PlacementMode.MousePoint,
-						StaysOpen = false,
-						Width = 250,
-						Height = 150
-					};
-
-					var stackPanel = new StackPanel();
-
-					stackPanel.Children.Add(new TextBlock { Text = $"Дата: {room.DateCrash}" });
-					stackPanel.Children.Add(new TextBlock { Text = $"Оборудование: {room.Device}" });
-					stackPanel.Children.Add(new TextBlock { Text = $"Статус: {room.Status}" });
-
-					var changeStatusButton = new Button { Content = "Изменить статус на 'В работе'" };
-					changeStatusButton.Click += (s, e) =>
-					{
-						UpdateRoomStatusInDatabase(roomNumber, "В работе");
-						_popup.IsOpen = false;
-					};
-
-					stackPanel.Children.Add(changeStatusButton);
-					_popup.Child = stackPanel;
-				}
-
-				_popup.IsOpen = true;
-				UpdateDataGrid(roomNumber);
-			}
-		}
-
-		private void HideRoomInfo()
-		{
-			if (_popup != null)
-			{
-				_popup.IsOpen = false;
-			}
-		}
-
-		private void UpdateDataGrid(string roomNumber)
-		{
-			if (_roomInfo.ContainsKey(roomNumber))
-			{
-				var room = _roomInfo[roomNumber];
-				dataGridCrash.Items.Clear();
-				dataGridCrash.Items.Add(new { Date = room.DateCrash, Device = room.Device, Status = room.Status });
-			}
-		}
-
+		// Начало мониторинга (таймер, обновляющий данные каждые 5 секунд)
 		private void StartMonitoring()
 		{
-			_timer = new Timer(5000);
+			_timer = new Timer(5000); // Таймер на 5 секунд
 			_timer.Elapsed += (s, e) => Dispatcher.Invoke(UpdateStatusesFromDatabase);
 			_timer.AutoReset = true;
 			_timer.Start();
 		}
 
+		// Обновление статусов комнат из базы данных
 		private void UpdateStatusesFromDatabase()
 		{
 			var roomStatuses = new Dictionary<string, string>();
 
-			using (SqlConnection connection = new SqlConnection("YourConnectionString"))
+			using (SqlConnection connection = new SqlConnection(_connectionString))
 			{
 				connection.Open();
-				var query = "SELECT Location, Status, Date_Crash, Device FROM [Technical_Service].[dbo].[Crash]";
+				var query = "SELECT [ID], [Status], [Location] FROM [Technical_Service].[dbo].[Crash]";
 				using (var command = new SqlCommand(query, connection))
 				{
 					using (var reader = command.ExecuteReader())
 					{
 						while (reader.Read())
 						{
-							string location = reader["Location"].ToString();
+							string id = reader["ID"].ToString();
 							string status = reader["Status"].ToString();
-							string dateCrash = reader["Date_Crash"].ToString();
-							string device = reader["Device"].ToString();
+							string location = reader["Location"].ToString();
 
-							_roomInfo[location] = new RoomInfo
-							{
-								DateCrash = dateCrash,
-								Device = device,
-								Status = status
-							};
+							if (!_roomInfo.ContainsKey(id))
+								_roomInfo[id] = new RoomInfo();
 
-							roomStatuses[location] = status;
+							_roomInfo[id].Status = status;
+							_roomInfo[id].Location = location; // Обновление локации
+							roomStatuses[id] = status;
 						}
 					}
 				}
@@ -1514,71 +1458,111 @@ namespace WpfApp4
 			UpdateRoomStatuses(roomStatuses);
 		}
 
+		// Обновление статусов комнат на экране (изменение цвета прямоугольников)
 		private void UpdateRoomStatuses(Dictionary<string, string> roomStatuses)
 		{
-			foreach (var room in _roomShapes)
+			foreach (var room in _roomRectangles)
 			{
 				string roomNumber = room.Key;
-				string status = roomStatuses.ContainsKey(roomNumber) ? roomStatuses[roomNumber] : "Normal";
 
-				SolidColorBrush fillColor = status switch
+				if (roomStatuses.TryGetValue(roomNumber, out string status))
 				{
-					"Поломка" => new SolidColorBrush(Color.FromArgb(128, 255, 0, 0)), // Красный
-					"В работе" => new SolidColorBrush(Color.FromArgb(128, 255, 255, 0)), // Желтый
-					_ => new SolidColorBrush(Color.FromArgb(128, 0, 255, 0)) // Зеленый
-				};
+					SolidColorBrush fillColor = new SolidColorBrush(Colors.Green);
+					if (status == "Поломка") fillColor = new SolidColorBrush(Colors.Red);
+					else if (status == "В работе") fillColor = new SolidColorBrush(Colors.Yellow);
+					else if (status == "Ожидание") fillColor = new SolidColorBrush(Colors.Blue); // Добавленное состояние
 
-				room.Value.Fill = fillColor;
-			}
-		}
-
-		private void UpdateRoomStatusInDatabase(string roomNumber, string newStatus)
-		{
-			using (SqlConnection connection = new SqlConnection("YourConnectionString"))
-			{
-				connection.Open();
-				var query = "UPDATE [Technical_Service].[dbo].[Crash] SET Status = @Status WHERE Location = @Location";
-				using (var command = new SqlCommand(query, connection))
-				{
-					command.Parameters.AddWithValue("@Status", newStatus);
-					command.Parameters.AddWithValue("@Location", roomNumber);
-					command.ExecuteNonQuery();
+					_roomRectangles[roomNumber].Fill = fillColor;
 				}
 			}
 		}
 
+		// Обработка клика на прямоугольник
+		private void Room_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			if (sender is Rectangle roomRectangle && roomRectangle.Tag is string roomNumber)
+			{
+				LoadRoomData(roomNumber);
+			}
+		}
+
+		// Загрузка данных комнаты в DataGrid
+		private void LoadRoomData(string roomId)
+		{
+			var roomData = new List<dynamic>(); // Используем dynamic для отображения всех столбцов.
+			using (var connection = new SqlConnection(_connectionString))
+			{
+				connection.Open();
+				string query = "SELECT [ID], [Date_Crash], [FIO_Tech], [Location], [Device], [Comment], [FIO_Nalad], [Date_Complete], [Status] FROM [Technical_Service].[dbo].[Crash] WHERE ID = @ID";
+				using (var command = new SqlCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@ID", roomId);
+					using (var reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							roomData.Add(new
+							{
+								ID = reader["ID"],
+								DateCrash = reader["Date_Crash"],
+								FIO_Tech = reader["FIO_Tech"],
+								Location = reader["Location"],
+								Device = reader["Device"],
+								Comment = reader["Comment"],
+								FIO_Nalad = reader["FIO_Nalad"],
+								DateComplete = reader["Date_Complete"],
+								Status = reader["Status"]
+							});
+						}
+					}
+				}
+			}
+
+			dataGridCrash.ItemsSource = roomData;
+
+			if (roomData.Count > 0)
+			{
+				var firstRow = roomData.FirstOrDefault();
+				ShowRoomWindow(firstRow.ID.ToString(), firstRow.DateCrash.ToString(), firstRow.Device.ToString(), firstRow.Status.ToString());
+			}
+		}
+
+		// Открытие окна с данными комнаты
+		private void ShowRoomWindow(string id, string dateCrash, string device, string status)
+		{
+			var crashWorkWindow = new Crash_Work_Window(id, dateCrash, device, status)
+			{
+				Owner = this
+			};
+			crashWorkWindow.ShowDialog();
+		}
+
+		// Управление этажами
 		private void Floor1_Click(object sender, RoutedEventArgs e)
 		{
 			_currentFloor = 1;
-			LoadFloorImage();
+			LoadFloorImage(_currentFloor);
 		}
 
 		private void Floor2_Click(object sender, RoutedEventArgs e)
 		{
 			_currentFloor = 2;
-			LoadFloorImage();
+			LoadFloorImage(_currentFloor);
 		}
 
-		private void LoadFloorImage()
+		// Загрузка изображения этажа
+		private void LoadFloorImage(int floor)
 		{
-			FloorImage.Source = new BitmapImage(new Uri($"/Floor{_currentFloor}.PNG", UriKind.Relative));
+			FloorImage.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri($"/Floor{floor}.PNG", UriKind.Relative));
 		}
+
+
+
+
+
+
+
 	}
-
-	public class RoomInfo
-	{
-		public string DateCrash { get; set; }
-		public string Device { get; set; }
-		public string Status { get; set; }
-	}
-
-
-
-
-
-
-
-}
 }
 
 //		public MainWindow()
