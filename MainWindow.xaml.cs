@@ -29,6 +29,12 @@ using System.Web.UI.WebControls;
 using WpfApp4.MiniWindows;
 using Style = System.Windows.Style;
 using System.IO;
+using System.Timers;
+using Timer = System.Timers.Timer;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using Path = System.Windows.Shapes.Path;
+
 
 
 
@@ -40,7 +46,7 @@ namespace WpfApp4
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-
+		
 
 		public MainWindow()
 		{
@@ -71,6 +77,10 @@ namespace WpfApp4
 
 
 
+
+
+			InitializeRooms();
+			StartMonitoring();
 
 		}
 
@@ -1325,7 +1335,250 @@ namespace WpfApp4
 				naryad_Edit_Window.ShowDialog();
 			}
 		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		private Timer _timer;
+		private readonly Dictionary<string, Rectangle> _roomShapes = new();
+		private readonly Dictionary<string, RoomInfo> _roomInfo = new();
+		private Popup _popup;
+		private int _currentFloor = 1;
+
+
+		// Инициализация ссылок на комнаты
+		private void InitializeRooms()
+		{
+			// Сопоставляем комнаты с объектами Rectangle
+			_roomShapes["106"] = Room106;
+			_roomShapes["107"] = Room107;
+			_roomShapes["108"] = Room108;
+
+			// Назначаем события
+			foreach (var room in _roomShapes)
+			{
+				room.Value.MouseEnter += (sender, e) => ShowRoomInfo(sender, room.Key);
+				room.Value.MouseLeave += (sender, e) => HideRoomInfo();
+			}
+		}
+
+		private void ShowRoomInfo(object sender, string roomNumber)
+		{
+			if (_roomInfo.ContainsKey(roomNumber))
+			{
+				var room = _roomInfo[roomNumber];
+
+				if (_popup == null)
+				{
+					_popup = new Popup
+					{
+						PlacementTarget = sender as UIElement,
+						Placement = PlacementMode.MousePoint,
+						StaysOpen = false,
+						Width = 250,
+						Height = 150
+					};
+
+					var stackPanel = new StackPanel();
+
+					stackPanel.Children.Add(new TextBlock { Text = $"Дата: {room.DateCrash}" });
+					stackPanel.Children.Add(new TextBlock { Text = $"Оборудование: {room.Device}" });
+					stackPanel.Children.Add(new TextBlock { Text = $"Статус: {room.Status}" });
+
+					var changeStatusButton = new Button { Content = "Изменить статус на 'В работе'" };
+					changeStatusButton.Click += (s, e) =>
+					{
+						UpdateRoomStatusInDatabase(roomNumber, "В работе");
+						_popup.IsOpen = false;
+					};
+
+					stackPanel.Children.Add(changeStatusButton);
+					_popup.Child = stackPanel;
+				}
+
+				_popup.IsOpen = true;
+				UpdateDataGrid(roomNumber);
+			}
+		}
+
+		private void HideRoomInfo()
+		{
+			if (_popup != null)
+			{
+				_popup.IsOpen = false;
+			}
+		}
+
+		private void UpdateDataGrid(string roomNumber)
+		{
+			if (_roomInfo.ContainsKey(roomNumber))
+			{
+				var room = _roomInfo[roomNumber];
+				dataGridCrash.Items.Clear();
+				dataGridCrash.Items.Add(new { Date = room.DateCrash, Device = room.Device, Status = room.Status });
+			}
+		}
+
+		private void StartMonitoring()
+		{
+			_timer = new Timer(5000);
+			_timer.Elapsed += (s, e) => Dispatcher.Invoke(UpdateStatusesFromDatabase);
+			_timer.AutoReset = true;
+			_timer.Start();
+		}
+
+		private void UpdateStatusesFromDatabase()
+		{
+			var roomStatuses = new Dictionary<string, string>();
+
+			using (SqlConnection connection = new SqlConnection("YourConnectionString"))
+			{
+				connection.Open();
+				var query = "SELECT Location, Status, Date_Crash, Device FROM [Technical_Service].[dbo].[Crash]";
+				using (var command = new SqlCommand(query, connection))
+				{
+					using (var reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							string location = reader["Location"].ToString();
+							string status = reader["Status"].ToString();
+							string dateCrash = reader["Date_Crash"].ToString();
+							string device = reader["Device"].ToString();
+
+							_roomInfo[location] = new RoomInfo
+							{
+								DateCrash = dateCrash,
+								Device = device,
+								Status = status
+							};
+
+							roomStatuses[location] = status;
+						}
+					}
+				}
+			}
+
+			UpdateRoomStatuses(roomStatuses);
+		}
+
+		private void UpdateRoomStatuses(Dictionary<string, string> roomStatuses)
+		{
+			foreach (var room in _roomShapes)
+			{
+				string roomNumber = room.Key;
+				string status = roomStatuses.ContainsKey(roomNumber) ? roomStatuses[roomNumber] : "Normal";
+
+				SolidColorBrush fillColor = status switch
+				{
+					"Поломка" => new SolidColorBrush(Color.FromArgb(128, 255, 0, 0)), // Красный
+					"В работе" => new SolidColorBrush(Color.FromArgb(128, 255, 255, 0)), // Желтый
+					_ => new SolidColorBrush(Color.FromArgb(128, 0, 255, 0)) // Зеленый
+				};
+
+				room.Value.Fill = fillColor;
+			}
+		}
+
+		private void UpdateRoomStatusInDatabase(string roomNumber, string newStatus)
+		{
+			using (SqlConnection connection = new SqlConnection("YourConnectionString"))
+			{
+				connection.Open();
+				var query = "UPDATE [Technical_Service].[dbo].[Crash] SET Status = @Status WHERE Location = @Location";
+				using (var command = new SqlCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@Status", newStatus);
+					command.Parameters.AddWithValue("@Location", roomNumber);
+					command.ExecuteNonQuery();
+				}
+			}
+		}
+
+		private void Floor1_Click(object sender, RoutedEventArgs e)
+		{
+			_currentFloor = 1;
+			LoadFloorImage();
+		}
+
+		private void Floor2_Click(object sender, RoutedEventArgs e)
+		{
+			_currentFloor = 2;
+			LoadFloorImage();
+		}
+
+		private void LoadFloorImage()
+		{
+			FloorImage.Source = new BitmapImage(new Uri($"/Floor{_currentFloor}.PNG", UriKind.Relative));
+		}
 	}
+
+	public class RoomInfo
+	{
+		public string DateCrash { get; set; }
+		public string Device { get; set; }
+		public string Status { get; set; }
+	}
+
+
+
+
+
+
+
+}
 }
 
 //		public MainWindow()

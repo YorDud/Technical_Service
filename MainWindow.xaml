@@ -26,7 +26,7 @@
 
             <Expander Header="📂 Главное" FontSize="16" Margin="10" Padding="10">
                 <StackPanel>
-                    
+
                     <Button Content="Оборудование" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="ShowDevices"/>
                     <Button Content="Наряды" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="NarTObtn"/>
                     <Button Content="Виды ТО" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="TechObslbtn"/>
@@ -99,7 +99,7 @@
                         <DataGridTextColumn Header="Запчасти" Width="auto" Binding="{Binding Sklad_Deteil_ID}" />
                         <DataGridTextColumn Header="Количество запчастей" Width="auto" Binding="{Binding Sklad_Kolich}" />
                         <DataGridTextColumn Header="Документация" Width="auto" Binding="{Binding Documentation_Name_ID}" />
-                        
+
                         <DataGridTextColumn Header="Комментарий" Width="auto" Binding="{Binding Comment}" />
                     </DataGrid.Columns>
                 </DataGrid>
@@ -107,13 +107,13 @@
             </Grid>
         </ContentControl>
 
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
         <ContentControl x:Name="Devices" Grid.Column="1" Visibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
@@ -941,11 +941,11 @@
 
             </Grid>
         </ContentControl>
-        
-        
-        
-        
-<!--                                                                                                        ПРОЧЕЕ                                                  -->
+
+
+
+
+        <!--                                                                                                        ПРОЧЕЕ                                                  -->
         <ContentControl x:Name="Deteil_Types" Grid.Column="1" Visibility= "Hidden">
             <Grid>
                 <Grid.RowDefinitions>
@@ -1092,6 +1092,55 @@
                 </DataGrid>
             </Grid>
         </ContentControl>
+
+
+
+        <ContentControl x:Name="Crash" Grid.Column="1" Visibility="Visible">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Кнопки переключения этажей -->
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="10">
+                    <Button x:Name="Floor1Button" Content="Этаж 1" Width="100" Click="Floor1_Click"/>
+                    <Button x:Name="Floor2Button" Content="Этаж 2" Width="100" Margin="10,0,0,0" Click="Floor2_Click"/>
+                </StackPanel>
+
+                <!-- Контейнер для изображения и Canvas -->
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <!-- Изображение плана этажа -->
+                    <Image x:Name="FloorImage" Stretch="Uniform" Source="/Floor1.PNG"/>
+
+                    <!-- Canvas для отображения фигур -->
+                    <Canvas x:Name="RoomOverlayCanvas" Background="Transparent">
+                        <!-- Определение комнат -->
+                        <Rectangle x:Name="Room106" Width="100" Height="100" Fill="Green" Stroke="Black" StrokeThickness="1" Canvas.Left="500" Canvas.Top="50"/>
+                        <Rectangle x:Name="Room107" Width="150" Height="100" Fill="Green" Stroke="Black" StrokeThickness="1" Canvas.Left="200" Canvas.Top="200"/>
+                        <Rectangle x:Name="Room108" Width="120" Height="80" Fill="Green" Stroke="Black" StrokeThickness="1" Canvas.Left="300" Canvas.Top="300"/>
+                    </Canvas>
+                </Grid>
+
+                <!-- DataGrid для отображения информации -->
+                <DataGrid x:Name="dataGridCrash" Grid.Row="1" Grid.Column="1" IsReadOnly="True" AutoGenerateColumns="False" Margin="10">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="*"/>
+                        <DataGridTextColumn Header="Оборудование" Binding="{Binding Device}" Width="*"/>
+                        <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </ContentControl>
+
+
+
+
 
 
 
