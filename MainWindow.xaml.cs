@@ -104,7 +104,8 @@ namespace WpfApp4
 		Kalendar_To,
 		Raboti_Devices,
 		Deteil_Types,
-		Location
+		Location,
+		Work_List
 	};
 
 			// Устанавливаем видимость для каждого элемента
@@ -202,6 +203,23 @@ namespace WpfApp4
 				connection.Close();
 
 				dataGridLocation.ItemsSource = dataTable.DefaultView;
+			}
+		}
+		
+		public void LoadData_Work_List()
+		{
+			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+			{
+				string query = "SELECT [ID]\r\n      ,[Work_List]\r\n  FROM [Work_List]";
+				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+
+				DataTable dataTable = new DataTable();
+
+				connection.Open();
+				adapter.Fill(dataTable);
+				connection.Close();
+
+				dataGridWork_List.ItemsSource = dataTable.DefaultView;
 			}
 		}
 
@@ -506,6 +524,37 @@ namespace WpfApp4
 		private void ClearBtnLocation_Click(object sender, RoutedEventArgs e)
 		{
 			SearchBoxLocation.Clear();
+		}
+
+		private void SearchBoxWork_List_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			var dataView = dataGridWork_List.ItemsSource as DataView;
+
+			if (dataView != null)
+			{
+				string filterText = SearchBoxWork_List.Text;
+
+				if (string.IsNullOrEmpty(filterText))
+				{
+					dataView.RowFilter = string.Empty; // Показываем все строки
+				}
+				else
+				{
+					// Создаем фильтр, приводя числовые данные к строковому типу
+					string filter = string.Join(" OR ", dataView.Table.Columns.Cast<DataColumn>()
+						.Select(col => col.DataType == typeof(string)
+							? $"[{col.ColumnName}] LIKE '%{filterText}%'"
+							: $"CONVERT([{col.ColumnName}], 'System.String') LIKE '%{filterText}%'"));
+
+					dataView.RowFilter = filter;
+				}
+			}
+
+		}
+
+		private void ClearBtnWork_List_Click(object sender, RoutedEventArgs e)
+		{
+			SearchBoxWork_List.Clear();
 		}
 
 
@@ -1247,6 +1296,30 @@ namespace WpfApp4
 			{
 				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
 				Location_Edit_Window naryad_Edit_Window = new Location_Edit_Window(this, selectedRow);
+
+				// Показываем диалоговое окно
+				naryad_Edit_Window.ShowDialog();
+			}
+		}
+
+		private void Show_Work_List(object sender, RoutedEventArgs e)
+		{
+			LoadData_Work_List();
+			SetVisibility(Work_List);
+		}
+
+		private void Work_List_Createbtn_Click(object sender, RoutedEventArgs e)
+		{
+			MiniWindows.Work_List_Create_Window sklad_Create_Window = new Work_List_Create_Window(this);
+			sklad_Create_Window.ShowDialog();
+		}
+
+		private void dataGridWork_List_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			if (dataGridWork_List.SelectedItem is DataRowView selectedRow)
+			{
+				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+				Work_List_Edit_Window naryad_Edit_Window = new Work_List_Edit_Window(this, selectedRow);
 
 				// Показываем диалоговое окно
 				naryad_Edit_Window.ShowDialog();

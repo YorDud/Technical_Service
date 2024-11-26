@@ -32,16 +32,49 @@ namespace WpfApp4.MiniWindows
 			_dataRow = dataRow;
 
 			LoadDevice_Type();
-			
+			LoadWork_List();
+
 			// Заполнение полей данными из выбранной записи
 			DeviceType.Text = _dataRow["Device_Type"].ToString();
 			NameTO.Text = _dataRow["Name_TO"].ToString();
 			//WorkList.Text = _dataRow["Work_List"].ToString();
 			LoadWorkList();
 
+
 			Raspisanie.Text = _dataRow["Raspisanie"].ToString();
 		}
-		
+
+		private void LoadWork_List()
+		{
+			string query = "SELECT Work_List FROM [Technical_Service].[dbo].[Work_List]";
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				{
+					connection.Open();
+					using (SqlCommand command = new SqlCommand(query, connection))
+					{
+						using (SqlDataReader reader = command.ExecuteReader())
+						{
+							List<string> typesTO = new List<string>();
+							while (reader.Read())
+							{
+								typesTO.Add(reader["Work_List"].ToString());
+							}
+							WorkList.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
+						}
+					}
+				}
+
+				// Подписка на событие выбора элемента
+				//Device_Type.SelectionChanged += Device_Type_SelectionChanged;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+			}
+		}
+
 
 		private void LoadDevice_Type()
 		{
@@ -136,7 +169,7 @@ namespace WpfApp4.MiniWindows
 			}
 
 			// Очищаем текстовое поле после добавления работы
-			WorkList.Clear();
+			WorkList.Text = string.Empty;
 		}
 
 		// Метод для удаления выбранной работы из ListBox

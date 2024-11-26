@@ -67,8 +67,8 @@ AllowsTransparency="True" WindowStartupLocation="CenterScreen">
                     <ListBox x:Name="WorkListBox" Grid.Row="2" Grid.Column="1" Margin="5" Height="150" Padding="3">
                         <!-- Список работ будет загружаться из базы данных -->
                     </ListBox>
-                    <TextBox x:Name="WorkList" Grid.Row="3" Grid.ColumnSpan="2" Margin="5" Height="30" Padding="3" 
-         Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Введите наименование работы"/>
+                <ComboBox x:Name="WorkList" IsEditable="True" Grid.Row="3" Grid.ColumnSpan="2" Margin="5" Height="30" Padding="3" 
+         Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Введите наименование работы"/>
                     <Button Content="Удалить работу" Grid.Row="4" Grid.Column="0" Margin="5" Click="RemoveWork_Click"/>
                     <Button Content="Добавить работу" Grid.Row="4" Grid.Column="1" Margin="5" Click="AddWork_Click"/>
 

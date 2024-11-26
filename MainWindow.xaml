@@ -50,6 +50,7 @@
                     <Button Content="Типы оборудования" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="ShowTipesTO"/>
                     <Button Content="Типы деталей" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Show_Deteil_Types"/>
                     <Button Content="Помещения" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Show_Location"/>
+                    <Button Content="Перечень работ" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Show_Work_List"/>
 
 
                 </StackPanel>
@@ -1020,7 +1021,7 @@
         </ContentControl>
 
 
-        <ContentControl x:Name="Location" Grid.Column="1" Visibility= "Visible">
+        <ContentControl x:Name="Location" Grid.Column="1" Visibility= "Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -1050,6 +1051,43 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
                         <DataGridTextColumn Header="Помещение" Width="auto" Binding="{Binding Location}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </ContentControl>
+
+
+
+        <ContentControl x:Name="Work_List" Grid.Column="1" Visibility= "Hidden">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+
+
+                <TextBlock Grid.Row="0" Text="Перечень работ" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBox Grid.Row="1" x:Name="SearchBoxWork_List" Width="150" Height="30" HorizontalAlignment="Right" VerticalContentAlignment="Center" Margin="0,0,65,0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="SearchBoxWork_List_TextChanged"></TextBox>
+
+
+                <!-- Serch Button -->
+                <Button x:Name="ClearBtnWork_List" Grid.Row="1" HorizontalAlignment="Right" Width="auto" Height="30" FontSize="12" Margin="0,0,10,0" Content="✖" Click="ClearBtnWork_List_Click"></Button>
+
+
+
+
+
+
+                <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="Work_List_Createbtn_Click"/>
+
+
+                <DataGrid x:Name="dataGridWork_List" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridWork_List_MouseDoubleClick">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Помещение" Width="auto" Binding="{Binding Work_List}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

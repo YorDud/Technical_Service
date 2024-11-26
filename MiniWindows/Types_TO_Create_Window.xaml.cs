@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Avalonia.Controls;
+using Window = System.Windows.Window;
 
 namespace WpfApp4.MiniWindows
 {
@@ -29,6 +31,38 @@ namespace WpfApp4.MiniWindows
 			this.mainWindow = mainWindow;
 
 			LoadDevice_Type();
+			LoadWork_List();
+		}
+
+		private void LoadWork_List()
+		{
+			string query = "SELECT Work_List FROM [Technical_Service].[dbo].[Work_List]";
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				{
+					connection.Open();
+					using (SqlCommand command = new SqlCommand(query, connection))
+					{
+						using (SqlDataReader reader = command.ExecuteReader())
+						{
+							List<string> typesTO = new List<string>();
+							while (reader.Read())
+							{
+								typesTO.Add(reader["Work_List"].ToString());
+							}
+							WorkList.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
+						}
+					}
+				}
+
+				// Подписка на событие выбора элемента
+				//Device_Type.SelectionChanged += Device_Type_SelectionChanged;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+			}
 		}
 
 		private void AddWork_Click(object sender, RoutedEventArgs e)
@@ -43,9 +77,9 @@ namespace WpfApp4.MiniWindows
 			// Увеличиваем номер для следующей работы
 			workNumber++;
 
-			WorkList.Clear();
+			WorkList.Text = string.Empty;
 
-			
+
 
 		}
 
