@@ -23,6 +23,9 @@
         <StackPanel Background="#f0f0f0" Grid.Column="0">
             <Button Content="🏠 Мониторинг ТО" FontSize="16" Margin="10" Padding="10" Height="45" 
                     HorizontalAlignment="Stretch" Click="ShowMonitoringTO" />
+            
+            <Button Content="Мониторинг поломок" FontSize="15" Margin="10" Padding="10" Height="45" 
+        HorizontalAlignment="Stretch" Click="ShowMonitoringCrash" />
 
             <Expander Header="📂 Главное" FontSize="16" Margin="10" Padding="10">
                 <StackPanel>
@@ -55,6 +58,8 @@
 
                 </StackPanel>
             </Expander>
+            
+            <Button Content="Визуал поломок и ТО" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Show_Crash"/>
 
 
 
@@ -106,6 +111,40 @@
                 <!--<Button x:Name="MT" Content="Мониторинг ТО" Margin="40" Grid.Row="3" HorizontalAlignment="Right" Click="MT_Click"/>-->
             </Grid>
         </ContentControl>
+
+        <ContentControl x:Name="MonitorCrash" Grid.Column="1" Visibility="Visible">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Мониторинг поломок оборудования" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                
+                
+                <DataGrid x:Name="dataGridMonitorCrash" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" LoadingRow="dataGridMonitorCrash_LoadingRow">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Дата/Время поломки" Width="auto" Binding="{Binding Date_Crash}" />
+                        <DataGridTextColumn Header="ФИО технолога" Width="auto" Binding="{Binding FIO_Tech}" />
+                        <DataGridTextColumn Header="Помещение" Width="auto" Binding="{Binding Location}" />
+                        <DataGridTextColumn Header="Устройство" Width="auto" Binding="{Binding Device}" />
+                        <DataGridTextColumn Header="Описание" Width="auto" Binding="{Binding Comment}" />
+                        <DataGridTextColumn Header="ФИО наладчика" Width="auto" Binding="{Binding FIO_Nalad}" />
+                        <DataGridTextColumn Header="Дата/Время починки" Width="auto" Binding="{Binding Date_Complete}" />
+                        <DataGridTextColumn Header="Статус" Width="auto" Binding="{Binding Status}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--<Button x:Name="MT" Content="Мониторинг ТО" Margin="40" Grid.Row="3" HorizontalAlignment="Right" Click="MT_Click"/>-->
+            </Grid>
+        </ContentControl>
+
+
+
+
+
+
 
 
 
@@ -1095,7 +1134,7 @@
 
 
 
-        <ContentControl x:Name="Crash" Grid.Column="1" Visibility="Visible">
+        <ContentControl x:Name="Crash" Grid.Column="1" Visibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -1108,68 +1147,38 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Кнопки переключения этажей -->
-                <Button x:Name="Floor1Button" Content="Этаж 1" Grid.Row="1" HorizontalAlignment="Left" Width="100" Margin="5" Click="Floor1_Click"/>
-                <Button x:Name="Floor2Button" Content="Этаж 2" Grid.Row="1" HorizontalAlignment="Left" Width="100" Margin="150,5,5,5" Click="Floor2_Click"/>
+                <Button x:Name="Floor1Button" Content="Этаж 1" Grid.Row="1" HorizontalAlignment="Left" Width="100" Margin="5"/>
+                <Button x:Name="Floor2Button" Content="Этаж 2" Grid.Row="1" HorizontalAlignment="Left" Width="100" Margin="150,5,5,5" />
 
                 <!-- Контейнер для изображения и Rectangle -->
                 <Grid Grid.Row="2" Grid.Column="0">
                     <!-- Изображение плана этажа -->
                     <Image x:Name="FloorImage" Stretch="Uniform" Width="1000" Height="800" Source="/Floor1.PNG"/>
 
-                    <!-- Прямоугольники для комнат -->
-                    <Canvas x:Name="RoomOverlayCanvas" Background="Transparent">
-                        <Rectangle x:Name="Room106" Tag="106" Width="152" Height="91" Fill="Green" Stroke="Black" 
-               StrokeThickness="1" Canvas.Left="821" Canvas.Top="229"
-               MouseLeftButtonDown="Room_MouseLeftButtonDown" RenderTransformOrigin="0.5,0.5" 
-               HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand">
-                            <Rectangle.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="59.056"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                        <TextBlock Text="106" FontSize="20" Foreground="Black" FontWeight="Bold" 
-               Canvas.Left="885" Canvas.Top="263" />
+                    <Canvas>
+                        <!-- Точки с оборудованием -->
+                        <StackPanel Canvas.Left="934" Canvas.Top="105" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Ellipse x:Name="Penta300" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" />
+                            <TextBlock x:Name="Penta300Label" Text="Penta300" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Canvas.Left="929" Canvas.Top="96" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </StackPanel>
 
-                        <Rectangle x:Name="Room107" Tag="107" Width="80" Height="80" Fill="Green" Stroke="Black" 
-               StrokeThickness="1" Canvas.Left="708" Canvas.Top="286"
-               MouseLeftButtonDown="Room_MouseLeftButtonDown" RenderTransformOrigin="0.5,0.5" 
-               HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand">
-                            <Rectangle.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="-32.104"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                        <TextBlock Text="107" FontSize="20" Foreground="Black" FontWeight="Bold" 
-               Canvas.Left="722" Canvas.Top="313" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <StackPanel Canvas.Left="527" Canvas.Top="309" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Ellipse x:Name="Electrotest618" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" />
+                            <TextBlock x:Name="Electrotest618Label" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Электротест 618" Canvas.Left="688" Canvas.Top="262" />
+                        </StackPanel>
 
-                        <Rectangle x:Name="Room108" Tag="108" Width="144" Height="80" Fill="Green" Stroke="Black" 
-               StrokeThickness="1" Canvas.Left="787" Canvas.Top="399"
-               MouseLeftButtonDown="Room_MouseLeftButtonDown" RenderTransformOrigin="0.5,0.5" 
-               HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand">
-                            <Rectangle.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="-32.104"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                        <TextBlock Text="108" FontSize="20" Foreground="Black" FontWeight="Bold" 
-               Canvas.Left="843" Canvas.Top="428" />
+                        <StackPanel Canvas.Left="898" Canvas.Top="557" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Ellipse x:Name="MaskUnit" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" />
+                            <TextBlock x:Name="MaskUnitLabel" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Установка проявления маски" Canvas.Left="1042" Canvas.Top="585" />
+                        </StackPanel>
+
+
+                        <Ellipse x:Name="Penta580" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="738" Canvas.Top="519" />
+                        <TextBlock x:Name="Penta580Label" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Penta580" Canvas.Left="710" Canvas.Top="539" />
+
                     </Canvas>
-
                 </Grid>
 
-                <DataGrid x:Name="dataGridCrash" IsReadOnly="True" AutoGenerateColumns="True" Margin="10" Grid.Row="3" Height="120" />
 
 
             </Grid>

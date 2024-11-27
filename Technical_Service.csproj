@@ -124,6 +124,9 @@
     <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
       <HintPath>packages\ControlzEx.4.4.0\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Dapper.2.1.35\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="DialogHost.Avalonia, Version=0.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\DialogHost.Avalonia.0.8.1\lib\netstandard2.0\DialogHost.Avalonia.dll</HintPath>
     </Reference>
