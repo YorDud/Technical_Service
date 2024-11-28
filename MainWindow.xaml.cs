@@ -787,7 +787,7 @@ namespace WpfApp4
 				string status = row["Status"]?.ToString();
 
 				// Если статус пустой или "В работе", устанавливаем светло-красный цвет
-				if (string.IsNullOrEmpty(status) || status == "В работе")
+				if (string.IsNullOrEmpty(status))
 				{
 					e.Row.Background = new SolidColorBrush(Colors.LightCoral);
 				}

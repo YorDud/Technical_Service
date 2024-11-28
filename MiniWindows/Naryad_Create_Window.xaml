@@ -59,7 +59,7 @@ AllowsTransparency="True" WindowStartupLocation="CenterScreen">
 
                     <Label Content="Название устройства:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
        FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                    <ComboBox x:Name="DeviceName" SelectionChanged="TypesTOName_SelectionChanged" Grid.Row="0" Grid.Column="1" Margin="5" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+                <ComboBox x:Name="DeviceName"  SelectionChanged="DeviceName_SelectionChanged"  Grid.Row="0" Grid.Column="1" Margin="5" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
 
                     <Label Content="ТО:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
        FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>

@@ -40,31 +40,29 @@ namespace WpfApp4.MiniWindows
 			var deviceName = DeviceName.Text;
 			var typesTOName = TypesTOName.Text;
 			var typesTOWorkList = TypesTOWorkList.Text;
-			//var usersFIO = UsersFIO.Text;
-			//var dateStart = DateStart.SelectedDate;
-			//var dateEnd = DateEnd.SelectedDate;
-			//var status = Status.Text;
 			var comment = Comment.Text;
 			var skladDeteilID = SkladDeteilID.Text;
 			var skladKolich = SkladKolich.Text;
 			var documentationNameID = DocumentationNameID.Text;
 
-			// Проверяем, выбрано ли значение ID
+			string selectQuery = @"
+        SELECT t.Raspisanie
+        FROM [Technical_Service].[dbo].[Devices] d
+        INNER JOIN [Technical_Service].[dbo].[Types_TO] t
+            ON d.Device_Type = t.Device_Type
+        WHERE d.Name_Device = @DeviceName AND t.Name_TO = @TypesTOName";
 
-			//string selectQuery = "SELECT Raspisanie FROM Types_TO WHERE Name_TO = @Id";
-			//string insertNaryadQuery = "INSERT INTO [Technical_Service].[dbo].[Naryad] " +
-			//						   "([Device_Name], [Types_TO_Name], [Types_TO_Work_List], [Users_FIO], " +
-			//						   "[Status], [Comment], [Sklad_Deteil_ID], [Sklad_Kolich], [Documentation_Name_ID], [Date_TO]) " +
-			//						   "VALUES (@DeviceName, @TypesTOName, @TypesTOWorkList, @UsersFIO, " +
-			//						   "@Status, @Comment, @SkladDeteilID, @SkladKolich, @DocumentationNameID, @Date_TO)";
+			string deleteQuery = @"
+        DELETE FROM [Technical_Service].[dbo].[Naryad]
+        WHERE Device_Name = @DeviceName AND Date_TO = @Date_TO";
 
-
-			string selectQuery = "SELECT Raspisanie FROM Types_TO WHERE Name_TO = @Id";
-			string insertNaryadQuery = "INSERT INTO [Technical_Service].[dbo].[Naryad] " +
-									   "([Device_Name], [Types_TO_Name], [Types_TO_Work_List], " +
-									   "[Comment], [Sklad_Deteil_ID], [Sklad_Kolich], [Documentation_Name_ID], [Date_TO]) " +
-									   "VALUES (@DeviceName, @TypesTOName, @TypesTOWorkList, " +
-									   "@Comment, @SkladDeteilID, @SkladKolich, @DocumentationNameID, @Date_TO)";
+			string insertNaryadQuery = @"
+        INSERT INTO [Technical_Service].[dbo].[Naryad] 
+            ([Device_Name], [Types_TO_Name], [Types_TO_Work_List], 
+            [Comment], [Sklad_Deteil_ID], [Sklad_Kolich], [Documentation_Name_ID], [Date_TO]) 
+        VALUES 
+            (@DeviceName, @TypesTOName, @TypesTOWorkList, 
+            @Comment, @SkladDeteilID, @SkladKolich, @DocumentationNameID, @Date_TO)";
 
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
@@ -74,44 +72,52 @@ namespace WpfApp4.MiniWindows
 				string schedule;
 				using (SqlCommand selectCommand = new SqlCommand(selectQuery, connection))
 				{
-					selectCommand.Parameters.AddWithValue("@Id", typesTOName);
+					selectCommand.Parameters.AddWithValue("@DeviceName", deviceName);
+					selectCommand.Parameters.AddWithValue("@TypesTOName", typesTOName);
+
 					schedule = selectCommand.ExecuteScalar()?.ToString();
 				}
 
 				if (string.IsNullOrEmpty(schedule))
 				{
-					MessageBox.Show($"Нет расписания для обработки по {typesTOName}.");
+					MessageBox.Show($"Нет расписания для обработки по {typesTOName} для устройства {deviceName}.");
 					return;
 				}
 
 				// Парсинг расписания
 				var parsedSchedule = ParseSchedule(schedule);
 
-
 				DateTime? start = DateStart.SelectedDate;
 				DateTime? end = DateEnd.SelectedDate;
 
-				// Обработка расписания (1 год вперед)
+				if (!start.HasValue || !end.HasValue)
+				{
+					MessageBox.Show("Выберите начальную и конечную даты.");
+					return;
+				}
+
+				// Обработка расписания (1 год вперёд)
 				DateTime currentDate = start.Value;
 				DateTime endDate = end.Value;
-
-
-
 
 				while (currentDate <= endDate)
 				{
 					if (IsDateMatchingSchedule(currentDate, parsedSchedule))
 					{
-						// Вставляем наряд с датой из расписания
+						// Удаляем строку, если она уже есть
+						using (SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection))
+						{
+							deleteCommand.Parameters.AddWithValue("@DeviceName", deviceName);
+							deleteCommand.Parameters.AddWithValue("@Date_TO", currentDate);
+							deleteCommand.ExecuteNonQuery();
+						}
+
+						// Вставляем новый наряд с датой из расписания
 						using (SqlCommand insertCommand = new SqlCommand(insertNaryadQuery, connection))
 						{
 							insertCommand.Parameters.AddWithValue("@DeviceName", deviceName);
 							insertCommand.Parameters.AddWithValue("@TypesTOName", typesTOName);
 							insertCommand.Parameters.AddWithValue("@TypesTOWorkList", typesTOWorkList);
-							//insertCommand.Parameters.AddWithValue("@UsersFIO", usersFIO);
-							//insertCommand.Parameters.AddWithValue("@DateStart", (object)dateStart ?? DBNull.Value);
-							//insertCommand.Parameters.AddWithValue("@DateEnd", (object)dateEnd ?? DBNull.Value);
-							//insertCommand.Parameters.AddWithValue("@Status", status);
 							insertCommand.Parameters.AddWithValue("@Comment", comment);
 							insertCommand.Parameters.AddWithValue("@SkladDeteilID", skladDeteilID);
 							insertCommand.Parameters.AddWithValue("@SkladKolich", (object)skladKolich ?? DBNull.Value);
@@ -127,12 +133,14 @@ namespace WpfApp4.MiniWindows
 				}
 			}
 
-			
+			// Обновление данных и закрытие формы
 			mainWindow.LoadData_Naryad();
 			this.Close();
 		}
 
-		
+
+
+
 
 
 
@@ -272,34 +280,34 @@ namespace WpfApp4.MiniWindows
 
 
 
-		private void LoadDevices()
-		{
-			string query = "SELECT Name_Device FROM [Technical_Service].[dbo].[Devices]";
-			try
-			{
-				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
-				{
-					connection.Open();
-					using (SqlCommand command = new SqlCommand(query, connection))
-					{
-						using (SqlDataReader reader = command.ExecuteReader())
-						{
-							List<string> deviceNames = new List<string>();
-							while (reader.Read())
-							{
-								deviceNames.Add(reader["Name_Device"].ToString());
-							}
+		//private void LoadDevices()
+		//{
+		//	string query = "SELECT Name_Device FROM [Technical_Service].[dbo].[Devices]";
+		//	try
+		//	{
+		//		using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+		//		{
+		//			connection.Open();
+		//			using (SqlCommand command = new SqlCommand(query, connection))
+		//			{
+		//				using (SqlDataReader reader = command.ExecuteReader())
+		//				{
+		//					List<string> deviceNames = new List<string>();
+		//					while (reader.Read())
+		//					{
+		//						deviceNames.Add(reader["Name_Device"].ToString());
+		//					}
 
-							DeviceName.ItemsSource = deviceNames; // Устанавливаем источник данных для ComboBox
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
-			}
-		}
+		//					DeviceName.ItemsSource = deviceNames; // Устанавливаем источник данных для ComboBox
+		//				}
+		//			}
+		//		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+		//	}
+		//}
 
 
 
@@ -307,7 +315,7 @@ namespace WpfApp4.MiniWindows
 		private void LoadData_ComboBox()
 		{
 			LoadDeviceNames();   // Загрузка устройств
-			LoadTypesTOName();   // Загрузка ТО
+			//LoadTypesTOName();   // Загрузка ТО
 			//LoadUsersFIO();      // Загрузка ФИО сотрудников
 			//LoadStatus();        // Загрузка статусов
 			LoadSkladDeteilID(); // Загрузка деталей
@@ -344,16 +352,33 @@ namespace WpfApp4.MiniWindows
 		}
 
 		// Загрузка типов ТО в ComboBox
-		private void LoadTypesTOName()
+		private void LoadTypesTOName(string selectedDeviceName)
 		{
-			string query = "SELECT Name_TO FROM [Technical_Service].[dbo].[Types_TO]";
+			if (string.IsNullOrEmpty(selectedDeviceName))
+			{
+				MessageBox.Show("Не выбрано устройство.");
+				return;
+			}
+
+			// Запрос для получения Device_Type и соответствующих Name_TO
+			string query = @"
+        SELECT t.Name_TO 
+        FROM [Technical_Service].[dbo].[Devices] d
+        INNER JOIN [Technical_Service].[dbo].[Types_TO] t
+        ON d.Device_Type = t.Device_Type
+        WHERE d.Name_Device = @DeviceName";
+
 			try
 			{
 				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 				{
 					connection.Open();
+
 					using (SqlCommand command = new SqlCommand(query, connection))
 					{
+						// Добавляем значение параметра @DeviceName
+						command.Parameters.AddWithValue("@DeviceName", selectedDeviceName);
+
 						using (SqlDataReader reader = command.ExecuteReader())
 						{
 							List<string> typesTO = new List<string>();
@@ -361,19 +386,29 @@ namespace WpfApp4.MiniWindows
 							{
 								typesTO.Add(reader["Name_TO"].ToString());
 							}
-							TypesTOName.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
+
+							// Устанавливаем источник данных для ComboBox
+							TypesTOName.ItemsSource = typesTO;
 						}
 					}
 				}
-
-				// Подписка на событие выбора элемента
-				TypesTOName.SelectionChanged += TypesTOName_SelectionChanged;
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
 			}
 		}
+
+		private void DeviceName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			// Получаем выбранное устройство
+			string selectedDeviceName = (DeviceName.SelectedItem as string);
+
+			// Вызываем метод для загрузки соответствующих Types_TO
+			LoadTypesTOName(selectedDeviceName);
+		}
+
+
 
 		// Загрузка списка работ в TextBox по выбранному виду ТО
 		private void TypesTOName_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
