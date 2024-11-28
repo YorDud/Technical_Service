@@ -53,7 +53,7 @@ AllowsTransparency="True" WindowStartupLocation="CenterScreen">
 
                     <Label Content="Тип оборудования:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5" 
                            FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                <ComboBox x:Name="DeviceType" IsEditable="True" Grid.Row="0" Grid.Column="1" Margin="5" Height="30" Padding="3" 
+                <ComboBox x:Name="DeviceType" SelectionChanged="DeviceType_SelectionChanged" IsEditable="True" Grid.Row="0" Grid.Column="1" Margin="5" Height="30" Padding="3" 
                              Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
 
                     <Label Content="Название ТО:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5" 
@@ -140,7 +140,11 @@ AllowsTransparency="True" WindowStartupLocation="CenterScreen">
                                 <TextBlock Text="День месяца:" Margin="5" VerticalAlignment="Center"/>
                                 <TextBox Name="SpecificDaysTextBox" Width="50" VerticalAlignment="Center" Margin="5" Height="30" Padding="3" 
                              Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                            </StackPanel>
+
+                            <CheckBox Margin="80,5,5,5" Content="Первая неделя месяца" Name="FirstWeekMonthCheckBox" 
+          Checked="FirstWeekMonthCheckBox_Checked" Unchecked="FirstWeekMonthCheckBox_Unchecked"/>
+
+                        </StackPanel>
 
                         </StackPanel>
                     </Grid>

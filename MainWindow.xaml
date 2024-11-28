@@ -112,7 +112,7 @@
             </Grid>
         </ContentControl>
 
-        <ContentControl x:Name="MonitorCrash" Grid.Column="1" Visibility="Visible">
+        <ContentControl x:Name="MonitorCrash" Grid.Column="1" Visibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -121,8 +121,9 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Мониторинг поломок оборудования" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                
-                
+
+                <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="CrashCreateClick"/>
+
                 <DataGrid x:Name="dataGridMonitorCrash" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" LoadingRow="dataGridMonitorCrash_LoadingRow">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
@@ -1097,7 +1098,7 @@
 
 
 
-        <ContentControl x:Name="Work_List" Grid.Column="1" Visibility= "Hidden">
+        <ContentControl x:Name="Work_List" Grid.Column="1" Visibility= "Visible">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -1126,7 +1127,9 @@
                 <DataGrid x:Name="dataGridWork_List" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridWork_List_MouseDoubleClick">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
-                        <DataGridTextColumn Header="Помещение" Width="auto" Binding="{Binding Work_List}" />
+                        <DataGridTextColumn Header="Работа" Width="auto" Binding="{Binding Work_List}" />
+                        <DataGridTextColumn Header="Тип оборудования" Width="auto" Binding="{Binding Device_Type}" />
+                        <DataGridTextColumn Header="Норм. Час" Width="auto" Binding="{Binding Norm_Hour}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

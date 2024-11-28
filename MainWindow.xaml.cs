@@ -233,7 +233,7 @@ namespace WpfApp4
 		{
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
-				string query = "SELECT [ID]\r\n      ,[Work_List]\r\n  FROM [Work_List]";
+				string query = "SELECT [ID]\r\n      ,[Work_List]\r\n      ,[Device_Type]\r\n      ,[Norm_Hour] FROM [Work_List]";
 				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
 
 				DataTable dataTable = new DataTable();
@@ -951,6 +951,8 @@ namespace WpfApp4
 			Load_Data_DataGrid();
 			LoadData_Monitor_Naryad();
 			LoadData_Monitor_Crash();
+			LoadData_Work_List();
+		
 
 
 
@@ -986,6 +988,12 @@ namespace WpfApp4
 		private void Deteil_TypesCreatebtn_Click(object sender, RoutedEventArgs e)
 		{
 			MiniWindows.Deteil_Types_Create_Window typeDeviceWindow = new MiniWindows.Deteil_Types_Create_Window(this);
+			typeDeviceWindow.ShowDialog();
+		}
+
+		private void CrashCreateClick(object sender, RoutedEventArgs e)
+		{
+			Crash_Create_Wndow typeDeviceWindow = new Crash_Create_Wndow(this);
 			typeDeviceWindow.ShowDialog();
 		}
 

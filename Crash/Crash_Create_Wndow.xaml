@@ -1,11 +1,11 @@
-﻿<Window x:Class="WpfApp4.MiniWindows.Crash_Work_Window" 
+﻿<Window x:Class="WpfApp4.MiniWindows.Crash_Create_Wndow" 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         mc:Ignorable="d" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        Title="Типы оборудования" Height="330" Width="600" 
+        Title="Типы оборудования" Height="304" Width="600" 
         materialDesign:ColorZoneAssist.Mode="PrimaryLight"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -34,7 +34,7 @@
                     Click="ExitButton_Click" Height="39" Width="50"/>
 
             <StackPanel Grid.Row="0">
-                <TextBlock x:Name="TitleLabel" Grid.Row="0" Text="Location" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBlock x:Name="TitleLabel" Grid.Row="0" Text="Сообщить о поломке" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
             </StackPanel>
 
             <Grid Grid.Row="1" Margin="0,10,0,126">
@@ -56,14 +56,16 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label x:Name="DateCrashLabel" Content="-" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                <Label x:Name="DeviceLabel" Content="-" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                <Label x:Name="StatusLabel" Content="-" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <Label x:Name="LocationLabel" Content="Помещение:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <ComboBox x:Name="Location" IsEditable="True" Grid.Row="0" Grid.Column="1" Margin="5" Height="30" Padding="3" 
+             Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+                <Label x:Name="DeviceLabel" Content="Название оборудования:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <ComboBox x:Name="Device" IsEditable="True" Grid.Row="1" Grid.Column="1" Margin="5" Height="30" Padding="3" 
+             Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
 
 
-
-                <Button x:Name="StartWorkButton" Grid.Row="10" Content="В работу" Margin="5" Grid.ColumnSpan="2"
-        Click="StartWorkButton_Click"/>
+                <Button x:Name="StartWorkButton" Grid.Row="10" Content="Сообщить" Margin="5" Grid.ColumnSpan="2"
+        Click="Create_Click"/>
             </Grid>
         </Grid>
     </Border>

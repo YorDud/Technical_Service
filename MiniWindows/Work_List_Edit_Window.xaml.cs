@@ -33,9 +33,42 @@ namespace WpfApp4.MiniWindows
 			_dataRow = dataRow;
 
 			Work_List.Text = _dataRow["Work_List"].ToString();
+			DeviceType.Text = _dataRow["Device_Type"].ToString();
+			NormHour.Text = _dataRow["Norm_Hour"].ToString();
+
+			LoadDevice_Type();
 		}
 
-		
+		private void LoadDevice_Type()
+		{
+			string query = "SELECT Device_Type FROM [Technical_Service].[dbo].[Devices_Types]";
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				{
+					connection.Open();
+					using (SqlCommand command = new SqlCommand(query, connection))
+					{
+						using (SqlDataReader reader = command.ExecuteReader())
+						{
+							List<string> typesTO = new List<string>();
+							while (reader.Read())
+							{
+								typesTO.Add(reader["Device_Type"].ToString());
+							}
+							DeviceType.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
+						}
+					}
+				}
+
+				// Подписка на событие выбора элемента
+				//Device_Type.SelectionChanged += Device_Type_SelectionChanged;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+			}
+		}
 
 		private void ExitButton_Click(object sender, RoutedEventArgs e)
 		{
@@ -89,11 +122,13 @@ namespace WpfApp4.MiniWindows
 
 		private void Work_List_Update_Click(object sender, RoutedEventArgs e)
 		{
-			var deviceTypeId = _dataRow["ID"]; // Получаем идентификатор из текстбокса (предположительно, отдельное поле для ID)
-			var deviceType = Work_List.Text; // Получаем новое значение типа устройства
+			var Id = _dataRow["ID"]; // Получаем идентификатор из текстбокса (предположительно, отдельное поле для ID)
+			var Work_ListV = Work_List.Text; 
+			var Device_TypeV = DeviceType.Text;
+			var Norm_HourV = NormHour.Text;
 
 			// SQL-запрос на обновление
-			string query = "UPDATE [Work_List] SET [Work_List] = @Device_Type WHERE [ID] = @Device_Type_Id";
+			string query = "UPDATE [Work_List] \r\n     SET \r\n         [Work_List] = @Work_List, \r\n         [Device_Type] = @Device_Type, \r\n         [Norm_Hour] = @Norm_Hour\r\n     WHERE [ID] = @Id";
 
 			try
 			{
@@ -102,8 +137,12 @@ namespace WpfApp4.MiniWindows
 					using (SqlCommand command = new SqlCommand(query, connection))
 					{
 						// Добавление значений для параметров
-						command.Parameters.Add("@Device_Type", SqlDbType.NVarChar).Value = deviceType;
-						command.Parameters.Add("@Device_Type_Id", SqlDbType.Int).Value = deviceTypeId;
+						command.Parameters.AddWithValue("@Work_List", Work_ListV);
+						command.Parameters.AddWithValue("@Device_Type", Device_TypeV);
+						command.Parameters.AddWithValue("@Norm_Hour", Norm_HourV);
+
+						command.Parameters.Add("@Id", SqlDbType.Int).Value = Id;
+
 
 						// Открытие соединения
 						connection.Open();

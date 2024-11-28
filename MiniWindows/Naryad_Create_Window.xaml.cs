@@ -150,9 +150,10 @@ namespace WpfApp4.MiniWindows
 			var daysOfWeek = new List<DayOfWeek>();
 			var months = new List<int>();
 			var specificDays = new List<int>();
-			int repeatWeeks = 0, weekDayInMonth = 0;
+			int repeatWeeks = 0;
+			int weekDayInMonth = 0;
 
-			// Разделяем расписание на части
+			// Разбиваем расписание на части по ";"
 			var parts = schedule.Split(';');
 			foreach (var part in parts)
 			{
@@ -160,10 +161,12 @@ namespace WpfApp4.MiniWindows
 
 				if (cleanedPart.StartsWith("Дни недели:"))
 				{
-					var days = cleanedPart.Replace("Дни недели:", "").Split(',').Select(d => d.Trim());
+					// Извлекаем дни недели
+					var days = cleanedPart.Replace("Дни недели:", "").Split(',');
 					foreach (var day in days)
 					{
-						switch (day)
+						var trimmedDay = day.Trim();
+						switch (trimmedDay)
 						{
 							case "Пн": daysOfWeek.Add(DayOfWeek.Monday); break;
 							case "Вт": daysOfWeek.Add(DayOfWeek.Tuesday); break;
@@ -172,15 +175,18 @@ namespace WpfApp4.MiniWindows
 							case "Пт": daysOfWeek.Add(DayOfWeek.Friday); break;
 							case "Сб": daysOfWeek.Add(DayOfWeek.Saturday); break;
 							case "Вс": daysOfWeek.Add(DayOfWeek.Sunday); break;
+							//default: throw new ArgumentException($"Неверный формат дня недели: {trimmedDay}");
 						}
 					}
 				}
 				else if (cleanedPart.StartsWith("Месяцы:"))
 				{
-					var monthsStr = cleanedPart.Replace("Месяцы:", "").Split(',').Select(m => m.Trim());
-					foreach (var month in monthsStr)
+					// Извлекаем месяцы
+					var monthNames = cleanedPart.Replace("Месяцы:", "").Split(',');
+					foreach (var month in monthNames)
 					{
-						switch (month)
+						var trimmedMonth = month.Trim();
+						switch (trimmedMonth)
 						{
 							case "Январь": months.Add(1); break;
 							case "Февраль": months.Add(2); break;
@@ -194,30 +200,54 @@ namespace WpfApp4.MiniWindows
 							case "Октябрь": months.Add(10); break;
 							case "Ноябрь": months.Add(11); break;
 							case "Декабрь": months.Add(12); break;
+							//default: throw new ArgumentException($"Неверный формат месяца: {trimmedMonth}");
 						}
 					}
 				}
 				else if (cleanedPart.StartsWith("Повторять каждые:"))
 				{
-					int.TryParse(cleanedPart.Replace("Повторять каждые:", "").Replace("недель", "").Trim(), out repeatWeeks);
+					// Извлекаем количество недель для повторения
+					var weeks = cleanedPart.Replace("Повторять каждые:", "").Replace("недель", "").Trim();
+					if (int.TryParse(weeks, out int parsedWeeks))
+					{
+						repeatWeeks = parsedWeeks;
+					}
+					else
+					{
+						//throw new ArgumentException($"Неверный формат количества недель: {weeks}");
+					}
 				}
 				else if (cleanedPart.StartsWith("День месяца:"))
 				{
-					var days = cleanedPart.Replace("День месяца:", "").Split(',').Select(d => d.Trim());
+					// Извлекаем дни месяца
+					var days = cleanedPart.Replace("День месяца:", "").Split(',');
 					foreach (var day in days)
 					{
-						if (int.TryParse(day, out int specificDay) && specificDay != 0)
-							specificDays.Add(specificDay);
+						var trimmedDay = day.Trim();
+						if (int.TryParse(trimmedDay, out int parsedDay) && parsedDay > 0 && parsedDay <= 31)
+						{
+							specificDays.Add(parsedDay);
+						}
+						else
+						{
+							// Игнорируем некорректное значение
+							Console.WriteLine($"Предупреждение: День месяца \"{trimmedDay}\" пропущен, так как он некорректен.");
+						}
 					}
 				}
-				else if (cleanedPart.StartsWith("День недели в месяце:"))
+				else if (cleanedPart.StartsWith("Первая неделя месяца:"))
 				{
-					int.TryParse(cleanedPart.Replace("День недели в месяце:", "").Trim(), out weekDayInMonth);
+					// Проверяем, указана ли первая неделя месяца
+					var firstWeekValue = cleanedPart.Replace("Первая неделя месяца:", "").Trim();
+					weekDayInMonth = string.Equals(firstWeekValue, "Да", StringComparison.OrdinalIgnoreCase) ? 1 : 0;
 				}
 			}
 
 			return (daysOfWeek, months, repeatWeeks, specificDays, weekDayInMonth);
 		}
+
+
+
 
 
 		private bool IsDateMatchingSchedule(DateTime date, (List<DayOfWeek> DaysOfWeek, List<int> Months, int RepeatWeeks, List<int> SpecificDays, int WeekDayInMonth) schedule)

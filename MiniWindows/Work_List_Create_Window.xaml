@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         mc:Ignorable="d" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        Title="Типы оборудования" Height="246" Width="600" 
+        Title="Типы оборудования" Height="341" Width="600" 
         materialDesign:ColorZoneAssist.Mode="PrimaryLight"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -58,6 +58,12 @@
 
                 <Label Content="Вид работы:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                 <TextBox x:Name="Work_List" Grid.Row="0" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
+
+                <Label Content="Тип оборудования:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <ComboBox x:Name="DeviceType"  Grid.Row="1" Grid.Column="1" Margin="5" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+
+                <Label Content="Норм. Час:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBox x:Name="NormHour" Grid.Row="2" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
 
                 <Button Grid.Row="10" Content="Добавить" Margin="5" Grid.ColumnSpan="2" Click="Work_List_Dobav_Click" />
             </Grid>
