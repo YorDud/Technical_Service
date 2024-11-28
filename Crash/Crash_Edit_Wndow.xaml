@@ -58,8 +58,12 @@
 
                 <Label x:Name="StatusLabel" Content="Статус:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                 <ComboBox x:Name="Status" IsEditable="True" Grid.Row="0" Grid.Column="1" Margin="5" Height="30" Padding="3" 
-             Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
-               
+             Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                    <ComboBoxItem>В работе</ComboBoxItem>
+                    <ComboBoxItem>Выполнено</ComboBoxItem>
+                    <ComboBoxItem>Закрыт</ComboBoxItem>
+                </ComboBox>
+
 
 
                 <Button x:Name="StartWorkButton" Grid.Row="10" Content="Сохранить" Margin="5" Grid.ColumnSpan="2"

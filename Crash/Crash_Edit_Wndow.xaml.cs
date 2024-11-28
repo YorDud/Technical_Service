@@ -28,8 +28,8 @@ namespace WpfApp4.MiniWindows
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
-			
-			
+			_dataRow = dataRow;
+
 			Status.Text = _dataRow["Status"].ToString();
 		}
 		
@@ -43,7 +43,7 @@ namespace WpfApp4.MiniWindows
 			// Проверяем, что все необходимые поля заполнены
 			string status = Status.Text;
 			string query = "UPDATE [Crash] " +
-						   "SET [Status] = @Status" +
+						   "SET [Status] = @Status " +
 						   "WHERE [ID] = @ID";
 
 			try
@@ -58,7 +58,8 @@ namespace WpfApp4.MiniWindows
 					{
 						// Добавляем параметры в запрос
 						command.Parameters.AddWithValue("@Status", status);
-						
+						command.Parameters.AddWithValue("@ID", _dataRow["ID"]);
+
 						// Выполняем команду
 						int result = command.ExecuteNonQuery();
 
