@@ -124,7 +124,7 @@
 
                 <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="CrashCreateClick"/>
 
-                <DataGrid x:Name="dataGridMonitorCrash" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" LoadingRow="dataGridMonitorCrash_LoadingRow">
+                <DataGrid x:Name="dataGridMonitorCrash" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridMonitorCrash_MouseDoubleClick" LoadingRow="dataGridMonitorCrash_LoadingRow">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
                         <DataGridTextColumn Header="Дата/Время поломки" Width="auto" Binding="{Binding Date_Crash}" />
@@ -1098,7 +1098,7 @@
 
 
 
-        <ContentControl x:Name="Work_List" Grid.Column="1" Visibility= "Visible">
+        <ContentControl x:Name="Work_List" Grid.Column="1" Visibility= "Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />

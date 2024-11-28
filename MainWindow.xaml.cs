@@ -1191,7 +1191,17 @@ namespace WpfApp4
 		{
 			System.Windows.Application.Current.Shutdown();
 		}
+		private void dataGridMonitorCrash_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			if (dataGridMonitorCrash.SelectedItem is DataRowView selectedRow)
+			{
+				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+				Crash_Edit_Wndow users_Nalad_Edit_Window = new Crash_Edit_Wndow(this, selectedRow);
 
+				// Показываем диалоговое окно
+				users_Nalad_Edit_Window.ShowDialog();
+			}
+		}
 		private void dataGridUsers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			// Проверяем, выбрана ли строка
