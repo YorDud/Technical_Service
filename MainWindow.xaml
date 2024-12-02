@@ -58,8 +58,8 @@
 
                 </StackPanel>
             </Expander>
-            
-            <Button Content="Визуал поломок и ТО" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Show_Crash"/>
+
+            <Button Content="🗺️ Визуал поломок и ТО" Margin="10" Height="45" Padding="5" HorizontalAlignment="Stretch" Click="Show_Crash"/>
 
 
 
