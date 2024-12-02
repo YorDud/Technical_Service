@@ -23,8 +23,8 @@
         <StackPanel Background="#f0f0f0" Grid.Column="0">
             <Button Content="🏠 Мониторинг ТО" FontSize="16" Margin="10" Padding="10" Height="45" 
                     HorizontalAlignment="Stretch" Click="ShowMonitoringTO" />
-            
-            <Button Content="Мониторинг поломок" FontSize="15" Margin="10" Padding="10" Height="45" 
+
+            <Button Content="📈 Мониторинг поломок" FontSize="13" Margin="10" Padding="10" Height="45" 
         HorizontalAlignment="Stretch" Click="ShowMonitoringCrash" />
 
             <Expander Header="📂 Главное" FontSize="16" Margin="10" Padding="10">
