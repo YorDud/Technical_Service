@@ -1137,7 +1137,7 @@
 
 
 
-        <ContentControl x:Name="Crash" Grid.Column="1" Visibility="Visible">
+        <ContentControl x:Name="Crash" Grid.Column="1" Visibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />

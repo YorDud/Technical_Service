@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp4"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Авторизация" Height="299" Width="519" WindowStartupLocation="CenterScreen">
+        Title="Авторизация" Height="381" Width="519" WindowStartupLocation="CenterScreen">
     <Grid Background="White">
         <Border Background="White" Margin="15,15,15,15"
 CornerRadius="15" 
@@ -25,6 +25,7 @@ Padding="10">
                 <!--<PasswordBox x:Name="pass_txt" materialDesign:HintAssist.Hint="Введите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:HintAssist.FloatingHintHorizontalAlignment="Left" materialDesign:HintAssist.HintHorizontalAlignment="Center" HorizontalContentAlignment="Center"></PasswordBox>-->
 
                 <Button Content="Войти" Margin="0,25,0,30" VerticalAlignment="Top" Click="Button_Click"/>
+                <Button Content="⚠️ Сообщить о неисправности" Margin="0,25,0,30" VerticalAlignment="Top" Background="#FFD63434" BorderBrush="Red"/>
             </StackPanel>
 
 
