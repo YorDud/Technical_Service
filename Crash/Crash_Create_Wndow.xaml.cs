@@ -95,9 +95,9 @@ namespace WpfApp4.MiniWindows
 		private void Create_Click(object sender, RoutedEventArgs e)
 		{
 			// Проверяем, что все необходимые поля заполнены
-			if (Location.SelectedItem == null || Device.SelectedItem == null || string.IsNullOrWhiteSpace(Comment.Text))
+			if (Location.SelectedItem == null || Device.SelectedItem == null)
 			{
-				//MessageBox.Show("Пожалуйста, заполните все поля.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+				MessageBox.Show("Пожалуйста, укажите наименование оборудования и помещение.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
 				return;
 			}
 

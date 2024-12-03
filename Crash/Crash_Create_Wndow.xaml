@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         mc:Ignorable="d" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        Title="Типы оборудования" Height="304" Width="600" 
+        Title="Типы оборудования" Height="320" Width="600" 
         materialDesign:ColorZoneAssist.Mode="PrimaryLight"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -57,10 +57,10 @@
                 </Grid.ColumnDefinitions>
 
                 <Label x:Name="LocationLabel" Content="Помещение:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                <ComboBox x:Name="Location" IsEditable="True" Grid.Row="0" Grid.Column="1" Margin="5" Height="30" Padding="3" 
+                <ComboBox x:Name="Location" Grid.Row="0" Grid.Column="1" Margin="5" Height="30" Padding="3" 
              Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
                 <Label x:Name="DeviceLabel" Content="Название оборудования:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                <ComboBox x:Name="Device" IsEditable="True" Grid.Row="1" Grid.Column="1" Margin="5" Height="30" Padding="3" 
+                <ComboBox x:Name="Device" Grid.Row="1" Grid.Column="1" Margin="5" Height="30" Padding="3" 
              Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
                 <Label x:Name="CommentLabel" Content="Описание:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                 <TextBox x:Name="Comment" Grid.Row="2" Grid.Column="1" Margin="5" Height="30" Padding="3" 

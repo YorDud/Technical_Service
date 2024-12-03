@@ -1137,7 +1137,7 @@
 
 
 
-        <ContentControl x:Name="Crash" Grid.Column="1" Visibility="Hidden">
+        <ContentControl x:Name="Crash" Grid.Column="1" Visibility="Visible">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -1178,6 +1178,18 @@
 
                         <Ellipse x:Name="Penta580" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="738" Canvas.Top="519" />
                         <TextBlock x:Name="Penta580Label" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Penta580" Canvas.Left="710" Canvas.Top="539" />
+
+                        <Rectangle x:Name="Line1" Width="152" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="777" Canvas.Top="272" RenderTransformOrigin="0.5,0.5" >
+                            <Rectangle.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-36.238"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                        <TextBlock x:Name="Line1Label" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Линия 1" Canvas.Left="838" Canvas.Top="312" />
 
                     </Canvas>
                 </Grid>

@@ -1517,6 +1517,7 @@ namespace WpfApp4
 					UpdatePointStatus(Electrotest618, Electrotest618Label, "Электротест 618", crashData, naryadData);
 					UpdatePointStatus(MaskUnit, MaskUnitLabel, "Установка проявления маски", crashData, naryadData);
 					UpdatePointStatus(Penta580, Penta580Label, "Penta580", crashData, naryadData);
+					UpdateRectangleStatus(Line1, Line1Label, "Линия1", crashData, naryadData);
 				}
 			}
 			catch (Exception ex)
@@ -1596,7 +1597,65 @@ namespace WpfApp4
 			point.Fill = Brushes.LightGray;
 		}
 
-		
+		private void UpdateRectangleStatus(Rectangle point, TextBlock label, string deviceName, DataTable crashData, DataTable naryadData)
+		{
+			// Очистка возможных заметок
+			label.Text = deviceName;
+
+			// Проверяем данные в таблице Crash
+			DataRow[] crashRows = crashData.Select($"Device = '{deviceName}'");
+
+			foreach (var row in crashRows) // Ищем указанное оборудование по всем строкам
+			{
+				string status = row["Status"].ToString();
+				if (status == "Поломка")
+				{
+					point.Fill = Brushes.Red;
+					label.Text += " (Поломка)";
+					return;
+				}
+				else if (status == "В работе")
+				{
+					point.Fill = Brushes.Yellow;
+					label.Text += " (Поломка)";
+					return;
+				}
+
+			}
+
+			// Если в Crash не найдены актуальные статусы, продолжить проверку в таблице Naryad
+			string todayDate = DateTime.Now.ToString("yyyy-MM-dd"); // Текущая дата
+			DataRow[] naryadRows = naryadData.Select($"Device_Name = '{deviceName}' AND Date_TO = '{todayDate}'");
+
+			foreach (var row in naryadRows) // Перебираем все строки Naryad
+			{
+				string naryadStatus = row["Status"].ToString();
+				if (string.IsNullOrEmpty(naryadStatus) || naryadStatus == "null")
+				{
+					point.Fill = Brushes.Red;
+					label.Text += " (ТО)";
+					return;
+				}
+				else if (naryadStatus == "В работе")
+				{
+					point.Fill = Brushes.Yellow;
+					label.Text += " (ТО)";
+					return;
+				}
+				else if (naryadStatus == "Выполнен")
+				{
+					point.Fill = Brushes.Green;
+					label.Text += " (ТО)";
+					return;
+				}
+
+			}
+
+			// Если не найдено ни одного совпадения со статусами, оставить стандартный цвет
+			point.Fill = Brushes.LightGray;
+		}
+
+
 	}
 }
 
