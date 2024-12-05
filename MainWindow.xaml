@@ -1137,10 +1137,10 @@
 
 
 
-        <ContentControl x:Name="Crash" Grid.Column="1" Visibility="Hidden">
+        <ContentControl x:Name="Crash" Grid.Column="1" Visibility="Visible">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="70" />
+                    <RowDefinition Height="auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -1150,49 +1150,76 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Кнопки переключения этажей -->
-                <Button x:Name="Floor1Button" Content="Этаж 1" Grid.Row="1" HorizontalAlignment="Left" Width="100" Margin="5"/>
-                <Button x:Name="Floor2Button" Content="Этаж 2" Grid.Row="1" HorizontalAlignment="Left" Width="100" Margin="150,5,5,5" />
+                <!--Button x:Name="Floor1Button" Content="Этаж 1" Grid.Row="1" HorizontalAlignment="Left" Width="100" Margin="5" IsEnabled="False"/>
+                <Button x:Name="Floor2Button" Content="Этаж 2" Grid.Row="1" HorizontalAlignment="Left" Width="100" Margin="150,5,5,5" />-->
 
-                <!-- Контейнер для изображения и Rectangle -->
-                <Grid Grid.Row="2" Grid.Column="0">
-                    <!-- Изображение плана этажа -->
-                    <Image x:Name="FloorImage" Stretch="Uniform" Width="1000" Height="800" Source="/Floor1.PNG"/>
+                <TabControl Grid.Row="0">
+                    <TabItem Header="Этаж 1">
+                        <Grid>
+                            <!-- Изображение плана этажа -->
+                            <Image x:Name="FloorImage" Stretch="Uniform" Width="1000" Height="800" Source="/Floor1.png"/>
 
-                    <Canvas>
-                        <!-- Точки с оборудованием -->
-                        <StackPanel Canvas.Left="934" Canvas.Top="105" HorizontalAlignment="Left" VerticalAlignment="Top">
-                            <Ellipse x:Name="Penta300" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" />
-                            <TextBlock x:Name="Penta300Label" Text="Penta300" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Canvas.Left="929" Canvas.Top="96" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                        </StackPanel>
+                            <Canvas>
+                                <!-- Точки с оборудованием -->
+                                <StackPanel Canvas.Left="934" Canvas.Top="105" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <Ellipse x:Name="Penta300" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" />
+                                    <TextBlock x:Name="Penta300Label" Text="Penta300" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Canvas.Left="929" Canvas.Top="96" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                </StackPanel>
 
-                        <StackPanel Canvas.Left="527" Canvas.Top="309" HorizontalAlignment="Left" VerticalAlignment="Top">
-                            <Ellipse x:Name="Electrotest618" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" />
-                            <TextBlock x:Name="Electrotest618Label" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Электротест 618" Canvas.Left="688" Canvas.Top="262" />
-                        </StackPanel>
+                                <StackPanel Canvas.Left="527" Canvas.Top="309" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <Ellipse x:Name="Electrotest618" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" />
+                                    <TextBlock x:Name="Electrotest618Label" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Электротест 618" Canvas.Left="688" Canvas.Top="262" />
+                                </StackPanel>
 
-                        <StackPanel Canvas.Left="898" Canvas.Top="557" HorizontalAlignment="Left" VerticalAlignment="Top">
-                            <Ellipse x:Name="MaskUnit" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" />
-                            <TextBlock x:Name="MaskUnitLabel" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Установка проявления маски" Canvas.Left="1042" Canvas.Top="585" />
-                        </StackPanel>
+                                <StackPanel Canvas.Left="898" Canvas.Top="557" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <Ellipse x:Name="MaskUnit" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" />
+                                    <TextBlock x:Name="MaskUnitLabel" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Установка проявления маски" Canvas.Left="1042" Canvas.Top="585" />
+                                </StackPanel>
 
 
-                        <Ellipse x:Name="Penta580" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="738" Canvas.Top="519" />
-                        <TextBlock x:Name="Penta580Label" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Penta580" Canvas.Left="710" Canvas.Top="539" />
+                                <Ellipse x:Name="Penta580" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="738" Canvas.Top="519" />
+                                <TextBlock x:Name="Penta580Label" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Penta580" Canvas.Left="710" Canvas.Top="539" />
 
-                        <Rectangle x:Name="Line1" Width="152" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="777" Canvas.Top="272" RenderTransformOrigin="0.5,0.5" >
-                            <Rectangle.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="-36.238"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                        <TextBlock x:Name="Line1Label" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Линия 1" Canvas.Left="838" Canvas.Top="312" />
+                                <Rectangle x:Name="Line1" Width="152" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="777" Canvas.Top="272" RenderTransformOrigin="0.5,0.5" >
+                                    <Rectangle.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="-36.238"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                                <TextBlock x:Name="Line1Label" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Линия 1" Canvas.Left="838" Canvas.Top="312" />
 
-                    </Canvas>
-                </Grid>
+                            </Canvas>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Этаж 2">
+                        <Grid>
+                            <!-- Изображение плана этажа -->
+                            <Image x:Name="FloorImage2" Stretch="Uniform" Width="auto" Height="970" Source="/Floor222.png" Opacity="0.8"/>
+
+                            <Canvas>
+                                <!-- Точки с оборудованием -->
+                                <Ellipse x:Name="Electrotest600" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="870" Canvas.Top="376" />
+                                <TextBlock x:Name="Electrotest600Label" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Электротест 600" Canvas.Left="812" Canvas.Top="401" />
+                       
+
+                                <Rectangle x:Name="Line2" Width="152" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="773" Canvas.Top="153" RenderTransformOrigin="0.5,0.5" >
+                                </Rectangle>
+                                <TextBlock x:Name="Line2Label" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Линия 2" Canvas.Left="816" Canvas.Top="178" />
+
+                                <Rectangle x:Name="Line3" Width="92" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="648" Canvas.Top="153" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                <TextBlock x:Name="Line3Label" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Линия 3" Canvas.Left="661" Canvas.Top="173" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+                            </Canvas>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+
+
+
 
 
 

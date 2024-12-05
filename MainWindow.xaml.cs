@@ -1388,7 +1388,7 @@ namespace WpfApp4
 			{
 				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
 				Deteil_Types_Edit_Window naryad_Edit_Window = new Deteil_Types_Edit_Window(this, selectedRow);
-
+				//
 				// Показываем диалоговое окно
 				naryad_Edit_Window.ShowDialog();
 			}
@@ -1507,17 +1507,29 @@ namespace WpfApp4
 				using (SqlConnection connection = new SqlConnection(connectionString))
 				{
 					connection.Open();
-
+					
 					// Получить данные из таблиц Crash и Naryad
 					DataTable crashData = GetData(connection, "SELECT * FROM [Technical_Service].[dbo].[Crash]");
 					DataTable naryadData = GetData(connection, "SELECT * FROM [Technical_Service].[dbo].[Naryad]");
 
+					//
+					// Этаж 1
+					//
 					// Обновляем статусы для каждой точки
 					UpdatePointStatus(Penta300, Penta300Label, "Penta300", crashData, naryadData);
 					UpdatePointStatus(Electrotest618, Electrotest618Label, "Электротест 618", crashData, naryadData);
 					UpdatePointStatus(MaskUnit, MaskUnitLabel, "Установка проявления маски", crashData, naryadData);
 					UpdatePointStatus(Penta580, Penta580Label, "Penta580", crashData, naryadData);
 					UpdateRectangleStatus(Line1, Line1Label, "Линия1", crashData, naryadData);
+
+
+					//
+					// Этаж 2
+					//
+					UpdateRectangleStatus(Line2, Line2Label, "Линия2", crashData, naryadData);
+					UpdateRectangleStatus(Line3, Line3Label, "Линия3", crashData, naryadData);
+					UpdatePointStatus(Electrotest600, Electrotest600Label, "Электротест 600", crashData, naryadData);
+
 				}
 			}
 			catch (Exception ex)
