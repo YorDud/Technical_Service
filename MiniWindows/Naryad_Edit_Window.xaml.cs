@@ -373,23 +373,23 @@ namespace WpfApp4.MiniWindows
 			if (SkladDeteilID.SelectedItem is ComboBoxItem selectedItem)
 			{
 				string selectedID = selectedItem.Tag.ToString();
-				LoadSkladKolich(selectedID); // Загрузка количества по выбранной детали
+				//LoadSkladKolich(selectedID); // Загрузка количества по выбранной детали
 			}
 		}
 
 		// Получение количества по ID детали
-		private void LoadSkladKolich(string skladDeteilID)
-		{
-			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
-			{
-				connection.Open();
-				SqlCommand command = new SqlCommand("SELECT [Kolich] FROM [Technical_Service].[dbo].[Sklad] WHERE [ID] = @ID", connection);
-				command.Parameters.AddWithValue("@ID", skladDeteilID);
+		//private void LoadSkladKolich(string skladDeteilID)
+		//{
+		//	using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+		//	{
+		//		connection.Open();
+		//		SqlCommand command = new SqlCommand("SELECT [Kolich] FROM [Technical_Service].[dbo].[Sklad] WHERE [ID] = @ID", connection);
+		//		command.Parameters.AddWithValue("@ID", skladDeteilID);
 
-				var result = command.ExecuteScalar();
-				SkladKolich.Text = result?.ToString() ?? string.Empty;
-			}
-		}
+		//		var result = command.ExecuteScalar();
+		//		SkladKolich.Text = result?.ToString() ?? string.Empty;
+		//	}
+		//}
 
 		// Загрузка документации в ComboBox DocumentationNameID
 		private void LoadDocumentationNameID()

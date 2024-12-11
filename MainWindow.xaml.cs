@@ -1514,7 +1514,7 @@ namespace WpfApp4
 
 					//
 					// Этаж 1
-					//
+					// 
 					// Обновляем статусы для каждой точки
 					UpdatePointStatus(Penta300, Penta300Label, "Penta300", crashData, naryadData);
 					UpdatePointStatus(Electrotest618, Electrotest618Label, "Электротест 618", crashData, naryadData);
@@ -1528,7 +1528,7 @@ namespace WpfApp4
 					//
 					UpdateRectangleStatus(Line2, Line2Label, "Линия2", crashData, naryadData);
 					UpdateRectangleStatus(Line3, Line3Label, "Линия3", crashData, naryadData);
-					UpdatePointStatus(Electrotest600, Electrotest600Label, "Электротест 600", crashData, naryadData);
+					UpdatePointStatus(Electrotest600, Electrotest600Label, "Электротест 600", crashData, naryadData); 
 
 				}
 			}
