@@ -1530,6 +1530,12 @@ namespace WpfApp4
 					UpdateRectangleStatus(Line3, Line3Label, "Линия3", crashData, naryadData);
 					UpdatePointStatus(Electrotest600, Electrotest600Label, "Электротест 600", crashData, naryadData); 
 
+
+					UpdatePointStatus(PayalMask, PayalMaskLabel, "Линия проявления паяльной маски", crashData, naryadData); 
+					UpdatePointStatus(Photorez, PhotorezLabel, "Линия проявления фоторезиста", crashData, naryadData); 
+
+
+
 				}
 			}
 			catch (Exception ex)
@@ -1554,7 +1560,8 @@ namespace WpfApp4
 		private void UpdatePointStatus(Ellipse point, TextBlock label, string deviceName, DataTable crashData, DataTable naryadData)
 		{
 			// Очистка возможных заметок
-			label.Text = deviceName;
+			//label.Text = deviceName;
+			label.Text = "";
 
 			// Проверяем данные в таблице Crash
 			DataRow[] crashRows = crashData.Select($"Device = '{deviceName}'");

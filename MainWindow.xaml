@@ -1213,6 +1213,13 @@
                                 <Rectangle x:Name="Line3" Width="92" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="648" Canvas.Top="153" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" />
                                 <TextBlock x:Name="Line3Label" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="Линия 3" Canvas.Left="661" Canvas.Top="173" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
+
+
+                                <Ellipse x:Name="PayalMask" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="470" Canvas.Top="153" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                <TextBlock x:Name="PayalMaskLabel" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="(Поломка)" Canvas.Left="381" Canvas.Top="149" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                <Ellipse x:Name="Photorez" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="547" Canvas.Top="153" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                <TextBlock x:Name="PhotorezLabel" FontSize="18" FontWeight="Bold" FontFamily="Yu Gothic UI" Text="(Поломка)" Canvas.Left="480" Canvas.Top="166" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
                             </Canvas>
                         </Grid>
                     </TabItem>
