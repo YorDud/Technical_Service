@@ -1516,23 +1516,19 @@ namespace WpfApp4
 					// Этаж 1
 					// 
 					// Обновляем статусы для каждой точки
-					UpdatePointStatus(Penta300, Penta300Label, "Penta300", crashData, naryadData);
-					UpdatePointStatus(Electrotest618, Electrotest618Label, "Электротест 618", crashData, naryadData);
-					UpdatePointStatus(MaskUnit, MaskUnitLabel, "Установка проявления маски", crashData, naryadData);
-					UpdatePointStatus(Penta580, Penta580Label, "Penta580", crashData, naryadData);
-					UpdateRectangleStatus(Line1, Line1Label, "Линия1", crashData, naryadData);
+					//UpdatePointStatus(Penta300, Penta300Label, "Penta300", crashData, naryadData);
+					//UpdatePointStatus(Electrotest618, Electrotest618Label, "Электротест 618", crashData, naryadData);
+					//UpdatePointStatus(MaskUnit, MaskUnitLabel, "Установка проявления маски", crashData, naryadData);
+					//UpdatePointStatus(Penta580, Penta580Label, "Penta580", crashData, naryadData);
+					//UpdateRectangleStatus(Line1, Line1Label, "Линия1", crashData, naryadData);
 
 
 					//
 					// Этаж 2
 					//
-					UpdateRectangleStatus(Line2, Line2Label, "Линия2", crashData, naryadData);
-					UpdateRectangleStatus(Line3, Line3Label, "Линия3", crashData, naryadData);
-					UpdatePointStatus(Electrotest600, Electrotest600Label, "Электротест 600", crashData, naryadData); 
-
-
-					UpdatePointStatus(PayalMask, PayalMaskLabel, "Линия проявления паяльной маски", crashData, naryadData); 
-					UpdatePointStatus(Photorez, PhotorezLabel, "Линия проявления фоторезиста", crashData, naryadData); 
+										
+					UpdatePointStatus(PayalMask, "Линия проявления паяльной маски", crashData, naryadData); 
+					UpdatePointStatus(Photorez, "Линия проявления фоторезиста", crashData, naryadData); 
 
 
 
@@ -1557,11 +1553,11 @@ namespace WpfApp4
 			}
 		}
 
-		private void UpdatePointStatus(Ellipse point, TextBlock label, string deviceName, DataTable crashData, DataTable naryadData)
+		private void UpdatePointStatus(Ellipse point, string deviceName, DataTable crashData, DataTable naryadData)
 		{
 			// Очистка возможных заметок
 			//label.Text = deviceName;
-			label.Text = "";
+			//label.Text = "";
 
 			// Проверяем данные в таблице Crash
 			DataRow[] crashRows = crashData.Select($"Device = '{deviceName}'");
@@ -1572,13 +1568,13 @@ namespace WpfApp4
 				if (status == "Поломка")
 				{
 					point.Fill = Brushes.Red;
-					label.Text += " (Поломка)";
+					//label.Text += " (Поломка)";
 					return;
 				}
 				else if (status == "В работе")
 				{
-					point.Fill = Brushes.Yellow;
-					label.Text += " (Поломка)";
+					point.Fill = Brushes.Red;
+					//label.Text += " (Поломка)";
 					return;
 				}
 				
@@ -1593,20 +1589,20 @@ namespace WpfApp4
 				string naryadStatus = row["Status"].ToString();
 				if (string.IsNullOrEmpty(naryadStatus) || naryadStatus == "null")
 				{
-					point.Fill = Brushes.Red;
-					label.Text += " (ТО)";
+					point.Fill = Brushes.Yellow;
+					//label.Text += " (ТО)";
 					return;
 				}
 				else if (naryadStatus == "В работе")
 				{
 					point.Fill = Brushes.Yellow;
-					label.Text += " (ТО)";
+					//label.Text += " (ТО)";
 					return;
 				}
 				else if (naryadStatus == "Выполнен")
 				{
 					point.Fill = Brushes.Green;
-					label.Text += " (ТО)";
+					//label.Text += " (ТО)";
 					return;
 				}
 				
@@ -1616,63 +1612,63 @@ namespace WpfApp4
 			point.Fill = Brushes.LightGray;
 		}
 
-		private void UpdateRectangleStatus(Rectangle point, TextBlock label, string deviceName, DataTable crashData, DataTable naryadData)
-		{
-			// Очистка возможных заметок
-			label.Text = deviceName;
+		//private void UpdateRectangleStatus(Rectangle point, TextBlock label, string deviceName, DataTable crashData, DataTable naryadData)
+		//{
+		//	// Очистка возможных заметок
+		//	label.Text = deviceName;
 
-			// Проверяем данные в таблице Crash
-			DataRow[] crashRows = crashData.Select($"Device = '{deviceName}'");
+		//	// Проверяем данные в таблице Crash
+		//	DataRow[] crashRows = crashData.Select($"Device = '{deviceName}'");
 
-			foreach (var row in crashRows) // Ищем указанное оборудование по всем строкам
-			{
-				string status = row["Status"].ToString();
-				if (status == "Поломка")
-				{
-					point.Fill = Brushes.Red;
-					label.Text += " (Поломка)";
-					return;
-				}
-				else if (status == "В работе")
-				{
-					point.Fill = Brushes.Yellow;
-					label.Text += " (Поломка)";
-					return;
-				}
+		//	foreach (var row in crashRows) // Ищем указанное оборудование по всем строкам
+		//	{
+		//		string status = row["Status"].ToString();
+		//		if (status == "Поломка")
+		//		{
+		//			point.Fill = Brushes.Red;
+		//			label.Text += " (Поломка)";
+		//			return;
+		//		}
+		//		else if (status == "В работе")
+		//		{
+		//			point.Fill = Brushes.Yellow;
+		//			label.Text += " (Поломка)";
+		//			return;
+		//		}
 
-			}
+		//	}
 
-			// Если в Crash не найдены актуальные статусы, продолжить проверку в таблице Naryad
-			string todayDate = DateTime.Now.ToString("yyyy-MM-dd"); // Текущая дата
-			DataRow[] naryadRows = naryadData.Select($"Device_Name = '{deviceName}' AND Date_TO = '{todayDate}'");
+		//	// Если в Crash не найдены актуальные статусы, продолжить проверку в таблице Naryad
+		//	string todayDate = DateTime.Now.ToString("yyyy-MM-dd"); // Текущая дата
+		//	DataRow[] naryadRows = naryadData.Select($"Device_Name = '{deviceName}' AND Date_TO = '{todayDate}'");
 
-			foreach (var row in naryadRows) // Перебираем все строки Naryad
-			{
-				string naryadStatus = row["Status"].ToString();
-				if (string.IsNullOrEmpty(naryadStatus) || naryadStatus == "null")
-				{
-					point.Fill = Brushes.Red;
-					label.Text += " (ТО)";
-					return;
-				}
-				else if (naryadStatus == "В работе")
-				{
-					point.Fill = Brushes.Yellow;
-					label.Text += " (ТО)";
-					return;
-				}
-				else if (naryadStatus == "Выполнен")
-				{
-					point.Fill = Brushes.Green;
-					label.Text += " (ТО)";
-					return;
-				}
+		//	foreach (var row in naryadRows) // Перебираем все строки Naryad
+		//	{
+		//		string naryadStatus = row["Status"].ToString();
+		//		if (string.IsNullOrEmpty(naryadStatus) || naryadStatus == "null")
+		//		{
+		//			point.Fill = Brushes.Red;
+		//			label.Text += " (ТО)";
+		//			return;
+		//		}
+		//		else if (naryadStatus == "В работе")
+		//		{
+		//			point.Fill = Brushes.Yellow;
+		//			label.Text += " (ТО)";
+		//			return;
+		//		}
+		//		else if (naryadStatus == "Выполнен")
+		//		{
+		//			point.Fill = Brushes.Green;
+		//			label.Text += " (ТО)";
+		//			return;
+		//		}
 
-			}
+		//	}
 
-			// Если не найдено ни одного совпадения со статусами, оставить стандартный цвет
-			point.Fill = Brushes.LightGray;
-		}
+		//	// Если не найдено ни одного совпадения со статусами, оставить стандартный цвет
+		//	point.Fill = Brushes.LightGray;
+		//}
 
 
 	}
