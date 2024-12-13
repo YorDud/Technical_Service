@@ -1157,7 +1157,7 @@
                     <TabItem Header="Этаж 1">
                         <Grid>
                             <!-- Изображение плана этажа -->
-                            <Image x:Name="FloorImage" Stretch="Uniform" Width="1000" Height="800" Source="/Floor1.png"/>
+                            <Image x:Name="FloorImage" Stretch="Uniform" Width="1200" Height="970" Source="/Floor1.png" Opacity="0.8"/>
 
                             <Canvas>
                                 <!-- Точки с оборудованием -->
@@ -1198,7 +1198,7 @@
                     <TabItem Header="Этаж 2">
                         <Grid>
                             <!-- Изображение плана этажа -->
-                            <Image x:Name="FloorImage2" Stretch="Uniform" Width="1200" Height="970" Source="/Floor222.png" Opacity="0.8"/>
+                            <Image x:Name="FloorImage2" Stretch="Uniform" Width="1200" Height="970" Source="/Floor222.png" Opacity="0.9"/>
 
                             <Canvas>
                                 <!-- Точки с оборудованием -->

@@ -1522,7 +1522,7 @@ namespace WpfApp4
 					//UpdatePointStatus(Penta580, Penta580Label, "Penta580", crashData, naryadData);
 					//UpdateRectangleStatus(Line1, Line1Label, "Линия1", crashData, naryadData);
 
-
+					
 					//
 					// Этаж 2
 					//
