@@ -415,7 +415,13 @@ namespace WpfApp4
 
 		private void dataGridMonitorNaryad_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
+
 		}
+
+
+
+
+
 		private void dataGridDevices_Types_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			

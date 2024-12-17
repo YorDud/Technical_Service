@@ -35,7 +35,7 @@
 
 
             <Button Content="❓ Помощь" FontSize="16" Margin="10" Padding="10" Height="45" Visibility="Hidden"
-                    HorizontalAlignment="Stretch" Click="ShowHelp" />
+                    HorizontalAlignment="Stretch"/>
         </StackPanel>
 
         <!-- Основное содержание                                                                                         Главное -->
