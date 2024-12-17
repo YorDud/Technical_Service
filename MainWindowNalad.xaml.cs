@@ -415,7 +415,14 @@ namespace WpfApp4
 
 		private void dataGridMonitorNaryad_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
+			if (dataGridMonitorNaryad.SelectedItem is DataRowView selectedRow)
+			{
+				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
+				Monitor_Naryad_Nalad users_Nalad_Edit_Window = new Monitor_Naryad_Nalad(this, selectedRow);
 
+				// Показываем диалоговое окно
+				users_Nalad_Edit_Window.ShowDialog();
+			}
 		}
 
 

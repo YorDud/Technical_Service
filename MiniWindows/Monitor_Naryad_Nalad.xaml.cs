@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -21,9 +22,10 @@ namespace WpfApp4.MiniWindows
 	/// </summary>
 	public partial class Monitor_Naryad_Nalad : Window
 	{
-		private MainWindow mainWindow;
+		private MainWindowNalad mainWindow;
+		private DataRowView _dataRow;
 		private int workNumber = 1;
-		public Monitor_Naryad_Nalad(MainWindow mainWindow)
+		public Monitor_Naryad_Nalad(MainWindowNalad mainWindow, DataRowView dataRow)
 		{
 			InitializeComponent();
 
@@ -97,7 +99,25 @@ namespace WpfApp4.MiniWindows
 			this.Close();
 		}
 
-		
+		private void AddNalad_Click(object sender, RoutedEventArgs e)
+		{
+			// Создание новой строки с номером и текстом работы
+			string workName = FIONalad.Text; // Считываем название работы из текстового поля (можно сделать отдельное поле для наименования работы)
+			string workLine = $"{workNumber}. {workName}";
+
+			// Добавляем в ListBox
+			FIONaladBox.Items.Add(workLine);
+
+			// Увеличиваем номер для следующей работы
+			workNumber++;
+
+			FIONalad.Text = string.Empty;
+		}
+
+		private void StartWork_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
 	}
     
 }
