@@ -229,6 +229,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lab_RezDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MainWindowNalad.xaml.cs">
+      <DependentUpon>MainWindowNalad.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiniWindows\Work_List_Edit_Window.xaml.cs">
       <DependentUpon>Work_List_Edit_Window.xaml</DependentUpon>
     </Compile>
@@ -321,6 +324,10 @@
     <Page Include="CustomMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindowNalad.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
