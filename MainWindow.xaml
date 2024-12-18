@@ -1195,6 +1195,15 @@
                                     <Ellipse x:Name="GorachLushen2" Width="15" Height="15" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="214" Canvas.Top="205" HorizontalAlignment="Center" VerticalAlignment="Top" />
                                     <Ellipse x:Name="OchistPPposLushen" Width="15" Height="15" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="300" Canvas.Top="205" HorizontalAlignment="Left" VerticalAlignment="Center" />
                                     <Ellipse x:Name="PodgotovPPperedLushen" Width="15" Height="15" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="274" Canvas.Top="181" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                    <Ellipse x:Name="SchelochTrav1" Width="16" Height="15" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="293" Canvas.Top="305" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                    <Ellipse x:Name="LineFinishOtm1" Width="15" Height="15" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="551" Canvas.Top="429" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                    <Ellipse x:Name="AutoHimikoGalvanLine" Width="16" Height="15" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="266" Canvas.Top="128" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                    <Ellipse x:Name="LineMetallHimMed" Width="15" Height="15" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="532" Canvas.Top="375" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                    <Ellipse x:Name="GalLine1" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="508" Canvas.Top="251" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                    <Ellipse x:Name="GalLine2" Width="20" Height="20" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="603" Canvas.Top="251" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                    <Ellipse x:Name="GalLineZatOtverst" Width="15" Height="16" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="615" Canvas.Top="402" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                    <Ellipse x:Name="BlackHolle" Width="15" Height="16" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="465" Canvas.Top="255" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                    <Ellipse x:Name="SystemVakPil" Width="20" Height="21" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="39" Canvas.Top="241" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
 
                                 </Canvas>

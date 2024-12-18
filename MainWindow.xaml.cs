@@ -1550,6 +1550,15 @@ namespace WpfApp4
 					UpdatePointStatus(GorachLushen2, "Установка горячего лужения (2)", crashData, naryadData);
 					UpdatePointStatus(OchistPPposLushen, "Установка очистки ПП после лужения", crashData, naryadData);
 					UpdatePointStatus(PodgotovPPperedLushen, "Установка подготовки ПП перед лужением", crashData, naryadData);
+					UpdatePointStatus(SchelochTrav1, "Установка щелочного травления (1эт)", crashData, naryadData);
+					UpdatePointStatus(LineFinishOtm1, "Линия финишной отмывки (1)", crashData, naryadData);
+					UpdatePointStatus(AutoHimikoGalvanLine, "Автоматическая химико-гальваническая линия", crashData, naryadData);
+					UpdatePointStatus(LineMetallHimMed, "Линия металлизации и хим-медь", crashData, naryadData);
+					UpdatePointStatus(GalLine1, "Гальваническая линия (1)", crashData, naryadData);
+					UpdatePointStatus(GalLine2, "Гальваническая линия (2)", crashData, naryadData);
+					UpdatePointStatus(GalLineZatOtverst, "Гальваническая линия затяжки отверстий", crashData, naryadData);
+					UpdatePointStatus(BlackHolle, "Линия BlackHolle", crashData, naryadData);
+					UpdatePointStatus(SystemVakPil, "Система вакуумной пылеуборки", crashData, naryadData);
 
 
 					//
