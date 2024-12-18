@@ -1516,17 +1516,46 @@ namespace WpfApp4
 					// Этаж 1
 					// 
 					// Обновляем статусы для каждой точки
-					//UpdatePointStatus(Penta300, Penta300Label, "Penta300", crashData, naryadData);
-					//UpdatePointStatus(Electrotest618, Electrotest618Label, "Электротест 618", crashData, naryadData);
-					//UpdatePointStatus(MaskUnit, MaskUnitLabel, "Установка проявления маски", crashData, naryadData);
-					//UpdatePointStatus(Penta580, Penta580Label, "Penta580", crashData, naryadData);
-					//UpdateRectangleStatus(Line1, Line1Label, "Линия1", crashData, naryadData);
+					UpdatePointStatus(GilyotinaElektro1, "Гильотина электромеханическая (1)", crashData, naryadData);
+					UpdatePointStatus(AutomatikPinner1, "Автоматический пиннер (1)", crashData, naryadData);
+					UpdatePointStatus(AutomatikPinner2, "Автоматический пиннер (2)", crashData, naryadData);
+					UpdatePointStatus(SverlStanTrehstacionar1_3, "Сверлильный станок трехстационарный (1-3)", crashData, naryadData);
+					UpdatePointStatus(SverlStan4, "Сверлильный станок (4)", crashData, naryadData);
+					UpdatePointStatus(SverlStan5, "Сверлильный станок (5)", crashData, naryadData);
+					UpdatePointStatus(SverlStan4_Shpindel6, "Сверлильный станок 4-х шпиндельный (6)", crashData, naryadData);
+					UpdatePointStatus(SverlStan7, "Сверлильный станок (7)", crashData, naryadData);
+					UpdatePointStatus(SverlStanTrehstacionar8_10, "Сверлильный станок трехстационарный (8-10)", crashData, naryadData);
+					UpdatePointStatus(SverlStan11, "Сверлильный станок (11)", crashData, naryadData);
+					UpdatePointStatus(SverlStan12, "Сверлильный станок (12)", crashData, naryadData);
+					UpdatePointStatus(Skraibirov1, "Установка скрайбирования (1)", crashData, naryadData);
+					UpdatePointStatus(Skraibirov2, "Установка скрайбирования (2)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan1, "Фрезерный станок (1)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan2, "Фрезерный станок (2)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan3, "Фрезерный станок (3)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan4, "Фрезерный станок (4)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan5, "Фрезерный станок (5)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan6, "Фрезерный станок (6)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan7, "Фрезерный станок (7)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan8, "Фрезерный станок (8)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan9, "Фрезерный станок (9)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan10, "Фрезерный станок (10)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan12, "Фрезерный станок (12)", crashData, naryadData);
+					UpdatePointStatus(AvtomatUstanovSnatZausen, "Автоматическая установка снятия заусенцев", crashData, naryadData);
+					UpdatePointStatus(LinePermObr, "Линия перманганатной обработки", crashData, naryadData);
+					UpdatePointStatus(LineSnatMetallorez, "Линия снятия металлорезиста", crashData, naryadData);
+					UpdatePointStatus(LineSnatPhotorez, "Линия снятия фоторезиста", crashData, naryadData);
+					UpdatePointStatus(PechKonvek1, "Печь конвекционная (1)", crashData, naryadData);
+					UpdatePointStatus(PechKonvek2, "Печь конвекционная (2)", crashData, naryadData);
+					UpdatePointStatus(GorachLushen1, "Установка горячего лужения (1)", crashData, naryadData);
+					UpdatePointStatus(GorachLushen2, "Установка горячего лужения (2)", crashData, naryadData);
+					UpdatePointStatus(OchistPPposLushen, "Установка очистки ПП после лужения", crashData, naryadData);
+					UpdatePointStatus(PodgotovPPperedLushen, "Установка подготовки ПП перед лужением", crashData, naryadData);
 
-					
+
 					//
 					// Этаж 2
 					//
-										
+
 					UpdatePointStatus(PayalMask, "Линия проявления паяльной маски", crashData, naryadData); 
 					UpdatePointStatus(Photorez, "Линия проявления фоторезиста", crashData, naryadData); 
 					UpdatePointStatus(TravDES, "Конвейерная линия проявления, травления, снятия фоторезиста DES", crashData, naryadData); 
