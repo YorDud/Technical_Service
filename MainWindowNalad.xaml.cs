@@ -365,8 +365,21 @@ namespace WpfApp4
 		{
 			if (dataGridMonitorCrash.SelectedItem is DataRowView selectedRow)
 			{
-				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
-				
+				// Проверяем значение в столбце "status"
+				string status = selectedRow["Status"]?.ToString();
+
+				if (string.IsNullOrEmpty(status) || status == "Поломка") // Если статус пустой или поломка
+				{
+					// Открываем Monitor_Naryad_Nalad
+					Crash_Nalad monitorWindow = new Crash_Nalad(this, selectedRow);
+					monitorWindow.ShowDialog();
+				}
+				else if (status == "В работе") // Если статус "В работе"
+				{
+					// Открываем Monitor_Naryad_Nalad_Complete
+					Crash_Nalad_Complete monitorWindowComplete = new Crash_Nalad_Complete(this, selectedRow);
+					monitorWindowComplete.ShowDialog();
+				}
 			}
 
 		}

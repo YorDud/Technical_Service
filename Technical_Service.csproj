@@ -235,6 +235,12 @@
     <Compile Include="MainWindowNalad.xaml.cs">
       <DependentUpon>MainWindowNalad.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MiniWindows\Crash_Nalad.xaml.cs">
+      <DependentUpon>Crash_Nalad.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MiniWindows\Crash_Nalad_Complete.xaml.cs">
+      <DependentUpon>Crash_Nalad_Complete.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MiniWindows\Monitor_Naryad_Nalad_Complete.xaml.cs">
       <DependentUpon>Monitor_Naryad_Nalad_Complete.xaml</DependentUpon>
     </Compile>
@@ -354,6 +360,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MiniWindows\Crash_Nalad.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MiniWindows\Crash_Nalad_Complete.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MiniWindows\Monitor_Naryad_Nalad_Complete.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
