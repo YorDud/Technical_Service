@@ -287,15 +287,7 @@ namespace WpfApp4
 
 		
 
-		private void Load_Data_DataGrid()
-		{
-			WpfApp4.Lab_RezDataSet lab_RezDataSet = ((WpfApp4.Lab_RezDataSet)(this.FindResource("lab_RezDataSet")));
-			// Загрузить данные в таблицу test_table. Можно изменить этот код как требуется.
-			WpfApp4.Lab_RezDataSetTableAdapters.test_tableTableAdapter lab_RezDataSettest_tableTableAdapter = new WpfApp4.Lab_RezDataSetTableAdapters.test_tableTableAdapter();
-			lab_RezDataSettest_tableTableAdapter.Fill(lab_RezDataSet.test_table);
-			System.Windows.Data.CollectionViewSource test_tableViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("test_tableViewSource")));
-			test_tableViewSource.View.MoveCurrentToFirst();
-		}
+		
 
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -376,6 +368,7 @@ namespace WpfApp4
 				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
 				
 			}
+
 		}
 		private void dataGridUsers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
@@ -417,11 +410,21 @@ namespace WpfApp4
 		{
 			if (dataGridMonitorNaryad.SelectedItem is DataRowView selectedRow)
 			{
-				// Создаем экземпляр окна редактирования, передавая выбранный DataRowView и ссылку на основное окно
-				Monitor_Naryad_Nalad users_Nalad_Edit_Window = new Monitor_Naryad_Nalad(this, selectedRow);
+				// Проверяем значение в столбце "status"
+				string status = selectedRow["Status"]?.ToString();
 
-				// Показываем диалоговое окно
-				users_Nalad_Edit_Window.ShowDialog();
+				if (string.IsNullOrEmpty(status)) // Если статус пустой
+				{
+					// Открываем Monitor_Naryad_Nalad
+					Monitor_Naryad_Nalad monitorWindow = new Monitor_Naryad_Nalad(this, selectedRow);
+					monitorWindow.ShowDialog();
+				}
+				else if (status == "В работе") // Если статус "В работе"
+				{
+					// Открываем Monitor_Naryad_Nalad_Complete
+					Monitor_Naryad_Nalad_Complete monitorWindowComplete = new Monitor_Naryad_Nalad_Complete(this, selectedRow);
+					monitorWindowComplete.ShowDialog();
+				}
 			}
 		}
 

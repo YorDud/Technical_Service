@@ -28,7 +28,7 @@ namespace WpfApp4.MiniWindows
 		public Monitor_Naryad_Nalad(MainWindowNalad mainWindow, DataRowView dataRow)
 		{
 			InitializeComponent();
-
+			_dataRow = dataRow;
 			this.mainWindow = mainWindow;
 			LoadFIO();
 
@@ -116,7 +116,40 @@ namespace WpfApp4.MiniWindows
 
 		private void StartWork_Click(object sender, RoutedEventArgs e)
 		{
+			var workList = string.Join("\n", FIONaladBox.Items.Cast<string>());
 
+			var id = _dataRow["ID"];
+
+			// SQL-запрос для обновления данных в базе
+			string query = "UPDATE [Technical_Service].[dbo].[Naryad] " +
+						   "SET [Users_FIO] = @Users_FIO, [Date_Start] = @Date_Start, " +
+						   "[Status] = @Status " +
+						   "WHERE [ID] = @ID";
+
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				{
+					using (SqlCommand command = new SqlCommand(query, connection))
+					{
+						command.Parameters.AddWithValue("@Users_FIO", workList); // Обновляем перечень работ
+						command.Parameters.AddWithValue("@Date_Start", DateTime.Now);
+						command.Parameters.AddWithValue("@Status", "В работе");
+						command.Parameters.AddWithValue("@ID", id);
+
+						connection.Open();
+						command.ExecuteNonQuery();
+
+						// После сохранения изменений обновляем данные в главном окне
+						mainWindow.LoadData_Monitor_Naryad();
+						this.Close();
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ошибка: " + ex.Message);
+			}
 		}
 	}
     

@@ -77,7 +77,7 @@ namespace WpfApp4.MiniWindows
 		private void LoadStatus()
 		{
 			Status.Items.Add("В работе");
-			Status.Items.Add("Выполнен");
+			Status.Items.Add("Выполнено");
 			Status.Items.Add("Закрыт");
 		}
 
