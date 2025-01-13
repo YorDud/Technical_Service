@@ -214,6 +214,9 @@
     <Compile Include="Avtorize.xaml.cs">
       <DependentUpon>Avtorize.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Crash\Crash_Create_Wndow_Nalad.xaml.cs">
+      <DependentUpon>Crash_Create_Wndow_Nalad.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Crash\Crash_Create_Wndow_Avtorize.xaml.cs">
       <DependentUpon>Crash_Create_Wndow_Avtorize.xaml</DependentUpon>
     </Compile>
@@ -327,6 +330,10 @@
     <Page Include="Avtorize.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Crash\Crash_Create_Wndow_Nalad.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Crash\Crash_Create_Wndow_Avtorize.xaml">
       <Generator>MSBuild:Compile</Generator>

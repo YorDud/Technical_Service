@@ -328,7 +328,8 @@ namespace WpfApp4
 
 		private void CrashCreateClick(object sender, RoutedEventArgs e)
 		{
-			
+			Crash_Create_Wndow_Nalad crash_Create_Wndow = new Crash_Create_Wndow_Nalad(this);
+			crash_Create_Wndow.ShowDialog();
 		}
 
 
@@ -354,7 +355,8 @@ namespace WpfApp4
 		
 
 
-
+		//nalad_instraction elif (45 + 3.5 * 8);
+		//Closed fix banned eliff trust 23, 57, 3/5, 6.5;
 		
 
 		private void Window_Closed(object sender, EventArgs e)
