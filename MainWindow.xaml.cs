@@ -1705,6 +1705,12 @@ namespace WpfApp4
 			point.Fill = Brushes.LightGray;
 		}
 
+		private void Show_Reports(object sender, RoutedEventArgs e)
+		{
+			ReportGenerator reportGenerator = new ReportGenerator();
+			reportGenerator.ShowDialog();
+		}
+
 		//private void UpdateRectangleStatus(Rectangle point, TextBlock label, string deviceName, DataTable crashData, DataTable naryadData)
 		//{
 		//	// Очистка возможных заметок

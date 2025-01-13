@@ -60,6 +60,7 @@
             </Expander>
 
             <Button Content="🗺️ Визуал поломок и ТО" Margin="10" Height="45" Padding="5" HorizontalAlignment="Stretch" Click="Show_Crash"/>
+            <Button Content="📝 Отчеты" Margin="10" Height="45" Padding="5" HorizontalAlignment="Stretch" Click="Show_Reports"/>
 
 
 
