@@ -60,8 +60,19 @@
                     <ComboBoxItem Content="Январь"/>
                     <ComboBoxItem Content="Февраль"/>
                     <ComboBoxItem Content="Март"/>
+                    <ComboBoxItem Content="Апрель"/>
+                    <ComboBoxItem Content="Май"/>
+                    <ComboBoxItem Content="Июнь"/>
+                    <ComboBoxItem Content="Июль"/>
+                    <ComboBoxItem Content="Август"/>
+                    <ComboBoxItem Content="Сентябрь"/>
+                    <ComboBoxItem Content="Октябрь"/>
+                    <ComboBoxItem Content="Ноябрь"/>
+                    <ComboBoxItem Content="Декабрь"/>
                     <ComboBoxItem Content="1-й квартал"/>
                     <ComboBoxItem Content="2-й квартал"/>
+                    <ComboBoxItem Content="3-й квартал"/>
+                    <ComboBoxItem Content="4-й квартал"/>
                     <ComboBoxItem Content="Год"/>
                 </ComboBox>
 
@@ -69,6 +80,12 @@
                 <ComboBox x:Name="YearComboBox" Grid.Column="1" Grid.Row="0">
                     <ComboBoxItem Content="2023"/>
                     <ComboBoxItem Content="2024"/>
+                    <ComboBoxItem Content="2025"/>
+                    <ComboBoxItem Content="2026"/>
+                    <ComboBoxItem Content="2027"/>
+                    <ComboBoxItem Content="2028"/>
+                    <ComboBoxItem Content="2029"/>
+                    <ComboBoxItem Content="2030"/>
                 </ComboBox>
 
                 <!-- Кнопка создания отчета -->
