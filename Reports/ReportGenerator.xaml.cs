@@ -237,21 +237,44 @@ namespace WpfApp4.MiniWindows
 				}
 
 
+				//int totalRow = startRow + dbData.Count;
+				//int totalNormHours = dbData.Sum(item => int.Parse(CalculateNormHour(item.TypesToWorkList, workListNormHours)));
+
+				//worksheet.Cells[totalRow, 4].Value = "Итого:";
+				//worksheet.Cells[totalRow, 4].Style.Font.Bold = true;
+				//worksheet.Cells[totalRow, 4].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+
+				//worksheet.Cells[totalRow, 5].Value = totalNormHours;
+				//worksheet.Cells[totalRow, 5].Style.Font.Bold = true;
+				//worksheet.Cells[totalRow, 5].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+				//for (int col = 4; col <= 5; col++)
+				//{
+				//	worksheet.Cells[totalRow, col].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+				//}
+
+
 				int totalRow = startRow + dbData.Count;
 				int totalNormHours = dbData.Sum(item => int.Parse(CalculateNormHour(item.TypesToWorkList, workListNormHours)));
 
-				worksheet.Cells[totalRow, 4].Value = "Итого:";
-				worksheet.Cells[totalRow, 4].Style.Font.Bold = true;
-				worksheet.Cells[totalRow, 4].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+				// Объединяем ячейки с 1 по 4 столбец для строки "Итого"
+				worksheet.Cells[totalRow, 1, totalRow, 4].Merge = true;
+				worksheet.Cells[totalRow, 1].Value = "Итого:";
+				worksheet.Cells[totalRow, 1].Style.Font.Bold = true;
+				worksheet.Cells[totalRow, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
 
+				// Вывод итогового значения в 5-й колонке
 				worksheet.Cells[totalRow, 5].Value = totalNormHours;
 				worksheet.Cells[totalRow, 5].Style.Font.Bold = true;
 				worksheet.Cells[totalRow, 5].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
 
-				for (int col = 4; col <= 5; col++)
+				// Применяем рамки (границы) ко всем затронутым ячейкам
+				for (int col = 1; col <= 7; col++)
 				{
 					worksheet.Cells[totalRow, col].Style.Border.BorderAround(ExcelBorderStyle.Thin);
 				}
+
+
 
 				worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
 
