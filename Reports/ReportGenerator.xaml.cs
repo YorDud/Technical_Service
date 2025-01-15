@@ -236,24 +236,6 @@ namespace WpfApp4.MiniWindows
 					}
 				}
 
-
-				//int totalRow = startRow + dbData.Count;
-				//int totalNormHours = dbData.Sum(item => int.Parse(CalculateNormHour(item.TypesToWorkList, workListNormHours)));
-
-				//worksheet.Cells[totalRow, 4].Value = "Итого:";
-				//worksheet.Cells[totalRow, 4].Style.Font.Bold = true;
-				//worksheet.Cells[totalRow, 4].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
-
-				//worksheet.Cells[totalRow, 5].Value = totalNormHours;
-				//worksheet.Cells[totalRow, 5].Style.Font.Bold = true;
-				//worksheet.Cells[totalRow, 5].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-
-				//for (int col = 4; col <= 5; col++)
-				//{
-				//	worksheet.Cells[totalRow, col].Style.Border.BorderAround(ExcelBorderStyle.Thin);
-				//}
-
-
 				int totalRow = startRow + dbData.Count;
 				int totalNormHours = dbData.Sum(item => int.Parse(CalculateNormHour(item.TypesToWorkList, workListNormHours)));
 
@@ -273,6 +255,39 @@ namespace WpfApp4.MiniWindows
 				{
 					worksheet.Cells[totalRow, col].Style.Border.BorderAround(ExcelBorderStyle.Thin);
 				}
+
+
+
+				int signatureStartRow = totalRow + 2;
+
+				string[] leftSignatures = { "Составил: инженер", "Главный механик", "Главный энергетик" };
+				string[] leftNames = { "И.А. Гусев", "А.В. Игорев", "Н.С. Чернов" };
+				for (int i = 0; i < leftSignatures.Length; i++)
+				{
+					worksheet.Cells[signatureStartRow + i, 2].Value = $"{leftSignatures[i]}";
+					//worksheet.Cells[signatureStartRow + i, 1, signatureStartRow + i, 2].Merge = true;
+					worksheet.Cells[signatureStartRow + i, 2].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+
+					worksheet.Cells[signatureStartRow + i, 4].Value = leftNames[i];
+					worksheet.Cells[signatureStartRow + i, 4].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+					//worksheet.Cells[signatureStartRow + i, 2, signatureStartRow + i, 3].Merge = true;
+					worksheet.Cells[signatureStartRow + i, 3].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+				}
+
+				string[] rightSignatures = { "Начальник упр. б", "Главный механик", "Главный энергетик", "Начальник ППК" };
+				string[] rightNames = { "Е.А. Иванов", "А.В. Егоров", "Н.С. Чернов", "К.И. Алекпм" };
+				for (int i = 0; i < rightSignatures.Length; i++)
+				{
+					worksheet.Cells[signatureStartRow + i, 5].Value = $"{rightSignatures[i]}";
+					worksheet.Cells[signatureStartRow + i, 5].Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+
+					worksheet.Cells[signatureStartRow + i, 7].Value = rightNames[i];
+					worksheet.Cells[signatureStartRow + i, 7].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+
+					// Линия для подписи
+					worksheet.Cells[signatureStartRow + i, 6].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+				}
+
 
 
 
