@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using OfficeOpenXml.Style;
+using OfficeOpenXml;
 
 namespace WpfApp4.MiniWindows
 {
@@ -424,5 +427,369 @@ namespace WpfApp4.MiniWindows
 		{
 			this.Close();
         }
-    }
+
+
+
+
+
+		private void Naryad_Download_Click(object sender, RoutedEventArgs e)
+		{
+			if (_dataRow == null)
+			{
+				MessageBox.Show("Выберите строку данных для создания наряда.");
+				return;
+			}
+
+			// Извлекаем данные из _dataRow
+			int id = Convert.ToInt32(_dataRow["ID"]);
+			DateTime dateTo = Convert.ToDateTime(_dataRow["Date_TO"]);
+			string deviceName = _dataRow["Device_Name"]?.ToString() ?? " ";
+			string typesToName = _dataRow["Types_TO_Name"]?.ToString() ?? " ";
+			string typesToWorkList = _dataRow["Types_TO_Work_List"]?.ToString() ?? " ";
+			string usersFio = _dataRow["Users_FIO"]?.ToString() ?? " ";
+
+			// Заменяем символы '\n' на перенос строки для Excel
+			typesToWorkList = typesToWorkList.Replace("\\n", Environment.NewLine);
+			usersFio = usersFio.Replace("\\n", Environment.NewLine);
+
+			// Создание Excel-документа
+			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+			using (var package = new ExcelPackage())
+			{
+				var worksheet = package.Workbook.Worksheets.Add("Наряд");
+
+				// Заголовок
+				worksheet.Cells["A1:E1"].Merge = true;
+				worksheet.Cells["A1"].Value = "ООО \"Резонит Плюс\", Служба ремонта и обслуживания оборудования";
+				worksheet.Cells["A1"].Style.Font.Bold = true;
+				worksheet.Cells["A1"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+				worksheet.Cells["A2:E2"].Merge = true;
+				worksheet.Cells["A2"].Value = "Наряд на проведение технического обслуживания";
+				worksheet.Cells["A2"].Style.Font.Bold = true;
+				worksheet.Cells["A2"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+				worksheet.Cells["A3:E3"].Merge = true;
+				worksheet.Cells["A3"].Value = $"Наряд № {id} от {dateTo:dd.MM.yyyy}";
+				worksheet.Cells["A3"].Style.Font.Bold = true;
+				worksheet.Cells["A3"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+				// Подписи
+				worksheet.Cells["A5:E5"].Merge = true;
+				worksheet.Cells["A5"].Value = "Начальник отдела по ремонту и обслуживанию: Гусев И. А.";
+
+				// Таблица
+				string[] headers = { "№ п/п", "Наименование оборудования", "Вид работ", "Перечень работ", "Наладчики" };
+				for (int i = 0; i < headers.Length; i++)
+				{
+					worksheet.Cells[8, i + 1].Value = headers[i];
+					worksheet.Cells[8, i + 1].Style.Font.Bold = true;
+					worksheet.Cells[8, i + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+					worksheet.Cells[8, i + 1].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+					worksheet.Cells[8, i + 1].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+					//worksheet.Cells[8, i + 1].Style.WrapText = true; // Включаем перенос текста
+				}
+
+				// Данные таблицы
+				worksheet.Cells[9, 1].Value = 1; // № п/п
+				worksheet.Cells[9, 2].Value = deviceName; // Наименование оборудования
+				worksheet.Cells[9, 3].Value = typesToName; // Вид работ
+				worksheet.Cells[9, 4].Value = typesToWorkList; // Перечень работ
+				worksheet.Cells[9, 5].Value = usersFio; // Наладчики
+
+				for (int col = 1; col <= 5; col++)
+				{
+					worksheet.Cells[9, col].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+					worksheet.Cells[9, col].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+					worksheet.Cells[9, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+					worksheet.Cells[9, col].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+					worksheet.Cells[9, 4].Style.WrapText = true; // Перенос текста
+					worksheet.Cells[9, 5].Style.WrapText = true; // Перенос текста
+				}
+
+
+				// Автоматическая ширина для всех колонок
+				worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
+
+				// Фиксированная ширина для 4-го и 5-го столбиков
+				worksheet.Column(1).Width = 7;
+				worksheet.Column(4).Width = 30; // Ширина для "Перечень работ"
+				worksheet.Column(5).Width = 25; // Ширина для "Наладчики"
+
+
+				// После добавления данных таблицы
+
+				// Определяем начальную строку для подписи
+				int signatureRow = 13; // 9 (таблица) + 4 строки
+
+				// Добавляем подчеркивание
+				worksheet.Cells[signatureRow, 5].Value = ""; // Пустая ячейка
+				worksheet.Cells[signatureRow, 5].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+
+				// Добавляем текст "Подпись" ниже
+				worksheet.Cells[signatureRow + 1, 5].Value = "Подпись";
+				worksheet.Cells[signatureRow + 1, 5].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+				worksheet.Cells[signatureRow + 1, 5].Style.VerticalAlignment = ExcelVerticalAlignment.Top;
+
+
+
+
+				// Сохранение на рабочий стол
+				var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+				var filePath = System.IO.Path.Combine(desktopPath, $"Наряд_№{id}_от_{dateTo:dd.MM.yyyy}.xlsx");
+				package.SaveAs(new FileInfo(filePath));
+			}
+
+			MessageBox.Show("Наряд успешно сохранён на рабочем столе.");
+			this.Close();
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		//private void Naryad_Download_Click(object sender, RoutedEventArgs e)
+		//{
+		//	if (_dataRow == null)
+		//	{
+		//		MessageBox.Show("Выберите строку данных для создания наряда.");
+		//		return;
+		//	}
+
+		//	// Извлекаем данные из _dataRow
+		//	int id = Convert.ToInt32(_dataRow["ID"]);
+		//	DateTime dateTo = Convert.ToDateTime(_dataRow["Date_TO"]);
+		//	string deviceName = _dataRow["Device_Name"]?.ToString() ?? " ";
+		//	string typesToName = _dataRow["Types_TO_Name"]?.ToString() ?? " ";
+		//	string typesToWorkList = _dataRow["Types_TO_Work_List"]?.ToString() ?? " ";
+		//	string usersFio = _dataRow["Users_FIO"]?.ToString() ?? " ";
+
+
+
+		//	// Создание Excel-документа
+		//	ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+		//	using (var package = new ExcelPackage())
+		//	{
+		//		var worksheet = package.Workbook.Worksheets.Add("Наряд");
+
+		//		// Заголовок
+		//		worksheet.Cells["A1:E1"].Merge = true;
+		//		worksheet.Cells["A1"].Value = "ООО \"Резонит Плюс\", Служба ремонта и облуживания оборудования";
+		//		worksheet.Cells["A1"].Style.Font.Bold = true;
+		//		worksheet.Cells["A1"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+		//		worksheet.Cells["A2:E2"].Merge = true;
+		//		worksheet.Cells["A2"].Value = "Наряд на проведение технического обслуживания";
+		//		worksheet.Cells["A2"].Style.Font.Bold = true;
+		//		worksheet.Cells["A2"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+		//		worksheet.Cells["A3:E3"].Merge = true;
+		//		worksheet.Cells["A3"].Value = $"Наряд № {id} от {dateTo:dd.MM.yyyy}";
+		//		worksheet.Cells["A3"].Style.Font.Bold = true;
+		//		worksheet.Cells["A3"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+		//		// Подписи
+		//		worksheet.Cells["A5:E5"].Merge = true;
+		//		worksheet.Cells["A5"].Value = "Начальник отдела по ремонту и обслуживанию: Гусев И. А.";
+
+		//		//worksheet.Cells["E6"].Value = "Наладчики";
+		//		//worksheet.Cells["E6"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+		//		//worksheet.Cells["E7"].Value = usersFio;
+		//		//worksheet.Cells["E7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+		//		// Таблица
+		//		string[] headers = { "№ п/п", "Наименование оборудования", "Вид работ", "Перечень работ", "Наладчики" };
+		//		for (int i = 0; i < headers.Length; i++)
+		//		{
+		//			worksheet.Cells[8, i + 1].Value = headers[i];
+		//			worksheet.Cells[8, i + 1].Style.Font.Bold = true;
+		//			worksheet.Cells[8, i + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+		//			worksheet.Cells[8, i + 1].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+		//			worksheet.Cells[8, i + 1].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+		//		}
+
+		//		// Данные таблицы
+		//		worksheet.Cells[9, 1].Value = 1; // № п/п
+		//		worksheet.Cells[9, 2].Value = deviceName; // Наименование оборудования
+		//		worksheet.Cells[9, 3].Value = typesToName; // Вид работ
+		//		worksheet.Cells[9, 4].Value = typesToWorkList; // Перечень работ
+		//		worksheet.Cells[9, 5].Value = usersFio; // Наладчики
+
+		//		for (int col = 1; col <= 5; col++)
+		//		{
+		//			worksheet.Cells[9, col].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+		//			worksheet.Cells[9, col].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+		//			worksheet.Cells[9, col].Style.VerticalAlignment = ExcelVerticalAlignment.Top;
+		//			worksheet.Cells[9, 4].Style.WrapText = true; // Перенос текста
+		//			worksheet.Cells[9, 5].Style.WrapText = true; // Перенос текста
+		//		}
+
+		//		worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
+
+		//		// Сохранение на рабочий стол
+		//		var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+		//		var filePath = System.IO.Path.Combine(desktopPath, $"Наряд_№{id}_от_{dateTo:dd.MM.yyyy}.xlsx");
+		//		package.SaveAs(new FileInfo(filePath));
+		//	}
+
+		//	MessageBox.Show("Наряд успешно сохранён на рабочем столе.");
+		//	this.Close();
+		//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		//		private void Naryad_Download_Click(object sender, RoutedEventArgs e)
+		//		{
+		//			string query = @"
+		//SELECT n.ID, 
+		//       n.Date_TO, 
+		//       n.Device_Name, 
+		//       n.Types_TO_Name, 
+		//       n.Types_TO_Work_List, 
+		//       n.Users_FIO
+		//FROM Naryad n";
+
+		//			var dbData = new List<(int ID, DateTime Date_TO, string Device_Name, string Types_TO_Name, string Types_TO_Work_List, string Users_FIO)>();
+
+		//			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+		//			{
+		//				try
+		//				{
+		//					connection.Open();
+		//					using (SqlCommand command = new SqlCommand(query, connection))
+		//					{
+		//						using (SqlDataReader reader = command.ExecuteReader())
+		//						{
+		//							while (reader.Read())
+		//							{
+		//								var id = reader.GetInt32(0);
+		//								var dateTo = reader.GetDateTime(1);
+		//								var deviceName = reader.IsDBNull(2) ? " " : reader.GetString(2);
+		//								var typesToName = reader.IsDBNull(3) ? " " : reader.GetString(3);
+		//								var typesToWorkList = reader.IsDBNull(4) ? " " : reader.GetString(4);
+		//								var usersFio = reader.IsDBNull(5) ? " " : reader.GetString(5);
+
+		//								dbData.Add((id, dateTo, deviceName, typesToName, typesToWorkList, usersFio));
+		//							}
+		//						}
+		//					}
+		//				}
+		//				catch (Exception ex)
+		//				{
+		//					MessageBox.Show($"Ошибка подключения к БД: {ex.Message}");
+		//					return;
+		//				}
+		//			}
+
+		//			if (dbData.Count == 0)
+		//			{
+		//				MessageBox.Show("Данные для создания наряда отсутствуют.");
+		//				return;
+		//			}
+
+		//			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+		//			foreach (var row in dbData)
+		//			{
+		//				using (var package = new ExcelPackage())
+		//				{
+		//					var worksheet = package.Workbook.Worksheets.Add("Наряд");
+
+		//					// Заголовок
+		//					worksheet.Cells["A1:E1"].Merge = true;
+		//					worksheet.Cells["A1"].Value = "ООО \"Микролит\", инженерная служба";
+		//					worksheet.Cells["A1"].Style.Font.Bold = true;
+		//					worksheet.Cells["A1"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+		//					worksheet.Cells["A2:E2"].Merge = true;
+		//					worksheet.Cells["A2"].Value = "Наряд на проведение технического обслуживания";
+		//					worksheet.Cells["A2"].Style.Font.Bold = true;
+		//					worksheet.Cells["A2"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+		//					worksheet.Cells["A3:E3"].Merge = true;
+		//					worksheet.Cells["A3"].Value = $"Наряд № {row.ID} от {row.Date_TO:dd.MM.yyyy}";
+		//					worksheet.Cells["A3"].Style.Font.Bold = true;
+		//					worksheet.Cells["A3"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+		//					// Подписи
+		//					worksheet.Cells["A5:E5"].Merge = true;
+		//					worksheet.Cells["A5"].Value = "Начальник отдела по ремонту и обслуживанию Гусев И. А.";
+
+		//					worksheet.Cells["E6"].Value = "Наладчики";
+		//					worksheet.Cells["E6"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+		//					worksheet.Cells["E7"].Value = row.Users_FIO;
+		//					worksheet.Cells["E7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+		//					// Таблица
+		//					string[] headers = { "№ п/п", "Наименование оборудования", "Вид работ", "Перечень работ" };
+		//					for (int i = 0; i < headers.Length; i++)
+		//					{
+		//						worksheet.Cells[8, i + 1].Value = headers[i];
+		//						worksheet.Cells[8, i + 1].Style.Font.Bold = true;
+		//						worksheet.Cells[8, i + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+		//						worksheet.Cells[8, i + 1].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+		//						worksheet.Cells[8, i + 1].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+		//					}
+
+		//					// Данные таблицы
+		//					worksheet.Cells[9, 1].Value = 1; // № п/п
+		//					worksheet.Cells[9, 2].Value = row.Device_Name; // Наименование оборудования
+		//					worksheet.Cells[9, 3].Value = row.Types_TO_Name; // Вид работ
+		//					worksheet.Cells[9, 4].Value = row.Types_TO_Work_List; // Перечень работ
+
+		//					for (int col = 1; col <= 4; col++)
+		//					{
+		//						worksheet.Cells[9, col].Style.Border.BorderAround(ExcelBorderStyle.Thin);
+		//						worksheet.Cells[9, col].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+		//					}
+
+		//					worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
+
+		//					// Сохранение на рабочий стол
+		//					var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+		//					var filePath = System.IO.Path.Combine(desktopPath, $"Наряд_№{row.ID}_от_{row.Date_TO:dd.MM.yyyy}.xlsx");
+		//					package.SaveAs(new FileInfo(filePath));
+		//				}
+		//			}
+
+		//			MessageBox.Show("Наряды созданы на рабочем столе.");
+		//			this.Close();
+		//		}
+	}
 }
