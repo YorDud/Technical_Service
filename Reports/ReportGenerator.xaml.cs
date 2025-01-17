@@ -237,7 +237,10 @@ namespace WpfApp4.MiniWindows
 				}
 
 				int totalRow = startRow + dbData.Count;
-				int totalNormHours = dbData.Sum(item => int.Parse(CalculateNormHour(item.TypesToWorkList, workListNormHours)));
+
+				double totalNormHours = dbData.Sum(item => double.Parse(CalculateNormHour(item.TypesToWorkList, workListNormHours), System.Globalization.CultureInfo.InvariantCulture));
+
+				//int totalNormHours = dbData.Sum(item => int.Parse(CalculateNormHour(item.TypesToWorkList, workListNormHours)));
 
 				// Объединяем ячейки с 1 по 4 столбец для строки "Итого"
 				worksheet.Cells[totalRow, 1, totalRow, 4].Merge = true;
@@ -344,21 +347,35 @@ namespace WpfApp4.MiniWindows
 		{
 			var items = typesToWorkList.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
 
-			int totalNormHour = 0;
+			double totalNormHour = 0;
 			foreach (var item in items)
 			{
 				string trimmedItem = item.Trim();
 
-				// Проверяем, существует ли тип работы в словаре и добавляем соответствующие нормированные часы
+				// Проверяем, существует ли тип работы в словаре и добавляем соответствующие нормированные часы  
 				if (workListNormHours.ContainsKey(trimmedItem))
 				{
-					// Конкатенируем строки Norm_Hour
-					totalNormHour += int.Parse(workListNormHours[trimmedItem]);
+					// Используем double для поддержки десятичных чисел и обрабатываем возможное использование запятой
+					double normHour;
+					if (double.TryParse(workListNormHours[trimmedItem].Replace(',', '.'), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out normHour))
+					{
+						totalNormHour += normHour;
+					}
+					else
+					{
+						// Можно логировать ошибку или бросить исключение
+					}
 				}
 			}
 
-			return totalNormHour.ToString(); // Возвращаем суммированное значение как строку
+			// Проверим, является ли число целым, и изменим формат вывода
+			if (totalNormHour % 1 == 0)
+				return totalNormHour.ToString("F0", System.Globalization.CultureInfo.InvariantCulture); // Без десятичных знаков
+			else
+				return totalNormHour.ToString("F1", System.Globalization.CultureInfo.InvariantCulture); // С одним десятичным знаком
 		}
+
+
 
 		// Метод для очистки строки Types_TO_Work_List, оставляя числовые индикаторы
 		private string CleanTypesToWorkList(string input)
