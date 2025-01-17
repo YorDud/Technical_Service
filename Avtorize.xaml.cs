@@ -118,5 +118,9 @@ namespace WpfApp4
 			crash_Create_Wndow.ShowDialog();
 		}
 
-	}
+		private void ExitButton_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+		}
+    }
 }

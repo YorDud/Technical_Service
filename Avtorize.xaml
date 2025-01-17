@@ -6,17 +6,26 @@
         xmlns:local="clr-namespace:WpfApp4"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Авторизация" Height="381" Width="519" WindowStartupLocation="CenterScreen">
-    <Grid Background="White">
-        <Border Background="White" Margin="15,15,15,15"
-CornerRadius="15" 
-               
-Padding="10">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="30" Color="Gray" ShadowDepth="0"></DropShadowEffect>
-            </Border.Effect>
+        Title="Авторизация" Height="381" Width="519" materialDesign:ColorZoneAssist.Mode="PrimaryLight" ResizeMode="NoResize"
+WindowStyle="None"
+Background="Transparent"
+AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+
+    <Border Background="White" Margin="15,15,15,15"
+            CornerRadius="15" 
+            Padding="10">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="15" Color="#FF673AB7" ShadowDepth="0"></DropShadowEffect>
+        </Border.Effect>
+        <Grid Margin="10">
+            <Button x:Name="ExitButton" Content="×"  
+HorizontalAlignment="Right" VerticalAlignment="Top"
+FontSize="30" FontWeight="Bold" 
+Background="Transparent" BorderBrush="Transparent"
+Foreground="Red" Margin="0,-14,-15,0"
+Click="ExitButton_Click" Height="39" Width="50"/>
             <StackPanel Margin="10,10,10,10">
-                <TextBlock FontSize="30" FontWeight="Bold" Margin="0,0,0,20" FontFamily="Yu Gothic UI" TextAlignment="Center"><Run Text="Авторизация"/></TextBlock>
+                <TextBlock FontSize="24" FontWeight="Bold" Margin="0,0,0,20" FontFamily="Yu Gothic UI" TextAlignment="Center"><Run Text="Авторизация"/></TextBlock>
                 <Grid/>
 
                 <!--<TextBox x:Name="log_txt" materialDesign:HintAssist.Hint="Введите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.FloatingHintHorizontalAlignment="Left" materialDesign:HintAssist.HintHorizontalAlignment="Center" HorizontalContentAlignment="Center"></TextBox>-->
@@ -30,17 +39,9 @@ Padding="10">
 
 
 
+        </Grid>
+
+    </Border>
 
 
-        </Border>
-
-
-
-
-
-
-
-
-
-    </Grid>
 </Window>
