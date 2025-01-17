@@ -233,6 +233,11 @@ namespace WpfApp4.MiniWindows
 						worksheet.Cells[startRow + row, col].Style.Border.BorderAround(ExcelBorderStyle.Thin);
 						worksheet.Cells[startRow + row, col].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
 						worksheet.Cells[startRow + row, col].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+						worksheet.Cells[startRow + row, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+						worksheet.Cells[startRow + row, 5].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+						//worksheet.Cells[startRow + row, col].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+						worksheet.Cells[startRow + row, 6].Style.WrapText = true; // Перенос текста
+						
 					}
 				}
 
@@ -295,6 +300,7 @@ namespace WpfApp4.MiniWindows
 
 
 				worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
+				worksheet.Column(6).Width = 25;
 
 				var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 				var filePath = System.IO.Path.Combine(desktopPath, $"Отчет_{period}_{year}.xlsx");
