@@ -68,9 +68,15 @@ Padding="10">
 
 
                     <Label Content="Смена:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                    <ComboBox x:Name="Smena" Grid.Row="4" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1"/>
+                <ComboBox x:Name="Smena" Grid.Row="4" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1">
+                    <ComboBoxItem>1</ComboBoxItem>
+                    <ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>Пятидневка</ComboBoxItem>
+                    <ComboBoxItem>1 (ночь)</ComboBoxItem>
+                    <ComboBoxItem>2 (ночь)</ComboBoxItem>
+                </ComboBox>
 
-                    <Label Content="Телефон:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <Label Content="Телефон:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                     <TextBox x:Name="Phone" Grid.Row="5" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
 
 

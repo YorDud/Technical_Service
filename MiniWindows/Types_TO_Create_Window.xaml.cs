@@ -109,6 +109,38 @@ namespace WpfApp4.MiniWindows
 
 		}
 
+		private void RemoveWork_Click(object sender, RoutedEventArgs e)
+		{
+			// Получаем выбранную работу
+			var selectedWork = WorkListBox.SelectedItem as string;
+
+			if (selectedWork != null)
+			{
+				// Удаляем выбранную работу из ListBox
+				WorkListBox.Items.Remove(selectedWork);
+				// После удаления номера нужно пересчитать их, если нужно, чтобы номера были последовательными
+				RecalculateWorkNumbers();
+			}
+		}
+
+
+		// Метод для пересчета номеров работ после их изменения
+		private void RecalculateWorkNumbers()
+		{
+			for (int i = 0; i < WorkListBox.Items.Count; i++)
+			{
+				string workLine = WorkListBox.Items[i] as string;
+				if (workLine != null)
+				{
+					string newWorkLine = $"{i + 1}. {workLine.Split(new[] { ". " }, StringSplitOptions.None)[1]}";
+					WorkListBox.Items[i] = newWorkLine;
+				}
+			}
+
+			// Обновляем переменную workNumber на следующий номер после последней работы
+			workNumber = WorkListBox.Items.Count + 1;
+		}
+
 
 		private void LoadDevice_Type()
 		{
@@ -146,7 +178,9 @@ namespace WpfApp4.MiniWindows
 		private void FirstWeekMonthCheckBox_Checked(object sender, RoutedEventArgs e)
 		{
 			SpecificDaysTextBox.IsEnabled = false;
+			SpecificDaysTextBox.Clear();
 			RepeatWeeksTextBox.IsEnabled = false;
+			RepeatWeeksTextBox.Clear();
 		}
 
 		private void FirstWeekMonthCheckBox_Unchecked(object sender, RoutedEventArgs e)
@@ -261,6 +295,8 @@ namespace WpfApp4.MiniWindows
 		{
 			this.Close();
         }
+
+		
     }
 
 }

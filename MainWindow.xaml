@@ -74,7 +74,7 @@
         </StackPanel>
 
         <!-- Основное содержание                                                                                         Главное -->
-        <ContentControl x:Name="MainContent" Grid.Column="1" Visibility="Hidden">
+        <ContentControl x:Name="MainContent" Grid.Column="1" Visibility="Visible">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -93,14 +93,14 @@
 
                 <DataGrid x:Name="dataGridMonitorNaryad" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridMonitorNaryad_MouseDoubleClick" LoadingRow="dataGridMonitorNaryad_LoadingRow">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Дата ТО" Width="auto" Binding="{Binding Date_TO}" />
+                        <DataGridTextColumn Header="Дата ТО" Width="auto" Binding="{Binding Date_TO,StringFormat=\{0:dd.MM.yyyy HH:mm\}}" />
                         <DataGridTextColumn Header="Номер наряда" Width="auto" Binding="{Binding ID}" />
                         <DataGridTextColumn Header="Устройство" Width="auto" Binding="{Binding Device_Name}" />
                         <DataGridTextColumn Header="ТО" Width="auto" Binding="{Binding Types_TO_Name}" />
                         <DataGridTextColumn Header="Список работ" Width="auto" Binding="{Binding Types_TO_Work_List}" />
                         <DataGridTextColumn Header="Сотрудник" Width="auto" Binding="{Binding Users_FIO}" />
-                        <DataGridTextColumn Header="Дата начала выполнения" Width="auto" Binding="{Binding Date_Start}" />
-                        <DataGridTextColumn Header="Дата завершения выполнения" Width="auto" Binding="{Binding Date_End}" />
+                        <DataGridTextColumn Header="Дата начала выполнения" Width="auto" Binding="{Binding Date_Start,StringFormat=\{0:dd.MM.yyyy HH:mm\}}" />
+                        <DataGridTextColumn Header="Дата завершения выполнения" Width="auto" Binding="{Binding Date_End,StringFormat=\{0:dd.MM.yyyy HH:mm\}}" />
                         <DataGridTextColumn Header="Статус" Width="auto" Binding="{Binding Status}" />
                         <DataGridTextColumn Header="Запчасти" Width="auto" Binding="{Binding Sklad_Deteil_ID}" />
                         <DataGridTextColumn Header="Количество запчастей" Width="auto" Binding="{Binding Sklad_Kolich}" />
@@ -128,13 +128,13 @@
                 <DataGrid x:Name="dataGridMonitorCrash" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridMonitorCrash_MouseDoubleClick" LoadingRow="dataGridMonitorCrash_LoadingRow">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
-                        <DataGridTextColumn Header="Дата/Время поломки" Width="auto" Binding="{Binding Date_Crash}" />
+                        <DataGridTextColumn Header="Дата/Время поломки" Width="auto" Binding="{Binding Date_Crash,StringFormat=\{0:dd.MM.yyyy HH:mm\}}" />
                         <DataGridTextColumn Header="ФИО технолога" Width="auto" Binding="{Binding FIO_Tech}" />
                         <DataGridTextColumn Header="Помещение" Width="auto" Binding="{Binding Location}" />
                         <DataGridTextColumn Header="Устройство" Width="auto" Binding="{Binding Device}" />
                         <DataGridTextColumn Header="Описание" Width="auto" Binding="{Binding Comment}" />
                         <DataGridTextColumn Header="ФИО наладчика" Width="auto" Binding="{Binding FIO_Nalad}" />
-                        <DataGridTextColumn Header="Дата/Время починки" Width="auto" Binding="{Binding Date_Complete}" />
+                        <DataGridTextColumn Header="Дата/Время починки" Width="auto" Binding="{Binding Date_Complete,StringFormat=\{0:dd.MM.yyyy HH:mm\}}" />
                         <DataGridTextColumn Header="Статус" Width="auto" Binding="{Binding Status}" />
                     </DataGrid.Columns>
                 </DataGrid>
@@ -235,13 +235,13 @@
                         <DataGridTextColumn Header="ТО" Width="auto" Binding="{Binding Types_TO_Name}" />
                         <DataGridTextColumn Header="Список работ" Width="auto" Binding="{Binding Types_TO_Work_List}" />
                         <DataGridTextColumn Header="Сотрудник" Width="auto" Binding="{Binding Users_FIO}" />
-                        <DataGridTextColumn Header="Дата начала выполнения" Width="auto" Binding="{Binding Date_Start}" />
-                        <DataGridTextColumn Header="Дата завершения выполнения" Width="auto" Binding="{Binding Date_End}" />
+                        <DataGridTextColumn Header="Дата начала выполнения" Width="auto" Binding="{Binding Date_Start,StringFormat=\{0:dd.MM.yyyy HH:mm\}}" />
+                        <DataGridTextColumn Header="Дата завершения выполнения" Width="auto" Binding="{Binding Date_End,StringFormat=\{0:dd.MM.yyyy HH:mm\}}" />
                         <DataGridTextColumn Header="Статус" Width="auto" Binding="{Binding Status}" />
                         <DataGridTextColumn Header="Запчасти" Width="auto" Binding="{Binding Sklad_Deteil_ID}" />
                         <DataGridTextColumn Header="Количество запчастей" Width="auto" Binding="{Binding Sklad_Kolich}" />
                         <DataGridTextColumn Header="Документация" Width="auto" Binding="{Binding Documentation_Name_ID}" />
-                        <DataGridTextColumn Header="Дата ТО" Width="auto" Binding="{Binding Date_TO}" />
+                        <DataGridTextColumn Header="Дата ТО" Width="auto" Binding="{Binding Date_TO,StringFormat=\{0:dd.MM.yyyy HH:mm\}}" />
                         <DataGridTextColumn Header="Комментарий" Width="auto" Binding="{Binding Comment}" />
                     </DataGrid.Columns>
                 </DataGrid>
@@ -1138,7 +1138,7 @@
 
 
 
-        <ContentControl x:Name="Crash" Grid.Column="1" Visibility="Visible">
+        <ContentControl x:Name="Crash" Grid.Column="1" Visibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
