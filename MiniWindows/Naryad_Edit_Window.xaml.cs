@@ -47,6 +47,8 @@ namespace WpfApp4.MiniWindows
 			SkladKolich.Text = _dataRow["Sklad_Kolich"].ToString();
 			DocumentationNameID.Text = _dataRow["Documentation_Name_ID"].ToString();
 			DateTO.Text = _dataRow["Date_TO"].ToString();
+					
+
 		}
 
 		private void Naryad_Update_Click(object sender, RoutedEventArgs e)
@@ -57,8 +59,8 @@ namespace WpfApp4.MiniWindows
 			var typesTOName = TypesTOName.Text;
 			var typesTOWorkList = TypesTOWorkList.Text;
 			var usersFIO = UsersFIO.Text;
-			var dateStart = DateStart.SelectedDate;
-			var dateEnd = DateEnd.SelectedDate;
+			var dateStart = DateStart.Value;
+			var dateEnd = DateEnd.Value;
 			var status = Status.Text;
 			var comment = Comment.Text;
 			var skladDeteilID = SkladDeteilID.Text; // Получение ID запчасти

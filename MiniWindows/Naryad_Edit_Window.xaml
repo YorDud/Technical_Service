@@ -1,6 +1,7 @@
 ﻿<Window x:Class="WpfApp4.MiniWindows.Naryad_Edit_Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Создание Наряда" Height="882" Width="800" materialDesign:ColorZoneAssist.Mode="PrimaryLight"
 ResizeMode="NoResize"
@@ -74,11 +75,12 @@ AllowsTransparency="True" WindowStartupLocation="CenterScreen">
 
                 <Label Content="Дата начала выполнения:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
        FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                <DatePicker x:Name="DateStart" Grid.Row="4" Grid.Column="1" Margin="5" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                <xctk:DateTimePicker  x:Name="DateStart" Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" Height="30" Padding="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Left" FormatString="dd.MM.yyyy HH:mm" BorderBrush="Black"/>
+
 
                 <Label Content="Дата завершения выполнения:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
        FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                <DatePicker x:Name="DateEnd" Grid.Row="5" Grid.Column="1" Margin="5" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                <xctk:DateTimePicker  x:Name="DateEnd" Grid.Row="5" Grid.Column="1" Margin="5,5,5,5" Height="30" Padding="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Left" FormatString="dd.MM.yyyy HH:mm" BorderBrush="Black"/>
 
                 <Label Content="Статус:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
        FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
