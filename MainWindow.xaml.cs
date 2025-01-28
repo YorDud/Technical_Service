@@ -1507,7 +1507,7 @@ namespace WpfApp4
 				using (SqlConnection connection = new SqlConnection(connectionString))
 				{
 					connection.Open();
-					
+
 					// Получить данные из таблиц Crash и Naryad
 					DataTable crashData = GetData(connection, "SELECT * FROM [Technical_Service].[dbo].[Crash]");
 					DataTable naryadData = GetData(connection, "SELECT * FROM [Technical_Service].[dbo].[Naryad]");
@@ -1565,37 +1565,37 @@ namespace WpfApp4
 					// Этаж 2
 					//
 
-					UpdatePointStatus(PayalMask, "Линия проявления паяльной маски", crashData, naryadData); 
-					UpdatePointStatus(Photorez, "Линия проявления фоторезиста", crashData, naryadData); 
-					UpdatePointStatus(TravDES, "Конвейерная линия проявления, травления, снятия фоторезиста DES", crashData, naryadData); 
-					UpdatePointStatus(SchelTrav2, "Линия щелочного травления (2эт)", crashData, naryadData); 
-					UpdatePointStatus(LineOksid, "Линия оксидирования", crashData, naryadData); 
-					UpdatePointStatus(PryamMark3, "Принтер прямой маркировки (3)", crashData, naryadData); 
-					UpdatePointStatus(PryamMark2, "Принтер прямой маркировки (2)", crashData, naryadData); 
-					UpdatePointStatus(PryamMark1, "Принтер прямой маркировки (1)", crashData, naryadData); 
-					UpdatePointStatus(PryamEksponsMask2, "Установка прямого экспонирования маски (2)", crashData, naryadData); 
-					UpdatePointStatus(PryamEksponsMask1, "Установка прямого экспонирования маски (1)", crashData, naryadData); 
-					UpdatePointStatus(PryamEkspons1, "Установка прямого экспонирования (1)", crashData, naryadData); 
-					UpdatePointStatus(PryamEkspons2, "Установка прямого экспонирования (2)", crashData, naryadData); 
-					UpdatePointStatus(PryamEkspons3, "Установка прямого экспонирования (3)", crashData, naryadData); 
-					UpdatePointStatus(Laminat1, "Ламинатор (1)", crashData, naryadData); 
-					UpdatePointStatus(Laminat2, "Ламинатор (2)", crashData, naryadData); 
-					UpdatePointStatus(Ekspons1, "Установка экспонирования (1)", crashData, naryadData); 
-					UpdatePointStatus(AvtoLaminat1, "Автоматический ламинатор (1)", crashData, naryadData); 
-					UpdatePointStatus(AvtoLaminat2, "Автоматический ламинатор (2)", crashData, naryadData); 
-					UpdatePointStatus(AOI1, "Установка АОИ (1)", crashData, naryadData); 
-					UpdatePointStatus(AOI2, "Установка АОИ (2)", crashData, naryadData); 
-					UpdatePointStatus(AOI3, "Установка АОИ (3)", crashData, naryadData); 
-					UpdatePointStatus(AOI4, "Установка АОИ (4)", crashData, naryadData); 
-					UpdatePointStatus(TrafPetchat2, "Установка трафаретной печати (2)", crashData, naryadData); 
-					UpdatePointStatus(TrafPetchat3, "Установка трафаретной печати (3)", crashData, naryadData); 
-					UpdatePointStatus(TrafPetchat4, "Установка трафаретной печати (4)", crashData, naryadData); 
-					UpdatePointStatus(TrafPetchat5, "Установка трафаретной печати (5)", crashData, naryadData); 
-					UpdatePointStatus(PechKonvek3, "Печь конвекционная (3)", crashData, naryadData); 
-					UpdatePointStatus(PechKonvek4, "Печь конвекционная (4)", crashData, naryadData); 
-					UpdatePointStatus(PechKonvek5, "Печь конвекционная (5)", crashData, naryadData); 
-					UpdatePointStatus(MechZachist_rez, "Установка механической зачистки (резист)", crashData, naryadData); 
-					UpdatePointStatus(HimPodgFotorez, "Установка химической подготовки перед нанесением фоторезиста", crashData, naryadData); 
+					UpdatePointStatus(PayalMask, "Линия проявления паяльной маски", crashData, naryadData);
+					UpdatePointStatus(Photorez, "Линия проявления фоторезиста", crashData, naryadData);
+					UpdatePointStatus(TravDES, "Конвейерная линия проявления, травления, снятия фоторезиста DES", crashData, naryadData);
+					UpdatePointStatus(SchelTrav2, "Линия щелочного травления (2эт)", crashData, naryadData);
+					UpdatePointStatus(LineOksid, "Линия оксидирования", crashData, naryadData);
+					UpdatePointStatus(PryamMark3, "Принтер прямой маркировки (3)", crashData, naryadData);
+					UpdatePointStatus(PryamMark2, "Принтер прямой маркировки (2)", crashData, naryadData);
+					UpdatePointStatus(PryamMark1, "Принтер прямой маркировки (1)", crashData, naryadData);
+					UpdatePointStatus(PryamEksponsMask2, "Установка прямого экспонирования маски (2)", crashData, naryadData);
+					UpdatePointStatus(PryamEksponsMask1, "Установка прямого экспонирования маски (1)", crashData, naryadData);
+					UpdatePointStatus(PryamEkspons1, "Установка прямого экспонирования (1)", crashData, naryadData);
+					UpdatePointStatus(PryamEkspons2, "Установка прямого экспонирования (2)", crashData, naryadData);
+					UpdatePointStatus(PryamEkspons3, "Установка прямого экспонирования (3)", crashData, naryadData);
+					UpdatePointStatus(Laminat1, "Ламинатор (1)", crashData, naryadData);
+					UpdatePointStatus(Laminat2, "Ламинатор (2)", crashData, naryadData);
+					UpdatePointStatus(Ekspons1, "Установка экспонирования (1)", crashData, naryadData);
+					UpdatePointStatus(AvtoLaminat1, "Автоматический ламинатор (1)", crashData, naryadData);
+					UpdatePointStatus(AvtoLaminat2, "Автоматический ламинатор (2)", crashData, naryadData);
+					UpdatePointStatus(AOI1, "Установка АОИ (1)", crashData, naryadData);
+					UpdatePointStatus(AOI2, "Установка АОИ (2)", crashData, naryadData);
+					UpdatePointStatus(AOI3, "Установка АОИ (3)", crashData, naryadData);
+					UpdatePointStatus(AOI4, "Установка АОИ (4)", crashData, naryadData);
+					UpdatePointStatus(TrafPetchat2, "Установка трафаретной печати (2)", crashData, naryadData);
+					UpdatePointStatus(TrafPetchat3, "Установка трафаретной печати (3)", crashData, naryadData);
+					UpdatePointStatus(TrafPetchat4, "Установка трафаретной печати (4)", crashData, naryadData);
+					UpdatePointStatus(TrafPetchat5, "Установка трафаретной печати (5)", crashData, naryadData);
+					UpdatePointStatus(PechKonvek3, "Печь конвекционная (3)", crashData, naryadData);
+					UpdatePointStatus(PechKonvek4, "Печь конвекционная (4)", crashData, naryadData);
+					UpdatePointStatus(PechKonvek5, "Печь конвекционная (5)", crashData, naryadData);
+					UpdatePointStatus(MechZachist_rez, "Установка механической зачистки (резист)", crashData, naryadData);
+					UpdatePointStatus(HimPodgFotorez, "Установка химической подготовки перед нанесением фоторезиста", crashData, naryadData);
 					UpdatePointStatus(HimPodgMask, "Установка химической подготовки перед нанесением маски", crashData, naryadData);
 					UpdatePointStatus(MechZachist_mask, "Установка механической зачистки (маска)", crashData, naryadData);
 					UpdatePointStatus(FinishOtmivka2, "Линия финишной отмывки (2)", crashData, naryadData);
@@ -1622,6 +1622,115 @@ namespace WpfApp4
 					UpdatePointStatus(Laminat3, "Ламинатор (3)", crashData, naryadData);
 					UpdatePointStatus(Ekspons2, "Установка экспонирования (2)", crashData, naryadData);
 
+
+
+
+
+					//
+					// 1 и 2 Этажи
+					//
+
+					UpdatePointStatus(GilyotinaElektro1_3, "Гильотина электромеханическая (1)", crashData, naryadData);
+					UpdatePointStatus(AutomatikPinner1_3, "Автоматический пиннер (1)", crashData, naryadData);
+					UpdatePointStatus(AutomatikPinner2_3, "Автоматический пиннер (2)", crashData, naryadData);
+					UpdatePointStatus(SverlStanTrehstacionar1_3_3, "Сверлильный станок трехстационарный (1-3)", crashData, naryadData);
+					UpdatePointStatus(SverlStan4_3, "Сверлильный станок (4)", crashData, naryadData);
+					UpdatePointStatus(SverlStan5_3, "Сверлильный станок (5)", crashData, naryadData);
+					UpdatePointStatus(SverlStan4_Shpindel6_3, "Сверлильный станок 4-х шпиндельный (6)", crashData, naryadData);
+					UpdatePointStatus(SverlStan7_3, "Сверлильный станок (7)", crashData, naryadData);
+					UpdatePointStatus(SverlStanTrehstacionar8_10_3, "Сверлильный станок трехстационарный (8-10)", crashData, naryadData);
+					UpdatePointStatus(SverlStan11_3, "Сверлильный станок (11)", crashData, naryadData);
+					UpdatePointStatus(SverlStan12_3, "Сверлильный станок (12)", crashData, naryadData);
+					UpdatePointStatus(Skraibirov1_3, "Установка скрайбирования (1)", crashData, naryadData);
+					UpdatePointStatus(Skraibirov2_3, "Установка скрайбирования (2)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan1_3, "Фрезерный станок (1)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan2_3, "Фрезерный станок (2)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan3_3, "Фрезерный станок (3)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan4_3, "Фрезерный станок (4)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan5_3, "Фрезерный станок (5)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan6_3, "Фрезерный станок (6)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan7_3, "Фрезерный станок (7)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan8_3, "Фрезерный станок (8)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan9_3, "Фрезерный станок (9)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan10_3, "Фрезерный станок (10)", crashData, naryadData);
+					UpdatePointStatus(FrezerStan12_3, "Фрезерный станок (12)", crashData, naryadData);
+					UpdatePointStatus(AvtomatUstanovSnatZausen_3, "Автоматическая установка снятия заусенцев", crashData, naryadData);
+					UpdatePointStatus(LinePermObr_3, "Линия перманганатной обработки", crashData, naryadData);
+					UpdatePointStatus(LineSnatMetallorez_3, "Линия снятия металлорезиста", crashData, naryadData);
+					UpdatePointStatus(LineSnatPhotorez_3, "Линия снятия фоторезиста", crashData, naryadData);
+					UpdatePointStatus(PechKonvek1_3, "Печь конвекционная (1)", crashData, naryadData);
+					UpdatePointStatus(PechKonvek2_3, "Печь конвекционная (2)", crashData, naryadData);
+					UpdatePointStatus(GorachLushen1_3, "Установка горячего лужения (1)", crashData, naryadData);
+					UpdatePointStatus(GorachLushen2_3, "Установка горячего лужения (2)", crashData, naryadData);
+					UpdatePointStatus(OchistPPposLushen_3, "Установка очистки ПП после лужения", crashData, naryadData);
+					UpdatePointStatus(PodgotovPPperedLushen_3, "Установка подготовки ПП перед лужением", crashData, naryadData);
+					UpdatePointStatus(SchelochTrav1_3, "Установка щелочного травления (1эт)", crashData, naryadData);
+					UpdatePointStatus(LineFinishOtm1_3, "Линия финишной отмывки (1)", crashData, naryadData);
+					UpdatePointStatus(AutoHimikoGalvanLine_3, "Автоматическая химико-гальваническая линия", crashData, naryadData);
+					UpdatePointStatus(LineMetallHimMed_3, "Линия металлизации и хим-медь", crashData, naryadData);
+					UpdatePointStatus(GalLine1_3, "Гальваническая линия (1)", crashData, naryadData);
+					UpdatePointStatus(GalLine2_3, "Гальваническая линия (2)", crashData, naryadData);
+					UpdatePointStatus(GalLineZatOtverst_3, "Гальваническая линия затяжки отверстий", crashData, naryadData);
+					UpdatePointStatus(BlackHolle_3, "Линия BlackHolle", crashData, naryadData);
+					UpdatePointStatus(SystemVakPil_3, "Система вакуумной пылеуборки", crashData, naryadData);
+
+
+					UpdatePointStatus(PayalMask_3, "Линия проявления паяльной маски", crashData, naryadData);
+					UpdatePointStatus(Photorez_3, "Линия проявления фоторезиста", crashData, naryadData);
+					UpdatePointStatus(TravDES_3, "Конвейерная линия проявления, травления, снятия фоторезиста DES", crashData, naryadData);
+					UpdatePointStatus(SchelTrav2_3, "Линия щелочного травления (2эт)", crashData, naryadData);
+					UpdatePointStatus(LineOksid_3, "Линия оксидирования", crashData, naryadData);
+					UpdatePointStatus(PryamMark3_3, "Принтер прямой маркировки (3)", crashData, naryadData);
+					UpdatePointStatus(PryamMark2_3, "Принтер прямой маркировки (2)", crashData, naryadData);
+					UpdatePointStatus(PryamMark1_3, "Принтер прямой маркировки (1)", crashData, naryadData);
+					UpdatePointStatus(PryamEksponsMask2_3, "Установка прямого экспонирования маски (2)", crashData, naryadData);
+					UpdatePointStatus(PryamEksponsMask1_3, "Установка прямого экспонирования маски (1)", crashData, naryadData);
+					UpdatePointStatus(PryamEkspons1_3, "Установка прямого экспонирования (1)", crashData, naryadData);
+					UpdatePointStatus(PryamEkspons2_3, "Установка прямого экспонирования (2)", crashData, naryadData);
+					UpdatePointStatus(PryamEkspons3_3, "Установка прямого экспонирования (3)", crashData, naryadData);
+					UpdatePointStatus(Laminat1_3, "Ламинатор (1)", crashData, naryadData);
+					UpdatePointStatus(Laminat2_3, "Ламинатор (2)", crashData, naryadData);
+					UpdatePointStatus(Ekspons1_3, "Установка экспонирования (1)", crashData, naryadData);
+					UpdatePointStatus(AvtoLaminat1_3, "Автоматический ламинатор (1)", crashData, naryadData);
+					UpdatePointStatus(AvtoLaminat2_3, "Автоматический ламинатор (2)", crashData, naryadData);
+					UpdatePointStatus(AOI1_3, "Установка АОИ (1)", crashData, naryadData);
+					UpdatePointStatus(AOI2_3, "Установка АОИ (2)", crashData, naryadData);
+					UpdatePointStatus(AOI3_3, "Установка АОИ (3)", crashData, naryadData);
+					UpdatePointStatus(AOI4_3, "Установка АОИ (4)", crashData, naryadData);
+					UpdatePointStatus(TrafPetchat2_3, "Установка трафаретной печати (2)", crashData, naryadData);
+					UpdatePointStatus(TrafPetchat3_3, "Установка трафаретной печати (3)", crashData, naryadData);
+					UpdatePointStatus(TrafPetchat4_3, "Установка трафаретной печати (4)", crashData, naryadData);
+					UpdatePointStatus(TrafPetchat5_3, "Установка трафаретной печати (5)", crashData, naryadData);
+					UpdatePointStatus(PechKonvek3_3, "Печь конвекционная (3)", crashData, naryadData);
+					UpdatePointStatus(PechKonvek4_3, "Печь конвекционная (4)", crashData, naryadData);
+					UpdatePointStatus(PechKonvek5_3, "Печь конвекционная (5)", crashData, naryadData);
+					UpdatePointStatus(MechZachist_rez_3, "Установка механической зачистки (резист)", crashData, naryadData);
+					UpdatePointStatus(HimPodgFotorez_3, "Установка химической подготовки перед нанесением фоторезиста", crashData, naryadData);
+					UpdatePointStatus(HimPodgMask_3, "Установка химической подготовки перед нанесением маски", crashData, naryadData);
+					UpdatePointStatus(MechZachist_mask_3, "Установка механической зачистки (маска)", crashData, naryadData);
+					UpdatePointStatus(FinishOtmivka2_3, "Линия финишной отмывки (2)", crashData, naryadData);
+					UpdatePointStatus(UpakovMash_3, "Упаковочная машина", crashData, naryadData);
+					UpdatePointStatus(Electrotest1_3, "Установка электротестирования (1)", crashData, naryadData);
+					UpdatePointStatus(Electrotest2_3, "Установка электротестирования (2)", crashData, naryadData);
+					UpdatePointStatus(Electrotest3_3, "Установка электротестирования (3)", crashData, naryadData);
+					UpdatePointStatus(Electrotest4_3, "Установка электротестирования (4)", crashData, naryadData);
+					UpdatePointStatus(Electrotest5_3, "Установка электротестирования (5)", crashData, naryadData);
+					UpdatePointStatus(Electrotest6_3, "Установка электротестирования (6)", crashData, naryadData);
+					UpdatePointStatus(ShlifovMicroshlif_3, "Станок для шлифования микрошлифов", crashData, naryadData);
+					UpdatePointStatus(TrafPetchat1_3, "Установка трафаретной печати (1)", crashData, naryadData);
+					UpdatePointStatus(UltaFeltrac1_3, "Установка ультрафильтрации (1)", crashData, naryadData);
+					UpdatePointStatus(UltaFeltrac2_3, "Установка ультрафильтрации (2)", crashData, naryadData);
+					UpdatePointStatus(UltaFeltrac3_3, "Установка ультрафильтрации (3)", crashData, naryadData);
+					UpdatePointStatus(UltaFeltrac4_3, "Установка ультрафильтрации (4)", crashData, naryadData);
+					UpdatePointStatus(KonvSborPacketPress_3, "Конвейер сборки пакетов под прессование", crashData, naryadData);
+					UpdatePointStatus(KonvSborPacketPress_3, "Конвейер сборки пакетов под прессование", crashData, naryadData);
+					UpdatePointStatus(Press_3, "Пресс", crashData, naryadData);
+					UpdatePointStatus(OchistZagotPP1_3, "Установка очистки заготовок ПП (1)", crashData, naryadData);
+					UpdatePointStatus(OchistZagotPP2_3, "Установка очистки заготовок ПП (2)", crashData, naryadData);
+					UpdatePointStatus(IspitanieRazriv_3, "Установка испытания образцов на разрыв", crashData, naryadData);
+					UpdatePointStatus(PodgotovObrazcov_3, "Установка подготовки образцов", crashData, naryadData);
+					UpdatePointStatus(Laminat3_3, "Ламинатор (3)", crashData, naryadData);
+					UpdatePointStatus(Ekspons2_3, "Установка экспонирования (2)", crashData, naryadData);
 
 
 

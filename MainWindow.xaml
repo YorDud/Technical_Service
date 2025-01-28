@@ -74,7 +74,7 @@
         </StackPanel>
 
         <!-- Основное содержание                                                                                         Главное -->
-        <ContentControl x:Name="MainContent" Grid.Column="1" Visibility="Visible">
+        <ContentControl x:Name="MainContent" Grid.Column="1" Visibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -1138,7 +1138,7 @@
 
 
 
-        <ContentControl x:Name="Crash" Grid.Column="1" Visibility="Hidden">
+        <ContentControl x:Name="Crash" Grid.Column="1" Visibility="Visible">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -1284,6 +1284,155 @@
                             </Grid>
                         </Viewbox>
                     </TabItem>
+
+                    <TabItem Header="1 и 2 этажи">
+                        <Viewbox Stretch="Uniform" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid>
+                                <!-- Изображение плана этажа -->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <!-- Левая половина -->
+                                    <ColumnDefinition Width="auto" />
+                                    <!-- Правая половина -->
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Изображение плана этажа слева -->
+                                <Grid Grid.Column="0">
+                                    <Image x:Name="FloorImage_3" MinWidth="3500"
+Stretch="Uniform"
+Source="/Floor1.png"
+Opacity="0.8" />
+                                    <Canvas>
+                                        <Ellipse x:Name="GilyotinaElektro1_3" Width="77" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="338" Canvas.Top="2491" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="AutomatikPinner1_3" Width="61" Height="61" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="538" Canvas.Top="884" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="AutomatikPinner2_3" Width="61" Height="60" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="538" Canvas.Top="740" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="SverlStanTrehstacionar1_3_3" Width="76" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="313" Canvas.Top="996" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="SverlStan4_3" Width="78" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="204" Canvas.Top="781" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="SverlStan4_Shpindel6_3" Width="81" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="287" Canvas.Top="469" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="SverlStan5_3" Width="78" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="204" Canvas.Top="648" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="SverlStan7_3" Width="77" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="501" Canvas.Top="469" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="SverlStanTrehstacionar8_10_3" Width="76" Height="78" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="676" Canvas.Top="929" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="SverlStan11_3" Width="77" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="691" Canvas.Top="730" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="SverlStan12_3" Width="77" Height="78" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="691" Canvas.Top="581" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="Skraibirov1_3" Width="77" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="666" Canvas.Top="2189" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="Skraibirov2_3" Width="76" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="825" Canvas.Top="2189" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="FrezerStan1_3" Width="78" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="230" Canvas.Top="2138" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="FrezerStan2_3" Width="78" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="230" Canvas.Top="1984" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="FrezerStan3_3" Width="77" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="261" Canvas.Top="1780" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="FrezerStan4_3" Width="77" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="261" Canvas.Top="1682" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="FrezerStan5_3" Width="77" Height="78" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="261" Canvas.Top="1589" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="FrezerStan6_3" Width="77" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="261" Canvas.Top="1492" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="FrezerStan7_3" Width="77" Height="78" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="691" Canvas.Top="1456" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="FrezerStan8_3" Width="77" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="691" Canvas.Top="1595" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="FrezerStan9_3" Width="77" Height="78" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="691" Canvas.Top="1743" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="FrezerStan10_3" Width="77" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="691" Canvas.Top="1872" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="FrezerStan12_3" Width="77" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="415" Canvas.Top="2189" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="AvtomatUstanovSnatZausen_3" Width="77" Height="78" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="2069" Canvas.Top="1452" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="LinePermObr_3" Width="77" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="1695" Canvas.Top="1242" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="LineSnatMetallorez_3" Width="78" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="1613" Canvas.Top="1421" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="LineSnatPhotorez_3" Width="78" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="1735" Canvas.Top="1785" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="PechKonvek1_3" Width="78" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="1879" Canvas.Top="884" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="PechKonvek2_3" Width="78" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="1879" Canvas.Top="1011" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="GorachLushen1_3" Width="77" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="1086" Canvas.Top="893" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="GorachLushen2_3" Width="77" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="1086" Canvas.Top="1042" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="OchistPPposLushen_3" Width="76" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="1527" Canvas.Top="1042" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="PodgotovPPperedLushen_3" Width="78" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="1392" Canvas.Top="919" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="SchelochTrav1_3" Width="82" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="1490" Canvas.Top="1555" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="LineFinishOtm1_3" Width="77" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="2811" Canvas.Top="2189" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="AutoHimikoGalvanLine_3" Width="84" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="1351" Canvas.Top="648" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="LineMetallHimMed_3" Width="75" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="2715" Canvas.Top="1913" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="GalLine1_3" Width="103" Height="102" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="2591" Canvas.Top="1278" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="GalLine2_3" Width="102" Height="102" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="3078" Canvas.Top="1278" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="GalLineZatOtverst_3" Width="76" Height="80" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="3140" Canvas.Top="2052" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="BlackHolle_3" Width="76" Height="81" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="2372" Canvas.Top="1299" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="SystemVakPil_3" Width="104" Height="107" Fill="LightGray" Stroke="Black" StrokeThickness="0.5" Canvas.Left="189" Canvas.Top="1227" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+
+                                    </Canvas>
+
+                                </Grid>
+
+                                <Grid Grid.Column="1">
+                                    <!-- Изображение плана этажа справа -->
+                                    <Image x:Name="FloorImage2_3"
+Stretch="Uniform"
+Source="/Floor222.png"
+Opacity="0.9"/>
+
+
+
+
+
+
+                                    <Canvas  x:Name="Floor2" Grid.Column="1">
+                                        <!--Точки с оборудованием-->
+
+
+
+                                        <Ellipse x:Name="PayalMask_3" Width="76" Height="78" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="281" Canvas.Top="579" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+                                        <Ellipse x:Name="Photorez_3" Width="75" Height="78" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="572" Canvas.Top="579" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="TravDES_3" Width="75" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1404" Canvas.Top="266" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="SchelTrav2_3" Width="75" Height="78" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1045" Canvas.Top="579" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="LineOksid_3" Width="77" Height="78" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1686" Canvas.Top="579" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="PryamMark3_3" Width="76" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1380" Canvas.Top="962" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="PryamMark2_3" Width="77" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1519" Canvas.Top="962" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="PryamMark1_3" Width="76" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1653" Canvas.Top="924" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="PryamEksponsMask2_3" Width="75" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="187" Canvas.Top="1400" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="PryamEksponsMask1_3" Width="75" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="187" Canvas.Top="1579" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="PryamEkspons1_3" Width="75" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="535" Canvas.Top="1514" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="PryamEkspons2_3" Width="75" Height="74" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="535" Canvas.Top="1696" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="PryamEkspons3_3" Width="75" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="535" Canvas.Top="1836" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="Laminat1_3" Width="45" Height="45" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="448" Canvas.Top="2020" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="Laminat2_3" Width="45" Height="45" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="598" Canvas.Top="2020" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="Ekspons1_3" Width="75" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="187" Canvas.Top="1866" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="AvtoLaminat1_3" Width="75" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="243" Canvas.Top="2300" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="AvtoLaminat2_3" Width="75" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="243" Canvas.Top="2432" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="AOI1_3" Width="74" Height="74" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1789" Canvas.Top="1696" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="AOI2_3" Width="74" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1789" Canvas.Top="1805" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="AOI3_3" Width="74" Height="74" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1789" Canvas.Top="1915" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="AOI4_3" Width="74" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1789" Canvas.Top="2024" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="TrafPetchat2_3" Width="76" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="360" Canvas.Top="2757" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="TrafPetchat3_3" Width="76" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="360" Canvas.Top="2886" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="TrafPetchat4_3" Width="76" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="360" Canvas.Top="3052" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="TrafPetchat5_3" Width="76" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="360" Canvas.Top="3183" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="PechKonvek3_3" Width="75" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="583" Canvas.Top="2811" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="PechKonvek4_3" Width="75" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="583" Canvas.Top="3063" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="PechKonvek5_3" Width="75" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="583" Canvas.Top="3191" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="MechZachist_rez_3" Width="76" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="859" Canvas.Top="2300" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="HimPodgFotorez_3" Width="76" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="859" Canvas.Top="2432" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="HimPodgMask_3" Width="76" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="859" Canvas.Top="2731" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="MechZachist_mask_3" Width="76" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="859" Canvas.Top="2897" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="FinishOtmivka2_3" Width="76" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1463" Canvas.Top="2565" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="UpakovMash_3" Width="75" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1305" Canvas.Top="2882" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="Electrotest1_3" Width="45" Height="45" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1941" Canvas.Top="2791" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="Electrotest2_3" Width="45" Height="44" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1941" Canvas.Top="2724" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="Electrotest3_3" Width="45" Height="46" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1941" Canvas.Top="2655" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="Electrotest4_3" Width="45" Height="45" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1941" Canvas.Top="2583" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="Electrotest5_3" Width="45" Height="45" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1941" Canvas.Top="2383" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="Electrotest6_3" Width="45" Height="45" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1941" Canvas.Top="2304" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="ShlifovMicroshlif_3" Width="47" Height="45" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="2155" Canvas.Top="1952" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="TrafPetchat1_3" Width="75" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="243" Canvas.Top="3325" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                        <Ellipse x:Name="UltaFeltrac1_3" Width="77" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="704" Canvas.Top="840" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="UltaFeltrac2_3" Width="77" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="704" Canvas.Top="959" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="UltaFeltrac3_3" Width="76" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="160" Canvas.Top="962" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="UltaFeltrac4_3" Width="76" Height="75" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="160" Canvas.Top="830" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="KonvSborPacketPress_3" Width="76" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="2983" Canvas.Top="342" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="Press_3" Width="75" Height="77" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="3221" Canvas.Top="493" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="OchistZagotPP1_3" Width="52" Height="53" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="531" Canvas.Top="1445" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="OchistZagotPP2_3" Width="54" Height="53" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="583" Canvas.Top="1778" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="IspitanieRazriv_3" Width="75" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="1941" Canvas.Top="1899" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="PodgotovObrazcov_3" Width="78" Height="74" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="2120" Canvas.Top="1718" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="Laminat3_3" Width="76" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="507" Canvas.Top="1933" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                        <Ellipse x:Name="Ekspons2_3" Width="75" Height="76" Fill="LightGray" Stroke="Black" StrokeThickness="1" Canvas.Left="224" Canvas.Top="1963" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+
+                                    </Canvas>
+                                </Grid>
+                            </Grid>
+                        </Viewbox>
+                    </TabItem>
+
                 </TabControl>
 
 
