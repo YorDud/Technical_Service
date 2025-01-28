@@ -65,9 +65,115 @@ namespace WpfApp4
 			LoadData_Monitor_Naryad();
 			LoadData_Monitor_Crash();
 
-			
+			timer2 = new DispatcherTimer();
+			timer2.Interval = TimeSpan.FromSeconds(5);
+			timer2.Tick += LoadData_Monitor_Naryad_timer;
+			timer2.Start();
+
+			timer3 = new DispatcherTimer();
+			timer3.Interval = TimeSpan.FromSeconds(5);
+			timer3.Tick += LoadData_Monitor_Crash_timer;
+			timer3.Start();
+		}
+		private DispatcherTimer timer2;
+		private DispatcherTimer timer3;
+
+
+
+		public void LoadData_Monitor_Naryad_timer(object sender, EventArgs e)
+		{
+			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+			{
+				DateTime? startDate = StartDatePicker.SelectedDate;
+				DateTime? endDate = EndDatePicker.SelectedDate;
+
+				string query = @"
+            SELECT [ID], [Device_Name], [Types_TO_Name], [Types_TO_Work_List], [Users_FIO],
+                   [Date_Start], [Date_End], [Status], [Sklad_Deteil_ID], [Sklad_Kolich],
+                   [Documentation_Name_ID], [Date_TO], [Comment]
+            FROM [Technical_Service].[dbo].[Naryad]
+            WHERE ([Date_TO] BETWEEN @StartDate AND @EndDate)
+              AND ([Status] IS NULL OR [Status] != 'Закрыт')";
+
+				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+				adapter.SelectCommand.Parameters.AddWithValue("@StartDate", (object)startDate ?? DBNull.Value);
+				adapter.SelectCommand.Parameters.AddWithValue("@EndDate", (object)endDate ?? DBNull.Value);
+
+				DataTable dataTable = new DataTable();
+				connection.Open();
+				adapter.Fill(dataTable);
+				connection.Close();
+
+				dataGridMonitorNaryad.ItemsSource = dataTable.DefaultView;
+
+				// Применяем цветовые стили строк
+				dataGridMonitorNaryad.UpdateLayout();
+				foreach (DataRowView row in dataGridMonitorNaryad.ItemsSource)
+				{
+					string status = row["Status"] == DBNull.Value ? null : row["Status"].ToString().Trim();
+					DataGridRow dataGridRow = dataGridMonitorNaryad.ItemContainerGenerator.ContainerFromItem(row) as DataGridRow;
+
+					if (dataGridRow != null)
+					{
+						if (string.IsNullOrEmpty(status))
+						{
+							dataGridRow.Background = new SolidColorBrush(Colors.LightCoral);
+						}
+						else if (string.Equals(status, "В работе", StringComparison.OrdinalIgnoreCase))
+						{
+							dataGridRow.Background = new SolidColorBrush(Color.FromRgb(255, 255, 102));
+
+						}
+						else if (string.Equals(status, "Выполнено", StringComparison.OrdinalIgnoreCase))
+						{
+							dataGridRow.Background = new SolidColorBrush(Colors.LightGreen);
+						}
+
+					}
+					dataGridMonitorNaryad.UpdateLayout();
+				}
+			}
 		}
 
+		public void LoadData_Monitor_Crash_timer(object sender, EventArgs e)
+		{
+			// Устанавливаем соединение с базой данных
+			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+			{
+				string query = @"
+            SELECT 
+                [ID],
+                [Date_Crash],
+                [FIO_Tech],
+                [Location],
+                [Device],
+                [Comment],
+                [FIO_Nalad],
+                [Date_Complete],
+                [Opisan_Complete],
+                [Status]
+            FROM 
+                [Technical_Service].[dbo].[Crash] 
+            ORDER BY [Date_Crash] DESC";
+
+				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+
+				DataTable dataTable = new DataTable();
+
+				try
+				{
+					connection.Open();
+					adapter.Fill(dataTable);
+				}
+				finally
+				{
+					connection.Close();
+				}
+
+				// Привязываем данные к DataGrid
+				dataGridMonitorCrash.ItemsSource = dataTable.DefaultView;
+			}
+		}
 
 
 
