@@ -57,38 +57,49 @@ namespace WpfApp4.MiniWindows
 
 		private void StartWork_Click(object sender, RoutedEventArgs e)
 		{
-			
-			var id = _dataRow["ID"];
-
-			// SQL-запрос для обновления данных в базе
-			string query = "UPDATE [Technical_Service].[dbo].[Crash] " +
-						   "SET [Date_Complete] = @Date_Complete, " +
-						   "[Status] = @Status " +
-						   "WHERE [ID] = @ID";
-
-			try
+			if (Opisan_Complete.Text == "")
 			{
-				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				bool result = CustomMessageBoxService.Show($"Пожалуйста заполните: Описание выполненных работ", "Ошибка");
+			}
+			else
+			{
+				var id = _dataRow["ID"];
+
+				// SQL-запрос для обновления данных в базе
+				string query = "UPDATE [Technical_Service].[dbo].[Crash] " +
+							   "SET [Date_Complete] = @Date_Complete, " +
+							   "[Opisan_Complete] = @Opisan_Complete, " +
+							   "[Status] = @Status " +
+							   "WHERE [ID] = @ID";
+
+				try
 				{
-					using (SqlCommand command = new SqlCommand(query, connection))
+					using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 					{
-						command.Parameters.AddWithValue("@Date_Complete", DateTime.Now);
-						command.Parameters.AddWithValue("@Status", "Выполнено");
-						command.Parameters.AddWithValue("@ID", id);
+						using (SqlCommand command = new SqlCommand(query, connection))
+						{
+							command.Parameters.AddWithValue("@Date_Complete", DateTime.Now);
+							command.Parameters.AddWithValue("@Opisan_Complete", Opisan_Complete.Text);
+							command.Parameters.AddWithValue("@Status", "Выполнено");
+							command.Parameters.AddWithValue("@ID", id);
 
-						connection.Open();
-						command.ExecuteNonQuery();
+							connection.Open();
+							command.ExecuteNonQuery();
 
-						// После сохранения изменений обновляем данные в главном окне
-						mainWindow.LoadData_Monitor_Crash();
-						this.Close();
+							// После сохранения изменений обновляем данные в главном окне
+							mainWindow.LoadData_Monitor_Crash();
+							this.Close();
+						}
 					}
 				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("Ошибка: " + ex.Message);
+				}
 			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Ошибка: " + ex.Message);
-			}
+
+
+			
 		}
 	}
     

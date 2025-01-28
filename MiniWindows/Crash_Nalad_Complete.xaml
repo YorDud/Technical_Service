@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         mc:Ignorable="d" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        Title="Типы оборудования" Height="204" Width="430" 
+        Title="Типы оборудования" Height="287" Width="430" 
         materialDesign:ColorZoneAssist.Mode="PrimaryLight"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -56,7 +56,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                
+                <Label x:Name="Opisan_CompletetLabel" Content="Описание выполненных работ:" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBox x:Name="Opisan_Complete" Grid.Row="3" Grid.ColumnSpan="2" Margin="5" Height="30" Padding="3" 
+Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
 
                 <Button Content="Выполнено" Grid.Row="7" Grid.ColumnSpan="2" Margin="5" Click="StartWork_Click"/>
             </Grid>

@@ -822,6 +822,7 @@ namespace WpfApp4
                 [Comment],
                 [FIO_Nalad],
                 [Date_Complete],
+                [Opisan_Complete],
                 [Status]
             FROM 
                 [Technical_Service].[dbo].[Crash] 
