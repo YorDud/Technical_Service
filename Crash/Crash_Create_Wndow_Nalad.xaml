@@ -58,7 +58,7 @@
 
                 <Label x:Name="LocationLabel" Content="Помещение:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                 <ComboBox x:Name="Location" Grid.Row="0" Grid.Column="1" Margin="5" Height="30" Padding="3" 
-             Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+             Style="{StaticResource MaterialDesignOutlinedComboBox}"  SelectionChanged="Location_SelectionChanged"/>
                 <Label x:Name="DeviceLabel" Content="Название оборудования:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                 <ComboBox x:Name="Device" Grid.Row="1" Grid.Column="1" Margin="5" Height="30" Padding="3" 
              Style="{StaticResource MaterialDesignOutlinedComboBox}"/>

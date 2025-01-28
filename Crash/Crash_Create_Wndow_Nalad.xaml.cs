@@ -28,11 +28,11 @@ namespace WpfApp4.MiniWindows
 			InitializeComponent();
 			this.mainWindow = mainWindow;
 			LoadLocation();
-			LoadDeviceNames();
+			//LoadDeviceNames();
 		}
-		private void LoadDeviceNames()
+		private void LoadDeviceNames(string selectedLocation)
 		{
-			string query = "SELECT Name_Device FROM [Technical_Service].[dbo].[Devices]";
+			string query = "SELECT Name_Device FROM [Technical_Service].[dbo].[Devices] WHERE Location = @Location";
 			try
 			{
 				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
@@ -40,6 +40,9 @@ namespace WpfApp4.MiniWindows
 					connection.Open();
 					using (SqlCommand command = new SqlCommand(query, connection))
 					{
+						// Передаем значение выбранной локации в команду
+						command.Parameters.AddWithValue("@Location", selectedLocation);
+
 						using (SqlDataReader reader = command.ExecuteReader())
 						{
 							List<string> deviceNames = new List<string>();
@@ -47,7 +50,7 @@ namespace WpfApp4.MiniWindows
 							{
 								deviceNames.Add(reader["Name_Device"].ToString());
 							}
-							Device.ItemsSource = deviceNames; // Устанавливаем источник данных для ComboBox
+							Device.ItemsSource = deviceNames; // Устанавливаем источник данных для ComboBox с устройствами
 						}
 					}
 				}
@@ -55,6 +58,20 @@ namespace WpfApp4.MiniWindows
 			catch (Exception ex)
 			{
 				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+			}
+		}
+
+
+		private void Location_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			// Берем выбранное значение из ComboBox Location
+			string selectedLocation = Location.SelectedItem as string;
+
+			// Проверяем, что значение не пустое
+			if (!string.IsNullOrEmpty(selectedLocation))
+			{
+				// Загружаем устройства, соответствующие выбранной локации
+				LoadDeviceNames(selectedLocation);
 			}
 		}
 		private void LoadLocation()
@@ -103,7 +120,7 @@ namespace WpfApp4.MiniWindows
 
 			// Проверка значения WC.FIO
 
-			WC.fio = "Технолог";
+			
 			// Собираем данные для вставки
 			string userFIO = WC.fio; // Имя сотрудника (переменная WC.FIO)
 			string selectedLocation = Location.SelectedItem.ToString(); // Выбранное помещение

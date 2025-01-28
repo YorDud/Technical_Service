@@ -27,11 +27,41 @@ namespace WpfApp4.MiniWindows
 		{
 			InitializeComponent();
 			LoadLocation();
-			LoadDeviceNames();
+			//LoadDeviceNames();
 		}
-		private void LoadDeviceNames()
+		//private void LoadDeviceNames()
+		//{
+		//	string query = "SELECT Name_Device FROM [Technical_Service].[dbo].[Devices]";
+		//	try
+		//	{
+		//		using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+		//		{
+		//			connection.Open();
+		//			using (SqlCommand command = new SqlCommand(query, connection))
+		//			{
+		//				using (SqlDataReader reader = command.ExecuteReader())
+		//				{
+		//					List<string> deviceNames = new List<string>();
+		//					while (reader.Read())
+		//					{
+		//						deviceNames.Add(reader["Name_Device"].ToString());
+		//					}
+		//					Device.ItemsSource = deviceNames; // Устанавливаем источник данных для ComboBox
+		//				}
+		//			}
+		//		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+		//	}
+		//}
+
+
+
+		private void LoadDeviceNames(string selectedLocation)
 		{
-			string query = "SELECT Name_Device FROM [Technical_Service].[dbo].[Devices]";
+			string query = "SELECT Name_Device FROM [Technical_Service].[dbo].[Devices] WHERE Location = @Location";
 			try
 			{
 				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
@@ -39,6 +69,9 @@ namespace WpfApp4.MiniWindows
 					connection.Open();
 					using (SqlCommand command = new SqlCommand(query, connection))
 					{
+						// Передаем значение выбранной локации в команду
+						command.Parameters.AddWithValue("@Location", selectedLocation);
+
 						using (SqlDataReader reader = command.ExecuteReader())
 						{
 							List<string> deviceNames = new List<string>();
@@ -46,7 +79,7 @@ namespace WpfApp4.MiniWindows
 							{
 								deviceNames.Add(reader["Name_Device"].ToString());
 							}
-							Device.ItemsSource = deviceNames; // Устанавливаем источник данных для ComboBox
+							Device.ItemsSource = deviceNames; // Устанавливаем источник данных для ComboBox с устройствами
 						}
 					}
 				}
@@ -56,6 +89,25 @@ namespace WpfApp4.MiniWindows
 				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
 			}
 		}
+
+
+		private void Location_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			// Берем выбранное значение из ComboBox Location
+			string selectedLocation = Location.SelectedItem as string;
+
+			// Проверяем, что значение не пустое
+			if (!string.IsNullOrEmpty(selectedLocation))
+			{
+				// Загружаем устройства, соответствующие выбранной локации
+				LoadDeviceNames(selectedLocation);
+			}
+		}
+
+
+
+
+
 		private void LoadLocation()
 		{
 			string query = "SELECT Location FROM [Technical_Service].[dbo].[Location]";
