@@ -38,14 +38,14 @@ namespace WpfApp4.MiniWindows
 			//Smena.Text = _dataRow["Smena"].ToString();
 			//Phone.Text = _dataRow["Phone"].ToString();
 
-			LoadDevice_Type();
+			//LoadDevice_Type();
 			LoadLocation();
 		}
 
 		private void Device_Dobav_Click(object sender, RoutedEventArgs e)
 		{
 			var Name_Device1 = Name_Device.Text;
-			var Device_Type1 = Device_Type.Text;
+			//var Device_Type1 = Device_Type.Text;
 			var Model1 = Model.Text;
 			var Ser_Number1 = Ser_Number.Text;
 			var Year_Create_Device1 = Year_Create_Device.Text;
@@ -57,8 +57,8 @@ namespace WpfApp4.MiniWindows
 
 			// SQL-запрос на добавление
 			string query = "INSERT INTO [Technical_Service].[dbo].[Devices] " +
-			   "([Name_Device], [Device_Type], [Model], [Ser_Number], [Year_Create_Device], [Inventory_Number], [Location], [Name_Buh_Uch]) " +
-			   "VALUES (@Name_Device, @Device_Type, @Model, @Ser_Number, @Year_Create_Device, @Inventory_Number, @Location, @Name_Buh_Uch)";
+			   "([Name_Device], [Model], [Ser_Number], [Year_Create_Device], [Inventory_Number], [Location], [Name_Buh_Uch]) " +
+			   "VALUES (@Name_Device, @Model, @Ser_Number, @Year_Create_Device, @Inventory_Number, @Location, @Name_Buh_Uch)";
 
 			try
 			{
@@ -68,7 +68,7 @@ namespace WpfApp4.MiniWindows
 					{
 						// Добавление значений для параметров
 						command.Parameters.AddWithValue("@Name_Device", Name_Device1);
-						command.Parameters.AddWithValue("@Device_Type", Device_Type1);
+						//command.Parameters.AddWithValue("@Device_Type", Device_Type1);
 						command.Parameters.AddWithValue("@Model", Model1);
 						command.Parameters.AddWithValue("@Ser_Number", Ser_Number1);
 						command.Parameters.AddWithValue("@Year_Create_Device", Year_Create_Device1);
@@ -97,36 +97,36 @@ namespace WpfApp4.MiniWindows
 		}
 
 
-		private void LoadDevice_Type()
-		{
-			string query = "SELECT Device_Type FROM [Technical_Service].[dbo].[Devices_Types]";
-			try
-			{
-				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
-				{
-					connection.Open();
-					using (SqlCommand command = new SqlCommand(query, connection))
-					{
-						using (SqlDataReader reader = command.ExecuteReader())
-						{
-							List<string> typesTO = new List<string>();
-							while (reader.Read())
-							{
-								typesTO.Add(reader["Device_Type"].ToString());
-							}
-							Device_Type.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
-						}
-					}
-				}
+		//private void LoadDevice_Type()
+		//{
+		//	string query = "SELECT Device_Type FROM [Technical_Service].[dbo].[Devices_Types]";
+		//	try
+		//	{
+		//		using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+		//		{
+		//			connection.Open();
+		//			using (SqlCommand command = new SqlCommand(query, connection))
+		//			{
+		//				using (SqlDataReader reader = command.ExecuteReader())
+		//				{
+		//					List<string> typesTO = new List<string>();
+		//					while (reader.Read())
+		//					{
+		//						typesTO.Add(reader["Device_Type"].ToString());
+		//					}
+		//					Device_Type.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
+		//				}
+		//			}
+		//		}
 
-				// Подписка на событие выбора элемента
-				//Device_Type.SelectionChanged += Device_Type_SelectionChanged;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
-			}
-		}
+		//		// Подписка на событие выбора элемента
+		//		//Device_Type.SelectionChanged += Device_Type_SelectionChanged;
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+		//	}
+		//}
 		private void LoadLocation()
 		{
 			string query = "SELECT Location FROM [Technical_Service].[dbo].[Location]";

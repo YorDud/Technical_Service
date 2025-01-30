@@ -40,14 +40,15 @@ namespace WpfApp4.MiniWindows
 			FileDropBorder.DragOver += new DragEventHandler(FileDropBorder_DragOver);
 
 			this.mainWindow = mainWindow; // сохраняем ссылку на главное окно
+			LoadDeviceNames();
 
-			
+
 		}
 
 		private void Docs_Dobav_Click(object sender, RoutedEventArgs e)
 		{
 			string opisaniye1 = Opisaniye.Text;
-			string query = "INSERT INTO [Technical_Service].[dbo].[Documentation] ([Name_Doc], [Doc], [Opisaniye]) VALUES (@Name_Doc, @Doc, @Opisaniye)";
+			string query = "INSERT INTO [Technical_Service].[dbo].[Documentation] ([Name_Doc], [Doc], [Name_Device], [Opisaniye]) VALUES (@Name_Doc, @Doc, @Name_Device, @Opisaniye)";
 
 			try
 			{
@@ -65,6 +66,7 @@ namespace WpfApp4.MiniWindows
 							// Добавляем параметры
 							command.Parameters.AddWithValue("@Name_Doc", FileName);
 							command.Parameters.AddWithValue("@Doc", fileData);
+							command.Parameters.AddWithValue("@Name_Device", DeviceName.Text);
 							command.Parameters.AddWithValue("@Opisaniye", opisaniye1);
 						}
 						else
@@ -93,7 +95,33 @@ namespace WpfApp4.MiniWindows
 
 
 
-
+		private void LoadDeviceNames()
+		{
+			string query = "SELECT Name_Device FROM [Technical_Service].[dbo].[Devices]";
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				{
+					connection.Open();
+					using (SqlCommand command = new SqlCommand(query, connection))
+					{
+						using (SqlDataReader reader = command.ExecuteReader())
+						{
+							List<string> deviceNames = new List<string>();
+							while (reader.Read())
+							{
+								deviceNames.Add(reader["Name_Device"].ToString());
+							}
+							DeviceName.ItemsSource = deviceNames; // Устанавливаем источник данных для ComboBox
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+			}
+		}
 
 		private void FileDropBorder_DragOver(object sender, DragEventArgs e)
 		{

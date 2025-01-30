@@ -166,7 +166,7 @@ namespace WpfApp4.MiniWindows
 
 		private void LoadDevice_Type()
 		{
-			string query = "SELECT Device_Type FROM [Technical_Service].[dbo].[Devices_Types]";
+			string query = "SELECT Name_Device FROM [Technical_Service].[dbo].[Devices]";
 			try
 			{
 				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
@@ -179,7 +179,7 @@ namespace WpfApp4.MiniWindows
 							List<string> typesTO = new List<string>();
 							while (reader.Read())
 							{
-								typesTO.Add(reader["Device_Type"].ToString());
+								typesTO.Add(reader["Name_Device"].ToString());
 							}
 							DeviceType.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
 						}

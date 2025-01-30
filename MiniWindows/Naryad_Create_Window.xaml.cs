@@ -49,7 +49,7 @@ namespace WpfApp4.MiniWindows
         SELECT t.Raspisanie
         FROM [Technical_Service].[dbo].[Devices] d
         INNER JOIN [Technical_Service].[dbo].[Types_TO] t
-            ON d.Device_Type = t.Device_Type
+            ON d.Name_Device = t.Device_Type
         WHERE d.Name_Device = @DeviceName AND t.Name_TO = @TypesTOName";
 
 			string deleteQuery = @"
@@ -175,7 +175,7 @@ namespace WpfApp4.MiniWindows
 							case "Пт": daysOfWeek.Add(DayOfWeek.Friday); break;
 							case "Сб": daysOfWeek.Add(DayOfWeek.Saturday); break;
 							case "Вс": daysOfWeek.Add(DayOfWeek.Sunday); break;
-							//default: throw new ArgumentException($"Неверный формат дня недели: {trimmedDay}");
+								//default: throw new ArgumentException($"Неверный формат дня недели: {trimmedDay}");
 						}
 					}
 				}
@@ -200,7 +200,7 @@ namespace WpfApp4.MiniWindows
 							case "Октябрь": months.Add(10); break;
 							case "Ноябрь": months.Add(11); break;
 							case "Декабрь": months.Add(12); break;
-							//default: throw new ArgumentException($"Неверный формат месяца: {trimmedMonth}");
+								//default: throw new ArgumentException($"Неверный формат месяца: {trimmedMonth}");
 						}
 					}
 				}
@@ -345,11 +345,11 @@ namespace WpfApp4.MiniWindows
 		private void LoadData_ComboBox()
 		{
 			LoadDeviceNames();   // Загрузка устройств
-			//LoadTypesTOName();   // Загрузка ТО
-			//LoadUsersFIO();      // Загрузка ФИО сотрудников
-			//LoadStatus();        // Загрузка статусов
+								 //LoadTypesTOName();   // Загрузка ТО
+								 //LoadUsersFIO();      // Загрузка ФИО сотрудников
+								 //LoadStatus();        // Загрузка статусов
 			LoadSkladDeteilID(); // Загрузка деталей
-			LoadDocumentationNameID(); // Загрузка документации
+			//LoadDocumentationNameID(); // Загрузка документации
 		}
 
 		// Загрузка названий устройств
@@ -395,7 +395,7 @@ namespace WpfApp4.MiniWindows
         SELECT t.Name_TO 
         FROM [Technical_Service].[dbo].[Devices] d
         INNER JOIN [Technical_Service].[dbo].[Types_TO] t
-        ON d.Device_Type = t.Device_Type
+        ON d.Name_Device = t.Device_Type
         WHERE d.Name_Device = @DeviceName";
 
 			try
@@ -436,6 +436,12 @@ namespace WpfApp4.MiniWindows
 
 			// Вызываем метод для загрузки соответствующих Types_TO
 			LoadTypesTOName(selectedDeviceName);
+
+			
+			if (!string.IsNullOrEmpty(selectedDeviceName))
+			{
+				LoadDocumentationNameID(selectedDeviceName);
+			}
 		}
 
 
@@ -563,9 +569,10 @@ namespace WpfApp4.MiniWindows
 		//}
 
 		// Загрузка документации в ComboBox DocumentationNameID
-		private void LoadDocumentationNameID()
+		private void LoadDocumentationNameID(string selectedDeviceName)
 		{
-			string query = "SELECT Name_Doc FROM [Technical_Service].[dbo].[Documentation]";
+			string query = "SELECT Name_Doc FROM [Technical_Service].[dbo].[Documentation] WHERE Name_Device = @DeviceName";
+
 			try
 			{
 				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
@@ -573,6 +580,9 @@ namespace WpfApp4.MiniWindows
 					connection.Open();
 					using (SqlCommand command = new SqlCommand(query, connection))
 					{
+						// Добавляем параметр для сравнения с выбранным значением
+						command.Parameters.AddWithValue("@DeviceName", selectedDeviceName);
+
 						using (SqlDataReader reader = command.ExecuteReader())
 						{
 							List<string> documentationNames = new List<string>();
@@ -591,9 +601,12 @@ namespace WpfApp4.MiniWindows
 			}
 		}
 
+		
+
 		private void ExitButton_Click(object sender, RoutedEventArgs e)
 		{
 			this.Close();
-        }
-    }
+		}
+
+	}
 }

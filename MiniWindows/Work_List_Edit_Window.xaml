@@ -59,8 +59,8 @@
 
                 <Label Content="Вид работы:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                 <TextBox x:Name="Work_List" Grid.Row="0" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
-                
-                <Label Content="Тип оборудования:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+
+                <Label Content="Наименование оборудования:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                 <ComboBox x:Name="DeviceType"  IsEditable="True" Grid.Row="1" Grid.Column="1" Margin="5" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
 
                 <Label Content="Норм. Час:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>

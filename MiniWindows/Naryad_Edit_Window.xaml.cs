@@ -206,11 +206,11 @@ namespace WpfApp4.MiniWindows
 		private void LoadData_ComboBox()
 		{
 			LoadDeviceNames();   // Загрузка устройств
-			LoadTypesTOName();   // Загрузка ТО
+			//LoadTypesTOName(selectedDeviceName);   // Загрузка ТО
 			LoadUsersFIO();      // Загрузка ФИО сотрудников
 			LoadStatus();        // Загрузка статусов
 			LoadSkladDeteilID(); // Загрузка деталей
-			LoadDocumentationNameID(); // Загрузка документации
+			//LoadDocumentationNameID(); // Загрузка документации
 		}
 
 		// Загрузка названий устройств
@@ -242,17 +242,27 @@ namespace WpfApp4.MiniWindows
 			}
 		}
 
+
 		// Загрузка типов ТО в ComboBox
-		private void LoadTypesTOName()
+		private void LoadTypesTOName(string selectedDeviceName)
 		{
-			string query = "SELECT Name_TO FROM [Technical_Service].[dbo].[Types_TO]";
+			string query = @"
+        SELECT t.Name_TO 
+        FROM [Technical_Service].[dbo].[Devices] d
+        INNER JOIN [Technical_Service].[dbo].[Types_TO] t
+        ON d.Name_Device = t.Device_Type
+        WHERE d.Name_Device = @DeviceName";
 			try
 			{
 				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 				{
 					connection.Open();
+
 					using (SqlCommand command = new SqlCommand(query, connection))
 					{
+						// Добавляем значение параметра @DeviceName
+						command.Parameters.AddWithValue("@DeviceName", selectedDeviceName);
+
 						using (SqlDataReader reader = command.ExecuteReader())
 						{
 							List<string> typesTO = new List<string>();
@@ -260,7 +270,9 @@ namespace WpfApp4.MiniWindows
 							{
 								typesTO.Add(reader["Name_TO"].ToString());
 							}
-							TypesTOName.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
+
+							// Устанавливаем источник данных для ComboBox
+							TypesTOName.ItemsSource = typesTO;
 						}
 					}
 				}
@@ -281,6 +293,15 @@ namespace WpfApp4.MiniWindows
 			{
 				string selectedNameTO = TypesTOName.SelectedItem.ToString();
 				LoadWorkList(selectedNameTO);
+			}
+			string selectedDeviceName = (DeviceName.SelectedItem as string);
+
+			// Вызываем метод для загрузки соответствующих Types_TO
+			LoadTypesTOName(selectedDeviceName);
+
+			if (!string.IsNullOrEmpty(selectedDeviceName))
+			{
+				LoadDocumentationNameID(selectedDeviceName);
 			}
 		}
 
@@ -380,6 +401,8 @@ namespace WpfApp4.MiniWindows
 				string selectedID = selectedItem.Tag.ToString();
 				//LoadSkladKolich(selectedID); // Загрузка количества по выбранной детали
 			}
+
+
 		}
 
 		// Получение количества по ID детали
@@ -397,9 +420,10 @@ namespace WpfApp4.MiniWindows
 		//}
 
 		// Загрузка документации в ComboBox DocumentationNameID
-		private void LoadDocumentationNameID()
+		private void LoadDocumentationNameID(string selectedDeviceName)
 		{
-			string query = "SELECT Name_Doc FROM [Technical_Service].[dbo].[Documentation]";
+			string query = "SELECT Name_Doc FROM [Technical_Service].[dbo].[Documentation] WHERE Name_Device = @DeviceName";
+
 			try
 			{
 				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
@@ -407,6 +431,9 @@ namespace WpfApp4.MiniWindows
 					connection.Open();
 					using (SqlCommand command = new SqlCommand(query, connection))
 					{
+						// Добавляем параметр для сравнения с выбранным значением
+						command.Parameters.AddWithValue("@DeviceName", selectedDeviceName);
+
 						using (SqlDataReader reader = command.ExecuteReader())
 						{
 							List<string> documentationNames = new List<string>();

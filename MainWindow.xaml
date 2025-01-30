@@ -50,7 +50,7 @@
             <Expander Header="📂 Прочее" FontSize="14" Margin="10" Padding="10">
                 <StackPanel>
 
-                    <Button Content="Типы оборудования" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="ShowTipesTO"/>
+                    <!--<Button Content="Типы оборудования" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="ShowTipesTO"/>-->
                     <Button Content="Типы деталей" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Show_Deteil_Types"/>
                     <Button Content="Помещения" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Show_Location"/>
                     <Button Content="Перечень работ" Margin="5" Padding="5" HorizontalAlignment="Stretch" Click="Show_Work_List"/>
@@ -186,7 +186,6 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
                         <DataGridTextColumn Header="Наименование оборудования" Width="auto" Binding="{Binding Name_Device}" />
-                        <DataGridTextColumn Header="Тип оборудования" Width="auto" Binding="{Binding Device_Type}" />
                         <DataGridTextColumn Header="Модель" Width="auto" Binding="{Binding Model}" />
                         <DataGridTextColumn Header="Серийный номер" Width="auto" Binding="{Binding Ser_Number}" />
                         <DataGridTextColumn Header="Год выпуска" Width="auto" Binding="{Binding Year_Create_Device}" />
@@ -284,7 +283,7 @@
                 <DataGrid x:Name="dataGridTypesTO"  IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridTypesTO_MouseDoubleClick">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
-                        <DataGridTextColumn Header="Тип оборудования" Width="auto" Binding="{Binding Device_Type}" />
+                        <DataGridTextColumn Header="Наименование оборудования" Width="auto" Binding="{Binding Device_Type}" />
                         <DataGridTextColumn Header="ТО" Width="auto" Binding="{Binding Name_TO}" />
                         <DataGridTextColumn Header="Перечень работ" Width="auto" Binding="{Binding Work_List}" />
                         <DataGridTextColumn Header="Расписание" Width="auto" Binding="{Binding Raspisanie}" />
@@ -641,6 +640,7 @@
                         <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
                         <DataGridTextColumn Header="Название документа" Width="auto" Binding="{Binding Name_Doc}" />
                         <DataGridTextColumn Header="Документ" Width="auto" Binding="{Binding Doc}" />
+                        <DataGridTextColumn Header="Наименование оборудования" Width="auto" Binding="{Binding Name_Device}" />
                         <DataGridTextColumn Header="Описание" Width="auto" Binding="{Binding Opisaniye}" />
 
 
@@ -1130,7 +1130,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
                         <DataGridTextColumn Header="Работа" Width="auto" Binding="{Binding Work_List}" />
-                        <DataGridTextColumn Header="Тип оборудования" Width="auto" Binding="{Binding Device_Type}" />
+                        <DataGridTextColumn Header="Наименование оборудования" Width="auto" Binding="{Binding Device_Type}" />
                         <DataGridTextColumn Header="Норм. Час" Width="auto" Binding="{Binding Norm_Hour}" />
                     </DataGrid.Columns>
                 </DataGrid>

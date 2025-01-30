@@ -65,10 +65,10 @@ Padding="10">
                     <Label Content="Производитель:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                     <TextBox x:Name="Proizvod" Grid.Row="2" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
                     <Label Content="Поставщик:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                    <ComboBox x:Name="Postav" Grid.Row="3" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1"/>
+                <TextBox x:Name="Postav" Grid.Row="3" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
 
                     <Label Content="Оборудование:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                    <ComboBox x:Name="Devices_ID" Grid.Row="4" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1"/>
+                <ComboBox x:Name="DeviceName" Grid.Row="4" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1"/>
 
                     <Label Content="Изображение:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                     <Border x:Name="FileDropBorder" 

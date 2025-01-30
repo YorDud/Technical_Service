@@ -148,7 +148,7 @@ namespace WpfApp4.MiniWindows
 		  FROM Naryad n
 		  JOIN Devices d ON n.Device_Name = d.Name_Device
 		  JOIN Work_List wl ON n.Types_TO_Work_List LIKE '%' + wl.Work_List + '%'
-		                   AND d.Device_Type = wl.Device_Type
+		                   AND d.Name_Device = wl.Device_Type
 		  WHERE n.Date_TO >= @startDate 
 		    AND n.Date_TO <= @endDate";
 

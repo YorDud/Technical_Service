@@ -44,14 +44,46 @@ namespace WpfApp4.MiniWindows
 			_dataRow = dataRow;
 			Opisaniye.Text = _dataRow["Opisaniye"].ToString();
 			FileNameTextBox.Text = _dataRow["Name_Doc"].ToString();
-			
+			DeviceName.SelectedValue = _dataRow["Name_Device"].ToString();
+
+			LoadDeviceNames();
+
 		}
+
+		private void LoadDeviceNames()
+		{
+			string query = "SELECT Name_Device FROM [Technical_Service].[dbo].[Devices]";
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				{
+					connection.Open();
+					using (SqlCommand command = new SqlCommand(query, connection))
+					{
+						using (SqlDataReader reader = command.ExecuteReader())
+						{
+							List<string> deviceNames = new List<string>();
+							while (reader.Read())
+							{
+								deviceNames.Add(reader["Name_Device"].ToString());
+							}
+							DeviceName.ItemsSource = deviceNames; // Устанавливаем источник данных для ComboBox
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+			}
+		}
+
 
 		private void Docs_Update_Click(object sender, RoutedEventArgs e)
 		{
 			string opisaniye1 = Opisaniye.Text;
 			string query = "UPDATE [Technical_Service].[dbo].[Documentation] " +
-						   "SET [Name_Doc] = @Name_Doc, [Doc] = @Doc, [Opisaniye] = @Opisaniye " +
+						   "SET [Name_Doc] = @Name_Doc, [Doc] = @Doc, [Name_Device] = @Name_Device, [Opisaniye] = @Opisaniye " +
 						   "WHERE [ID] = @ID"; // Предположим, что у вас есть идентификатор документа
 
 			try
@@ -69,6 +101,7 @@ namespace WpfApp4.MiniWindows
 							// Добавляем параметры
 							command.Parameters.AddWithValue("@Name_Doc", fileName);
 							command.Parameters.AddWithValue("@Doc", fileData);
+							command.Parameters.AddWithValue("@Name_Device", DeviceName.Text);
 							command.Parameters.AddWithValue("@Opisaniye", opisaniye1);
 
 							// Добавляем параметр ID для обновления конкретной записи
@@ -97,7 +130,7 @@ namespace WpfApp4.MiniWindows
 			catch
 			{
 				string query2 = "UPDATE [Technical_Service].[dbo].[Documentation] " +
-						   "SET [Opisaniye] = @Opisaniye " +
+						   "SET [Name_Device] = @Name_Device, [Opisaniye] = @Opisaniye " +
 						   "WHERE [ID] = @ID";
 
 				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
@@ -105,15 +138,16 @@ namespace WpfApp4.MiniWindows
 					using (SqlCommand command = new SqlCommand(query2, connection))
 					{
 
-						
+
 
 						// Преобразуем файл в массив байтов
 
 						command.Parameters.AddWithValue("@Opisaniye", opisaniye1);
+						command.Parameters.AddWithValue("@Name_Device", DeviceName.Text);
 
-							// Добавляем параметр ID для обновления конкретной записи
-							command.Parameters.AddWithValue("@ID", _dataRow["ID"]); // Замените "ID" на ваше истинное имя столбца идентификатора
-						
+						// Добавляем параметр ID для обновления конкретной записи
+						command.Parameters.AddWithValue("@ID", _dataRow["ID"]); // Замените "ID" на ваше истинное имя столбца идентификатора
+
 
 						connection.Open();
 						int rowsAffected = command.ExecuteNonQuery();

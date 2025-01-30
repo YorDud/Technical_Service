@@ -43,12 +43,14 @@ namespace WpfApp4.MiniWindows
 			Model.Text = _dataRow["Model"].ToString();
 			Proizvod.Text = _dataRow["Proizvod"].ToString();
 			Postav.Text = _dataRow["Postav"].ToString();
+			DeviceName.SelectedValue = _dataRow["Devices_ID"].ToString();
 			//FileNameTextBox.Text = _dataRow["Name_Image"].ToString();
 			Location.Text = _dataRow["Location"].ToString();
 			Kolich.Text = _dataRow["Kolich"].ToString();
 
 			LoadDeteil_Types();
 			LoadLocation();
+			LoadDeviceNames();
 		}
 
 
@@ -114,6 +116,33 @@ namespace WpfApp4.MiniWindows
 			}
 		}
 
+		private void LoadDeviceNames()
+		{
+			string query = "SELECT Name_Device FROM [Technical_Service].[dbo].[Devices]";
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				{
+					connection.Open();
+					using (SqlCommand command = new SqlCommand(query, connection))
+					{
+						using (SqlDataReader reader = command.ExecuteReader())
+						{
+							List<string> deviceNames = new List<string>();
+							while (reader.Read())
+							{
+								deviceNames.Add(reader["Name_Device"].ToString());
+							}
+							DeviceName.ItemsSource = deviceNames; // Устанавливаем источник данных для ComboBox
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+			}
+		}
 
 
 		private void Sklad_Update_Click(object sender, RoutedEventArgs e)
@@ -123,7 +152,7 @@ namespace WpfApp4.MiniWindows
 			string model = Model.Text;
 			string proizvod = Proizvod.Text;
 			string postav = Postav.Text;
-			int devicesId = string.IsNullOrWhiteSpace(Devices_ID.Text) ? 0 : Convert.ToInt32(Devices_ID.Text);
+			string devicesId = DeviceName.Text;
 			string location = Location.Text;
 			string kolich = Kolich.Text;
 			byte[] imageBytes = null; // Массив байтов для изображения
@@ -166,7 +195,7 @@ namespace WpfApp4.MiniWindows
 						command.Parameters.AddWithValue("@Model", string.IsNullOrEmpty(model) ? (object)DBNull.Value : model);
 						command.Parameters.AddWithValue("@Proizvod", string.IsNullOrEmpty(proizvod) ? (object)DBNull.Value : proizvod);
 						command.Parameters.AddWithValue("@Postav", string.IsNullOrEmpty(postav) ? (object)DBNull.Value : postav);
-						command.Parameters.AddWithValue("@Devices_ID", devicesId == 0 ? (object)DBNull.Value : devicesId);
+						command.Parameters.AddWithValue("@Devices_ID", devicesId);
 						command.Parameters.AddWithValue("@Location", string.IsNullOrEmpty(location) ? (object)DBNull.Value : location);
 						command.Parameters.AddWithValue("@Kolich", string.IsNullOrEmpty(kolich) ? (object)DBNull.Value : kolich);
 						command.Parameters.AddWithValue("@ID", _dataRow["ID"]);

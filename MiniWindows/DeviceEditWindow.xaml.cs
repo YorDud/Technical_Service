@@ -32,11 +32,11 @@ namespace WpfApp4.MiniWindows
 			_dataRow = dataRow;
 			this.mainWindow = mainWindow; // сохраняем ссылку на главное окно
 
-			LoadDevice_Type();
+			//LoadDevice_Type();
 			LoadLocation();
 
 			Name_Device.Text = _dataRow["Name_Device"].ToString();
-			Device_Type.Text = _dataRow["Device_Type"].ToString();
+			//Device_Type.Text = _dataRow["Device_Type"].ToString();
 			Model.Text = _dataRow["Model"].ToString();
 			Ser_Number.Text = _dataRow["Ser_Number"].ToString();
 			Year_Create_Device.Text = _dataRow["Year_Create_Device"].ToString();
@@ -48,7 +48,7 @@ namespace WpfApp4.MiniWindows
 		private void Device_Update_Click(object sender, RoutedEventArgs e)
 		{
 			var Name_Device1 = Name_Device.Text;
-			var Device_Type1 = Device_Type.Text;
+			//var Device_Type1 = Device_Type.Text;
 			var Model1 = Model.Text;
 			var Ser_Number1 = Ser_Number.Text;
 			var Year_Create_Device1 = Year_Create_Device.Text;
@@ -60,7 +60,7 @@ namespace WpfApp4.MiniWindows
 
 			// SQL-запрос на обновление
 			string query = "UPDATE [Technical_Service].[dbo].[Devices] " +
-						   "SET [Name_Device] = @Name_Device, [Device_Type] = @Device_Type, " +
+						   "SET [Name_Device] = @Name_Device, " +
 						   "[Model] = @Model, [Ser_Number] = @Ser_Number, " +
 						   "[Year_Create_Device] = @Year_Create_Device, [Inventory_Number] = @Inventory_Number, " +
 						   "[Location] = @Location, [Name_Buh_Uch] = @Name_Buh_Uch " +
@@ -74,7 +74,7 @@ namespace WpfApp4.MiniWindows
 					{
 						// Добавление значений для параметров
 						command.Parameters.AddWithValue("@Name_Device", Name_Device1);
-						command.Parameters.AddWithValue("@Device_Type", Device_Type1);
+						//command.Parameters.AddWithValue("@Device_Type", Device_Type1);
 						command.Parameters.AddWithValue("@Model", Model1);
 						command.Parameters.AddWithValue("@Ser_Number", Ser_Number1);
 						command.Parameters.AddWithValue("@Year_Create_Device", Year_Create_Device1);
@@ -146,36 +146,36 @@ namespace WpfApp4.MiniWindows
 		}
 
 
-		private void LoadDevice_Type()
-		{
-			string query = "SELECT Device_Type FROM [Technical_Service].[dbo].[Devices_Types]";
-			try
-			{
-				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
-				{
-					connection.Open();
-					using (SqlCommand command = new SqlCommand(query, connection))
-					{
-						using (SqlDataReader reader = command.ExecuteReader())
-						{
-							List<string> typesTO = new List<string>();
-							while (reader.Read())
-							{
-								typesTO.Add(reader["Device_Type"].ToString());
-							}
-							Device_Type.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
-						}
-					}
-				}
+		//private void LoadDevice_Type()
+		//{
+		//	string query = "SELECT Device_Type FROM [Technical_Service].[dbo].[Devices_Types]";
+		//	try
+		//	{
+		//		using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+		//		{
+		//			connection.Open();
+		//			using (SqlCommand command = new SqlCommand(query, connection))
+		//			{
+		//				using (SqlDataReader reader = command.ExecuteReader())
+		//				{
+		//					List<string> typesTO = new List<string>();
+		//					while (reader.Read())
+		//					{
+		//						typesTO.Add(reader["Device_Type"].ToString());
+		//					}
+		//					Device_Type.ItemsSource = typesTO; // Устанавливаем источник данных для ComboBox
+		//				}
+		//			}
+		//		}
 
-				// Подписка на событие выбора элемента
-				//Device_Type.SelectionChanged += Device_Type_SelectionChanged;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
-			}
-		}
+		//		// Подписка на событие выбора элемента
+		//		//Device_Type.SelectionChanged += Device_Type_SelectionChanged;
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		MessageBox.Show("Ошибка при загрузке данных: " + ex.Message);
+		//	}
+		//}
 
 		private void LoadLocation()
 		{
