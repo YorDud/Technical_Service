@@ -143,8 +143,7 @@ namespace WpfApp4.MiniWindows
 		         d.Inventory_Number, 
 		         n.Users_FIO, 
 		         wl.Norm_Hour,
-		         n.Types_TO_Work_List,
-		         d.Device_Type
+		         n.Types_TO_Work_List
 		  FROM Naryad n
 		  JOIN Devices d ON n.Device_Name = d.Name_Device
 		  JOIN Work_List wl ON n.Types_TO_Work_List LIKE '%' + wl.Work_List + '%'
