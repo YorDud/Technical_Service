@@ -192,6 +192,7 @@
                         <DataGridTextColumn Header="Инв номер" Width="auto" Binding="{Binding Inventory_Number}" />
                         <DataGridTextColumn Header="Помещение" Width="auto" Binding="{Binding Location}" />
                         <DataGridTextColumn Header="Наименование бух. учет" Width="auto" Binding="{Binding Name_Buh_Uch}" />
+                        <DataGridTextColumn Header="Производитель" Width="auto" Binding="{Binding Firm}" />
 
                     </DataGrid.Columns>
 
@@ -284,6 +285,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
                         <DataGridTextColumn Header="Наименование оборудования" Width="auto" Binding="{Binding Device_Type}" />
+                        <!--<DataGridTextColumn Header="Модель" Width="auto" Binding="{Binding Model}" />-->
                         <DataGridTextColumn Header="ТО" Width="auto" Binding="{Binding Name_TO}" />
                         <DataGridTextColumn Header="Перечень работ" Width="auto" Binding="{Binding Work_List}" />
                         <DataGridTextColumn Header="Расписание" Width="auto" Binding="{Binding Raspisanie}" />

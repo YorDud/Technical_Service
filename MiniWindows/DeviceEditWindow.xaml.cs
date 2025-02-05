@@ -43,6 +43,7 @@ namespace WpfApp4.MiniWindows
 			Inventory_Number.Text = _dataRow["Inventory_Number"].ToString();
 			Location.Text = _dataRow["Location"].ToString();
 			Name_Buh_Uch.Text = _dataRow["Name_Buh_Uch"].ToString();
+			Firm.Text = _dataRow["Firm"].ToString();
 		}
 
 		private void Device_Update_Click(object sender, RoutedEventArgs e)
@@ -63,7 +64,7 @@ namespace WpfApp4.MiniWindows
 						   "SET [Name_Device] = @Name_Device, " +
 						   "[Model] = @Model, [Ser_Number] = @Ser_Number, " +
 						   "[Year_Create_Device] = @Year_Create_Device, [Inventory_Number] = @Inventory_Number, " +
-						   "[Location] = @Location, [Name_Buh_Uch] = @Name_Buh_Uch " +
+						   "[Location] = @Location, [Name_Buh_Uch] = @Name_Buh_Uch, [Firm] = @Firm " +
 						   "WHERE [ID] = @ID";
 
 			try
@@ -81,6 +82,7 @@ namespace WpfApp4.MiniWindows
 						command.Parameters.AddWithValue("@Inventory_Number", Inventory_Number1);
 						command.Parameters.AddWithValue("@Location", Location1);
 						command.Parameters.AddWithValue("@Name_Buh_Uch", Name_Buh_Uch1);
+						command.Parameters.AddWithValue("@Firm", Firm.Text);
 						command.Parameters.AddWithValue("@ID", id);
 
 

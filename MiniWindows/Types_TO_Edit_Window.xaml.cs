@@ -291,10 +291,31 @@ namespace WpfApp4.MiniWindows
 			}
 		}
 
+		//private string GetDeviceModel(string deviceTypeText)
+		//{
+		//	using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+		//	{
+		//		connection.Open();
+
+		//		// Запрос для получения Model из таблицы Devices
+		//		SqlCommand command = new SqlCommand(
+		//			"SELECT [Model] FROM [Technical_Service].[dbo].[Devices] " +
+		//			"WHERE [Name_Device] = @DeviceName", connection);
+
+		//		command.Parameters.AddWithValue("@DeviceName", deviceTypeText);
+
+		//		var modelResult = command.ExecuteScalar();
+		//		return modelResult?.ToString() ?? string.Empty;
+		//	}
+		//}
+
 		// Метод для сохранения изменений в базу данных
 		private void SaveChanges_Click(object sender, RoutedEventArgs e)
 		{
 			var deviceType = DeviceType.Text;
+
+			//var model = GetDeviceModel(deviceType);
+
 			var nameTO = NameTO.Text;
 
 			var workList = string.Join("\n", WorkListBox.Items.Cast<string>()); // Перечень работ как строка
@@ -341,7 +362,7 @@ namespace WpfApp4.MiniWindows
 
 
 
-			// SQL-запрос для обновления данных в базе
+			// SQL-запрос для обновления данных в базе																			//на решении доработки Игоря
 			string query = "UPDATE [Technical_Service].[dbo].[Types_TO] " +
 						   "SET [Device_Type] = @DeviceType, [Name_TO] = @NameTO, " +
 						   "[Work_List] = @WorkList, [Raspisanie] = @Schedule " +
@@ -354,6 +375,7 @@ namespace WpfApp4.MiniWindows
 					using (SqlCommand command = new SqlCommand(query, connection))
 					{
 						command.Parameters.AddWithValue("@DeviceType", deviceType);
+						//command.Parameters.AddWithValue("@Model", model);
 						command.Parameters.AddWithValue("@NameTO", nameTO);
 						command.Parameters.AddWithValue("@WorkList", workList); // Обновляем перечень работ
 						command.Parameters.AddWithValue("@Schedule", schedule);

@@ -57,8 +57,8 @@ namespace WpfApp4.MiniWindows
 
 			// SQL-запрос на добавление
 			string query = "INSERT INTO [Technical_Service].[dbo].[Devices] " +
-			   "([Name_Device], [Model], [Ser_Number], [Year_Create_Device], [Inventory_Number], [Location], [Name_Buh_Uch]) " +
-			   "VALUES (@Name_Device, @Model, @Ser_Number, @Year_Create_Device, @Inventory_Number, @Location, @Name_Buh_Uch)";
+			   "([Name_Device], [Model], [Ser_Number], [Year_Create_Device], [Inventory_Number], [Location], [Name_Buh_Uch], [Firm] ) " +
+			   "VALUES (@Name_Device, @Model, @Ser_Number, @Year_Create_Device, @Inventory_Number, @Location, @Name_Buh_Uch, @Firm)";
 
 			try
 			{
@@ -75,6 +75,7 @@ namespace WpfApp4.MiniWindows
 						command.Parameters.AddWithValue("@Inventory_Number", Inventory_Number1);
 						command.Parameters.AddWithValue("@Location", Location1);
 						command.Parameters.AddWithValue("@Name_Buh_Uch", Name_Buh_Uch.Text);
+						command.Parameters.AddWithValue("@Firm", Firm.Text);
 
 
 						// Открытие соединения и выполнение команды

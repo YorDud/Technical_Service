@@ -452,24 +452,29 @@ namespace WpfApp4.MiniWindows
 			if (TypesTOName.SelectedItem != null)
 			{
 				string selectedNameTO = TypesTOName.SelectedItem.ToString();
-				LoadWorkList(selectedNameTO);
+				string selectedDeviceName = DeviceName.SelectedItem.ToString();
+				LoadWorkList(selectedNameTO, selectedDeviceName);
 			}
 		}
 
 		// Получение списка работ для выбранного типа ТО
-		private void LoadWorkList(string nameTO)
+		private void LoadWorkList(string nameTO, string deviceName)
 		{
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
 				connection.Open();
 				SqlCommand command = new SqlCommand(
-					"SELECT Work_List FROM [Technical_Service].[dbo].[Types_TO] WHERE Name_TO = @NameTO", connection);
+					"SELECT Work_List FROM [Technical_Service].[dbo].[Types_TO] " +
+					"WHERE Name_TO = @NameTO AND Device_Type = @DeviceName", connection);
+
 				command.Parameters.AddWithValue("@NameTO", nameTO);
+				command.Parameters.AddWithValue("@DeviceName", deviceName);
 
 				var result = command.ExecuteScalar();
 				TypesTOWorkList.Text = result?.ToString() ?? string.Empty;
 			}
 		}
+
 
 		// Загрузка ФИО сотрудников в ComboBox
 		//private void LoadUsersFIO()

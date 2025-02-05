@@ -292,7 +292,7 @@ namespace WpfApp4
 		{
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
-				string query = "SELECT [ID], [Name_Device]\r\n      ,[Model]\r\n      ,[Ser_Number]\r\n      ,[Year_Create_Device]\r\n      ,[Inventory_Number]\r\n      ,[Location]\r\n      ,[Name_Buh_Uch]\r\n  FROM [Devices]";
+				string query = "SELECT [ID], [Name_Device]\r\n      ,[Model]\r\n      ,[Ser_Number]\r\n      ,[Year_Create_Device]\r\n      ,[Inventory_Number]\r\n      ,[Location]\r\n      ,[Name_Buh_Uch]\r\n      ,[Firm]\r\n  FROM [Devices]";
 				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
 
 				DataTable dataTable = new DataTable();
@@ -747,6 +747,7 @@ namespace WpfApp4
 		{
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
+				//string query = "SELECT [ID]\r\n      ,[Device_Type]\r\n      ,[Model]\r\n      ,[Name_TO]\r\n      ,[Work_List]\r\n      ,[Raspisanie]\r\n  FROM [Types_TO]";
 				string query = "SELECT [ID]\r\n      ,[Device_Type]\r\n      ,[Name_TO]\r\n      ,[Work_List]\r\n      ,[Raspisanie]\r\n  FROM [Types_TO]";
 				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
 

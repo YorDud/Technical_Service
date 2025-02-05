@@ -190,10 +190,30 @@ namespace WpfApp4.MiniWindows
 		}
 
 
+		//private string GetDeviceModel(string deviceTypeText)
+		//{
+		//	using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+		//	{
+		//		connection.Open();
+
+		//		// Запрос для получения Model из таблицы Devices
+		//		SqlCommand command = new SqlCommand(
+		//			"SELECT [Model] FROM [Technical_Service].[dbo].[Devices] " +
+		//			"WHERE [Name_Device] = @DeviceName", connection);
+
+		//		command.Parameters.AddWithValue("@DeviceName", deviceTypeText);
+
+		//		var modelResult = command.ExecuteScalar();
+		//		return modelResult?.ToString() ?? string.Empty;
+		//	}
+		//}
+
+
 		private void AddTypeTO_Click(object sender, RoutedEventArgs e)
 		{
 			// Сбор данных из UI
 			var deviceType = DeviceType.Text;
+			//var model = GetDeviceModel(deviceType);
 			var nameTO = NameTO.Text;
 
 			// Создаем строку с перечнем работ
@@ -237,8 +257,8 @@ namespace WpfApp4.MiniWindows
 							  $"Первая неделя месяца: {firstWeek}";
 
 			string query = "INSERT INTO [Technical_Service].[dbo].[Types_TO] " +
-						   "([Device_Type], [Name_TO], [Work_List], [Raspisanie]) " +
-						   "VALUES (@DeviceType, @NameTO, @WorkList, @Schedule)";
+						   "([Device_Type], [Model], [Name_TO], [Work_List], [Raspisanie]) " +
+						   "VALUES (@DeviceType, @Model, @NameTO, @WorkList, @Schedule)";
 
 			try
 			{
@@ -246,7 +266,9 @@ namespace WpfApp4.MiniWindows
 				{
 					using (SqlCommand command = new SqlCommand(query, connection))
 					{
+
 						command.Parameters.AddWithValue("@DeviceType", deviceType);
+						//command.Parameters.AddWithValue("@Model", model);
 						command.Parameters.AddWithValue("@NameTO", nameTO);
 						command.Parameters.AddWithValue("@WorkList", workList);
 						command.Parameters.AddWithValue("@Schedule", schedule);

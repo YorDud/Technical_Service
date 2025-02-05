@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-                Title="Оборудование" Height="534" Width="700" materialDesign:ColorZoneAssist.Mode="PrimaryLight"
+                Title="Оборудование" Height="577" Width="700" materialDesign:ColorZoneAssist.Mode="PrimaryLight"
 ResizeMode="NoResize"
 WindowStyle="None"
 Background="Transparent"
@@ -48,6 +48,7 @@ Padding="10">
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -78,11 +79,14 @@ Padding="10">
                     <Label Content="Наименование бух. учет:" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
                     <TextBox x:Name="Name_Buh_Uch" Grid.Row="7" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
 
+                <Label Content="Производитель:" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBox x:Name="Firm" Grid.Row="8" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
 
 
-                    <Button Grid.Row="9" Content="Сохранить" Margin="5" Grid.ColumnSpan="2" Click="Device_Update_Click" />
+
+                <Button Grid.Row="10" Content="Сохранить" Margin="5" Grid.ColumnSpan="2" Click="Device_Update_Click" />
                     
-                    <Button Grid.Row="10" Content="Удалить оборудование" Margin="5" Grid.ColumnSpan="2" Click="Device_Delete_Click" Background="#FFDC2C2C" />
+                    <Button Grid.Row="11" Content="Удалить оборудование" Margin="5" Grid.ColumnSpan="2" Click="Device_Delete_Click" Background="#FFDC2C2C" />
 
 
                 </Grid>
