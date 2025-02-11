@@ -854,35 +854,114 @@ namespace WpfApp4.MiniWindows
 			this.Close();
         }
 
-        //private void DeleteTypeTO_Click(object sender, RoutedEventArgs e)
-        //{
-        //	var id = _dataRow["ID"];
+		private void Create_TO_New_Devices_Changes_Click(object sender, RoutedEventArgs e)
+		{
 
-        //	// SQL-запрос для удаления записи
-        //	string query = "DELETE FROM [Technical_Service].[dbo].[Types_TO] WHERE [ID] = @ID";
+			// Сбор данных из UI
+			var deviceType = DeviceType.Text;
+			//var model = GetDeviceModel(deviceType);
+			var nameTO = NameTO.Text;
 
-        //	try
-        //	{
-        //		using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
-        //		{
-        //			using (SqlCommand command = new SqlCommand(query, connection))
-        //			{
-        //				command.Parameters.AddWithValue("@ID", id);
+			// Создаем строку с перечнем работ
+			var workList = string.Join("\n", WorkListBox.Items.Cast<string>());
 
-        //				connection.Open();
-        //				command.ExecuteNonQuery();
+			// Формирование расписания
+			var selectedDays = new[] {
+			MondayCheckBox.IsChecked == true ? "Пн" : null,
+			TuesdayCheckBox.IsChecked == true ? "Вт" : null,
+			WednesdayCheckBox.IsChecked == true ? "Ср" : null,
+			ThursdayCheckBox.IsChecked == true ? "Чт" : null,
+			FridayCheckBox.IsChecked == true ? "Пт" : null,
+			SaturdayCheckBox.IsChecked == true ? "Сб" : null,
+			SundayCheckBox.IsChecked == true ? "Вс" : null
+		}.Where(day => day != null).ToList();
 
-        //				mainWindow.LoadData_TypesTO();
-        //				this.Close();
-        //			}
-        //		}
-        //	}
-        //	catch (Exception ex)
-        //	{
-        //		MessageBox.Show("Ошибка: " + ex.Message);
-        //	}
-        //}
-    }
+			var selectedMonths = new[] {
+			JanuaryCheckBox.IsChecked == true ? "Январь" : null,
+			FebruaryCheckBox.IsChecked == true ? "Февраль" : null,
+			MarchCheckBox.IsChecked == true ? "Март" : null,
+			AprilCheckBox.IsChecked == true ? "Апрель" : null,
+			MayCheckBox.IsChecked == true ? "Май" : null,
+			JuneCheckBox.IsChecked == true ? "Июнь" : null,
+			JulyCheckBox.IsChecked == true ? "Июль" : null,
+			AugustCheckBox.IsChecked == true ? "Август" : null,
+			SeptemberCheckBox.IsChecked == true ? "Сентябрь" : null,
+			OctoberCheckBox.IsChecked == true ? "Октябрь" : null,
+			NovemberCheckBox.IsChecked == true ? "Ноябрь" : null,
+			DecemberCheckBox.IsChecked == true ? "Декабрь" : null
+		}.Where(month => month != null).ToList();
+
+			int.TryParse(RepeatWeeksTextBox.Text, out int repeatWeeks);
+			int.TryParse(SpecificDaysTextBox.Text, out int specificDay);
+
+			string firstWeek = FirstWeekMonthCheckBox.IsChecked == true ? "Да" : "Нет";
+
+			string schedule = $"Дни недели: {string.Join(", ", selectedDays)}; " +
+							  $"Месяцы: {string.Join(", ", selectedMonths)}; " +
+							  $"Повторять каждые: {repeatWeeks} недель; " +
+							  $"День месяца: {specificDay}; " +
+							  $"Первая неделя месяца: {firstWeek}";
+
+			string query = "INSERT INTO [Technical_Service].[dbo].[Types_TO] " +
+						   "([Device_Type], [Name_TO], [Work_List], [Raspisanie]) " +
+						   "VALUES (@DeviceType, @NameTO, @WorkList, @Schedule)";
+
+			try
+			{
+				using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+				{
+					using (SqlCommand command = new SqlCommand(query, connection))
+					{
+
+						command.Parameters.AddWithValue("@DeviceType", deviceType);
+						//command.Parameters.AddWithValue("@Model", model);
+						command.Parameters.AddWithValue("@NameTO", nameTO);
+						command.Parameters.AddWithValue("@WorkList", workList);
+						command.Parameters.AddWithValue("@Schedule", schedule);
+
+						connection.Open();
+						command.ExecuteNonQuery();
+
+						mainWindow.LoadData_TypesTO();
+						this.Close();
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Ошибка: " + ex.Message);
+			}
+		}
+
+		//private void DeleteTypeTO_Click(object sender, RoutedEventArgs e)
+		//{
+		//	var id = _dataRow["ID"];
+
+		//	// SQL-запрос для удаления записи
+		//	string query = "DELETE FROM [Technical_Service].[dbo].[Types_TO] WHERE [ID] = @ID";
+
+		//	try
+		//	{
+		//		using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+		//		{
+		//			using (SqlCommand command = new SqlCommand(query, connection))
+		//			{
+		//				command.Parameters.AddWithValue("@ID", id);
+
+		//				connection.Open();
+		//				command.ExecuteNonQuery();
+
+		//				mainWindow.LoadData_TypesTO();
+		//				this.Close();
+		//			}
+		//		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		MessageBox.Show("Ошибка: " + ex.Message);
+		//	}
+		//}
+	}
 
 
 }

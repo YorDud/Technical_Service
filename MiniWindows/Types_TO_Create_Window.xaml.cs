@@ -257,8 +257,8 @@ namespace WpfApp4.MiniWindows
 							  $"Первая неделя месяца: {firstWeek}";
 
 			string query = "INSERT INTO [Technical_Service].[dbo].[Types_TO] " +
-						   "([Device_Type], [Model], [Name_TO], [Work_List], [Raspisanie]) " +
-						   "VALUES (@DeviceType, @Model, @NameTO, @WorkList, @Schedule)";
+						   "([Device_Type], [Name_TO], [Work_List], [Raspisanie]) " +
+						   "VALUES (@DeviceType, @NameTO, @WorkList, @Schedule)";
 
 			try
 			{

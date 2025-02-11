@@ -63,9 +63,13 @@ AllowsTransparency="True" WindowStartupLocation="CenterScreen">
 
                     <Label Content="Перечень работ:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5" 
                            FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
-                    <ListBox x:Name="WorkListBox" Grid.Row="2" Grid.Column="1" Margin="5" Height="150" Padding="3">
-                        <!-- ListBox for adding work -->
-                    </ListBox>
+                <ListBox x:Name="WorkListBox" Grid.Row="2" Grid.Column="1" Margin="5" Height="150" Padding="3">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
                 <ComboBox x:Name="WorkList" IsEditable="True" Grid.Row="3" Grid.ColumnSpan="2" Margin="5" Height="30" Padding="3" 
          Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Введите наименование работы"/>
 
