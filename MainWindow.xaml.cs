@@ -59,7 +59,7 @@ namespace WpfApp4
 		{
 			InitializeComponent();
 			StartDatePicker.SelectedDate = DateTime.Now;
-			EndDatePicker.SelectedDate = DateTime.Now.AddDays(7);       // Текущая дата + 7 дней
+			EndDatePicker.SelectedDate = DateTime.Now.AddDays(0); //AddDays(7) // Текущая дата + 7 дней
 
 
 			LoadData_Monitor_Naryad();
@@ -96,7 +96,7 @@ namespace WpfApp4
 
 
 			timer2 = new DispatcherTimer();
-			timer2.Interval = TimeSpan.FromSeconds(5);
+			timer2.Interval = TimeSpan.FromSeconds(30);
 			timer2.Tick += LoadData_Monitor_Naryad_timer;
 			timer2.Start();
 
@@ -110,6 +110,64 @@ namespace WpfApp4
 
 
 
+		//public void LoadData_Monitor_Naryad_timer(object sender, EventArgs e)
+		//{
+		//	using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+		//	{
+		//		DateTime? startDate = StartDatePicker.SelectedDate;
+		//		DateTime? endDate = EndDatePicker.SelectedDate;
+
+		//		string query = @"
+		//          SELECT [ID], [Device_Name], [Types_TO_Name], [Types_TO_Work_List], [Users_FIO],
+		//                 [Date_Start], [Date_End], [Status], [Sklad_Deteil_ID], [Sklad_Kolich],
+		//                 [Documentation_Name_ID], [Date_TO], [Comment]
+		//          FROM [Technical_Service].[dbo].[Naryad]
+		//          WHERE ([Date_TO] BETWEEN @StartDate AND @EndDate)
+		//            AND ([Status] IS NULL OR [Status] != 'Закрыт') order by Date_TO asc";
+
+		//		SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+		//		adapter.SelectCommand.Parameters.AddWithValue("@StartDate", (object)startDate ?? DBNull.Value);
+		//		adapter.SelectCommand.Parameters.AddWithValue("@EndDate", (object)endDate ?? DBNull.Value);
+
+		//		DataTable dataTable = new DataTable();
+		//		connection.Open();
+		//		adapter.Fill(dataTable);
+		//		connection.Close();
+
+		//		dataGridMonitorNaryad.ItemsSource = dataTable.DefaultView;
+
+		//		// Применяем цветовые стили строк
+		//		dataGridMonitorNaryad.UpdateLayout();
+		//		foreach (DataRowView row in dataGridMonitorNaryad.ItemsSource)
+		//		{
+		//			string status = row["Status"] == DBNull.Value ? null : row["Status"].ToString().Trim();
+		//			DataGridRow dataGridRow = dataGridMonitorNaryad.ItemContainerGenerator.ContainerFromItem(row) as DataGridRow;
+
+		//			if (dataGridRow != null)
+		//			{
+		//				if (string.IsNullOrEmpty(status))
+		//				{
+		//					dataGridRow.Background = new SolidColorBrush(Colors.LightCoral);
+		//				}
+		//				else if (string.Equals(status, "В работе", StringComparison.OrdinalIgnoreCase))
+		//				{
+		//					dataGridRow.Background = new SolidColorBrush(Color.FromRgb(255, 255, 102));
+
+		//				}
+		//				else if (string.Equals(status, "Выполнено", StringComparison.OrdinalIgnoreCase))
+		//				{
+		//					dataGridRow.Background = new SolidColorBrush(Colors.LightGreen);
+		//				}
+
+		//			}
+		//			dataGridMonitorNaryad.UpdateLayout();
+		//		}
+		//	}
+		//}
+
+
+
+
 		public void LoadData_Monitor_Naryad_timer(object sender, EventArgs e)
 		{
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
@@ -118,12 +176,13 @@ namespace WpfApp4
 				DateTime? endDate = EndDatePicker.SelectedDate;
 
 				string query = @"
-            SELECT [ID], [Device_Name], [Types_TO_Name], [Types_TO_Work_List], [Users_FIO],
+            SELECT [ID], [Device_Name], [Types_TO_Name], [Types_TO_Work_List], [Users_FIO], 
                    [Date_Start], [Date_End], [Status], [Sklad_Deteil_ID], [Sklad_Kolich],
                    [Documentation_Name_ID], [Date_TO], [Comment]
             FROM [Technical_Service].[dbo].[Naryad]
-            WHERE ([Date_TO] BETWEEN @StartDate AND @EndDate)
-              AND ([Status] IS NULL OR [Status] != 'Закрыт')";
+            WHERE ([Date_TO] BETWEEN @StartDate AND @EndDate) 
+              AND ([Status] IS NULL OR [Status] != 'Закрыт') 
+            ORDER BY Date_TO ASC";
 
 				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
 				adapter.SelectCommand.Parameters.AddWithValue("@StartDate", (object)startDate ?? DBNull.Value);
@@ -135,35 +194,16 @@ namespace WpfApp4
 				connection.Close();
 
 				dataGridMonitorNaryad.ItemsSource = dataTable.DefaultView;
-
-				// Применяем цветовые стили строк
-				dataGridMonitorNaryad.UpdateLayout();
-				foreach (DataRowView row in dataGridMonitorNaryad.ItemsSource)
-				{
-					string status = row["Status"] == DBNull.Value ? null : row["Status"].ToString().Trim();
-					DataGridRow dataGridRow = dataGridMonitorNaryad.ItemContainerGenerator.ContainerFromItem(row) as DataGridRow;
-
-					if (dataGridRow != null)
-					{
-						if (string.IsNullOrEmpty(status))
-						{
-							dataGridRow.Background = new SolidColorBrush(Colors.LightCoral);
-						}
-						else if (string.Equals(status, "В работе", StringComparison.OrdinalIgnoreCase))
-						{
-							dataGridRow.Background = new SolidColorBrush(Color.FromRgb(255, 255, 102));
-
-						}
-						else if (string.Equals(status, "Выполнено", StringComparison.OrdinalIgnoreCase))
-						{
-							dataGridRow.Background = new SolidColorBrush(Colors.LightGreen);
-						}
-
-					}
-					dataGridMonitorNaryad.UpdateLayout();
-				}
 			}
 		}
+
+		
+
+
+
+
+
+
 
 		public void LoadData_Monitor_Crash_timer(object sender, EventArgs e)
 		{
@@ -799,6 +839,7 @@ namespace WpfApp4
 
 		public void LoadData_Monitor_Naryad()
 		{
+
 			using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
 			{
 				DateTime? startDate = StartDatePicker.SelectedDate;
@@ -810,7 +851,7 @@ namespace WpfApp4
                    [Documentation_Name_ID], [Date_TO], [Comment]
             FROM [Technical_Service].[dbo].[Naryad]
             WHERE ([Date_TO] BETWEEN @StartDate AND @EndDate)
-              AND ([Status] IS NULL OR [Status] != 'Закрыт')";
+              AND ([Status] IS NULL OR [Status] != 'Закрыт') order by Date_TO asc";
 
 				SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
 				adapter.SelectCommand.Parameters.AddWithValue("@StartDate", (object)startDate ?? DBNull.Value);
@@ -823,34 +864,103 @@ namespace WpfApp4
 
 				dataGridMonitorNaryad.ItemsSource = dataTable.DefaultView;
 
-				// Применяем цветовые стили строк
-				dataGridMonitorNaryad.UpdateLayout();
-				foreach (DataRowView row in dataGridMonitorNaryad.ItemsSource)
-				{
-					string status = row["Status"] == DBNull.Value ? null : row["Status"].ToString().Trim();
-					DataGridRow dataGridRow = dataGridMonitorNaryad.ItemContainerGenerator.ContainerFromItem(row) as DataGridRow;
+				//dataGridMonitorNaryad.ItemsSource = dataTable.DefaultView;
 
-					if (dataGridRow != null)
-					{
-						if (string.IsNullOrEmpty(status))
-						{
-							dataGridRow.Background = new SolidColorBrush(Colors.LightCoral);
-						}
-						else if (string.Equals(status, "В работе", StringComparison.OrdinalIgnoreCase))
-						{
-							dataGridRow.Background = new SolidColorBrush(Color.FromRgb(255, 255, 102));
+				//// Применяем цветовые стили строк
+				//dataGridMonitorNaryad.UpdateLayout();
+				//DateTime today = DateTime.Today;
 
-						}
-						else if (string.Equals(status, "Выполнено", StringComparison.OrdinalIgnoreCase))
-						{
-							dataGridRow.Background = new SolidColorBrush(Colors.LightGreen);
-						}
+				//foreach (DataRowView row in dataGridMonitorNaryad.ItemsSource)
+				//{
+				//	string status = row["Status"] == DBNull.Value ? null : row["Status"].ToString().Trim();
+				//	DataGridRow dataGridRow = dataGridMonitorNaryad.ItemContainerGenerator.ContainerFromItem(row) as DataGridRow;
 
-					}
-					dataGridMonitorNaryad.UpdateLayout();
-				}
+				//	if (dataGridRow != null)
+				//	{
+				//		DateTime dateTo = row["Date_TO"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(row["Date_TO"]);
+
+				//		if (dateTo.Date == today)
+				//		{
+				//			if (string.IsNullOrEmpty(status))
+				//			{
+				//				dataGridRow.Background = new SolidColorBrush(Colors.LightCoral);
+				//			}
+				//			else if (string.Equals(status, "В работе", StringComparison.OrdinalIgnoreCase))
+				//			{
+				//				dataGridRow.Background = new SolidColorBrush(Color.FromRgb(255, 255, 102));
+				//			}
+				//			else if (string.Equals(status, "Выполнено", StringComparison.OrdinalIgnoreCase))
+				//			{
+				//				dataGridRow.Background = new SolidColorBrush(Colors.LightGreen);
+				//			}
+				//		}
+				//	}
+				//}
 			}
 		}
+
+
+
+
+
+
+
+
+
+
+			//using (SqlConnection connection = new SqlConnection(WC.ConnectionString))
+			//{
+			//	DateTime? startDate = StartDatePicker.SelectedDate;
+			//	DateTime? endDate = EndDatePicker.SelectedDate;
+
+			//	string query = @"
+			//         SELECT [ID], [Device_Name], [Types_TO_Name], [Types_TO_Work_List], [Users_FIO],
+			//                [Date_Start], [Date_End], [Status], [Sklad_Deteil_ID], [Sklad_Kolich],
+			//                [Documentation_Name_ID], [Date_TO], [Comment]
+			//         FROM [Technical_Service].[dbo].[Naryad]
+			//         WHERE ([Date_TO] BETWEEN @StartDate AND @EndDate)
+			//           AND ([Status] IS NULL OR [Status] != 'Закрыт') order by Date_TO asc";
+
+			//	SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+			//	adapter.SelectCommand.Parameters.AddWithValue("@StartDate", (object)startDate ?? DBNull.Value);
+			//	adapter.SelectCommand.Parameters.AddWithValue("@EndDate", (object)endDate ?? DBNull.Value);
+
+			//	DataTable dataTable = new DataTable();
+			//	connection.Open();
+			//	adapter.Fill(dataTable);
+			//	connection.Close();
+
+			//	dataGridMonitorNaryad.ItemsSource = dataTable.DefaultView;
+
+			//	// Применяем цветовые стили строк
+			//	dataGridMonitorNaryad.UpdateLayout();
+			//	foreach (DataRowView row in dataGridMonitorNaryad.ItemsSource)
+			//	{
+			//		string status = row["Status"] == DBNull.Value ? null : row["Status"].ToString().Trim();
+			//		DataGridRow dataGridRow = dataGridMonitorNaryad.ItemContainerGenerator.ContainerFromItem(row) as DataGridRow;
+
+			//		if (dataGridRow != null)
+			//		{
+			//			if (string.IsNullOrEmpty(status))
+			//			{
+			//				dataGridRow.Background = new SolidColorBrush(Colors.LightCoral);
+			//			}
+			//			else if (string.Equals(status, "В работе", StringComparison.OrdinalIgnoreCase))
+			//			{
+			//				dataGridRow.Background = new SolidColorBrush(Color.FromRgb(255, 255, 102));
+
+			//			}
+			//			else if (string.Equals(status, "Выполнено", StringComparison.OrdinalIgnoreCase))
+			//			{
+			//				dataGridRow.Background = new SolidColorBrush(Colors.LightGreen);
+			//			}
+
+			//		}
+			//		dataGridMonitorNaryad.UpdateLayout();
+			//	}
+			//}
+			//}
+		
 
 
 
@@ -889,30 +999,70 @@ namespace WpfApp4
 		{
 			LoadData_Monitor_Naryad();
 		}
+		//private void dataGridMonitorNaryad_LoadingRow(object sender, DataGridRowEventArgs e)
+		//{
+		//	// Получаем текущую строку
+		//	var row = e.Row.Item as DataRowView;
+		//	if (row != null)
+		//	{
+		//		string status = row["Status"]?.ToString();
+
+		//		// Если статус пустой или "В работе", устанавливаем светло-красный цвет
+		//		if (string.IsNullOrEmpty(status))
+		//		{
+		//			e.Row.Background = new SolidColorBrush(Colors.LightCoral);
+		//		}
+		//		// Если статус "Выполнено", устанавливаем светло-зеленый цвет
+		//		else if (status == "Выполнен")
+		//		{
+		//			e.Row.Background = new SolidColorBrush(Colors.LightGreen);
+		//		}
+		//		else if (status == "В работе")
+		//		{
+		//			e.Row.Background = new SolidColorBrush(Color.FromRgb(255, 255, 102));
+
+		//		}
+
+		//	}
+		//}
+
+
 		private void dataGridMonitorNaryad_LoadingRow(object sender, DataGridRowEventArgs e)
 		{
-			// Получаем текущую строку
+			// Получаем текущую строку данных
 			var row = e.Row.Item as DataRowView;
-			if (row != null)
+			if (row == null) return;
+
+			// Получаем статус и дату
+			string status = row["Status"]?.ToString()?.Trim();
+			bool isDateValid = DateTime.TryParse(row["Date_TO"]?.ToString(), out DateTime dateTo);
+
+			// Устанавливаем текущую дату (можете заменить на DateTime.Now)
+			DateTime today = DateTime.Today;
+
+			// Сбрасываем стиль, если дата не подходит или статус пуст
+			if (!isDateValid || dateTo != today)
 			{
-				string status = row["Status"]?.ToString();
+				e.Row.Background = new SolidColorBrush(Colors.White); // Белый цвет для строк, не подходящих под условие
+				return;
+			}
 
-				// Если статус пустой или "В работе", устанавливаем светло-красный цвет
-				if (string.IsNullOrEmpty(status))
-				{
-					e.Row.Background = new SolidColorBrush(Colors.LightCoral);
-				}
-				// Если статус "Выполнено", устанавливаем светло-зеленый цвет
-				else if (status == "Выполнен")
-				{
-					e.Row.Background = new SolidColorBrush(Colors.LightGreen);
-				}
-				else if (status == "В работе")
-				{
-					e.Row.Background = new SolidColorBrush(Color.FromRgb(255, 255, 102));
-
-				}
-
+			// Логика окрашивания
+			if (string.IsNullOrEmpty(status))
+			{
+				e.Row.Background = new SolidColorBrush(Colors.LightCoral);
+			}
+			else if (string.Equals(status, "В работе", StringComparison.OrdinalIgnoreCase))
+			{
+				e.Row.Background = new SolidColorBrush(Color.FromRgb(255, 255, 102));
+			}
+			else if (string.Equals(status, "Выполнено", StringComparison.OrdinalIgnoreCase))
+			{
+				e.Row.Background = new SolidColorBrush(Colors.LightGreen);
+			}
+			else
+			{
+				e.Row.Background = new SolidColorBrush(Colors.White); // Сброс цвета для нестандартного статуса
 			}
 		}
 
