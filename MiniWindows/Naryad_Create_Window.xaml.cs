@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -102,7 +103,7 @@ namespace WpfApp4.MiniWindows
 
 				while (currentDate <= endDate)
 				{
-					if (IsDateMatchingSchedule(currentDate, parsedSchedule))
+					if (IsDateMatchingSchedule(currentDate, parsedSchedule, start.Value))
 					{
 						// Удаляем строку, если она уже есть
 						using (SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection))
@@ -250,7 +251,7 @@ namespace WpfApp4.MiniWindows
 
 
 
-		private bool IsDateMatchingSchedule(DateTime date, (List<DayOfWeek> DaysOfWeek, List<int> Months, int RepeatWeeks, List<int> SpecificDays, int WeekDayInMonth) schedule)
+		private bool IsDateMatchingSchedule(DateTime date, (List<DayOfWeek> DaysOfWeek, List<int> Months, int RepeatWeeks, List<int> SpecificDays, int WeekDayInMonth) schedule, DateTime startDate)
 		{
 			// Проверяем дни недели
 			if (schedule.DaysOfWeek.Count > 0 && !schedule.DaysOfWeek.Contains(date.DayOfWeek))
@@ -263,7 +264,8 @@ namespace WpfApp4.MiniWindows
 			// Проверяем частоту повторения (например, каждую неделю)
 			if (schedule.RepeatWeeks > 0)
 			{
-				int weekDifference = (int)((date - DateTime.Now.Date).TotalDays / 7);
+				//int weekDifference = (int)((date - DateTime.Now.Date).TotalDays / 7);
+				int weekDifference = (int)((date - startDate).TotalDays / 7);
 				if (weekDifference % schedule.RepeatWeeks != 0)
 					return false;
 			}
