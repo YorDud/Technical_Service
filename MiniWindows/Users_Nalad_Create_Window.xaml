@@ -1,0 +1,95 @@
+﻿<Window x:Class="WpfApp4.MiniWindows.Users_Nalad_Create_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Сотрудники" Height="450" Width="700" materialDesign:ColorZoneAssist.Mode="PrimaryLight"
+ResizeMode="NoResize"
+WindowStyle="None"
+Background="Transparent"
+AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+
+
+        <Border Background="White" Margin="15,15,15,15"
+CornerRadius="15" 
+               
+Padding="10">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" Color="#FF673AB7" ShadowDepth="0"></DropShadowEffect>
+            </Border.Effect>
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Кнопка Exit -->
+                <Button x:Name="ExitButton" Content="×"  
+        HorizontalAlignment="Right" VerticalAlignment="Top"
+        FontSize="30" FontWeight="Bold" 
+        Background="Transparent" BorderBrush="Transparent"
+        Foreground="Red" Margin="0,-14,-15,0"
+        Click="ExitButton_Click" Height="39" Width="50"/>
+
+                <StackPanel Grid.Row="0">
+                    <TextBlock Grid.Row="0" Text="Добавить нового сотрудника" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                </StackPanel>
+
+
+
+                <Grid Grid.Row="1" Margin="0,10,0,126">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="ФИО:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                    <TextBox x:Name="FIO" Grid.Row="0" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
+
+                    <Label Content="Логин:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                    <TextBox x:Name="Log" Grid.Row="1" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
+                    <Label Content="Пароль:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                    <TextBox x:Name="Pass" Grid.Row="2" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
+                <Label Content="Должность:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <ComboBox x:Name="Role" Grid.Row="3" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1">
+                    <ComboBoxItem>admin</ComboBoxItem>
+                    <ComboBoxItem>nalad</ComboBoxItem>
+                </ComboBox>
+
+
+                    <Label Content="Смена:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <ComboBox x:Name="Smena" Grid.Row="4" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}" Grid.Column="1">
+                    <ComboBoxItem>1</ComboBoxItem>
+                    <ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>Пятидневка</ComboBoxItem>
+                    <ComboBoxItem>1 (ночь)</ComboBoxItem>
+                    <ComboBoxItem>2 (ночь)</ComboBoxItem>
+                </ComboBox>
+
+                <Label Content="Телефон:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                    <TextBox x:Name="Phone" Grid.Row="5" Margin="5"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Column="1"/>
+
+
+                    <Button Grid.Row="7" Content="Добавить" Margin="5" Grid.ColumnSpan="2" Click="User_Dobav_Click" />
+
+                </Grid>
+            </Grid>
+
+
+
+
+        </Border>
+
+    
+
+</Window>

@@ -1,0 +1,120 @@
+﻿<Window x:Class="WpfApp4.MiniWindows.Naryad_Edit_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Создание Наряда" Height="882" Width="800" materialDesign:ColorZoneAssist.Mode="PrimaryLight"
+ResizeMode="NoResize"
+WindowStyle="None"
+Background="Transparent"
+AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+
+    <Border Background="White" Margin="15,15,15,15"
+                CornerRadius="15" 
+                Padding="10">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="15" Color="#FF673AB7" ShadowDepth="0"></DropShadowEffect>
+        </Border.Effect>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="ExitButton" Content="×"  
+        HorizontalAlignment="Right" VerticalAlignment="Top"
+        FontSize="30" FontWeight="Bold" 
+        Background="Transparent" BorderBrush="Transparent"
+        Foreground="Red" Margin="0,-14,-15,0"
+        Click="ExitButton_Click" Height="39" Width="50"/>
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="Изменить наряд" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                               Margin="10" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+            </StackPanel>
+
+            <Grid Grid.Row="1" Margin="0,10,0,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Название устройства:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
+       FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <ComboBox x:Name="DeviceName" SelectionChanged="TypesTOName_SelectionChanged" Grid.Row="0" Grid.Column="1" Margin="5" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+
+                <Label Content="ТО:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
+       FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <ComboBox x:Name="TypesTOName" SelectionChanged="TypesTOName_SelectionChanged" Grid.Row="1" Grid.Column="1" Margin="5" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+
+                <Label Content="Перечень работ ТО:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
+       FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBox x:Name="TypesTOWorkList" Grid.Row="2" Grid.Column="1" Margin="5" Height="100" Padding="3"  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+                <Label Content="ФИО сотрудника:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
+       FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <ComboBox x:Name="UsersFIO" SelectionChanged="TypesTOName_SelectionChanged" Grid.Row="3" Grid.Column="1" Margin="5" Height="30" Padding="3"  Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+
+                <Label Content="Дата начала выполнения:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
+       FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <xctk:DateTimePicker  x:Name="DateStart" Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" Height="30" Padding="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Left" FormatString="dd.MM.yyyy HH:mm" BorderBrush="Black"/>
+
+
+                <Label Content="Дата завершения выполнения:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
+       FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <xctk:DateTimePicker  x:Name="DateEnd" Grid.Row="5" Grid.Column="1" Margin="5,5,5,5" Height="30" Padding="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Left" FormatString="dd.MM.yyyy HH:mm" BorderBrush="Black"/>
+
+                <Label Content="Статус:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
+       FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <ComboBox x:Name="Status" SelectionChanged="TypesTOName_SelectionChanged" Grid.Row="6" Grid.Column="1" Margin="5" Height="30" Padding="3"  Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+
+                <Label Content="Запчасти:" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
+       FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <ComboBox x:Name="SkladDeteilID" SelectionChanged="TypesTOName_SelectionChanged" Grid.Row="7" Grid.Column="1" Margin="5" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+
+                <Label Content="Количество запчастей:" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
+       FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBox x:Name="SkladKolich" Grid.Row="8" Grid.Column="1" Margin="5" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+                <Label Content="Документация:" Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
+       FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <ComboBox x:Name="DocumentationNameID" SelectionChanged="TypesTOName_SelectionChanged" Grid.Row="9" Grid.Column="1" Margin="5" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+
+                <Label Content="Дата TO:" Grid.Row="10" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
+FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <DatePicker x:Name="DateTO" Grid.Row="10" Grid.Column="1" Margin="5" Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+
+
+                <Label Content="Комментарий:" Grid.Row="11" Grid.Column="0" VerticalAlignment="Center" Margin="5"  
+       FontSize="15" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBox x:Name="Comment" Grid.Row="11" Grid.Column="1" Margin="5" Height="30" Padding="3"  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+
+                <Button Content="Сохранить" Grid.Row="13" Grid.ColumnSpan="2" Margin="5" Click="Naryad_Update_Click"/>
+                <Button Content="Удалить Наряд" Grid.Row="14" Grid.ColumnSpan="2" Margin="5" Click="Naryad_Delete_Click" 
+        Background="#FFDC2C2C"/>
+                <Button Content="Скачать документ ⭳" Grid.Row="16" Grid.Column="1" Margin="318,5,5,5" Click="Naryad_Download_Click" Background="#FF2CCE27" BorderBrush="#FF5AFF00" Foreground="#DD000000"/>
+
+            </Grid>
+        </Grid>
+    </Border>
+
+</Window>

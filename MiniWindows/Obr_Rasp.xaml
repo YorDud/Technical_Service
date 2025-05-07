@@ -1,0 +1,15 @@
+﻿<Window x:Class="WpfApp4.MiniWindows.Obr_Rasp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Обработка расписания" Height="250" Width="400">
+    <Grid>
+        <StackPanel Margin="10">
+            <!-- Выпадающий список для выбора ID -->
+            <ComboBox Name="IdComboBox" Width="200" Height="30" Margin="0,0,0,10" 
+                      SelectionChanged="IdComboBox_SelectionChanged"/>
+            <Button Content="Обработать расписание" Click="ProcessScheduleButton_Click" Margin="0,10,0,0"/>
+            <TextBox Name="ResultTextBox" Height="100" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
+
