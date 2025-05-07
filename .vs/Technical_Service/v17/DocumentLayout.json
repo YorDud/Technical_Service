@@ -1,0 +1,725 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|c:\\users\\ya.dudarev\\desktop\\dya\\technical_service\\wc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:wc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\mainwindow.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:mainwindow.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\mainwindownalad.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:mainwindownalad.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\avtorize.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:avtorize.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\avtorize.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:avtorize.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\deteil_types_create_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\deteil_types_create_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\types_to_edit_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\types_to_edit_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\naryad_create_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\naryad_create_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\types_to_create_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\types_to_create_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\types_to_create_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\types_to_create_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\deviceeditwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\deviceeditwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\types_to_edit_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\types_to_edit_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\naryad_edit_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\naryad_edit_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\deviceeditwindow.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\deviceeditwindow.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\mainwindownalad.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:mainwindownalad.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\devicecreatewindow.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\devicecreatewindow.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\devicecreatewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\devicecreatewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\raspisane.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\raspisane.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\naryad_create_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\naryad_create_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\sklad_create_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\sklad_create_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\reports\\reportgenerator.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:reports\\reportgenerator.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\sklad_create_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\sklad_create_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\sklad_edit_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\sklad_edit_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\sklad_edit_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\sklad_edit_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\naryad_edit_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\naryad_edit_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\docs_create_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\docs_create_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\docs_edit_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\docs_edit_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\docs_edit_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\docs_edit_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\docs_create_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\docs_create_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\reports\\reportgenerator.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:reports\\reportgenerator.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\work_list_edit_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\work_list_edit_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\work_list_create_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\work_list_create_window.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\work_list_edit_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\work_list_edit_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\work_list_create_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\work_list_create_window.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\deteil_types_edit_window.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\deteil_types_edit_window.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\crash_nalad.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\crash_nalad.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\crash\\crash_create_wndow_avtorize.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:crash\\crash_create_wndow_avtorize.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\crash\\crash_create_wndow.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:crash\\crash_create_wndow.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\crash\\crash_create_wndow_nalad.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:crash\\crash_create_wndow_nalad.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\crash_nalad_complete.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\crash_nalad_complete.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\crash_nalad_complete.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\crash_nalad_complete.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\crash\\crash_create_wndow_nalad.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:crash\\crash_create_wndow_nalad.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\miniwindows\\raspisane.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{3414F7B4-BD09-42AD-95FF-1220A5446ED5}|Technical_Service.csproj|solutionrelative:miniwindows\\raspisane.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-24T08:10:49.959Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MainWindow.xaml.cs",
+              "ViewState": "AgIAAAMHAAAAAAAAAAAhwCsHAABbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T08:31:13.913Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindowNalad.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MainWindowNalad.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindowNalad.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MainWindowNalad.xaml.cs",
+              "RelativeToolTip": "MainWindowNalad.xaml.cs",
+              "ViewState": "AgIAAF8BAAAAAAAAAAASwIABAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T08:41:41.968Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WC.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\WC.cs",
+              "RelativeDocumentMoniker": "WC.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\WC.cs",
+              "RelativeToolTip": "WC.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAB9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T09:26:22.461Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Types_TO_Edit_Window.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Types_TO_Edit_Window.xaml",
+              "RelativeDocumentMoniker": "MiniWindows\\Types_TO_Edit_Window.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Types_TO_Edit_Window.xaml",
+              "RelativeToolTip": "MiniWindows\\Types_TO_Edit_Window.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-30T05:27:38.953Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Types_TO_Edit_Window.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Types_TO_Edit_Window.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Types_TO_Edit_Window.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Types_TO_Edit_Window.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Types_TO_Edit_Window.xaml.cs",
+              "ViewState": "AgIAAEADAAAAAAAAAAAcwKQDAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T06:05:25.768Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Naryad_Create_Window.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Naryad_Create_Window.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Naryad_Create_Window.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Naryad_Create_Window.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Naryad_Create_Window.xaml.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAhwE4AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T06:11:26.57Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Avtorize.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Avtorize.xaml",
+              "RelativeDocumentMoniker": "Avtorize.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Avtorize.xaml",
+              "RelativeToolTip": "Avtorize.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-10T11:39:08.011Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Avtorize.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Avtorize.xaml.cs",
+              "RelativeDocumentMoniker": "Avtorize.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Avtorize.xaml.cs",
+              "RelativeToolTip": "Avtorize.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T08:21:26.485Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Deteil_Types_Create_Window.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Deteil_Types_Create_Window.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Deteil_Types_Create_Window.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Deteil_Types_Create_Window.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Deteil_Types_Create_Window.xaml.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACEAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-24T11:12:54.733Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Work_List_Edit_Window.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Work_List_Edit_Window.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Work_List_Edit_Window.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Work_List_Edit_Window.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Work_List_Edit_Window.xaml.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAQwCsAAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T06:31:32.556Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ReportGenerator.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Reports\\ReportGenerator.xaml",
+              "RelativeDocumentMoniker": "Reports\\ReportGenerator.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Reports\\ReportGenerator.xaml",
+              "RelativeToolTip": "Reports\\ReportGenerator.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-30T06:36:19.053Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Raspisane.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Raspisane.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Raspisane.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Raspisane.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Raspisane.xaml.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAACsAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T06:49:39.057Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\App.xaml",
+              "RelativeDocumentMoniker": "App.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\App.xaml",
+              "RelativeToolTip": "App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-03T05:24:48.566Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DeviceEditWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\DeviceEditWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\DeviceEditWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\DeviceEditWindow.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\DeviceEditWindow.xaml.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAgwDsAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T07:45:41.654Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Types_TO_Create_Window.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Types_TO_Create_Window.xaml",
+              "RelativeDocumentMoniker": "MiniWindows\\Types_TO_Create_Window.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Types_TO_Create_Window.xaml",
+              "RelativeToolTip": "MiniWindows\\Types_TO_Create_Window.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-11T11:50:50.976Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Types_TO_Create_Window.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Types_TO_Create_Window.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Types_TO_Create_Window.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Types_TO_Create_Window.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Types_TO_Create_Window.xaml.cs",
+              "ViewState": "AgIAANAAAAAAAAAAAAAYwB4BAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T05:27:52.84Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "DeviceEditWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\DeviceEditWindow.xaml",
+              "RelativeDocumentMoniker": "MiniWindows\\DeviceEditWindow.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\DeviceEditWindow.xaml",
+              "RelativeToolTip": "MiniWindows\\DeviceEditWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-30T07:44:45.228Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Naryad_Edit_Window.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Naryad_Edit_Window.xaml",
+              "RelativeDocumentMoniker": "MiniWindows\\Naryad_Edit_Window.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Naryad_Edit_Window.xaml",
+              "RelativeToolTip": "MiniWindows\\Naryad_Edit_Window.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-10T09:56:47.067Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Sklad_Create_Window.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Sklad_Create_Window.xaml",
+              "RelativeDocumentMoniker": "MiniWindows\\Sklad_Create_Window.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Sklad_Create_Window.xaml",
+              "RelativeToolTip": "MiniWindows\\Sklad_Create_Window.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-30T07:48:31.929Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "DeviceCreateWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\DeviceCreateWindow.xaml",
+              "RelativeDocumentMoniker": "MiniWindows\\DeviceCreateWindow.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\DeviceCreateWindow.xaml",
+              "RelativeToolTip": "MiniWindows\\DeviceCreateWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-30T07:44:27.802Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "DeviceCreateWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\DeviceCreateWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\DeviceCreateWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\DeviceCreateWindow.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\DeviceCreateWindow.xaml.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAowGAAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T07:45:02.211Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "MainWindowNalad.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MainWindowNalad.xaml",
+              "RelativeDocumentMoniker": "MainWindowNalad.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MainWindowNalad.xaml",
+              "RelativeToolTip": "MainWindowNalad.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-07T04:47:55.971Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ReportGenerator.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Reports\\ReportGenerator.xaml.cs",
+              "RelativeDocumentMoniker": "Reports\\ReportGenerator.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Reports\\ReportGenerator.xaml.cs",
+              "RelativeToolTip": "Reports\\ReportGenerator.xaml.cs",
+              "ViewState": "AgIAAH0AAAAAAAAAAAAwwJAAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T06:36:21.699Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Sklad_Create_Window.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Sklad_Create_Window.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Sklad_Create_Window.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Sklad_Create_Window.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Sklad_Create_Window.xaml.cs",
+              "ViewState": "AgIAAH0AAAAAAAAAAAAvwKsAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T07:49:15.941Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Naryad_Create_Window.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Naryad_Create_Window.xaml",
+              "RelativeDocumentMoniker": "MiniWindows\\Naryad_Create_Window.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Naryad_Create_Window.xaml",
+              "RelativeToolTip": "MiniWindows\\Naryad_Create_Window.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-30T06:11:17.764Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Docs_Create_Window.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Docs_Create_Window.xaml",
+              "RelativeDocumentMoniker": "MiniWindows\\Docs_Create_Window.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Docs_Create_Window.xaml",
+              "RelativeToolTip": "MiniWindows\\Docs_Create_Window.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-30T06:50:42.249Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Sklad_Edit_Window.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Sklad_Edit_Window.xaml",
+              "RelativeDocumentMoniker": "MiniWindows\\Sklad_Edit_Window.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Sklad_Edit_Window.xaml",
+              "RelativeToolTip": "MiniWindows\\Sklad_Edit_Window.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-30T07:49:00.884Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Sklad_Edit_Window.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Sklad_Edit_Window.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Sklad_Edit_Window.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Sklad_Edit_Window.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Sklad_Edit_Window.xaml.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAhwC0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T07:48:59.942Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Docs_Edit_Window.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Docs_Edit_Window.xaml",
+              "RelativeDocumentMoniker": "MiniWindows\\Docs_Edit_Window.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Docs_Edit_Window.xaml",
+              "RelativeToolTip": "MiniWindows\\Docs_Edit_Window.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-30T06:57:57.754Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Work_List_Create_Window.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Work_List_Create_Window.xaml",
+              "RelativeDocumentMoniker": "MiniWindows\\Work_List_Create_Window.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Work_List_Create_Window.xaml",
+              "RelativeToolTip": "MiniWindows\\Work_List_Create_Window.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-30T06:29:53.494Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Naryad_Edit_Window.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Naryad_Edit_Window.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Naryad_Edit_Window.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Naryad_Edit_Window.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Naryad_Edit_Window.xaml.cs",
+              "ViewState": "AgIAAA0BAAAAAAAAAAAuwDABAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T05:16:46.762Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Docs_Create_Window.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Docs_Create_Window.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Docs_Create_Window.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Docs_Create_Window.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Docs_Create_Window.xaml.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAA5wEQAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T06:54:43.933Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Docs_Edit_Window.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Docs_Edit_Window.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Docs_Edit_Window.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Docs_Edit_Window.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Docs_Edit_Window.xaml.cs",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAcwIQAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T06:59:25.031Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Work_List_Edit_Window.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Work_List_Edit_Window.xaml",
+              "RelativeDocumentMoniker": "MiniWindows\\Work_List_Edit_Window.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Work_List_Edit_Window.xaml",
+              "RelativeToolTip": "MiniWindows\\Work_List_Edit_Window.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-30T06:30:28.361Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Work_List_Create_Window.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Work_List_Create_Window.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Work_List_Create_Window.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Work_List_Create_Window.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Work_List_Create_Window.xaml.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAowFsAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T06:30:39.389Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Crash_Nalad_Complete.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Crash_Nalad_Complete.xaml",
+              "RelativeDocumentMoniker": "MiniWindows\\Crash_Nalad_Complete.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Crash_Nalad_Complete.xaml",
+              "RelativeToolTip": "MiniWindows\\Crash_Nalad_Complete.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-28T08:01:01.149Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Crash_Create_Wndow_Nalad.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Crash\\Crash_Create_Wndow_Nalad.xaml",
+              "RelativeDocumentMoniker": "Crash\\Crash_Create_Wndow_Nalad.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Crash\\Crash_Create_Wndow_Nalad.xaml",
+              "RelativeToolTip": "Crash\\Crash_Create_Wndow_Nalad.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-28T05:58:55.822Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "Raspisane.xaml",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Raspisane.xaml",
+              "RelativeDocumentMoniker": "MiniWindows\\Raspisane.xaml",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Raspisane.xaml",
+              "RelativeToolTip": "MiniWindows\\Raspisane.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-22T06:49:37.413Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "Deteil_Types_Edit_Window.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Deteil_Types_Edit_Window.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Deteil_Types_Edit_Window.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Deteil_Types_Edit_Window.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Deteil_Types_Edit_Window.xaml.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAA6wGYAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T05:22:56.176Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Crash_Nalad.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Crash_Nalad.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Crash_Nalad.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Crash_Nalad.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Crash_Nalad.xaml.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAAAFgAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-30T05:22:51.649Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Crash_Nalad_Complete.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Crash_Nalad_Complete.xaml.cs",
+              "RelativeDocumentMoniker": "MiniWindows\\Crash_Nalad_Complete.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\MiniWindows\\Crash_Nalad_Complete.xaml.cs",
+              "RelativeToolTip": "MiniWindows\\Crash_Nalad_Complete.xaml.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAAACkAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T05:39:51.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Crash_Create_Wndow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Crash\\Crash_Create_Wndow.xaml.cs",
+              "RelativeDocumentMoniker": "Crash\\Crash_Create_Wndow.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Crash\\Crash_Create_Wndow.xaml.cs",
+              "RelativeToolTip": "Crash\\Crash_Create_Wndow.xaml.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAowGMAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T05:56:46.939Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Crash_Create_Wndow_Nalad.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Crash\\Crash_Create_Wndow_Nalad.xaml.cs",
+              "RelativeDocumentMoniker": "Crash\\Crash_Create_Wndow_Nalad.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Crash\\Crash_Create_Wndow_Nalad.xaml.cs",
+              "RelativeToolTip": "Crash\\Crash_Create_Wndow_Nalad.xaml.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAowGMAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T05:55:15.316Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Crash_Create_Wndow_Avtorize.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Crash\\Crash_Create_Wndow_Avtorize.xaml.cs",
+              "RelativeDocumentMoniker": "Crash\\Crash_Create_Wndow_Avtorize.xaml.cs",
+              "ToolTip": "C:\\Users\\ya.dudarev\\Desktop\\DYA\\Technical_Service\\Crash\\Crash_Create_Wndow_Avtorize.xaml.cs",
+              "RelativeToolTip": "Crash\\Crash_Create_Wndow_Avtorize.xaml.cs",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAowIUAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T05:58:04.117Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
