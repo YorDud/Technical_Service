@@ -1,0 +1,112 @@
+﻿<Window x:Class="WpfApp4.MainWindowNalad"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp4"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="MainWindowNalad" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="Window_Loaded" Closed="Window_Closed">
+    <Window.Resources>
+        <local:Lab_RezDataSet x:Key="lab_RezDataSet"/>
+        <CollectionViewSource x:Key="test_tableViewSource" Source="{Binding test_table, Source={StaticResource lab_RezDataSet}}"/>
+    </Window.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Левое меню -->
+        <StackPanel Background="#f0f0f0" Grid.Column="0">
+            <Button Content="🏠 Мониторинг ТО" FontSize="16" Margin="10" Padding="10" Height="45" 
+                    HorizontalAlignment="Stretch" Click="ShowMonitoringTO" />
+
+            <Button Content="📈 Мониторинг поломок" FontSize="13" Margin="10" Padding="10" Height="45" 
+        HorizontalAlignment="Stretch" Click="ShowMonitoringCrash" />
+
+
+
+
+
+
+
+
+            <Button Content="❓ Помощь" FontSize="16" Margin="10" Padding="10" Height="45" Visibility="Hidden"
+                    HorizontalAlignment="Stretch"/>
+        </StackPanel>
+
+        <!-- Основное содержание                                                                                         Главное -->
+        <ContentControl x:Name="MainContent" Grid.Column="1" Visibility="Visible">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Мониторинг нарядов на ТО" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+                <TextBlock Text="Дата начала:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Margin="10,0,10,0"/>
+                <DatePicker Name="StartDatePicker" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="90,0,0,0" Width="100"  Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDateChanged="StartDatePicker_SelectedDateChanged"/>
+
+                <TextBlock Text="Дата конца:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Margin="230,0,10,0"/>
+                <DatePicker Name="EndDatePicker" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="310,0,0,0" Width="100"   Height="30" Padding="3" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDateChanged="EndDatePicker_SelectedDateChanged"/>
+
+
+
+                <DataGrid x:Name="dataGridMonitorNaryad" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridMonitorNaryad_MouseDoubleClick" LoadingRow="dataGridMonitorNaryad_LoadingRow">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Дата ТО" Width="auto" Binding="{Binding Date_TO,StringFormat=\{0:dd.MM.yyyy HH:mm\}}" />
+                        <DataGridTextColumn Header="Номер наряда" Width="auto" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Устройство" Width="auto" Binding="{Binding Device_Name}" />
+                        <DataGridTextColumn Header="ТО" Width="auto" Binding="{Binding Types_TO_Name}" />
+                        <DataGridTextColumn Header="Список работ" Width="auto" Binding="{Binding Types_TO_Work_List}" />
+                        <DataGridTextColumn Header="Сотрудник" Width="auto" Binding="{Binding Users_FIO}" />
+                        <DataGridTextColumn Header="Дата начала выполнения" Width="auto" Binding="{Binding Date_Start,StringFormat=\{0:dd.MM.yyyy HH:mm\}}" />
+                        <DataGridTextColumn Header="Дата завершения выполнения" Width="auto" Binding="{Binding Date_End,StringFormat=\{0:dd.MM.yyyy HH:mm\}}" />
+                        <DataGridTextColumn Header="Статус" Width="auto" Binding="{Binding Status}" />
+                        <DataGridTextColumn Header="Запчасти" Width="auto" Binding="{Binding Sklad_Deteil_ID}" />
+                        <DataGridTextColumn Header="Количество запчастей" Width="auto" Binding="{Binding Sklad_Kolich}" />
+                        <DataGridTextColumn Header="Документация" Width="auto" Binding="{Binding Documentation_Name_ID}" />
+
+                        <DataGridTextColumn Header="Комментарий" Width="auto" Binding="{Binding Comment}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--<Button x:Name="MT" Content="Мониторинг ТО" Margin="40" Grid.Row="3" HorizontalAlignment="Right" Click="MT_Click"/>-->
+            </Grid>
+        </ContentControl>
+
+        <ContentControl x:Name="MonitorCrash" Grid.Column="1" Visibility="Hidden">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Мониторинг поломок оборудования" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="24" FontWeight="Bold" FontFamily="Yu Gothic UI"/>
+
+                <Button Grid.Row="1" Content="Создать" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Click="CrashCreateClick"/>
+
+                <DataGrid x:Name="dataGridMonitorCrash" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" Grid.Row="2" Height="900" MouseDoubleClick="dataGridMonitorCrash_MouseDoubleClick" LoadingRow="dataGridMonitorCrash_LoadingRow">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Номер" Width="auto" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Дата/Время поломки" Width="auto" Binding="{Binding Date_Crash,StringFormat=\{0:dd.MM.yyyy HH:mm\}}" />
+                        <DataGridTextColumn Header="ФИО технолога" Width="auto" Binding="{Binding FIO_Tech}" />
+                        <DataGridTextColumn Header="Помещение" Width="auto" Binding="{Binding Location}" />
+                        <DataGridTextColumn Header="Устройство" Width="auto" Binding="{Binding Device}" />
+                        <DataGridTextColumn Header="Описание" Width="auto" Binding="{Binding Comment}" />
+                        <DataGridTextColumn Header="ФИО наладчика" Width="auto" Binding="{Binding FIO_Nalad}" />
+                        <DataGridTextColumn Header="Дата/Время починки" Width="auto" Binding="{Binding Date_Complete,StringFormat=\{0:dd.MM.yyyy HH:mm\}}" />
+                        <DataGridTextColumn Header="Выполненные работы" Width="auto" Binding="{Binding Opisan_Complete}" />
+                        <DataGridTextColumn Header="Статус" Width="auto" Binding="{Binding Status}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--<Button x:Name="MT" Content="Мониторинг ТО" Margin="40" Grid.Row="3" HorizontalAlignment="Right" Click="MT_Click"/>-->
+            </Grid>
+        </ContentControl>
+
+    </Grid>
+</Window>
